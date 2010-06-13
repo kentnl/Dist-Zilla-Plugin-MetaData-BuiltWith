@@ -1,5 +1,10 @@
 Revision history for Dist-Zilla-Plugin-MetaData-BuiltWith
 
+0.01000216 2010-06-13 17:07:31 Pacific/Auckland
+
+          Added a very overkill MetaData::BuiltWith::All module for those
+          with suicidal tendencies.
+
 0.01000022 2010-06-11 23:48:14 Pacific/Auckland
 
           First version.

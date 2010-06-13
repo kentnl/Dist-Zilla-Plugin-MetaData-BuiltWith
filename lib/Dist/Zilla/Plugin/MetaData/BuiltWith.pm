@@ -2,7 +2,7 @@ use strict;
 use warnings;
 package Dist::Zilla::Plugin::MetaData::BuiltWith;
 BEGIN {
-  $Dist::Zilla::Plugin::MetaData::BuiltWith::VERSION = '0.01000022';
+  $Dist::Zilla::Plugin::MetaData::BuiltWith::VERSION = '0.01000216';
 }
 
 # ABSTRACT: Report what versions of things your distribution was built against
@@ -10,6 +10,7 @@ BEGIN {
 
 
 use Moose;
+use namespace::autoclean;
 with 'Dist::Zilla::Role::MetaProvider';
 
 
@@ -98,6 +99,8 @@ sub metadata {
   }};
 }
 
+__PACKAGE__->meta->make_immutable;
+no Moose;
 1;
 
 __END__
@@ -109,7 +112,7 @@ Dist::Zilla::Plugin::MetaData::BuiltWith - Report what versions of things your d
 
 =head1 VERSION
 
-version 0.01000022
+version 0.01000216
 
 =head1 SYNOPSIS
 
