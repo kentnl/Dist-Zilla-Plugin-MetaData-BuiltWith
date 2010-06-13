@@ -1,0 +1,38 @@
+
+use strict;
+use warnings;
+
+use Module::Build 0.3601;
+
+
+my %module_build_args = (
+  'build_requires' => {
+    'File::Find' => '0',
+    'File::Temp' => '0',
+    'Module::Build' => '0.3601',
+    'Test::More' => '0.88'
+  },
+  'configure_requires' => {
+    'Module::Build' => '0.3601'
+  },
+  'dist_abstract' => 'Report what versions of things your distribution was built against',
+  'dist_author' => [
+    'Kent Fredric <kentnl@cpan.org>'
+  ],
+  'dist_name' => 'Dist-Zilla-Plugin-MetaData-BuiltWith',
+  'dist_version' => '0.01000022',
+  'license' => 'perl',
+  'module_name' => 'Dist::Zilla::Plugin::MetaData::BuiltWith',
+  'recommends' => {},
+  'recursive_test_files' => 1,
+  'requires' => {
+    'Dist::Zilla::Role::MetaProvider' => '0',
+    'Moose' => '0'
+  },
+  'script_files' => []
+);
+
+
+my $build = Module::Build->new(%module_build_args);
+
+$build->create_build_script;

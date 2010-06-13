@@ -1,0 +1,59 @@
+NAME
+    Dist::Zilla::Plugin::MetaData::BuiltWith - Report what versions of
+    things your distribution was built against
+
+VERSION
+    version 0.01000022
+
+SYNOPSIS
+      [MetaData::BuiltWith]
+      include = Some::Module::Thats::Not::In::Preq
+      exclude = Some::Module::Youre::Ashamed::Of
+
+DESCRIPTION
+    Often, distribution authors get module dependencies wrong. So in such
+    cases, its handy to be able to see what version of various packages they
+    built with.
+
+    Some would prefer to demand everyone install the same version as they
+    did, but thats also not always nessecary.
+
+    Hopefully, the existance of the metadata provided by this module will
+    help users on thier end machines make intelligent choices about what
+    modules to install in the event of a problem.
+
+METHODS
+  mvp_multivalue_args
+    This module can take, as parameters, any volume of 'exclude' or
+    'include' arguments.
+
+  metadata
+    This module scrapes together the name of all modules that exist in the
+    "Prereq" section that Dist::Zilla collects, and then works out what
+    version of things you have, applies the various include/exclude rules,
+    and ships that data back to Dist::Zilla via this method. See
+    Dist::Zilla::Role::MetaProvider for more details.
+
+EXAMPLE OUTPUT ( META.json )
+        "x_BuiltWith" : {
+           "modules" : {
+              "Dist::Zilla::Role::MetaProvider" : "4.101612",
+              "File::Find" : "1.15",
+              "File::Temp" : "0.22",
+              "Module::Build" : "0.3607",
+              "Moose" : "1.07",
+              "Test::More" : "0.94"
+           },
+           "perl" : "5.012000",
+           "platform" : "MSWin32"
+        },
+
+AUTHOR
+      Kent Fredric <kentnl@cpan.org>
+
+COPYRIGHT AND LICENSE
+    This software is copyright (c) 2010 by Kent Fredric <kentnl@cpan.org>.
+
+    This is free software; you can redistribute it and/or modify it under
+    the same terms as the Perl 5 programming language system itself.
+
