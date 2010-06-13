@@ -47,7 +47,7 @@ sub _versions_of {
   for ( keys %outhash ){
     my $xsn = $_;
     $xsn = $package . '::' . $_ unless $package eq q{};
-    warn "$xsn -> VERSION\n";
+#    warn "$xsn -> VERSION\n";
     eval {
       $outhash{$_}->{version} = $xsn->VERSION();
     }
