@@ -2,6 +2,9 @@ Revision history for {{$dist->name}}
 
 {{$NEXT}}
 
+          Added a very overkill MetaData::BuiltWith::All module for those
+          with suicidal tendencies.
+
 0.01000022 2010-06-11 23:48:14 Pacific/Auckland
 
           First version.

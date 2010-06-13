@@ -43,6 +43,7 @@ install in the event of a problem.
 =cut
 
 use Moose;
+use namespace::autoclean;
 with 'Dist::Zilla::Role::MetaProvider';
 
 =method mvp_multivalue_args
@@ -144,4 +145,6 @@ sub metadata {
   }};
 }
 
+__PACKAGE__->meta->make_immutable;
+no Moose;
 1;
