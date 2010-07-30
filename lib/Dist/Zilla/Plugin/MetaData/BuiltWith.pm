@@ -2,60 +2,18 @@ use strict;
 use warnings;
 
 package Dist::Zilla::Plugin::MetaData::BuiltWith;
+BEGIN {
+  $Dist::Zilla::Plugin::MetaData::BuiltWith::VERSION = '0.01005020';
+}
 
 # ABSTRACT: Report what versions of things your distribution was built against
 
-=head1 SYNOPSIS
-
-  [MetaData::BuiltWith]
-  include = Some::Module::Thats::Not::In::Preq
-  exclude = Some::Module::Youre::Ashamed::Of
-  show_uname = 1           ; default is 0
-  uname_call = uname        ; the default
-  uname_args = -s -r -m -p  ; the default is -a
-
-
-=head1 DESCRIPTION
-
-Often, distribution authors get module dependencies wrong. So in such cases,
-its handy to be able to see what version of various packages they built with.
-
-Some would prefer to demand everyone install the same version as they did,
-but that's also not always necessary.
-
-Hopefully, the existence of the metadata provided by this module will help
-users on their end machines make intelligent choices about what modules to
-install in the event of a problem.
-
-
-
-=head1 EXAMPLE OUTPUT ( C<META.json> )
-
-    "x_BuiltWith" : {
-       "modules" : {
-          "Dist::Zilla::Role::MetaProvider" : "4.101612",
-          "File::Find" : "1.15",
-          "File::Temp" : "0.22",
-          "Module::Build" : "0.3607",
-          "Moose" : "1.07",
-          "Test::More" : "0.94"
-       },
-       "perl" : "5.012000",
-       "platform" : "MSWin32"
-    },
-
-=cut
 
 use Moose;
 use Carp qw( croak );
 use namespace::autoclean;
 with 'Dist::Zilla::Role::MetaProvider';
 
-=method mvp_multivalue_args
-
-This module can take, as parameters, any volume of 'exclude' or 'include' arguments.
-
-=cut
 
 sub mvp_multivalue_args { return qw( exclude include ) }
 
@@ -187,14 +145,6 @@ sub _detect_installed {
   return "$modver";
 }
 
-=method metadata
-
-This module scrapes together the name of all modules that exist in the "C<Prereqs>" section
-that Dist::Zilla collects, and then works out what version of things you have,
-applies the various include/exclude rules, and ships that data back to Dist::Zilla
-via this method. See L<< C<Dist::Zilla>'s C<MetaProvider> role|Dist::Zilla::Role::MetaProvider >> for more details.
-
-=cut
 
 sub metadata {
   my ($self) = @_;
@@ -220,3 +170,77 @@ sub metadata {
 __PACKAGE__->meta->make_immutable;
 no Moose;
 1;
+
+__END__
+=pod
+
+=head1 NAME
+
+Dist::Zilla::Plugin::MetaData::BuiltWith - Report what versions of things your distribution was built against
+
+=head1 VERSION
+
+version 0.01005020
+
+=head1 SYNOPSIS
+
+  [MetaData::BuiltWith]
+  include = Some::Module::Thats::Not::In::Preq
+  exclude = Some::Module::Youre::Ashamed::Of
+  show_uname = 1           ; default is 0
+  uname_call = uname        ; the default
+  uname_args = -s -r -m -p  ; the default is -a
+
+=head1 DESCRIPTION
+
+Often, distribution authors get module dependencies wrong. So in such cases,
+its handy to be able to see what version of various packages they built with.
+
+Some would prefer to demand everyone install the same version as they did,
+but that's also not always necessary.
+
+Hopefully, the existence of the metadata provided by this module will help
+users on their end machines make intelligent choices about what modules to
+install in the event of a problem.
+
+=head1 METHODS
+
+=head2 mvp_multivalue_args
+
+This module can take, as parameters, any volume of 'exclude' or 'include' arguments.
+
+=head2 metadata
+
+This module scrapes together the name of all modules that exist in the "C<Prereqs>" section
+that Dist::Zilla collects, and then works out what version of things you have,
+applies the various include/exclude rules, and ships that data back to Dist::Zilla
+via this method. See L<< C<Dist::Zilla>'s C<MetaProvider> role|Dist::Zilla::Role::MetaProvider >> for more details.
+
+=head1 EXAMPLE OUTPUT ( C<META.json> )
+
+    "x_BuiltWith" : {
+       "modules" : {
+          "Dist::Zilla::Role::MetaProvider" : "4.101612",
+          "File::Find" : "1.15",
+          "File::Temp" : "0.22",
+          "Module::Build" : "0.3607",
+          "Moose" : "1.07",
+          "Test::More" : "0.94"
+       },
+       "perl" : "5.012000",
+       "platform" : "MSWin32"
+    },
+
+=head1 AUTHOR
+
+Kent Fredric <kentnl@cpan.org>
+
+=head1 COPYRIGHT AND LICENSE
+
+This software is copyright (c) 2010 by Kent Fredric <kentnl@cpan.org>.
+
+This is free software; you can redistribute it and/or modify it under
+the same terms as the Perl 5 programming language system itself.
+
+=cut
+

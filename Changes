@@ -1,6 +1,4 @@
-Revision history for {{$dist->name}}
-
-{{$NEXT}}
+Revision history for Dist-Zilla-Plugin-MetaData-BuiltWith
 
 0.01005020 2010-07-30 21:06:26 Pacific/Auckland
           Skip 'perl' automatically when found in modules list. Can't depend on perl.pm.

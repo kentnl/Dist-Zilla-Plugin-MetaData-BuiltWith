@@ -2,6 +2,9 @@ use strict;
 use warnings;
 
 package Dist::Zilla::Plugin::MetaData::BuiltWith::All;
+BEGIN {
+  $Dist::Zilla::Plugin::MetaData::BuiltWith::All::VERSION = '0.01005020';
+}
 
 # ABSTRACT: Go overkill and report everything in all name-spaces.
 
@@ -9,29 +12,6 @@ use Moose;
 use namespace::autoclean;
 extends 'Dist::Zilla::Plugin::MetaData::BuiltWith';
 
-=head1 SYNOPSIS
-
-  [MetaData::BuiltWith::All]
-  show_undef = 1
-
-This module is otherwise identical to L<< C<MetaData::BuiltWith>|Dist::Zilla::Plugin::MetaData::BuiltWith >>.
-
-=head1 DESCRIPTION
-
-This further extends the verbosity of the information reported by the L<< C<BuiltWith>|Dist::Zilla::Plugin::MetaData::BuiltWith >> plug-in,
-by recursively rooting around in the name-spaces and reporting every version of everything it finds.
-
-Only recommended for the most extreme of situations where you find your code breaking all over the show between different versions of things, or for personal amusement.
-
-=head1 WARNING
-
-At present this code does no recursion prevention, apart from excluding the C<main> name-space.
-
-If it sees other name-spaces which recur into their self indefinitely ( like main does ), then it may not terminate normally.
-
-Also, using this module will likely add 1000 lines to C<META.yml>, so please for the love of sanity don't use this too often.
-
-=cut
 
 has 'show_undef' => ( is => 'ro', isa => 'Bool', default => 0 );
 
@@ -111,3 +91,50 @@ override 'metadata' => sub {
 __PACKAGE__->meta->make_immutable;
 no Moose;
 1;
+
+__END__
+=pod
+
+=head1 NAME
+
+Dist::Zilla::Plugin::MetaData::BuiltWith::All - Go overkill and report everything in all name-spaces.
+
+=head1 VERSION
+
+version 0.01005020
+
+=head1 SYNOPSIS
+
+  [MetaData::BuiltWith::All]
+  show_undef = 1
+
+This module is otherwise identical to L<< C<MetaData::BuiltWith>|Dist::Zilla::Plugin::MetaData::BuiltWith >>.
+
+=head1 DESCRIPTION
+
+This further extends the verbosity of the information reported by the L<< C<BuiltWith>|Dist::Zilla::Plugin::MetaData::BuiltWith >> plug-in,
+by recursively rooting around in the name-spaces and reporting every version of everything it finds.
+
+Only recommended for the most extreme of situations where you find your code breaking all over the show between different versions of things, or for personal amusement.
+
+=head1 WARNING
+
+At present this code does no recursion prevention, apart from excluding the C<main> name-space.
+
+If it sees other name-spaces which recur into their self indefinitely ( like main does ), then it may not terminate normally.
+
+Also, using this module will likely add 1000 lines to C<META.yml>, so please for the love of sanity don't use this too often.
+
+=head1 AUTHOR
+
+Kent Fredric <kentnl@cpan.org>
+
+=head1 COPYRIGHT AND LICENSE
+
+This software is copyright (c) 2010 by Kent Fredric <kentnl@cpan.org>.
+
+This is free software; you can redistribute it and/or modify it under
+the same terms as the Perl 5 programming language system itself.
+
+=cut
+
