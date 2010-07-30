@@ -1,9 +1,9 @@
 use strict;
 use warnings;
+
 package Dist::Zilla::Plugin::MetaData::BuiltWith;
 
 # ABSTRACT: Report what versions of things your distribution was built against
-
 
 =head1 SYNOPSIS
 
@@ -52,42 +52,42 @@ This module can take, as parameters, any volume of 'exclude' or 'include' argume
 
 =cut
 
-sub mvp_multivalue_args { qw( exclude include ) };
+sub mvp_multivalue_args { qw( exclude include ) }
 
 has exclude => ( is => 'ro', isa => 'ArrayRef', default => sub { [] } );
 has include => ( is => 'ro', isa => 'ArrayRef', default => sub { [] } );
 
-
 sub _get_prereq_modnames {
-  my ( $self ) = @_;
+  my ($self) = @_;
   my %modnames;
   my $prereqs = $self->zilla->prereqs->as_string_hash;
   return [] unless defined $prereqs;
-  for my $phase ( keys %{ $prereqs } ){
+  for my $phase ( keys %{$prereqs} ) {
     next unless defined $prereqs->{$phase};
-    for my $type ( keys %{ $prereqs->{$phase} } ){
+    for my $type ( keys %{ $prereqs->{$phase} } ) {
       next unless defined $prereqs->{$phase}->{$type};
       for my $module ( keys %{ $prereqs->{$phase}->{$type} } ) {
-          $modnames{$module} = 1;
+        $modnames{$module} = 1;
       }
     }
   }
   return [ sort { $a cmp $b } keys %modnames ];
 }
 
-{ my $context = 0;
+{
+  my $context = 0;
 
   sub _logonce {
-    my ( $self, $module, $reason, $error ) = @_ ;
+    my ( $self, $module, $reason, $error ) = @_;
     my $message = "Possible Error: Module '$module' $reason.";
-    if ( not $context and not $ENV{BUILTWITH_TRACE} ){
+    if ( not $context and not $ENV{BUILTWITH_TRACE} ) {
       $context++;
       $message .= "set BUILTWITH_TRACE=1 for details";
     }
     $self->zilla->log($message);
-    if( $ENV{BUILTWITH_TRACE} ){
-      $self->zilla->log('$@ : ' . $error->[0] );
-      $self->zilla->log('$! : ' . $error->[1] );
+    if ( $ENV{BUILTWITH_TRACE} ) {
+      $self->zilla->log( '$@ : ' . $error->[0] );
+      $self->zilla->log( '$! : ' . $error->[1] );
     }
     return;
   }
@@ -99,19 +99,19 @@ sub _detect_installed {
   my $success = undef;
   eval "require $module; \$success = 1";
   my $lasterror = [ $@, $! ];
-  if  ( not $success ){
-    $self->_logonce( $module, 'did not load' , $lasterror );
+  if ( not $success ) {
+    $self->_logonce( $module, 'did not load', $lasterror );
     return "NA(possibly not installed)";
   }
   my $modver;
   $success = undef;
   eval "\$modver = $module->VERSION(); \$success = 1";
-  $lasterror = [$@, $!];
-  if ( not $success ){
+  $lasterror = [ $@, $! ];
+  if ( not $success ) {
     $self->_logonce( $module, ' died assessing its version', $lasterror );
     return "NA(version could not be resolved)";
   }
-  if ( not defined $modver ){
+  if ( not defined $modver ) {
     $self->_logonce( $module, ' reported an undefined version', $lasterror );
     return "NA(undef)";
   }
@@ -128,21 +128,21 @@ via this method. See L<Dist::Zilla::Role::MetaProvider> for more details.
 =cut
 
 sub metadata {
-  my ( $self )  = @_;
+  my ($self) = @_;
 
   my $report = $self->_get_prereq_modnames();
-  my %modtable = map {
-    $_ , $self->_detect_installed($_)
-  } ( @{$report}, @{ $self->include } );
-  for  my $badmodule ( @{ $self->exclude } ){
+  my %modtable = map { $_, $self->_detect_installed($_) } ( @{$report}, @{ $self->include } );
+  for my $badmodule ( @{ $self->exclude } ) {
     delete $modtable{$badmodule} if exists $modtable{$badmodule};
   }
 
-  return { x_BuiltWith => {
-      modules   => \%modtable,
-      perl      => $],
-      platform  => $^O,
-  }};
+  return {
+    x_BuiltWith => {
+      modules  => \%modtable,
+      perl     => $],
+      platform => $^O,
+    }
+  };
 }
 
 __PACKAGE__->meta->make_immutable;
