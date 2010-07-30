@@ -21,7 +21,7 @@ Often, distribution authors get module dependencies wrong. So in such cases,
 its handy to be able to see what version of various packages they built with.
 
 Some would prefer to demand everyone install the same version as they did,
-but that's also not always neseccary.
+but that's also not always necessary.
 
 Hopefully, the existence of the metadata provided by this module will help
 users on their end machines make intelligent choices about what modules to
@@ -91,29 +91,33 @@ around dump_config => sub {
 sub _uname {
   my $self = shift;
   return () unless $self->show_uname;
-  my $str;
-
-  if ( open my $fh, q{-|}, $self->uname_call, @{ $self->_uname_args } ) {
+  {
+    my $str;
+    ## no critic ( ProhibitPunctuationVars )
     local $/ = undef;
+
+    last unless open my $fh, q{-|}, $self->uname_call, @{ $self->_uname_args };
     $str = <$fh>;
-  }
-  else {
-    my ( $x, $y ) = ( $@, $! );
-    $self->zilla->log('Error calling uname:');
-    $self->zilla->log( '   $@ :' . $x );
-    $self->zilla->log( '   $! :' . $y );
-    return ();
-  }
+    last unless close $fh;
+    chomp $str;
+    return ( 'uname', $str );
 
-  chomp $str;
+  }
+  ## no critic ( ProhibitPunctuationVars )
 
-  return ( 'uname', $str );
+  my ( $x, $y ) = ( $@, $! );
+  $self->zilla->log('Error calling uname:');
+  ## no critic ( RequireInterpolationOfMetachars )
+  $self->zilla->log( '   $@ :' . $x );
+  $self->zilla->log( '   $! :' . $y );
+  return ();
 
 }
 
 sub _build__uname_args {
-  my $self = $_[0];
-  return [ grep { defined $_ && $_ ne '' } split /\s+/, $self->uname_args ];
+  my $self = shift;
+  ## no critic ( RequireDotMatchAnything RequireExtendedFormatting RequireLineBoundaryMatching )
+  return [ grep { defined $_ && $_ ne q{} } split /\s+/, $self->uname_args ];
 }
 
 sub _get_prereq_modnames {
@@ -141,10 +145,11 @@ sub _get_prereq_modnames {
     my $message = "Possible Error: Module '$module' $reason.";
     if ( not $context and not $ENV{BUILTWITH_TRACE} ) {
       $context++;
-      $message .= "set BUILTWITH_TRACE=1 for details";
+      $message .= q{set BUILTWITH_TRACE=1 for details};
     }
     $self->zilla->log($message);
     if ( $ENV{BUILTWITH_TRACE} ) {
+      ## no critic ( RequireInterpolationOfMetachars )
       $self->zilla->log( '$@ : ' . $error->[0] );
       $self->zilla->log( '$! : ' . $error->[1] );
     }
@@ -157,25 +162,27 @@ sub _detect_installed {
   my ( $self, $module ) = @_;
   my $success = undef;
   if ( $module eq 'perl' ) {
-    return "NA(skipped: perl)";
+    return 'NA(skipped: perl)';
   }
-  eval "require $module; \$success = 1";
+  ## no critic ( ProhibitStringyEval )
+  eval "require $module; \$success = 1" or do { $success = undef; };
+  ## no critic ( Variables::ProhibitPunctuationVars )
   my $lasterror = [ $@, $! ];
   if ( not $success ) {
     $self->_logonce( $module, 'did not load', $lasterror );
-    return "NA(possibly not installed)";
+    return 'NA(possibly not installed)';
   }
   my $modver;
   $success = undef;
-  eval "\$modver = $module->VERSION(); \$success = 1";
+  eval "\$modver = $module->VERSION(); \$success = 1" or do { $success = undef };
   $lasterror = [ $@, $! ];
   if ( not $success ) {
     $self->_logonce( $module, ' died assessing its version', $lasterror );
-    return "NA(version could not be resolved)";
+    return 'NA(version could not be resolved)';
   }
   if ( not defined $modver ) {
     $self->_logonce( $module, ' reported an undefined version', $lasterror );
-    return "NA(undef)";
+    return 'NA(undef)';
   }
   return "$modver";
 }
@@ -185,7 +192,7 @@ sub _detect_installed {
 This module scrapes together the name of all modules that exist in the "C<Prereqs>" section
 that Dist::Zilla collects, and then works out what version of things you have,
 applies the various include/exclude rules, and ships that data back to Dist::Zilla
-via this method. See L<Dist::Zilla::Role::MetaProvider> for more details.
+via this method. See L<< C<Dist::Zilla>'s C<MetaProvider> role|Dist::Zilla::Role::MetaProvider >> for more details.
 
 =cut
 
@@ -193,7 +200,7 @@ sub metadata {
   my ($self) = @_;
 
   my $report = $self->_get_prereq_modnames();
-  my %modtable = map { $_, $self->_detect_installed($_) } ( @{$report}, @{ $self->include } );
+  my %modtable = map { ( $_, $self->_detect_installed($_) ) } ( @{$report}, @{ $self->include } );
   for my $badmodule ( @{ $self->exclude } ) {
     delete $modtable{$badmodule} if exists $modtable{$badmodule};
   }
@@ -201,7 +208,8 @@ sub metadata {
   return {
     $self->_stash_key,
     {
-      modules  => \%modtable,
+      modules => \%modtable,
+      ## no critic ( Variables::ProhibitPunctuationVars )
       perl     => $],
       platform => $^O,
       $self->_uname(),
