@@ -21,15 +21,15 @@ Often, distribution authors get module dependencies wrong. So in such cases,
 its handy to be able to see what version of various packages they built with.
 
 Some would prefer to demand everyone install the same version as they did,
-but thats also not always nessecary.
+but that's also not always neseccary.
 
-Hopefully, the existance of the metadata provided by this module will help
-users on thier end machines make intelligent choices about what modules to
+Hopefully, the existence of the metadata provided by this module will help
+users on their end machines make intelligent choices about what modules to
 install in the event of a problem.
 
 
 
-=head1 EXAMPLE OUTPUT ( META.json )
+=head1 EXAMPLE OUTPUT ( C<META.json> )
 
     "x_BuiltWith" : {
        "modules" : {
@@ -57,7 +57,7 @@ This module can take, as parameters, any volume of 'exclude' or 'include' argume
 
 =cut
 
-sub mvp_multivalue_args { qw( exclude include ) }
+sub mvp_multivalue_args { return qw( exclude include ) }
 
 has exclude => ( is => 'ro', isa => 'ArrayRef', default => sub { [] } );
 has include => ( is => 'ro', isa => 'ArrayRef', default => sub { [] } );
@@ -84,22 +84,18 @@ around dump_config => sub {
     $thisconfig->{include} = $self->include;
   }
 
-  $config->{ '' . __PACKAGE__ } = $thisconfig;
+  $config->{ q{} . __PACKAGE__ } = $thisconfig;
   return $config;
 };
 
 sub _uname {
-  my $self = $_[0];
+  my $self = shift;
   return () unless $self->show_uname;
-  if ( open my $fh, '-|', $self->uname_call, @{ $self->_uname_args } ) {
-    my $str;
-    {
-      local $/ = undef;
-      $str = <$fh>;
-    }
-    chomp $str;
+  my $str;
 
-    return ( 'uname', $str );
+  if ( open my $fh, q{-|}, $self->uname_call, @{ $self->_uname_args } ) {
+    local $/ = undef;
+    $str = <$fh>;
   }
   else {
     my ( $x, $y ) = ( $@, $! );
@@ -108,6 +104,11 @@ sub _uname {
     $self->zilla->log( '   $! :' . $y );
     return ();
   }
+
+  chomp $str;
+
+  return ( 'uname', $str );
+
 }
 
 sub _build__uname_args {
@@ -181,7 +182,7 @@ sub _detect_installed {
 
 =method metadata
 
-This module scrapes together the name of all modules that exist in the "Prereq" section
+This module scrapes together the name of all modules that exist in the "C<Prereqs>" section
 that Dist::Zilla collects, and then works out what version of things you have,
 applies the various include/exclude rules, and ships that data back to Dist::Zilla
 via this method. See L<Dist::Zilla::Role::MetaProvider> for more details.
