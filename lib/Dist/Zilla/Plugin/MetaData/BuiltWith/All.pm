@@ -34,6 +34,13 @@ Also, using this module will likely add 1000 lines to META.yml, so please for th
 
 has 'show_undef' => ( is => 'ro', isa => 'Bool', default => 0 );
 
+around dump_config => sub {
+    my ( $orig, $self ) = @_;
+    my $config = $self->$orig();
+    $config->{''. __PACKAGE__ }->{show_undef} = $self->show_undef;
+    return $config;
+};
+
 sub _versions_of {
   my $self    = shift;
   my $package = shift;
@@ -91,7 +98,7 @@ sub _filter {
 override 'metadata' => sub {
   my $self = shift;
   my $stash = super();
-  $stash->{x_BuiltWith}->{allmodules} = $self->_filter($self->_flatten( $self->_versions_of('') ) );
+  $stash->{ $self->_stash_key }->{allmodules} = $self->_filter($self->_flatten( $self->_versions_of('') ) );
   return $stash;
 };
 
