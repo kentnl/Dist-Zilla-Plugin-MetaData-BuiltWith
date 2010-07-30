@@ -52,6 +52,7 @@ sub _versions_of {
   };
   my %outhash;
   for ( keys %{$ns} ) {
+    ## no critic ( RequireDotMatchAnything RequireExtendedFormatting RequireLineBoundaryMatching )
     if ( $_ =~ /^(.*)::$/ ) {
       $outhash{$1} = { children => {}, version => undef };
     }
@@ -62,7 +63,7 @@ sub _versions_of {
 
     #    warn "$xsn -> VERSION\n";
     eval { $outhash{$_}->{version} = $xsn->VERSION(); } or do {
-        1;
+      1;
     };
   }
   for ( keys %outhash ) {
@@ -77,13 +78,13 @@ sub _versions_of {
 sub _flatten {
   my $self = shift;
   my $tree = shift;
-  my $path = shift || '';
+  my $path = shift || q{};
   my %outhash;
   for ( keys %{$tree} ) {
     $outhash{ $path . $_ } = $tree->{$_}->{version};
   }
   for ( keys %{$tree} ) {
-    %outhash = ( %outhash, $self->_flatten( $tree->{$_}->{children}, $path . $_ . '::' ) );
+    %outhash = ( %outhash, $self->_flatten( $tree->{$_}->{children}, $path . $_ . q{::} ) );
   }
   return %outhash;
 }
@@ -98,13 +99,13 @@ sub _filter {
     }
     $out{$_} = $in{$_};
   }
-  \%out;
+  return \%out;
 }
 
 override 'metadata' => sub {
   my $self  = shift;
   my $stash = super();
-  $stash->{ $self->_stash_key }->{allmodules} = $self->_filter( $self->_flatten( $self->_versions_of('') ) );
+  $stash->{ $self->_stash_key }->{allmodules} = $self->_filter( $self->_flatten( $self->_versions_of(q{}) ) );
   return $stash;
 };
 
