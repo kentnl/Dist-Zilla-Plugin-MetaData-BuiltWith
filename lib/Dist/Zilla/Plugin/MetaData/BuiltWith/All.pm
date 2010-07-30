@@ -14,7 +14,7 @@ extends 'Dist::Zilla::Plugin::MetaData::BuiltWith';
   [MetaData::BuiltWith::All]
   show_undef = 1
 
-This module is otherwise identical to L<Dist::Zilla::Plugin::MetaData::BuiltWith::All>.
+This module is otherwise identical to L<< C<MetaData::BuiltWith>|Dist::Zilla::Plugin::MetaData::BuiltWith >>.
 
 =head1 DESCRIPTION
 
@@ -27,9 +27,9 @@ Only recommended for the most extreme of situations where you find your code bre
 
 At present this code does no recursion prevention, apart from excluding the C<main> name-space.
 
-If it sees other name-spaces which recurse into themself indefinately ( like main does ), then it may not terminate normally.
+If it sees other name-spaces which recur into their self indefinitely ( like main does ), then it may not terminate normally.
 
-Also, using this module will likely add 1000 lines to META.yml, so please for the love of sanity don't use this too often.
+Also, using this module will likely add 1000 lines to C<META.yml>, so please for the love of sanity don't use this too often.
 
 =cut
 
@@ -38,7 +38,7 @@ has 'show_undef' => ( is => 'ro', isa => 'Bool', default => 0 );
 around dump_config => sub {
   my ( $orig, $self ) = @_;
   my $config = $self->$orig();
-  $config->{ '' . __PACKAGE__ }->{show_undef} = $self->show_undef;
+  $config->{ q{} . __PACKAGE__ }->{show_undef} = $self->show_undef;
   return $config;
 };
 
@@ -90,8 +90,7 @@ sub _flatten {
 }
 
 sub _filter {
-  my $self = shift;
-  my %in   = @_;
+  my ( $self, %in ) = @_;
   my %out;
   for ( keys %in ) {
     if ( not defined $in{$_} ) {
