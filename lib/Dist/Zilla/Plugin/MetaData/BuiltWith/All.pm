@@ -3,7 +3,7 @@ use warnings;
 
 package Dist::Zilla::Plugin::MetaData::BuiltWith::All;
 
-# ABSTRACT: Go overkill and report everything in all namespaces.
+# ABSTRACT: Go overkill and report everything in all name-spaces.
 
 use Moose;
 use namespace::autoclean;
@@ -18,16 +18,16 @@ This module is otherwise identical to L<Dist::Zilla::Plugin::MetaData::BuiltWith
 
 =head1 DESCRIPTION
 
-This further extends the verbosity of the information reported by the BuiltWith plugin,
-by recursively rooting around in the namespaces and reporting every version of everything it finds.
+This further extends the verbosity of the information reported by the L<< C<BuiltWith>|Dist::Zilla::Plugin::MetaData::BuiltWith >> plug-in,
+by recursively rooting around in the name-spaces and reporting every version of everything it finds.
 
 Only recommended for the most extreme of situations where you find your code breaking all over the show between different versions of things, or for personal amusement.
 
 =head1 WARNING
 
-At present this code does no recursion prevention, apart from excluding the 'main' namespace.
+At present this code does no recursion prevention, apart from excluding the C<main> name-space.
 
-If it sees other namespaces which recurse into themself indefinately ( like main does ), then it may not terminate normally.
+If it sees other name-spaces which recurse into themself indefinately ( like main does ), then it may not terminate normally.
 
 Also, using this module will likely add 1000 lines to META.yml, so please for the love of sanity don't use this too often.
 
@@ -45,7 +45,11 @@ around dump_config => sub {
 sub _versions_of {
   my $self    = shift;
   my $package = shift;
-  my $ns      = do { no strict 'refs'; \%{ $package . "::" } };
+  my $ns      = do {
+    ## no critic ( TestingAndDebugging::ProhibitNoStrict )
+    no strict 'refs';
+    \%{ $package . q{::} };
+  };
   my %outhash;
   for ( keys %{$ns} ) {
     if ( $_ =~ /^(.*)::$/ ) {
@@ -54,15 +58,17 @@ sub _versions_of {
   }
   for ( keys %outhash ) {
     my $xsn = $_;
-    $xsn = $package . '::' . $_ unless $package eq q{};
+    $xsn = $package . q{::} . $_ unless $package eq q{};
 
     #    warn "$xsn -> VERSION\n";
-    eval { $outhash{$_}->{version} = $xsn->VERSION(); };
+    eval { $outhash{$_}->{version} = $xsn->VERSION(); } or do {
+        1;
+    };
   }
   for ( keys %outhash ) {
     next if $_ eq 'main';
     my $xsn = $_;
-    $xsn = $package . '::' . $_ unless $package eq q{};
+    $xsn = $package . q{::} . $_ unless $package eq q{};
     $outhash{$_}->{children} = $self->_versions_of($xsn);
   }
   return \%outhash;
