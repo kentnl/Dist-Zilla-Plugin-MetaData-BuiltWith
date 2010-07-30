@@ -1,6 +1,8 @@
 Revision history for {{$dist->name}}
 
 {{$NEXT}}
+
+0.01005020 2010-07-30 21:06:26 Pacific/Auckland
           Skip 'perl' automatically when found in modules list. Can't depend on perl.pm.
           Added 'uname' reporting feature. This should mostly work still, and only warn when its run
             on a machine with no uname support and not publish uname data.
