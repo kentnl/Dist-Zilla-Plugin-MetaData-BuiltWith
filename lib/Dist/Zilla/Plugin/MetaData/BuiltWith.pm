@@ -66,6 +66,24 @@ has uname_call  => ( is       => 'ro',  isa => 'Str',  default => 'uname' );
 has uname_args  => ( is       => 'ro',  isa => 'Str',  default => '-a' );
 has _uname_args => ( init_arg => undef, is  => 'ro',   isa     => 'ArrayRef', lazy_build => 1 );
 
+around dump_config => sub {
+    my ( $orig, $self ) = @_ ;
+    my $config = $self->$orig();
+    my $unameconfig = { };
+    if ( $self->print_uname ){
+        $unameconfig->{uname_call} = $self->uname_call;
+        $unameconfig->{uname_args} = $self->_uname_args;
+    }
+    my $this_config = {
+        exclude => $self->exclude,
+        include => $self->include,
+        print_uname => $self->print_uname ,
+        ( $self->print_uname  ) ? (
+            uname => $unameconfig,
+        ): ( )
+    };
+    $config->{'' . __PACKAGE__ } = $this_config;
+};
 sub _uname {
   my $self = $_[0];
   return () unless $self->print_uname;
