@@ -10,6 +10,10 @@ package Dist::Zilla::Plugin::MetaData::BuiltWith;
   [MetaData::BuiltWith]
   include = Some::Module::Thats::Not::In::Preq
   exclude = Some::Module::Youre::Ashamed::Of
+  print_uname = 1           ; default is 0
+  uname_call = uname        ; the default
+  uname_args = -s -r -m -p  ; the default is -a
+
 
 =head1 DESCRIPTION
 
@@ -43,6 +47,7 @@ install in the event of a problem.
 =cut
 
 use Moose;
+use Carp qw( croak );
 use namespace::autoclean;
 with 'Dist::Zilla::Role::MetaProvider';
 
@@ -56,6 +61,33 @@ sub mvp_multivalue_args { qw( exclude include ) }
 
 has exclude => ( is => 'ro', isa => 'ArrayRef', default => sub { [] } );
 has include => ( is => 'ro', isa => 'ArrayRef', default => sub { [] } );
+has print_uname => ( is       => 'ro',  isa => 'Bool', default => 0 );
+has uname_call  => ( is       => 'ro',  isa => 'Str',  default => 'uname' );
+has uname_args  => ( is       => 'ro',  isa => 'Str',  default => '-a' );
+has _uname_args => ( init_arg => undef, is  => 'ro',   isa     => 'ArrayRef', lazy_build => 1 );
+
+sub _uname {
+  my $self = $_[0];
+  return () unless $self->print_uname;
+  if ( open my $fh, '-|', $self->uname_call, @{ $self->_uname_args } ) {
+    my $str;
+    local $/ = undef;
+    $str = <$fh>;
+    return ( 'uname', $str );
+  }
+  else {
+    my ( $x, $y ) = ( $@, $! );
+    $self->zilla->log('Error calling uname:');
+    $self->zilla->log( '   $@ :' . $x );
+    $self->zilla->log( '   $! :' . $y );
+    return ();
+  }
+}
+
+sub _build__uname_args {
+  my $self = $_[0];
+  return [ grep { defined $_ && $_ ne '' } split /\s+/, $self->uname_args ];
+}
 
 sub _get_prereq_modnames {
   my ($self) = @_;
@@ -97,6 +129,9 @@ sub _get_prereq_modnames {
 sub _detect_installed {
   my ( $self, $module ) = @_;
   my $success = undef;
+  if ( $module eq 'perl' ) {
+    return "NA(skipped: perl)";
+  }
   eval "require $module; \$success = 1";
   my $lasterror = [ $@, $! ];
   if ( not $success ) {
@@ -141,6 +176,7 @@ sub metadata {
       modules  => \%modtable,
       perl     => $],
       platform => $^O,
+      $self->_uname(),
     }
   };
 }
