@@ -10,7 +10,7 @@ package Dist::Zilla::Plugin::MetaData::BuiltWith;
   [MetaData::BuiltWith]
   include = Some::Module::Thats::Not::In::Preq
   exclude = Some::Module::Youre::Ashamed::Of
-  print_uname = 1           ; default is 0
+  show_uname = 1           ; default is 0
   uname_call = uname        ; the default
   uname_args = -s -r -m -p  ; the default is -a
 
@@ -61,36 +61,43 @@ sub mvp_multivalue_args { qw( exclude include ) }
 
 has exclude => ( is => 'ro', isa => 'ArrayRef', default => sub { [] } );
 has include => ( is => 'ro', isa => 'ArrayRef', default => sub { [] } );
-has print_uname => ( is       => 'ro',  isa => 'Bool', default => 0 );
+has show_uname => ( is       => 'ro',  isa => 'Bool', default => 0 );
 has uname_call  => ( is       => 'ro',  isa => 'Str',  default => 'uname' );
 has uname_args  => ( is       => 'ro',  isa => 'Str',  default => '-a' );
 has _uname_args => ( init_arg => undef, is  => 'ro',   isa     => 'ArrayRef', lazy_build => 1 );
+has _stash_key  => ( is       => 'ro',  isa => 'Str',  default => 'x_BuiltWith' );
 
 around dump_config => sub {
-    my ( $orig, $self ) = @_ ;
-    my $config = $self->$orig();
-    my $unameconfig = { };
-    if ( $self->print_uname ){
-        $unameconfig->{uname_call} = $self->uname_call;
-        $unameconfig->{uname_args} = $self->_uname_args;
-    }
-    my $this_config = {
-        exclude => $self->exclude,
-        include => $self->include,
-        print_uname => $self->print_uname ,
-        ( $self->print_uname  ) ? (
-            uname => $unameconfig,
-        ): ( )
-    };
-    $config->{'' . __PACKAGE__ } = $this_config;
+  my ( $orig, $self ) = @_;
+  my $config      = $self->$orig();
+  my $thisconfig  = { show_uname => $self->show_uname, _stash_key => $self->_stash_key };
+  my $unameconfig = {};
+  if ( $self->show_uname ) {
+    $unameconfig->{uname_call} = $self->uname_call;
+    $unameconfig->{uname_args} = $self->_uname_args;
+    $thisconfig->{uname}       = $unameconfig;
+  }
+  if ( @{ $self->exclude } ) {
+    $thisconfig->{exclude} = $self->exclude;
+  }
+  if ( @{ $self->include } ) {
+    $thisconfig->{include} = $self->include;
+  }
+
+  $config->{ '' . __PACKAGE__ } = $thisconfig;
+  return $config;
 };
+
 sub _uname {
   my $self = $_[0];
-  return () unless $self->print_uname;
+  return () unless $self->show_uname;
   if ( open my $fh, '-|', $self->uname_call, @{ $self->_uname_args } ) {
-    my $str;
-    local $/ = undef;
-    $str = <$fh>;
+    my $str;{
+       local $/ = undef;
+       $str = <$fh>;
+    }
+    chomp $str;
+
     return ( 'uname', $str );
   }
   else {
@@ -190,7 +197,8 @@ sub metadata {
   }
 
   return {
-    x_BuiltWith => {
+    $self->_stash_key,
+    {
       modules  => \%modtable,
       perl     => $],
       platform => $^O,
