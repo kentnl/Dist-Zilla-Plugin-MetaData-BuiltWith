@@ -1,5 +1,6 @@
 use strict;
 use warnings;
+
 package Dist::Zilla::Plugin::MetaData::BuiltWith::All;
 
 # ABSTRACT: Go overkill and report everything in all namespaces.
@@ -35,73 +36,71 @@ Also, using this module will likely add 1000 lines to META.yml, so please for th
 has 'show_undef' => ( is => 'ro', isa => 'Bool', default => 0 );
 
 around dump_config => sub {
-    my ( $orig, $self ) = @_;
-    my $config = $self->$orig();
-    $config->{''. __PACKAGE__ }->{show_undef} = $self->show_undef;
-    return $config;
+  my ( $orig, $self ) = @_;
+  my $config = $self->$orig();
+  $config->{ '' . __PACKAGE__ }->{show_undef} = $self->show_undef;
+  return $config;
 };
 
 sub _versions_of {
   my $self    = shift;
   my $package = shift;
-  my $ns = do { no strict 'refs' ;  \%{$package . "::" } };
+  my $ns      = do { no strict 'refs'; \%{ $package . "::" } };
   my %outhash;
-  for ( keys  %{$ns} ){
-    if ( $_ =~ /^(.*)::$/ ){
-      $outhash{$1} = { children => {} , version => undef };
+  for ( keys %{$ns} ) {
+    if ( $_ =~ /^(.*)::$/ ) {
+      $outhash{$1} = { children => {}, version => undef };
     }
   }
-  for ( keys %outhash ){
+  for ( keys %outhash ) {
     my $xsn = $_;
     $xsn = $package . '::' . $_ unless $package eq q{};
-#    warn "$xsn -> VERSION\n";
-    eval {
-      $outhash{$_}->{version} = $xsn->VERSION();
-    }
+
+    #    warn "$xsn -> VERSION\n";
+    eval { $outhash{$_}->{version} = $xsn->VERSION(); };
   }
-  for ( keys %outhash ){
-   next if $_ eq 'main';
+  for ( keys %outhash ) {
+    next if $_ eq 'main';
     my $xsn = $_;
     $xsn = $package . '::' . $_ unless $package eq q{};
-    $outhash{$_}->{children} = $self->_versions_of( $xsn );
+    $outhash{$_}->{children} = $self->_versions_of($xsn);
   }
   return \%outhash;
 }
 
 sub _flatten {
-    my $self = shift;
-    my $tree = shift;
-    my $path = shift || '';
-    my %outhash;
-    for ( keys %{$tree} ){
-      $outhash{$path . $_} = $tree->{$_}->{version};
-    }
-    for ( keys %{$tree} ){
-      %outhash = ( %outhash, $self->_flatten( $tree->{$_}->{children} , $path . $_ . '::' ) );
-    }
-    return %outhash;
+  my $self = shift;
+  my $tree = shift;
+  my $path = shift || '';
+  my %outhash;
+  for ( keys %{$tree} ) {
+    $outhash{ $path . $_ } = $tree->{$_}->{version};
+  }
+  for ( keys %{$tree} ) {
+    %outhash = ( %outhash, $self->_flatten( $tree->{$_}->{children}, $path . $_ . '::' ) );
+  }
+  return %outhash;
 }
+
 sub _filter {
   my $self = shift;
-  my %in = @_;
+  my %in   = @_;
   my %out;
-  for ( keys %in ){
-    if ( not defined $in{$_} ){
-        next unless $self->show_undef;
+  for ( keys %in ) {
+    if ( not defined $in{$_} ) {
+      next unless $self->show_undef;
     }
-    $out{$_} = $in{$_}
+    $out{$_} = $in{$_};
   }
   \%out;
 }
 
-
 override 'metadata' => sub {
-  my $self = shift;
+  my $self  = shift;
   my $stash = super();
-  $stash->{ $self->_stash_key }->{allmodules} = $self->_filter($self->_flatten( $self->_versions_of('') ) );
+  $stash->{ $self->_stash_key }->{allmodules} = $self->_filter( $self->_flatten( $self->_versions_of('') ) );
   return $stash;
 };
-
 
 __PACKAGE__->meta->make_immutable;
 no Moose;

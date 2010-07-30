@@ -61,7 +61,7 @@ sub mvp_multivalue_args { qw( exclude include ) }
 
 has exclude => ( is => 'ro', isa => 'ArrayRef', default => sub { [] } );
 has include => ( is => 'ro', isa => 'ArrayRef', default => sub { [] } );
-has show_uname => ( is       => 'ro',  isa => 'Bool', default => 0 );
+has show_uname  => ( is       => 'ro',  isa => 'Bool', default => 0 );
 has uname_call  => ( is       => 'ro',  isa => 'Str',  default => 'uname' );
 has uname_args  => ( is       => 'ro',  isa => 'Str',  default => '-a' );
 has _uname_args => ( init_arg => undef, is  => 'ro',   isa     => 'ArrayRef', lazy_build => 1 );
@@ -92,9 +92,10 @@ sub _uname {
   my $self = $_[0];
   return () unless $self->show_uname;
   if ( open my $fh, '-|', $self->uname_call, @{ $self->_uname_args } ) {
-    my $str;{
-       local $/ = undef;
-       $str = <$fh>;
+    my $str;
+    {
+      local $/ = undef;
+      $str = <$fh>;
     }
     chomp $str;
 
