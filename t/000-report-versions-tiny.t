@@ -49,6 +49,7 @@ sub pmver {
 }
 
 eval { $v .= pmver('Carp','any version') };
+eval { $v .= pmver('Dist::Zilla::Role::ConfigDumper','4.101540') };
 eval { $v .= pmver('Dist::Zilla::Role::MetaProvider','any version') };
 eval { $v .= pmver('File::Find','any version') };
 eval { $v .= pmver('File::Temp','any version') };

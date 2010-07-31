@@ -3,7 +3,7 @@ use warnings;
 
 package Dist::Zilla::Plugin::MetaData::BuiltWith::All;
 BEGIN {
-  $Dist::Zilla::Plugin::MetaData::BuiltWith::All::VERSION = '0.01005020';
+  $Dist::Zilla::Plugin::MetaData::BuiltWith::All::VERSION = '0.01005122';
 }
 
 # ABSTRACT: Go overkill and report everything in all name-spaces.
@@ -101,7 +101,7 @@ Dist::Zilla::Plugin::MetaData::BuiltWith::All - Go overkill and report everythin
 
 =head1 VERSION
 
-version 0.01005020
+version 0.01005122
 
 =head1 SYNOPSIS
 

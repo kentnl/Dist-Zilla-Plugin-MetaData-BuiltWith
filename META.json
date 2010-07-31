@@ -27,6 +27,7 @@
       "runtime" : {
          "requires" : {
             "Carp" : 0,
+            "Dist::Zilla::Role::ConfigDumper" : "4.101540",
             "Dist::Zilla::Role::MetaProvider" : 0,
             "Moose" : 0,
             "namespace::autoclean" : 0
@@ -43,11 +44,11 @@
    "provides" : {
       "Dist::Zilla::Plugin::MetaData::BuiltWith" : {
          "file" : "lib/Dist/Zilla/Plugin/MetaData/BuiltWith.pm",
-         "version" : "0.01005020"
+         "version" : "0.01005122"
       },
       "Dist::Zilla::Plugin::MetaData::BuiltWith::All" : {
          "file" : "lib/Dist/Zilla/Plugin/MetaData/BuiltWith/All.pm",
-         "version" : "0.01005020"
+         "version" : "0.01005122"
       }
    },
    "release_status" : "stable",
@@ -59,7 +60,7 @@
          "web" : "http://github.com/kentfredric/Dist-Zilla-Plugin-MetaData-BuiltWith/tree"
       }
    },
-   "version" : "0.01005020",
+   "version" : "0.01005122",
    "x_BuiltWith" : {
       "allmodules" : {
          "App::Cmd" : "0.307",
@@ -707,6 +708,7 @@
       },
       "modules" : {
          "Carp" : "1.16",
+         "Dist::Zilla::Role::ConfigDumper" : "4.101900",
          "Dist::Zilla::Role::MetaProvider" : "4.101900",
          "File::Find" : "1.15",
          "File::Temp" : "0.22",

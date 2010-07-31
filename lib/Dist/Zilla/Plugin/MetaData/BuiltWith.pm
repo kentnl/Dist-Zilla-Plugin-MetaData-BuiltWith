@@ -3,7 +3,7 @@ use warnings;
 
 package Dist::Zilla::Plugin::MetaData::BuiltWith;
 BEGIN {
-  $Dist::Zilla::Plugin::MetaData::BuiltWith::VERSION = '0.01005020';
+  $Dist::Zilla::Plugin::MetaData::BuiltWith::VERSION = '0.01005122';
 }
 
 # ABSTRACT: Report what versions of things your distribution was built against
@@ -180,7 +180,7 @@ Dist::Zilla::Plugin::MetaData::BuiltWith - Report what versions of things your d
 
 =head1 VERSION
 
-version 0.01005020
+version 0.01005122
 
 =head1 SYNOPSIS
 

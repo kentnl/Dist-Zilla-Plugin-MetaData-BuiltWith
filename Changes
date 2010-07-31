@@ -1,5 +1,9 @@
 Revision history for Dist-Zilla-Plugin-MetaData-BuiltWith
 
+0.01005122 2010-07-31 23:43:00 Pacific/Auckland
+          Dep on version 4.101540 of Dist::Zilla::Role::ConfigDumper.
+          ( This should reduce some test failures due to 'around dump_config' ) 
+
 0.01005020 2010-07-30 21:06:26 Pacific/Auckland
           Skip 'perl' automatically when found in modules list. Can't depend on perl.pm.
           Added 'uname' reporting feature. This should mostly work still, and only warn when its run
