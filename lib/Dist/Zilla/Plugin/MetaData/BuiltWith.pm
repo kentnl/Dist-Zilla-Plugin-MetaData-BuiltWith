@@ -3,14 +3,16 @@ use warnings;
 
 package Dist::Zilla::Plugin::MetaData::BuiltWith;
 BEGIN {
-  $Dist::Zilla::Plugin::MetaData::BuiltWith::VERSION = '0.01005122';
+  $Dist::Zilla::Plugin::MetaData::BuiltWith::VERSION = '0.01014716';
 }
 
 # ABSTRACT: Report what versions of things your distribution was built against
 
 
+use Hash::Merge::Simple;
+use Dist::Zilla::Util::EmulatePhase 0.01000101 qw( get_prereqs );
+use Moose::Autobox;
 use Moose;
-use Carp qw( croak );
 use namespace::autoclean;
 with 'Dist::Zilla::Role::MetaProvider';
 
@@ -27,18 +29,23 @@ has _stash_key  => ( is       => 'ro',  isa => 'Str',  default => 'x_BuiltWith' 
 
 around dump_config => sub {
   my ( $orig, $self ) = @_;
-  my $config      = $self->$orig();
-  my $thisconfig  = { show_uname => $self->show_uname, _stash_key => $self->_stash_key };
-  my $unameconfig = {};
+
+  my $config = $self->$orig();
+  my $thisconfig = { show_uname => $self->show_uname, _stash_key => $self->_stash_key };
+
   if ( $self->show_uname ) {
-    $unameconfig->{uname_call} = $self->uname_call;
-    $unameconfig->{uname_args} = $self->_uname_args;
-    $thisconfig->{uname}       = $unameconfig;
+    $thisconfig->put(
+      uname => {
+        uname_call => $self->uname_call,
+        uname_args => $self->_uname_args,
+      }
+    );
   }
-  if ( @{ $self->exclude } ) {
+
+  if ( $self->exclude->flatten ) {
     $thisconfig->{exclude} = $self->exclude;
   }
-  if ( @{ $self->include } ) {
+  if ( $self->include->flatten ) {
     $thisconfig->{include} = $self->include;
   }
 
@@ -54,7 +61,7 @@ sub _uname {
     ## no critic ( ProhibitPunctuationVars )
     local $/ = undef;
 
-    last unless open my $fh, q{-|}, $self->uname_call, @{ $self->_uname_args };
+    last unless open my $fh, q{-|}, $self->uname_call, $self->_uname_args->flatten;
     $str = <$fh>;
     last unless close $fh;
     chomp $str;
@@ -63,13 +70,16 @@ sub _uname {
   }
   ## no critic ( ProhibitPunctuationVars )
 
-  my ( $x, $y ) = ( $@, $! );
-  $self->zilla->log('Error calling uname:');
-  ## no critic ( RequireInterpolationOfMetachars )
-  $self->zilla->log( '   $@ :' . $x );
-  $self->zilla->log( '   $! :' . $y );
+  $self->_my_log_fatal( 'Error calling uname:', $@, $! );
+
   return ();
 
+}
+
+sub _my_log_fatal {
+  my ($self) = @_;
+  ## no critic ( RequireInterpolationOfMetachars )
+  $self->log_fatal( sprintf "%s\n   %s:%s\n   %s:%s", shift, q{$@}, shift, q{$!}, shift );
 }
 
 sub _build__uname_args {
@@ -80,19 +90,36 @@ sub _build__uname_args {
 
 sub _get_prereq_modnames {
   my ($self) = @_;
-  my %modnames;
-  my $prereqs = $self->zilla->prereqs->as_string_hash;
-  return [] unless defined $prereqs;
-  for my $phase ( keys %{$prereqs} ) {
-    next unless defined $prereqs->{$phase};
-    for my $type ( keys %{ $prereqs->{$phase} } ) {
-      next unless defined $prereqs->{$phase}->{$type};
-      for my $module ( keys %{ $prereqs->{$phase}->{$type} } ) {
-        $modnames{$module} = 1;
-      }
-    }
+
+  my $modnames = {};
+  my $prereqs = get_prereqs( { zilla => $self->zilla } )->as_string_hash;
+  if ( not $prereqs->flatten ) {
+    $self->log("WARNING: No prereqs were found, probably a bug");
+    return [];
   }
-  return [ sort { $a cmp $b } keys %modnames ];
+  $self->log_debug( ( scalar $prereqs->keys->flatten ) . ' phases defined: ' . join q{,}, $prereqs->keys->flatten );
+  $prereqs->each(
+    sub {
+      my ( $phase_name, $phase_data ) = @_;
+      return unless defined $phase_data;
+      my $phase_deps = {};
+      $phase_data->each(
+        sub {
+          my ( $type, $type_data ) = @_;
+          return unless defined $type_data;
+          $type_data->each(
+            sub {
+              my ( $module, $module_data ) = @_;
+              $phase_deps->put( $module, 1 );
+            }
+          );
+        }
+      );
+      $self->log_debug( "Prereqs for $phase_name: " . $phase_deps->keys->join(q{,}) );
+      $modnames = $modnames->merge($phase_deps);
+    }
+  );
+  return $modnames->keys->sort;
 }
 
 {
@@ -101,16 +128,14 @@ sub _get_prereq_modnames {
   sub _logonce {
     my ( $self, $module, $reason, $error ) = @_;
     my $message = "Possible Error: Module '$module' $reason.";
-    if ( not $context and not $ENV{BUILTWITH_TRACE} ) {
+    if ( not $context ) {
       $context++;
-      $message .= q{set BUILTWITH_TRACE=1 for details};
+      $message .= q{see "dzil build -v" for details};
     }
-    $self->zilla->log($message);
-    if ( $ENV{BUILTWITH_TRACE} ) {
-      ## no critic ( RequireInterpolationOfMetachars )
-      $self->zilla->log( '$@ : ' . $error->[0] );
-      $self->zilla->log( '$! : ' . $error->[1] );
-    }
+    $self->log($message);
+    ## no critic ( RequireInterpolationOfMetachars )
+    $self->log_debug( '$@ : ' . $error->[0] );
+    $self->log_debug( '$! : ' . $error->[1] );
     return;
   }
 
@@ -142,17 +167,23 @@ sub _detect_installed {
     $self->_logonce( $module, ' reported an undefined version', $lasterror );
     return 'NA(undef)';
   }
+  $self->log_debug("Installed $module is $modver");
   return "$modver";
 }
 
 
 sub metadata {
   my ($self) = @_;
-
+  $self->log_debug("Metadata called");
   my $report = $self->_get_prereq_modnames();
-  my %modtable = map { ( $_, $self->_detect_installed($_) ) } ( @{$report}, @{ $self->include } );
-  for my $badmodule ( @{ $self->exclude } ) {
-    delete $modtable{$badmodule} if exists $modtable{$badmodule};
+  $self->log_debug( 'Found mods: ' . scalar @{$report} );
+  my %modtable = [ $report->flatten, $self->include->flatten ]->map(
+    sub {
+      ( $_, $self->_detect_installed($_) );
+    }
+  )->flatten;
+  for my $badmodule ( $self->exclude->flatten ) {
+    %modtable->delete($badmodule) if %modtable->exists($badmodule);
   }
 
   return {
@@ -180,7 +211,7 @@ Dist::Zilla::Plugin::MetaData::BuiltWith - Report what versions of things your d
 
 =head1 VERSION
 
-version 0.01005122
+version 0.01014716
 
 =head1 SYNOPSIS
 

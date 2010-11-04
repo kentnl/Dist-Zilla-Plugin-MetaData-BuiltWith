@@ -6,13 +6,12 @@ META.json
 META.yml
 README
 dist.ini
-inc/lib.pm
 lib/Dist/Zilla/Plugin/MetaData/BuiltWith.pm
 lib/Dist/Zilla/Plugin/MetaData/BuiltWith/All.pm
 perlcriticrc
 t/00-compile.t
 t/000-report-versions-tiny.t
-t/release-critic.t
+t/author-critic.t
 t/release-distmeta.t
 t/release-eol.t
 t/release-kwalitee.t

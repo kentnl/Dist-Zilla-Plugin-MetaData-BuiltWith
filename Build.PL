@@ -7,6 +7,7 @@ use Module::Build 0.3601;
 
 my %module_build_args = (
   'build_requires' => {
+    'English' => '0',
     'File::Find' => '0',
     'File::Temp' => '0',
     'Module::Build' => '0.3601',
@@ -20,16 +21,18 @@ my %module_build_args = (
     'Kent Fredric <kentnl@cpan.org>'
   ],
   'dist_name' => 'Dist-Zilla-Plugin-MetaData-BuiltWith',
-  'dist_version' => '0.01005122',
+  'dist_version' => '0.01014716',
   'license' => 'perl',
   'module_name' => 'Dist::Zilla::Plugin::MetaData::BuiltWith',
   'recommends' => {},
   'recursive_test_files' => 1,
   'requires' => {
-    'Carp' => '0',
     'Dist::Zilla::Role::ConfigDumper' => '4.101540',
     'Dist::Zilla::Role::MetaProvider' => '0',
+    'Dist::Zilla::Util::EmulatePhase' => '0.01000101',
+    'Hash::Merge::Simple' => '0',
     'Moose' => '0',
+    'Moose::Autobox' => '0',
     'namespace::autoclean' => '0'
   },
   'script_files' => []

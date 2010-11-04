@@ -1,5 +1,10 @@
 Revision history for Dist-Zilla-Plugin-MetaData-BuiltWith
 
+0.01014716 2010-11-04 18:26:16 Pacific/Auckland
+          Clean source code/Update toolchain.
+          Fixed issue with Prereqs not being discoverable.
+          Minor refactor with More Autobox
+
 0.01005122 2010-07-31 23:43:00 Pacific/Auckland
           Dep on version 4.101540 of Dist::Zilla::Role::ConfigDumper.
           ( This should reduce some test failures due to 'around dump_config' ) 
