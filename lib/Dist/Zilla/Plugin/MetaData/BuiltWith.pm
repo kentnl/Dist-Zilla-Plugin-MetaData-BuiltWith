@@ -71,17 +71,19 @@ has _stash_key  => ( is       => 'ro',  isa => 'Str',  default => 'x_BuiltWith' 
 
 around dump_config => sub {
   my ( $orig, $self ) = @_;
-  
-  my $config      = $self->$orig();
-  my $thisconfig  = { show_uname => $self->show_uname, _stash_key => $self->_stash_key };
-    
+
+  my $config = $self->$orig();
+  my $thisconfig = { show_uname => $self->show_uname, _stash_key => $self->_stash_key };
+
   if ( $self->show_uname ) {
-    $thisconfig->put( uname => {
-      uname_call => $self->uname_call,
-      uname_args => $self->_uname_args,
-    });
+    $thisconfig->put(
+      uname => {
+        uname_call => $self->uname_call,
+        uname_args => $self->_uname_args,
+      }
+    );
   }
-  
+
   if ( $self->exclude->flatten ) {
     $thisconfig->{exclude} = $self->exclude;
   }
@@ -110,16 +112,16 @@ sub _uname {
   }
   ## no critic ( ProhibitPunctuationVars )
 
-  $self->_my_log_fatal('Error calling uname:', $@, $!);
+  $self->_my_log_fatal( 'Error calling uname:', $@, $! );
 
   return ();
 
 }
 
-sub _my_log_fatal { 
-  my ( $self ) = @_ ;
+sub _my_log_fatal {
+  my ($self) = @_;
   ## no critic ( RequireInterpolationOfMetachars )
-  $self->log_fatal(sprintf "%s\n   %s:%s\n   %s:%s", shift,  q{$@}, shift, q{$!}, shift );
+  $self->log_fatal( sprintf "%s\n   %s:%s\n   %s:%s", shift, q{$@}, shift, q{$!}, shift );
 }
 
 sub _build__uname_args {
@@ -132,27 +134,33 @@ sub _get_prereq_modnames {
   my ($self) = @_;
 
   my $modnames = {};
-  my $prereqs = get_prereqs({ zilla => $self->zilla })->as_string_hash;
-  if ( not $prereqs->flatten ){
-      $self->log( "WARNING: No prereqs were found, probably a bug");
-      return [];
+  my $prereqs = get_prereqs( { zilla => $self->zilla } )->as_string_hash;
+  if ( not $prereqs->flatten ) {
+    $self->log("WARNING: No prereqs were found, probably a bug");
+    return [];
   }
   $self->log_debug( ( scalar $prereqs->keys->flatten ) . ' phases defined: ' . join q{,}, $prereqs->keys->flatten );
-  $prereqs->each(sub{ 
-    my ( $phase_name, $phase_data )  = @_;
-    return unless defined $phase_data;
-    my $phase_deps = {};
-    $phase_data->each(sub{ 
-      my ( $type, $type_data ) = @_ ;
-      return unless defined $type_data;
-      $type_data->each(sub{
-        my ( $module, $module_data ) = @_;
-        $phase_deps->put( $module, 1 );
-      });
-    });
-    $self->log_debug("Prereqs for $phase_name: " . $phase_deps->keys->join(q{,}));
-    $modnames =  $modnames->merge( $phase_deps );
-  });
+  $prereqs->each(
+    sub {
+      my ( $phase_name, $phase_data ) = @_;
+      return unless defined $phase_data;
+      my $phase_deps = {};
+      $phase_data->each(
+        sub {
+          my ( $type, $type_data ) = @_;
+          return unless defined $type_data;
+          $type_data->each(
+            sub {
+              my ( $module, $module_data ) = @_;
+              $phase_deps->put( $module, 1 );
+            }
+          );
+        }
+      );
+      $self->log_debug( "Prereqs for $phase_name: " . $phase_deps->keys->join(q{,}) );
+      $modnames = $modnames->merge($phase_deps);
+    }
+  );
   return $modnames->keys->sort;
 }
 
@@ -167,7 +175,7 @@ sub _get_prereq_modnames {
       $message .= q{see "dzil build -v" for details};
     }
     $self->log($message);
-      ## no critic ( RequireInterpolationOfMetachars )
+    ## no critic ( RequireInterpolationOfMetachars )
     $self->log_debug( '$@ : ' . $error->[0] );
     $self->log_debug( '$! : ' . $error->[1] );
     return;
@@ -216,14 +224,16 @@ via this method. See L<< C<Dist::Zilla>'s C<MetaProvider> role|Dist::Zilla::Role
 
 sub metadata {
   my ($self) = @_;
-  $self->log_debug( "Metadata called");
+  $self->log_debug("Metadata called");
   my $report = $self->_get_prereq_modnames();
   $self->log_debug( 'Found mods: ' . scalar @{$report} );
-  my %modtable = [ $report->flatten, $self->include->flatten  ]->map(sub{
-      ( $_, $self->_detect_installed($_) )
-  })->flatten;
+  my %modtable = [ $report->flatten, $self->include->flatten ]->map(
+    sub {
+      ( $_, $self->_detect_installed($_) );
+    }
+  )->flatten;
   for my $badmodule ( $self->exclude->flatten ) {
-    %modtable->delete($badmodule) if %modtable->exists( $badmodule );
+    %modtable->delete($badmodule) if %modtable->exists($badmodule);
   }
 
   return {
