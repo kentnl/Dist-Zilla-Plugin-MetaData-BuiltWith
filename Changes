@@ -1,6 +1,9 @@
 Revision history for {{$dist->name}}
 
 {{$NEXT}}
+          Clean source code/Update toolchain.
+          Fixed issue with Prereqs not being discoverable.
+          Minor refactor with More Autobox
 
 0.01005122 2010-07-31 23:43:00 Pacific/Auckland
           Dep on version 4.101540 of Dist::Zilla::Role::ConfigDumper.
