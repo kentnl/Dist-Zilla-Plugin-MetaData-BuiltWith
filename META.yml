@@ -11,7 +11,7 @@ build_requires:
 configure_requires:
   Module::Build: 0.3601
 dynamic_config: 0
-generated_by: 'Dist::Zilla version 4.102342, CPAN::Meta::Converter version 2.102400'
+generated_by: 'Dist::Zilla version 4.102343, CPAN::Meta::Converter version 2.102400'
 license: perl
 meta-spec:
   url: http://module-build.sourceforge.net/META-spec-v1.4.html
@@ -20,10 +20,10 @@ name: Dist-Zilla-Plugin-MetaData-BuiltWith
 provides:
   Dist::Zilla::Plugin::MetaData::BuiltWith:
     file: lib/Dist/Zilla/Plugin/MetaData/BuiltWith.pm
-    version: 0.01014716
+    version: 0.01016607
   Dist::Zilla::Plugin::MetaData::BuiltWith::All:
     file: lib/Dist/Zilla/Plugin/MetaData/BuiltWith/All.pm
-    version: 0.01014716
+    version: 0.01016607
 requires:
   Dist::Zilla::Role::ConfigDumper: 4.101540
   Dist::Zilla::Role::MetaProvider: 0
@@ -35,15 +35,16 @@ requires:
 resources:
   homepage: http://github.com/kentfredric/Dist-Zilla-Plugin-MetaData-BuiltWith/tree
   repository: git://github.com/kentfredric/Dist-Zilla-Plugin-MetaData-BuiltWith.git
-version: 0.01014716
+version: 0.01016607
 x_BuiltWith:
   allmodules:
-    App::Cmd: 0.307
-    App::Cmd::ArgProcessor: 0.307
-    App::Cmd::Command: 0.307
-    App::Cmd::Command::commands: 0.307
-    App::Cmd::Command::help: 0.307
-    App::Cmd::Setup: 0.307
+    App::Cmd: 0.309
+    App::Cmd::ArgProcessor: 0.309
+    App::Cmd::Command: 0.309
+    App::Cmd::Command::commands: 0.309
+    App::Cmd::Command::help: 0.309
+    App::Cmd::Plugin: 0.309
+    App::Cmd::Setup: 0.309
     Archive::Tar: 1.68
     Archive::Tar::Constant: 1.68
     Archive::Tar::File: 1.68
@@ -56,27 +57,27 @@ x_BuiltWith:
     CPAN::Uploader: 0.102150
     Carp: 1.17
     Carp::Clan: 6.04
-    Class::MOP: 1.1
-    Class::MOP::Attribute: 1.1
-    Class::MOP::Class: 1.1
-    Class::MOP::Class::Immutable::Trait: 1.1
-    Class::MOP::Deprecated: 1.1
-    Class::MOP::Instance: 1.1
-    Class::MOP::Method: 1.1
-    Class::MOP::Method::Accessor: 1.1
-    Class::MOP::Method::Constructor: 1.1
-    Class::MOP::Method::Generated: 1.1
-    Class::MOP::Method::Inlined: 1.1
-    Class::MOP::Method::Meta: 1.1
-    Class::MOP::Method::Wrapped: 1.1
-    Class::MOP::MiniTrait: 1.1
-    Class::MOP::Mixin: 1.1
-    Class::MOP::Mixin::AttributeCore: 1.1
-    Class::MOP::Mixin::HasAttributes: 1.1
-    Class::MOP::Mixin::HasMethods: 1.1
-    Class::MOP::Module: 1.1
-    Class::MOP::Object: 1.1
-    Class::MOP::Package: 1.1
+    Class::MOP: 1.11
+    Class::MOP::Attribute: 1.11
+    Class::MOP::Class: 1.11
+    Class::MOP::Class::Immutable::Trait: 1.11
+    Class::MOP::Deprecated: 1.11
+    Class::MOP::Instance: 1.11
+    Class::MOP::Method: 1.11
+    Class::MOP::Method::Accessor: 1.11
+    Class::MOP::Method::Constructor: 1.11
+    Class::MOP::Method::Generated: 1.11
+    Class::MOP::Method::Inlined: 1.11
+    Class::MOP::Method::Meta: 1.11
+    Class::MOP::Method::Wrapped: 1.11
+    Class::MOP::MiniTrait: 1.11
+    Class::MOP::Mixin: 1.11
+    Class::MOP::Mixin::AttributeCore: 1.11
+    Class::MOP::Mixin::HasAttributes: 1.11
+    Class::MOP::Mixin::HasMethods: 1.11
+    Class::MOP::Module: 1.11
+    Class::MOP::Object: 1.11
+    Class::MOP::Package: 1.11
     Class::Singleton: 1.4
     Class::Struct: 0.63
     Clone: 0.31
@@ -92,8 +93,7 @@ x_BuiltWith:
     Config::MVP::Reader::Findable::ByExtension: 2.101650
     Config::MVP::Reader::Finder: 2.101650
     Config::MVP::Reader::Hash: 2.101650
-    Config::MVP::Reader::INI: 2.101460
-    Config::MVP::Reader::INI::INIReader: 2.101460
+    Config::MVP::Reader::INI: 2.101461
     Config::MVP::Section: 2.101650
     Config::MVP::Sequence: 2.101650
     Cwd: 3.33
@@ -122,127 +122,127 @@ x_BuiltWith:
     Digest::MD5: 2.51
     Digest::base: 1.16
     DirHandle: 1.03
-    Dist::Zilla: 4.102342
-    Dist::Zilla::App: 4.102342
-    Dist::Zilla::App::Command: 4.102342
-    Dist::Zilla::App::Command::authordeps: 4.102342
-    Dist::Zilla::App::Command::build: 4.102342
-    Dist::Zilla::App::Command::clean: 4.102342
-    Dist::Zilla::App::Command::install: 4.102342
-    Dist::Zilla::App::Command::listdeps: 4.102342
-    Dist::Zilla::App::Command::new: 4.102342
-    Dist::Zilla::App::Command::nop: 4.102342
-    Dist::Zilla::App::Command::release: 4.102342
-    Dist::Zilla::App::Command::run: 4.102342
-    Dist::Zilla::App::Command::setup: 4.102342
-    Dist::Zilla::App::Command::smoke: 4.102342
-    Dist::Zilla::App::Command::test: 4.102342
+    Dist::Zilla: 4.102343
+    Dist::Zilla::App: 4.102343
+    Dist::Zilla::App::Command: 4.102343
+    Dist::Zilla::App::Command::authordeps: 4.102343
+    Dist::Zilla::App::Command::build: 4.102343
+    Dist::Zilla::App::Command::clean: 4.102343
+    Dist::Zilla::App::Command::install: 4.102343
+    Dist::Zilla::App::Command::listdeps: 4.102343
+    Dist::Zilla::App::Command::new: 4.102343
+    Dist::Zilla::App::Command::nop: 4.102343
+    Dist::Zilla::App::Command::release: 4.102343
+    Dist::Zilla::App::Command::run: 4.102343
+    Dist::Zilla::App::Command::setup: 4.102343
+    Dist::Zilla::App::Command::smoke: 4.102343
+    Dist::Zilla::App::Command::test: 4.102343
     Dist::Zilla::App::Command::xtest: 0.004
-    Dist::Zilla::Chrome::Term: 4.102342
-    Dist::Zilla::Dist::Builder: 4.102342
-    Dist::Zilla::File::FromCode: 4.102342
-    Dist::Zilla::File::InMemory: 4.102342
-    Dist::Zilla::File::OnDisk: 4.102342
-    Dist::Zilla::MVP::Assembler: 4.102342
-    Dist::Zilla::MVP::Assembler::GlobalConfig: 4.102342
-    Dist::Zilla::MVP::Assembler::Zilla: 4.102342
-    Dist::Zilla::MVP::Reader::Finder: 4.102342
-    Dist::Zilla::MVP::Reader::Perl: 4.102342
-    Dist::Zilla::MVP::RootSection: 4.102342
-    Dist::Zilla::MVP::Section: 4.102342
-    Dist::Zilla::MetaProvides::ProvideRecord: 1.11044405
-    Dist::Zilla::MetaProvides::Types: 1.11044405
-    Dist::Zilla::Plugin::AutoPrereqs: 4.102342
+    Dist::Zilla::Chrome::Term: 4.102343
+    Dist::Zilla::Dist::Builder: 4.102343
+    Dist::Zilla::File::FromCode: 4.102343
+    Dist::Zilla::File::InMemory: 4.102343
+    Dist::Zilla::File::OnDisk: 4.102343
+    Dist::Zilla::MVP::Assembler: 4.102343
+    Dist::Zilla::MVP::Assembler::GlobalConfig: 4.102343
+    Dist::Zilla::MVP::Assembler::Zilla: 4.102343
+    Dist::Zilla::MVP::Reader::Finder: 4.102343
+    Dist::Zilla::MVP::Reader::Perl: 4.102343
+    Dist::Zilla::MVP::RootSection: 4.102343
+    Dist::Zilla::MVP::Section: 4.102343
+    Dist::Zilla::MetaProvides::ProvideRecord: 1.12044806
+    Dist::Zilla::MetaProvides::Types: 1.12044806
+    Dist::Zilla::Plugin::AutoPrereqs: 4.102343
     Dist::Zilla::Plugin::AutoVersion::Relative: 0.01037118
     Dist::Zilla::Plugin::Bootstrap::lib: 0.01000003
-    Dist::Zilla::Plugin::CompileTests: 1.101800
-    Dist::Zilla::Plugin::ConfirmRelease: 4.102342
+    Dist::Zilla::Plugin::CompileTests: 1.103030
+    Dist::Zilla::Plugin::ConfirmRelease: 4.102343
     Dist::Zilla::Plugin::CriticTests: 1.102280
     Dist::Zilla::Plugin::EOLTests: 0.02
-    Dist::Zilla::Plugin::ExtraTests: 4.102342
-    Dist::Zilla::Plugin::FinderCode: 4.102342
-    Dist::Zilla::Plugin::GatherDir: 4.102342
+    Dist::Zilla::Plugin::ExtraTests: 4.102343
+    Dist::Zilla::Plugin::FinderCode: 4.102343
+    Dist::Zilla::Plugin::GatherDir: 4.102343
     Dist::Zilla::Plugin::Git::Check: 1.102810
     Dist::Zilla::Plugin::Git::Commit: 1.102810
     Dist::Zilla::Plugin::Git::CommitBuild: 1.102810
     Dist::Zilla::Plugin::Git::Tag: 1.102810
     Dist::Zilla::Plugin::GithubMeta: 0.10
-    Dist::Zilla::Plugin::InlineFiles: 4.102342
+    Dist::Zilla::Plugin::InlineFiles: 4.102343
     Dist::Zilla::Plugin::KwaliteeTests: 1.101420
-    Dist::Zilla::Plugin::License: 4.102342
-    Dist::Zilla::Plugin::Manifest: 4.102342
-    Dist::Zilla::Plugin::ManifestSkip: 4.102342
-    Dist::Zilla::Plugin::MetaConfig: 4.102342
-    Dist::Zilla::Plugin::MetaJSON: 4.102342
-    Dist::Zilla::Plugin::MetaProvides::Package: 1.11044404
-    Dist::Zilla::Plugin::MetaTests: 4.102342
-    Dist::Zilla::Plugin::MetaYAML: 4.102342
-    Dist::Zilla::Plugin::ModuleBuild: 4.102342
-    Dist::Zilla::Plugin::NextRelease: 4.102342
-    Dist::Zilla::Plugin::PkgVersion: 4.102342
-    Dist::Zilla::Plugin::PodCoverageTests: 4.102342
-    Dist::Zilla::Plugin::PodSyntaxTests: 4.102342
+    Dist::Zilla::Plugin::License: 4.102343
+    Dist::Zilla::Plugin::Manifest: 4.102343
+    Dist::Zilla::Plugin::ManifestSkip: 4.102343
+    Dist::Zilla::Plugin::MetaConfig: 4.102343
+    Dist::Zilla::Plugin::MetaJSON: 4.102343
+    Dist::Zilla::Plugin::MetaProvides::Package: 1.12044908
+    Dist::Zilla::Plugin::MetaTests: 4.102343
+    Dist::Zilla::Plugin::MetaYAML: 4.102343
+    Dist::Zilla::Plugin::ModuleBuild: 4.102343
+    Dist::Zilla::Plugin::NextRelease: 4.102343
+    Dist::Zilla::Plugin::PkgVersion: 4.102343
+    Dist::Zilla::Plugin::PodCoverageTests: 4.102343
+    Dist::Zilla::Plugin::PodSyntaxTests: 4.102343
     Dist::Zilla::Plugin::PodWeaver: 3.101641
     Dist::Zilla::Plugin::PortabilityTests: 1.101420
-    Dist::Zilla::Plugin::Prereqs: 4.102342
-    Dist::Zilla::Plugin::PruneCruft: 4.102342
+    Dist::Zilla::Plugin::Prereqs: 4.102343
+    Dist::Zilla::Plugin::PruneCruft: 4.102343
     Dist::Zilla::Plugin::ReadmeFromPod: 0.14
     Dist::Zilla::Plugin::ReportVersions::Tiny: 1.01
-    Dist::Zilla::Plugin::TestRelease: 4.102342
+    Dist::Zilla::Plugin::TestRelease: 4.102343
     Dist::Zilla::Plugin::Twitter: 0.009
-    Dist::Zilla::Plugin::UploadToCPAN: 4.102342
-    Dist::Zilla::PluginBundle::KENTNL: 0.01017122
+    Dist::Zilla::Plugin::UploadToCPAN: 4.102343
+    Dist::Zilla::PluginBundle::KENTNL: 0.01017322
     Dist::Zilla::PluginBundle::KENTNL::Lite: 0.01000002
-    Dist::Zilla::Prereqs: 4.102342
-    Dist::Zilla::Role::AfterBuild: 4.102342
-    Dist::Zilla::Role::AfterRelease: 4.102342
-    Dist::Zilla::Role::BeforeRelease: 4.102342
-    Dist::Zilla::Role::BuildRunner: 4.102342
-    Dist::Zilla::Role::Chrome: 4.102342
-    Dist::Zilla::Role::ConfigDumper: 4.102342
-    Dist::Zilla::Role::File: 4.102342
-    Dist::Zilla::Role::FileFinder: 4.102342
-    Dist::Zilla::Role::FileFinderUser: 4.102342
-    Dist::Zilla::Role::FileGatherer: 4.102342
-    Dist::Zilla::Role::FileInjector: 4.102342
-    Dist::Zilla::Role::FileMunger: 4.102342
-    Dist::Zilla::Role::FilePruner: 4.102342
+    Dist::Zilla::Prereqs: 4.102343
+    Dist::Zilla::Role::AfterBuild: 4.102343
+    Dist::Zilla::Role::AfterRelease: 4.102343
+    Dist::Zilla::Role::BeforeRelease: 4.102343
+    Dist::Zilla::Role::BuildRunner: 4.102343
+    Dist::Zilla::Role::Chrome: 4.102343
+    Dist::Zilla::Role::ConfigDumper: 4.102343
+    Dist::Zilla::Role::File: 4.102343
+    Dist::Zilla::Role::FileFinder: 4.102343
+    Dist::Zilla::Role::FileFinderUser: 4.102343
+    Dist::Zilla::Role::FileGatherer: 4.102343
+    Dist::Zilla::Role::FileInjector: 4.102343
+    Dist::Zilla::Role::FileMunger: 4.102343
+    Dist::Zilla::Role::FilePruner: 4.102343
     Dist::Zilla::Role::Git::DirtyFiles: 1.102810
-    Dist::Zilla::Role::InstallTool: 4.102342
-    Dist::Zilla::Role::MetaProvider: 4.102342
-    Dist::Zilla::Role::MetaProvider::Provider: 1.11044405
-    Dist::Zilla::Role::Plugin: 4.102342
-    Dist::Zilla::Role::PluginBundle: 4.102342
-    Dist::Zilla::Role::PrereqSource: 4.102342
-    Dist::Zilla::Role::Releaser: 4.102342
-    Dist::Zilla::Role::Stash: 4.102342
-    Dist::Zilla::Role::Stash::Login: 4.102342
-    Dist::Zilla::Role::TestRunner: 4.102342
-    Dist::Zilla::Role::TextTemplate: 4.102342
-    Dist::Zilla::Role::VersionProvider: 4.102342
-    Dist::Zilla::Stash::PAUSE: 4.102342
-    Dist::Zilla::Stash::Rights: 4.102342
-    Dist::Zilla::Types: 4.102342
-    Dist::Zilla::Util: 4.102342
-    Dist::Zilla::Util::EmulatePhase: 0.01000101
-    Dist::Zilla::Util::EmulatePhase::PrereqCollector: 0.01000101
+    Dist::Zilla::Role::InstallTool: 4.102343
+    Dist::Zilla::Role::MetaProvider: 4.102343
+    Dist::Zilla::Role::MetaProvider::Provider: 1.12044806
+    Dist::Zilla::Role::Plugin: 4.102343
+    Dist::Zilla::Role::PluginBundle: 4.102343
+    Dist::Zilla::Role::PrereqSource: 4.102343
+    Dist::Zilla::Role::Releaser: 4.102343
+    Dist::Zilla::Role::Stash: 4.102343
+    Dist::Zilla::Role::Stash::Login: 4.102343
+    Dist::Zilla::Role::TestRunner: 4.102343
+    Dist::Zilla::Role::TextTemplate: 4.102343
+    Dist::Zilla::Role::VersionProvider: 4.102343
+    Dist::Zilla::Stash::PAUSE: 4.102343
+    Dist::Zilla::Stash::Rights: 4.102343
+    Dist::Zilla::Types: 4.102343
+    Dist::Zilla::Util: 4.102343
+    Dist::Zilla::Util::EmulatePhase: 0.01000515
+    Dist::Zilla::Util::EmulatePhase::PrereqCollector: 0.01000515
     DynaLoader: 1.10
     Encode: 2.40
     Encode::Alias: 2.12
     Encode::Config: 2.05
-    Encode::ConfigLocal: 1288604052
+    Encode::ConfigLocal: 1289677322
     Encode::Encoding: 2.05
     Errno: 1.11
     Exporter: 5.63
     Exporter::Heavy: 5.63
-    ExtUtils::Liblist: 6.56
-    ExtUtils::Liblist::Kid: 6.56
-    ExtUtils::MM: 6.56
-    ExtUtils::MM_Any: 6.56
-    ExtUtils::MM_Unix: 6.56
-    ExtUtils::MY: 6.56
-    ExtUtils::MakeMaker: 6.56
-    ExtUtils::MakeMaker::Config: 6.56
+    ExtUtils::Liblist: 6.57_06
+    ExtUtils::Liblist::Kid: 6.5706
+    ExtUtils::MM: 6.57_06
+    ExtUtils::MM_Any: 6.57_06
+    ExtUtils::MM_Unix: 6.57_06
+    ExtUtils::MY: 6.5706
+    ExtUtils::MakeMaker: 6.57_06
+    ExtUtils::MakeMaker::Config: 6.57_06
     ExtUtils::Manifest: 1.58
     Fatal: 2.10
     Fcntl: 1.06
@@ -272,7 +272,7 @@ x_BuiltWith:
     Getopt::Long::Descriptive::Opts::__OPT__::1: 0.086
     Getopt::Long::Descriptive::Opts::__OPT__::2: 0.086
     Getopt::Long::Descriptive::Usage: 0.086
-    Git::Wrapper: 0.011
+    Git::Wrapper: 0.013
     HTML::Entities: 3.64
     HTML::Parser: 3.67
     HTTP::Date: 5.831
@@ -327,12 +327,12 @@ x_BuiltWith:
     Log::Message: 0.02
     Log::Message::Config: 0.01
     Log::Message::Simple: 0.06
-    MIME::Base64: 3.09
+    MIME::Base64: 3.10
     MRO::Compat: 0.11
-    Math::BigFloat: 1.63
-    Math::BigInt: 1.96
-    Math::BigInt::Calc: 0.55
-    Math::BigInt::FastCalc: 0.19
+    Math::BigFloat: 1.65
+    Math::BigInt: 1.99
+    Math::BigInt::Calc: 0.58
+    Math::BigInt::FastCalc: 0.24
     Mixin::Linewise::Readers: 0.003
     Module::Build: 0.3607
     Module::Build::Base: 0.3607
@@ -347,7 +347,7 @@ x_BuiltWith:
     Module::Load: 0.18
     Module::Load::Conditional: 0.38
     Module::Pluggable::Object: 3.9
-    Moose: 1.17
+    Moose: 1.19
     Moose::Autobox: 0.11
     Moose::Autobox::Array: 0.11
     Moose::Autobox::Code: 0.11
@@ -362,67 +362,67 @@ x_BuiltWith:
     Moose::Autobox::String: 0.11
     Moose::Autobox::Undef: 0.11
     Moose::Autobox::Value: 0.11
-    Moose::Deprecated: 1.17
-    Moose::Error::Default: 1.17
-    Moose::Exporter: 1.17
-    Moose::Meta::Attribute: 1.17
+    Moose::Deprecated: 1.19
+    Moose::Error::Default: 1.19
+    Moose::Exporter: 1.19
+    Moose::Meta::Attribute: 1.19
     Moose::Meta::Attribute::Custom::Getopt: 0.33
     Moose::Meta::Attribute::Custom::NoGetopt: 0.33
     Moose::Meta::Attribute::Custom::Trait::Getopt: 0.33
     Moose::Meta::Attribute::Custom::Trait::LazyRequire: 0.06
     Moose::Meta::Attribute::Custom::Trait::NoGetopt: 0.33
-    Moose::Meta::Attribute::Custom::Trait::SetOnce: 0.100471
-    Moose::Meta::Attribute::Native: 1.17
-    Moose::Meta::Attribute::Native::Trait: 1.17
-    Moose::Meta::Attribute::Native::Trait::Bool: 1.17
-    Moose::Meta::Class: 1.17
-    Moose::Meta::Class::Immutable::Trait: 1.17
-    Moose::Meta::Instance: 1.17
-    Moose::Meta::Method: 1.17
-    Moose::Meta::Method::Accessor: 1.17
-    Moose::Meta::Method::Accessor::Native: 1.17
-    Moose::Meta::Method::Accessor::Native::Bool::not: 1.17
-    Moose::Meta::Method::Accessor::Native::Bool::set: 1.17
-    Moose::Meta::Method::Accessor::Native::Bool::toggle: 1.17
-    Moose::Meta::Method::Accessor::Native::Bool::unset: 1.17
-    Moose::Meta::Method::Accessor::Native::Reader: 1.17
-    Moose::Meta::Method::Accessor::Native::Writer: 1.17
-    Moose::Meta::Method::Augmented: 1.17
-    Moose::Meta::Method::Constructor: 1.17
-    Moose::Meta::Method::Delegation: 1.17
-    Moose::Meta::Method::Destructor: 1.17
-    Moose::Meta::Method::Meta: 1.17
-    Moose::Meta::Method::Overridden: 1.17
-    Moose::Meta::Mixin::AttributeCore: 1.17
-    Moose::Meta::Object::Trait: 1.17
-    Moose::Meta::Role: 1.17
-    Moose::Meta::Role::Application: 1.17
-    Moose::Meta::Role::Application::RoleSummation: 1.17
-    Moose::Meta::Role::Application::ToClass: 1.17
-    Moose::Meta::Role::Application::ToInstance: 1.17
-    Moose::Meta::Role::Application::ToRole: 1.17
-    Moose::Meta::Role::Attribute: 1.17
-    Moose::Meta::Role::Composite: 1.17
-    Moose::Meta::Role::Method: 1.17
-    Moose::Meta::Role::Method::Conflicting: 1.17
-    Moose::Meta::Role::Method::Required: 1.17
-    Moose::Meta::TypeCoercion: 1.17
-    Moose::Meta::TypeCoercion::Union: 1.17
-    Moose::Meta::TypeConstraint: 1.17
-    Moose::Meta::TypeConstraint::Class: 1.17
-    Moose::Meta::TypeConstraint::DuckType: 1.17
-    Moose::Meta::TypeConstraint::Enum: 1.17
-    Moose::Meta::TypeConstraint::Parameterizable: 1.17
-    Moose::Meta::TypeConstraint::Parameterized: 1.17
-    Moose::Meta::TypeConstraint::Registry: 1.17
-    Moose::Meta::TypeConstraint::Role: 1.17
-    Moose::Meta::TypeConstraint::Union: 1.17
-    Moose::Object: 1.17
-    Moose::Role: 1.17
-    Moose::Util: 1.17
-    Moose::Util::MetaRole: 1.17
-    Moose::Util::TypeConstraints: 1.17
-    Moose::Util::TypeConstraints::OptimizedConstraints: 1.17
+    Moose::Meta::Attribute::Custom::Trait::SetOnce: 0.100472
+    Moose::Meta::Attribute::Native: 1.19
+    Moose::Meta::Attribute::Native::Trait: 1.19
+    Moose::Meta::Attribute::Native::Trait::Bool: 1.19
+    Moose::Meta::Class: 1.19
+    Moose::Meta::Class::Immutable::Trait: 1.19
+    Moose::Meta::Instance: 1.19
+    Moose::Meta::Method: 1.19
+    Moose::Meta::Method::Accessor: 1.19
+    Moose::Meta::Method::Accessor::Native: 1.19
+    Moose::Meta::Method::Accessor::Native::Bool::not: 1.19
+    Moose::Meta::Method::Accessor::Native::Bool::set: 1.19
+    Moose::Meta::Method::Accessor::Native::Bool::toggle: 1.19
+    Moose::Meta::Method::Accessor::Native::Bool::unset: 1.19
+    Moose::Meta::Method::Accessor::Native::Reader: 1.19
+    Moose::Meta::Method::Accessor::Native::Writer: 1.19
+    Moose::Meta::Method::Augmented: 1.19
+    Moose::Meta::Method::Constructor: 1.19
+    Moose::Meta::Method::Delegation: 1.19
+    Moose::Meta::Method::Destructor: 1.19
+    Moose::Meta::Method::Meta: 1.19
+    Moose::Meta::Method::Overridden: 1.19
+    Moose::Meta::Mixin::AttributeCore: 1.19
+    Moose::Meta::Object::Trait: 1.19
+    Moose::Meta::Role: 1.19
+    Moose::Meta::Role::Application: 1.19
+    Moose::Meta::Role::Application::RoleSummation: 1.19
+    Moose::Meta::Role::Application::ToClass: 1.19
+    Moose::Meta::Role::Application::ToInstance: 1.19
+    Moose::Meta::Role::Application::ToRole: 1.19
+    Moose::Meta::Role::Attribute: 1.19
+    Moose::Meta::Role::Composite: 1.19
+    Moose::Meta::Role::Method: 1.19
+    Moose::Meta::Role::Method::Conflicting: 1.19
+    Moose::Meta::Role::Method::Required: 1.19
+    Moose::Meta::TypeCoercion: 1.19
+    Moose::Meta::TypeCoercion::Union: 1.19
+    Moose::Meta::TypeConstraint: 1.19
+    Moose::Meta::TypeConstraint::Class: 1.19
+    Moose::Meta::TypeConstraint::DuckType: 1.19
+    Moose::Meta::TypeConstraint::Enum: 1.19
+    Moose::Meta::TypeConstraint::Parameterizable: 1.19
+    Moose::Meta::TypeConstraint::Parameterized: 1.19
+    Moose::Meta::TypeConstraint::Registry: 1.19
+    Moose::Meta::TypeConstraint::Role: 1.19
+    Moose::Meta::TypeConstraint::Union: 1.19
+    Moose::Object: 1.19
+    Moose::Role: 1.19
+    Moose::Util: 1.19
+    Moose::Util::MetaRole: 1.19
+    Moose::Util::TypeConstraints: 1.19
+    Moose::Util::TypeConstraints::OptimizedConstraints: 1.19
     MooseX::Getopt: 0.33
     MooseX::Getopt::Basic: 0.33
     MooseX::Getopt::GLD: 0.33
@@ -431,19 +431,19 @@ x_BuiltWith:
     MooseX::Getopt::Meta::Attribute::Trait: 0.33
     MooseX::Getopt::Meta::Attribute::Trait::NoGetopt: 0.33
     MooseX::Getopt::OptionTypeMap: 0.33
-    MooseX::Has::Sugar: 0.05046611
+    MooseX::Has::Sugar: 0.05055616
     MooseX::LazyRequire: 0.06
     MooseX::LazyRequire::Meta::Attribute::Trait::LazyRequire: 0.06
     MooseX::MultiInitArg: 0.01
-    MooseX::Role::Parameterized: 0.19
+    MooseX::Role::Parameterized: 0.20
     MooseX::Role::Parameterized::Meta::Parameter: 0.19
     MooseX::Role::Parameterized::Meta::Role::Parameterizable: 0.19
     MooseX::Role::Parameterized::Meta::Role::Parameterized: 0.19
     MooseX::Role::Parameterized::Meta::Trait::Parameterized: 0.19
     MooseX::Role::Parameterized::Parameters: 0.19
-    MooseX::SetOnce: 0.100471
-    MooseX::SetOnce::Accessor: 0.100471
-    MooseX::SetOnce::Attribute: 0.100471
+    MooseX::SetOnce: 0.100472
+    MooseX::SetOnce::Accessor: 0.100472
+    MooseX::SetOnce::Attribute: 0.100472
     MooseX::StrictConstructor: 0.12
     MooseX::StrictConstructor::Role::Meta::Method::Constructor: 0.12
     MooseX::StrictConstructor::Role::Object: 0.12
@@ -554,7 +554,7 @@ x_BuiltWith:
     PPI::XS: 0.901
     Package::Constants: 0.02
     Package::DeprecationManager: 0.10
-    Package::Stash: 0.08
+    Package::Stash: 0.13
     Params::Check: 0.26
     Params::Util: 1.01
     Params::Validate: 0.95
@@ -601,11 +601,11 @@ x_BuiltWith:
     Pod::Elemental::Types: 0.102360
     Pod::Eventual: 0.093330
     Pod::Eventual::Simple: 0.093330
-    Pod::Weaver: 3.101630
-    Pod::Weaver::Config: 3.101630
-    Pod::Weaver::Config::Assembler: 3.101630
-    Pod::Weaver::Config::Finder: 3.101630
-    Pod::Weaver::Role::Plugin: 3.101630
+    Pod::Weaver: 3.101632
+    Pod::Weaver::Config: 3.101632
+    Pod::Weaver::Config::Assembler: 3.101632
+    Pod::Weaver::Config::Finder: 3.101632
+    Pod::Weaver::Role::Plugin: 3.101632
     Readonly: 1.03
     Readonly::XS: 1.05
     Scalar::Util: 1.23
@@ -618,8 +618,8 @@ x_BuiltWith:
     Software::License::Perl_5: 0.102340
     Storable: 2.21
     String::Flogger: 1.101240
-    String::Formatter: 0.102080
-    String::RewritePrefix: 0.005
+    String::Formatter: 0.102082
+    String::RewritePrefix: 0.006
     String::Truncate: 1.100570
     Sub::Exporter: 0.982
     Sub::Exporter::ForMethods: 0.100050
@@ -673,7 +673,7 @@ x_BuiltWith:
     if: 0.05
     integer: 1.00
     lib: 0.62
-    metaclass: 1.1
+    metaclass: 1.11
     mro: 1.02
     namespace::autoclean: 0.11
     namespace::clean: 0.18
@@ -688,20 +688,25 @@ x_BuiltWith:
     warnings: 1.09
     warnings::register: 1.01
   modules:
-    Dist::Zilla::PluginBundle::KENTNL: 0.01017122
+    Dist::Zilla::PluginBundle::KENTNL: 0.01017322
     Dist::Zilla::PluginBundle::KENTNL::Lite: 0.01000002
-    Dist::Zilla::Role::ConfigDumper: 4.102342
-    Dist::Zilla::Role::MetaProvider: 4.102342
-    Dist::Zilla::Util::EmulatePhase: 0.01000101
-    File::Find: 1.15
+    Dist::Zilla::Role::ConfigDumper: 4.102343
+    Dist::Zilla::Role::MetaProvider: 4.102343
+    Dist::Zilla::Util::EmulatePhase: 0.01000515
     File::Temp: 0.22
     Hash::Merge::Simple: 0.05
     Module::Build: 0.3607
-    Moose: 1.17
+    Moose: 1.19
     Moose::Autobox: 0.11
     Test::More: 0.96
     namespace::autoclean: 0.11
-  perl: 5.012002
+  perl:
+    original: v5.12.2
+    qv: 1
+    version:
+      - 5
+      - 12
+      - 2
   platform: linux
   uname: "Linux 2.6.36-gentoo x86_64 GenuineIntel GNU/Linux\n"
 x_Dist_Zilla:
@@ -726,15 +731,15 @@ x_Dist_Zilla:
     -
       class: Dist::Zilla::Plugin::GatherDir
       name: '@KENTNL/GatherDir'
-      version: 4.102342
+      version: 4.102343
     -
       class: Dist::Zilla::Plugin::MetaConfig
       name: '@KENTNL/MetaConfig'
-      version: 4.102342
+      version: 4.102343
     -
       class: Dist::Zilla::Plugin::PruneCruft
       name: '@KENTNL/PruneCruft'
-      version: 4.102342
+      version: 4.102343
     -
       class: Dist::Zilla::Plugin::GithubMeta
       name: '@KENTNL/GithubMeta'
@@ -742,11 +747,11 @@ x_Dist_Zilla:
     -
       class: Dist::Zilla::Plugin::License
       name: '@KENTNL/License'
-      version: 4.102342
+      version: 4.102343
     -
       class: Dist::Zilla::Plugin::PkgVersion
       name: '@KENTNL/PkgVersion'
-      version: 4.102342
+      version: 4.102343
     -
       class: Dist::Zilla::Plugin::PodWeaver
       name: '@KENTNL/PodWeaver'
@@ -754,19 +759,19 @@ x_Dist_Zilla:
     -
       class: Dist::Zilla::Plugin::MetaProvides::Package
       name: '@KENTNL/MetaProvides::Package'
-      version: 1.11044404
+      version: 1.12044908
     -
       class: Dist::Zilla::Plugin::MetaJSON
       name: '@KENTNL/MetaJSON'
-      version: 4.102342
+      version: 4.102343
     -
       class: Dist::Zilla::Plugin::MetaYAML
       name: '@KENTNL/MetaYAML'
-      version: 4.102342
+      version: 4.102343
     -
       class: Dist::Zilla::Plugin::ModuleBuild
       name: '@KENTNL/ModuleBuild'
-      version: 4.102342
+      version: 4.102343
     -
       class: Dist::Zilla::Plugin::ReadmeFromPod
       name: '@KENTNL/ReadmeFromPod'
@@ -774,15 +779,15 @@ x_Dist_Zilla:
     -
       class: Dist::Zilla::Plugin::ManifestSkip
       name: '@KENTNL/ManifestSkip'
-      version: 4.102342
+      version: 4.102343
     -
       class: Dist::Zilla::Plugin::Manifest
       name: '@KENTNL/Manifest'
-      version: 4.102342
+      version: 4.102343
     -
       class: Dist::Zilla::Plugin::AutoPrereqs
       name: '@KENTNL/AutoPrereqs'
-      version: 4.102342
+      version: 4.102343
     -
       class: Dist::Zilla::Plugin::Prereqs
       config:
@@ -790,7 +795,7 @@ x_Dist_Zilla:
           phase: develop
           type: requires
       name: '@KENTNL/Prereqs/BundleDevelNeeds'
-      version: 4.102342
+      version: 4.102343
     -
       class: Dist::Zilla::Plugin::Prereqs
       config:
@@ -798,7 +803,7 @@ x_Dist_Zilla:
           phase: develop
           type: recommends
       name: '@KENTNL/Prereqs/BundleDevelRecommends'
-      version: 4.102342
+      version: 4.102343
     -
       class: Dist::Zilla::Plugin::Prereqs
       config:
@@ -806,7 +811,7 @@ x_Dist_Zilla:
           phase: develop
           type: suggests
       name: '@KENTNL/Prereqs/BundleDevelSuggests'
-      version: 4.102342
+      version: 4.102343
     -
       class: Dist::Zilla::Plugin::MetaData::BuiltWith
       config:
@@ -826,7 +831,7 @@ x_Dist_Zilla:
     -
       class: Dist::Zilla::Plugin::CompileTests
       name: '@KENTNL/CompileTests'
-      version: 1.101800
+      version: 1.103030
     -
       class: Dist::Zilla::Plugin::CriticTests
       name: '@KENTNL/CriticTests'
@@ -834,15 +839,15 @@ x_Dist_Zilla:
     -
       class: Dist::Zilla::Plugin::MetaTests
       name: '@KENTNL/MetaTests'
-      version: 4.102342
+      version: 4.102343
     -
       class: Dist::Zilla::Plugin::PodCoverageTests
       name: '@KENTNL/PodCoverageTests'
-      version: 4.102342
+      version: 4.102343
     -
       class: Dist::Zilla::Plugin::PodSyntaxTests
       name: '@KENTNL/PodSyntaxTests'
-      version: 4.102342
+      version: 4.102343
     -
       class: Dist::Zilla::Plugin::ReportVersions::Tiny
       name: '@KENTNL/ReportVersions::Tiny'
@@ -862,15 +867,15 @@ x_Dist_Zilla:
     -
       class: Dist::Zilla::Plugin::ExtraTests
       name: '@KENTNL/ExtraTests'
-      version: 4.102342
+      version: 4.102343
     -
       class: Dist::Zilla::Plugin::TestRelease
       name: '@KENTNL/TestRelease'
-      version: 4.102342
+      version: 4.102343
     -
       class: Dist::Zilla::Plugin::ConfirmRelease
       name: '@KENTNL/ConfirmRelease'
-      version: 4.102342
+      version: 4.102343
     -
       class: Dist::Zilla::Plugin::Git::Check
       name: '@KENTNL/Git::Check'
@@ -878,7 +883,7 @@ x_Dist_Zilla:
     -
       class: Dist::Zilla::Plugin::NextRelease
       name: '@KENTNL/NextRelease'
-      version: 4.102342
+      version: 4.102343
     -
       class: Dist::Zilla::Plugin::Git::Tag
       name: '@KENTNL/Git::Tag/tag_master'
@@ -898,7 +903,7 @@ x_Dist_Zilla:
     -
       class: Dist::Zilla::Plugin::UploadToCPAN
       name: '@KENTNL/UploadToCPAN'
-      version: 4.102342
+      version: 4.102343
     -
       class: Dist::Zilla::Plugin::Twitter
       name: '@KENTNL/Twitter'
@@ -928,25 +933,25 @@ x_Dist_Zilla:
           phase: runtime
           type: requires
       name: Prereqs
-      version: 4.102342
+      version: 4.102343
     -
       class: Dist::Zilla::Plugin::FinderCode
       name: ':InstallModules'
-      version: 4.102342
+      version: 4.102343
     -
       class: Dist::Zilla::Plugin::FinderCode
       name: ':TestFiles'
-      version: 4.102342
+      version: 4.102343
     -
       class: Dist::Zilla::Plugin::FinderCode
       name: ':ExecFiles'
-      version: 4.102342
+      version: 4.102343
     -
       class: Dist::Zilla::Plugin::FinderCode
       name: ':ShareFiles'
-      version: 4.102342
+      version: 4.102343
   zilla:
     class: Dist::Zilla::Dist::Builder
     config:
       is_trial: 0
-    version: 4.102342
+    version: 4.102343

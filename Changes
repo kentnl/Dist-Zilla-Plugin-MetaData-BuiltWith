@@ -1,5 +1,9 @@
 Revision history for Dist-Zilla-Plugin-MetaData-BuiltWith
 
+0.01016607 2010-11-22 09:30:38 Pacific/Auckland
+          Replaced $] with { %{$^V} } to see the native version object
+          instead of this deprecated string.
+
 0.01014716 2010-11-04 18:26:16 Pacific/Auckland
           Clean source code/Update toolchain.
           Fixed issue with Prereqs not being discoverable.
