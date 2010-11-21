@@ -241,7 +241,7 @@ sub metadata {
     {
       modules => \%modtable,
       ## no critic ( Variables::ProhibitPunctuationVars )
-      perl     => $],
+      perl     => {%{$^V}},
       platform => $^O,
       $self->_uname(),
     }
