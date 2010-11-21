@@ -1,7 +1,7 @@
 Revision history for {{$dist->name}}
 
 {{$NEXT}}
-          Replaced $] with {%{$^V}} to see the native version object
+          Replaced $] with { %{$^V} } to see the native version object
           instead of this deprecated string.
 
 0.01014716 2010-11-04 18:26:16 Pacific/Auckland
