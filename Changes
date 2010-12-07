@@ -1,6 +1,8 @@
 Revision history for {{$dist->name}}
 
 {{$NEXT}}
+
+0.01018204 2010-12-08 06:05:34 Pacific/Auckland
           Finally fixed that pesky \n in the uname string.
           Moral of the story:  $/ is actually evil.
             ( Thanks to Apocalypse for prodding me into finally fixing this )
