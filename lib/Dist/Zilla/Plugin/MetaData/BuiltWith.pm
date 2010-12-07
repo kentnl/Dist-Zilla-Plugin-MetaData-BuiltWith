@@ -3,7 +3,7 @@ use warnings;
 
 package Dist::Zilla::Plugin::MetaData::BuiltWith;
 BEGIN {
-  $Dist::Zilla::Plugin::MetaData::BuiltWith::VERSION = '0.01016607';
+  $Dist::Zilla::Plugin::MetaData::BuiltWith::VERSION = '0.01018204';
 }
 
 # ABSTRACT: Report what versions of things your distribution was built against
@@ -58,13 +58,12 @@ sub _uname {
   return () unless $self->show_uname;
   {
     my $str;
-    ## no critic ( ProhibitPunctuationVars )
-    local $/ = undef;
-
     last unless open my $fh, q{-|}, $self->uname_call, $self->_uname_args->flatten;
-    $str = <$fh>;
+    while( my $line = <$fh> ){
+        chomp $line;
+        $str .= $line;
+    }
     last unless close $fh;
-    chomp $str;
     return ( 'uname', $str );
 
   }
@@ -211,7 +210,7 @@ Dist::Zilla::Plugin::MetaData::BuiltWith - Report what versions of things your d
 
 =head1 VERSION
 
-version 0.01016607
+version 0.01018204
 
 =head1 SYNOPSIS
 

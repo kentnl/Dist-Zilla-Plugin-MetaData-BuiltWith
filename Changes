@@ -1,5 +1,10 @@
 Revision history for Dist-Zilla-Plugin-MetaData-BuiltWith
 
+0.01018204 2010-12-08 06:05:34 Pacific/Auckland
+          Finally fixed that pesky \n in the uname string.
+          Moral of the story:  $/ is actually evil.
+            ( Thanks to Apocalypse for prodding me into finally fixing this )
+
 0.01016607 2010-11-22 09:30:38 Pacific/Auckland
           Replaced $] with { %{$^V} } to see the native version object
           instead of this deprecated string.

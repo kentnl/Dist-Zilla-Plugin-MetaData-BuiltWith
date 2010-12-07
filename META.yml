@@ -20,10 +20,10 @@ name: Dist-Zilla-Plugin-MetaData-BuiltWith
 provides:
   Dist::Zilla::Plugin::MetaData::BuiltWith:
     file: lib/Dist/Zilla/Plugin/MetaData/BuiltWith.pm
-    version: 0.01016607
+    version: 0.01018204
   Dist::Zilla::Plugin::MetaData::BuiltWith::All:
     file: lib/Dist/Zilla/Plugin/MetaData/BuiltWith/All.pm
-    version: 0.01016607
+    version: 0.01018204
 requires:
   Dist::Zilla::Role::ConfigDumper: 4.101540
   Dist::Zilla::Role::MetaProvider: 0
@@ -35,7 +35,7 @@ requires:
 resources:
   homepage: http://github.com/kentfredric/Dist-Zilla-Plugin-MetaData-BuiltWith/tree
   repository: git://github.com/kentfredric/Dist-Zilla-Plugin-MetaData-BuiltWith.git
-version: 0.01016607
+version: 0.01018204
 x_BuiltWith:
   allmodules:
     App::Cmd: 0.309
@@ -45,10 +45,10 @@ x_BuiltWith:
     App::Cmd::Command::help: 0.309
     App::Cmd::Plugin: 0.309
     App::Cmd::Setup: 0.309
-    Archive::Tar: 1.68
-    Archive::Tar::Constant: 1.68
-    Archive::Tar::File: 1.68
-    AutoLoader: 5.70
+    Archive::Tar: 1.72
+    Archive::Tar::Constant: 1.72
+    Archive::Tar::File: 1.72
+    AutoLoader: 5.71
     B: 1.23
     B::Hooks::EndOfScope: 0.09
     CPAN::Meta::Converter: 2.102400
@@ -57,6 +57,7 @@ x_BuiltWith:
     CPAN::Uploader: 0.102150
     Carp: 1.17
     Carp::Clan: 6.04
+    Class::Load: 0.06
     Class::MOP: 1.11
     Class::MOP::Attribute: 1.11
     Class::MOP::Class: 1.11
@@ -109,11 +110,18 @@ x_BuiltWith:
     DateTime::Infinite::Future: 0.65
     DateTime::Infinite::Past: 0.65
     DateTime::Locale: 0.45
-    DateTime::TimeZone: 1.23
-    DateTime::TimeZone::Floating: 0.01
-    DateTime::TimeZone::Local: 0.01
-    DateTime::TimeZone::OffsetOnly: 0.02
-    DateTime::TimeZone::UTC: 0.01
+    DateTime::TimeZone: 1.26
+    DateTime::TimeZone::Catalog: 1.26
+    DateTime::TimeZone::Floating: 1.26
+    DateTime::TimeZone::Local: 1.26
+    DateTime::TimeZone::OffsetOnly: 1.26
+    DateTime::TimeZone::OlsonDB: 1.26
+    DateTime::TimeZone::OlsonDB::Change: 1.26
+    DateTime::TimeZone::OlsonDB::Observance: 1.26
+    DateTime::TimeZone::OlsonDB::Rule: 1.26
+    DateTime::TimeZone::OlsonDB::Zone: 1.26
+    DateTime::TimeZone::Pacific::Auckland: 1.26
+    DateTime::TimeZone::UTC: 1.26
     DateTime::_Thawed: 0.65
     Devel::GlobalDestruction: 0.02
     Devel::InnerPackage: 0.3
@@ -230,7 +238,7 @@ x_BuiltWith:
     Encode: 2.40
     Encode::Alias: 2.12
     Encode::Config: 2.05
-    Encode::ConfigLocal: 1289677322
+    Encode::ConfigLocal: 1291231033
     Encode::Encoding: 2.05
     Errno: 1.11
     Exporter: 5.63
@@ -309,12 +317,12 @@ x_BuiltWith:
     IPC::Cmd: 0.64
     IPC::Open3: 1.05
     JSON: 2.27
-    JSON::Any: 1.22
+    JSON::Any: 1.25
     JSON::XS: 2.3
     LWP: 5.837
     LWP::Protocol: 5.829
     LWP::UserAgent: 5.835
-    List::MoreUtils: 0.22
+    List::MoreUtils: 0.24
     List::Util: 1.23
     Locale::Maketext::Lexicon: 0.82
     Locale::Maketext::Simple: 0.21
@@ -347,7 +355,7 @@ x_BuiltWith:
     Module::Load: 0.18
     Module::Load::Conditional: 0.38
     Module::Pluggable::Object: 3.9
-    Moose: 1.19
+    Moose: 1.2
     Moose::Autobox: 0.11
     Moose::Autobox::Array: 0.11
     Moose::Autobox::Code: 0.11
@@ -362,67 +370,67 @@ x_BuiltWith:
     Moose::Autobox::String: 0.11
     Moose::Autobox::Undef: 0.11
     Moose::Autobox::Value: 0.11
-    Moose::Deprecated: 1.19
-    Moose::Error::Default: 1.19
-    Moose::Exporter: 1.19
-    Moose::Meta::Attribute: 1.19
+    Moose::Deprecated: 1.2
+    Moose::Error::Default: 1.2
+    Moose::Exporter: 1.2
+    Moose::Meta::Attribute: 1.20
     Moose::Meta::Attribute::Custom::Getopt: 0.33
     Moose::Meta::Attribute::Custom::NoGetopt: 0.33
     Moose::Meta::Attribute::Custom::Trait::Getopt: 0.33
     Moose::Meta::Attribute::Custom::Trait::LazyRequire: 0.06
     Moose::Meta::Attribute::Custom::Trait::NoGetopt: 0.33
     Moose::Meta::Attribute::Custom::Trait::SetOnce: 0.100472
-    Moose::Meta::Attribute::Native: 1.19
-    Moose::Meta::Attribute::Native::Trait: 1.19
-    Moose::Meta::Attribute::Native::Trait::Bool: 1.19
-    Moose::Meta::Class: 1.19
-    Moose::Meta::Class::Immutable::Trait: 1.19
-    Moose::Meta::Instance: 1.19
-    Moose::Meta::Method: 1.19
-    Moose::Meta::Method::Accessor: 1.19
-    Moose::Meta::Method::Accessor::Native: 1.19
-    Moose::Meta::Method::Accessor::Native::Bool::not: 1.19
-    Moose::Meta::Method::Accessor::Native::Bool::set: 1.19
-    Moose::Meta::Method::Accessor::Native::Bool::toggle: 1.19
-    Moose::Meta::Method::Accessor::Native::Bool::unset: 1.19
-    Moose::Meta::Method::Accessor::Native::Reader: 1.19
-    Moose::Meta::Method::Accessor::Native::Writer: 1.19
-    Moose::Meta::Method::Augmented: 1.19
-    Moose::Meta::Method::Constructor: 1.19
-    Moose::Meta::Method::Delegation: 1.19
-    Moose::Meta::Method::Destructor: 1.19
-    Moose::Meta::Method::Meta: 1.19
-    Moose::Meta::Method::Overridden: 1.19
-    Moose::Meta::Mixin::AttributeCore: 1.19
-    Moose::Meta::Object::Trait: 1.19
-    Moose::Meta::Role: 1.19
-    Moose::Meta::Role::Application: 1.19
-    Moose::Meta::Role::Application::RoleSummation: 1.19
-    Moose::Meta::Role::Application::ToClass: 1.19
-    Moose::Meta::Role::Application::ToInstance: 1.19
-    Moose::Meta::Role::Application::ToRole: 1.19
-    Moose::Meta::Role::Attribute: 1.19
-    Moose::Meta::Role::Composite: 1.19
-    Moose::Meta::Role::Method: 1.19
-    Moose::Meta::Role::Method::Conflicting: 1.19
-    Moose::Meta::Role::Method::Required: 1.19
-    Moose::Meta::TypeCoercion: 1.19
-    Moose::Meta::TypeCoercion::Union: 1.19
-    Moose::Meta::TypeConstraint: 1.19
-    Moose::Meta::TypeConstraint::Class: 1.19
-    Moose::Meta::TypeConstraint::DuckType: 1.19
-    Moose::Meta::TypeConstraint::Enum: 1.19
-    Moose::Meta::TypeConstraint::Parameterizable: 1.19
-    Moose::Meta::TypeConstraint::Parameterized: 1.19
-    Moose::Meta::TypeConstraint::Registry: 1.19
-    Moose::Meta::TypeConstraint::Role: 1.19
-    Moose::Meta::TypeConstraint::Union: 1.19
-    Moose::Object: 1.19
-    Moose::Role: 1.19
-    Moose::Util: 1.19
-    Moose::Util::MetaRole: 1.19
-    Moose::Util::TypeConstraints: 1.19
-    Moose::Util::TypeConstraints::OptimizedConstraints: 1.19
+    Moose::Meta::Attribute::Native: 1.2
+    Moose::Meta::Attribute::Native::Trait: 1.2
+    Moose::Meta::Attribute::Native::Trait::Bool: 1.2
+    Moose::Meta::Class: 1.2
+    Moose::Meta::Class::Immutable::Trait: 1.2
+    Moose::Meta::Instance: 1.2
+    Moose::Meta::Method: 1.2
+    Moose::Meta::Method::Accessor: 1.2
+    Moose::Meta::Method::Accessor::Native: 1.2
+    Moose::Meta::Method::Accessor::Native::Bool::not: 1.2
+    Moose::Meta::Method::Accessor::Native::Bool::set: 1.2
+    Moose::Meta::Method::Accessor::Native::Bool::toggle: 1.2
+    Moose::Meta::Method::Accessor::Native::Bool::unset: 1.2
+    Moose::Meta::Method::Accessor::Native::Reader: 1.2
+    Moose::Meta::Method::Accessor::Native::Writer: 1.2
+    Moose::Meta::Method::Augmented: 1.2
+    Moose::Meta::Method::Constructor: 1.20
+    Moose::Meta::Method::Delegation: 1.2
+    Moose::Meta::Method::Destructor: 1.2
+    Moose::Meta::Method::Meta: 1.2
+    Moose::Meta::Method::Overridden: 1.2
+    Moose::Meta::Mixin::AttributeCore: 1.20
+    Moose::Meta::Object::Trait: 1.2
+    Moose::Meta::Role: 1.2
+    Moose::Meta::Role::Application: 1.2
+    Moose::Meta::Role::Application::RoleSummation: 1.2
+    Moose::Meta::Role::Application::ToClass: 1.2
+    Moose::Meta::Role::Application::ToInstance: 1.2
+    Moose::Meta::Role::Application::ToRole: 1.2
+    Moose::Meta::Role::Attribute: 1.20
+    Moose::Meta::Role::Composite: 1.2
+    Moose::Meta::Role::Method: 1.2
+    Moose::Meta::Role::Method::Conflicting: 1.2
+    Moose::Meta::Role::Method::Required: 1.2
+    Moose::Meta::TypeCoercion: 1.2
+    Moose::Meta::TypeCoercion::Union: 1.2
+    Moose::Meta::TypeConstraint: 1.2
+    Moose::Meta::TypeConstraint::Class: 1.2
+    Moose::Meta::TypeConstraint::DuckType: 1.2
+    Moose::Meta::TypeConstraint::Enum: 1.2
+    Moose::Meta::TypeConstraint::Parameterizable: 1.2
+    Moose::Meta::TypeConstraint::Parameterized: 1.2
+    Moose::Meta::TypeConstraint::Registry: 1.2
+    Moose::Meta::TypeConstraint::Role: 1.2
+    Moose::Meta::TypeConstraint::Union: 1.2
+    Moose::Object: 1.2
+    Moose::Role: 1.2
+    Moose::Util: 1.2
+    Moose::Util::MetaRole: 1.2
+    Moose::Util::TypeConstraints: 1.2
+    Moose::Util::TypeConstraints::OptimizedConstraints: 1.2
     MooseX::Getopt: 0.33
     MooseX::Getopt::Basic: 0.33
     MooseX::Getopt::GLD: 0.33
@@ -556,7 +564,7 @@ x_BuiltWith:
     Package::DeprecationManager: 0.10
     Package::Stash: 0.13
     Params::Check: 0.26
-    Params::Util: 1.01
+    Params::Util: 1.03
     Params::Validate: 0.95
     Path::Class: 0.21
     Path::Class::Dir: 0.21
@@ -654,7 +662,7 @@ x_BuiltWith:
     URI::FromHash: 0.03
     URI::WithBase: 2.19
     URI::file: 4.20
-    Variable::Magic: 0.44
+    Variable::Magic: 0.45
     Version::Requirements: 0.101020
     Version::Requirements::_Range::Exact: 0.101020
     Version::Requirements::_Range::Range: 0.101020
@@ -678,6 +686,7 @@ x_BuiltWith:
     namespace::autoclean: 0.11
     namespace::clean: 0.18
     overload: 1.10
+    parent: 0.224
     re: 0.11
     strict: 1.04
     subs: 1.00
@@ -696,7 +705,7 @@ x_BuiltWith:
     File::Temp: 0.22
     Hash::Merge::Simple: 0.05
     Module::Build: 0.3607
-    Moose: 1.19
+    Moose: 1.2
     Moose::Autobox: 0.11
     Test::More: 0.96
     namespace::autoclean: 0.11
@@ -708,7 +717,7 @@ x_BuiltWith:
       - 12
       - 2
   platform: linux
-  uname: "Linux 2.6.36-gentoo x86_64 GenuineIntel GNU/Linux\n"
+  uname: 'Linux 2.6.36-gentoo x86_64 GenuineIntel GNU/Linux'
 x_Dist_Zilla:
   plugins:
     -
