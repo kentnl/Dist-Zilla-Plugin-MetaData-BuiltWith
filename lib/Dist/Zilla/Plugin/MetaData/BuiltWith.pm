@@ -100,13 +100,12 @@ sub _uname {
   return () unless $self->show_uname;
   {
     my $str;
-    ## no critic ( ProhibitPunctuationVars )
-    local $/ = undef;
-
     last unless open my $fh, q{-|}, $self->uname_call, $self->_uname_args->flatten;
-    $str = <$fh>;
+    while( my $line = <$fh> ){
+        chomp $line;
+        $str .= $line;
+    }
     last unless close $fh;
-    chomp $str;
     return ( 'uname', $str );
 
   }
