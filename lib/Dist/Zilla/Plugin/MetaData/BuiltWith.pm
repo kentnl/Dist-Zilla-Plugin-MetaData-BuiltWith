@@ -101,9 +101,9 @@ sub _uname {
   {
     my $str;
     last unless open my $fh, q{-|}, $self->uname_call, $self->_uname_args->flatten;
-    while( my $line = <$fh> ){
-        chomp $line;
-        $str .= $line;
+    while ( my $line = <$fh> ) {
+      chomp $line;
+      $str .= $line;
     }
     last unless close $fh;
     return ( 'uname', $str );
@@ -120,7 +120,7 @@ sub _uname {
 sub _my_log_fatal {
   my ($self) = @_;
   ## no critic ( RequireInterpolationOfMetachars )
-  $self->log_fatal( sprintf "%s\n   %s:%s\n   %s:%s", shift, q{$@}, shift, q{$!}, shift );
+  return $self->log_fatal( [ "%s\n   %s:%s\n   %s:%s", shift, q{$@}, shift, q{$!}, shift ] );
 }
 
 sub _build__uname_args {
@@ -135,10 +135,10 @@ sub _get_prereq_modnames {
   my $modnames = {};
   my $prereqs = get_prereqs( { zilla => $self->zilla } )->as_string_hash;
   if ( not $prereqs->flatten ) {
-    $self->log("WARNING: No prereqs were found, probably a bug");
+    $self->log(q{WARNING: No prereqs were found, probably a bug});
     return [];
   }
-  $self->log_debug( ( scalar $prereqs->keys->flatten ) . ' phases defined: ' . join q{,}, $prereqs->keys->flatten );
+  $self->log_debug( [ '%s phases defined: %s ', scalar $prereqs->keys->flatten, ( join q{,}, $prereqs->keys->flatten ) ] );
   $prereqs->each(
     sub {
       my ( $phase_name, $phase_data ) = @_;
@@ -156,7 +156,7 @@ sub _get_prereq_modnames {
           );
         }
       );
-      $self->log_debug( "Prereqs for $phase_name: " . $phase_deps->keys->join(q{,}) );
+      $self->log_debug( [ 'Prereqs for %s: %s', $phase_name, $phase_deps->keys->join(q{,}) ] );
       $modnames = $modnames->merge($phase_deps);
     }
   );
@@ -223,14 +223,10 @@ via this method. See L<< C<Dist::Zilla>'s C<MetaProvider> role|Dist::Zilla::Role
 
 sub metadata {
   my ($self) = @_;
-  $self->log_debug("Metadata called");
+  $self->log_debug(q{Metadata called});
   my $report = $self->_get_prereq_modnames();
   $self->log_debug( 'Found mods: ' . scalar @{$report} );
-  my %modtable = [ $report->flatten, $self->include->flatten ]->map(
-    sub {
-      ( $_, $self->_detect_installed($_) );
-    }
-  )->flatten;
+  my %modtable = map { ( $_, $self->_detect_installed($_) ) } ( $report->flatten, $self->include->flatten );
   for my $badmodule ( $self->exclude->flatten ) {
     %modtable->delete($badmodule) if %modtable->exists($badmodule);
   }
@@ -240,7 +236,7 @@ sub metadata {
     {
       modules => \%modtable,
       ## no critic ( Variables::ProhibitPunctuationVars )
-      perl     => {%{$^V}},
+      perl     => { %{$^V} },
       platform => $^O,
       $self->_uname(),
     }
