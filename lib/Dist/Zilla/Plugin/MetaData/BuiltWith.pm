@@ -3,7 +3,10 @@ use warnings;
 
 package Dist::Zilla::Plugin::MetaData::BuiltWith;
 BEGIN {
-  $Dist::Zilla::Plugin::MetaData::BuiltWith::VERSION = '0.01018204';
+  $Dist::Zilla::Plugin::MetaData::BuiltWith::AUTHORITY = 'cpan:KENTNL';
+}
+{
+  $Dist::Zilla::Plugin::MetaData::BuiltWith::VERSION = '0.01018205';
 }
 
 # ABSTRACT: Report what versions of things your distribution was built against
@@ -59,9 +62,9 @@ sub _uname {
   {
     my $str;
     last unless open my $fh, q{-|}, $self->uname_call, $self->_uname_args->flatten;
-    while( my $line = <$fh> ){
-        chomp $line;
-        $str .= $line;
+    while ( my $line = <$fh> ) {
+      chomp $line;
+      $str .= $line;
     }
     last unless close $fh;
     return ( 'uname', $str );
@@ -78,7 +81,7 @@ sub _uname {
 sub _my_log_fatal {
   my ($self) = @_;
   ## no critic ( RequireInterpolationOfMetachars )
-  $self->log_fatal( sprintf "%s\n   %s:%s\n   %s:%s", shift, q{$@}, shift, q{$!}, shift );
+  return $self->log_fatal( [ "%s\n   %s:%s\n   %s:%s", shift, q{$@}, shift, q{$!}, shift ] );
 }
 
 sub _build__uname_args {
@@ -93,10 +96,10 @@ sub _get_prereq_modnames {
   my $modnames = {};
   my $prereqs = get_prereqs( { zilla => $self->zilla } )->as_string_hash;
   if ( not $prereqs->flatten ) {
-    $self->log("WARNING: No prereqs were found, probably a bug");
+    $self->log(q{WARNING: No prereqs were found, probably a bug});
     return [];
   }
-  $self->log_debug( ( scalar $prereqs->keys->flatten ) . ' phases defined: ' . join q{,}, $prereqs->keys->flatten );
+  $self->log_debug( [ '%s phases defined: %s ', scalar $prereqs->keys->flatten, ( join q{,}, $prereqs->keys->flatten ) ] );
   $prereqs->each(
     sub {
       my ( $phase_name, $phase_data ) = @_;
@@ -114,7 +117,7 @@ sub _get_prereq_modnames {
           );
         }
       );
-      $self->log_debug( "Prereqs for $phase_name: " . $phase_deps->keys->join(q{,}) );
+      $self->log_debug( [ 'Prereqs for %s: %s', $phase_name, $phase_deps->keys->join(q{,}) ] );
       $modnames = $modnames->merge($phase_deps);
     }
   );
@@ -173,14 +176,10 @@ sub _detect_installed {
 
 sub metadata {
   my ($self) = @_;
-  $self->log_debug("Metadata called");
+  $self->log_debug(q{Metadata called});
   my $report = $self->_get_prereq_modnames();
   $self->log_debug( 'Found mods: ' . scalar @{$report} );
-  my %modtable = [ $report->flatten, $self->include->flatten ]->map(
-    sub {
-      ( $_, $self->_detect_installed($_) );
-    }
-  )->flatten;
+  my %modtable = map { ( $_, $self->_detect_installed($_) ) } ( $report->flatten, $self->include->flatten );
   for my $badmodule ( $self->exclude->flatten ) {
     %modtable->delete($badmodule) if %modtable->exists($badmodule);
   }
@@ -190,7 +189,7 @@ sub metadata {
     {
       modules => \%modtable,
       ## no critic ( Variables::ProhibitPunctuationVars )
-      perl     => {%{$^V}},
+      perl     => { %{$^V} },
       platform => $^O,
       $self->_uname(),
     }
@@ -204,13 +203,15 @@ no Moose;
 __END__
 =pod
 
+=encoding utf-8
+
 =head1 NAME
 
 Dist::Zilla::Plugin::MetaData::BuiltWith - Report what versions of things your distribution was built against
 
 =head1 VERSION
 
-version 0.01018204
+version 0.01018205
 
 =head1 SYNOPSIS
 
@@ -267,7 +268,7 @@ Kent Fredric <kentnl@cpan.org>
 
 =head1 COPYRIGHT AND LICENSE
 
-This software is copyright (c) 2010 by Kent Fredric <kentnl@cpan.org>.
+This software is copyright (c) 2011 by Kent Fredric <kentnl@cpan.org>.
 
 This is free software; you can redistribute it and/or modify it under
 the same terms as the Perl 5 programming language system itself.

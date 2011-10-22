@@ -1,35 +1,66 @@
 Revision history for Dist-Zilla-Plugin-MetaData-BuiltWith
 
-0.01018204 2010-12-08 06:05:34 Pacific/Auckland
-          Finally fixed that pesky \n in the uname string.
-          Moral of the story:  $/ is actually evil.
-            ( Thanks to Apocalypse for prodding me into finally fixing this )
+0.01018205 2011-10-22T12:24:24Z
+ - Package Maintenance Release
 
-0.01016607 2010-11-22 09:30:38 Pacific/Auckland
-          Replaced $] with { %{$^V} } to see the native version object
-          instead of this deprecated string.
+ [Dependencies::New::Requires]
+ - strict
+ - warnings
 
-0.01014716 2010-11-04 18:26:16 Pacific/Auckland
-          Clean source code/Update toolchain.
-          Fixed issue with Prereqs not being discoverable.
-          Minor refactor with More Autobox
+ [Dependencies::Removed::Test]
+ - English
 
-0.01005122 2010-07-31 23:43:00 Pacific/Auckland
-          Dep on version 4.101540 of Dist::Zilla::Role::ConfigDumper.
-          ( This should reduce some test failures due to 'around dump_config' ) 
+ [Internals]
+ - Version no longer set during BEGIN
+ - Now declares $AUTHORITY in all packages.
+ - Use log( [ $format ) instead of log( sprintf $format notation.
+ - Replace an autoboxed map{} with a plain map{}
 
-0.01005020 2010-07-30 21:06:26 Pacific/Auckland
-          Skip 'perl' automatically when found in modules list. Can't depend on perl.pm.
-          Added 'uname' reporting feature. This should mostly work still, and only warn when its run
-            on a machine with no uname support and not publish uname data.
-          Added dump_config reporting support for MetaConfig
+ [Packaging]
+ - Changelog moved to CPAN::Changes form.
+ - Ship .perltidyrc
+ - Update Copyright notice ( Year, Indentation, Address )
+ - Move perlcriticrc to perlcritic.rc
+ - Author/Release tests no longer in t/
+ - Use @Author::KENTNL instead of @KENTNT
+ - Gituhub URLS now all https://
+ - Stop using Autoversion for versioning, use Git instead.
+ - Declare x_authority
+ - set Encoding in POD
 
-0.01000216 2010-06-13 17:07:31 Pacific/Auckland
+ [Tests]
+ - 00-compile.t regenerated
 
-          Added a very overkill MetaData::BuiltWith::All module for those
-          with suicidal tendencies.
+0.01018204 2010-12-07T17:05:34Z
+ - Finally fixed that pesky \n in the uname string.
+ - Moral of the story: $/ is actually evil. ( Thanks to Apocalypse for
+   prodding me into finally fixing this )
 
-0.01000022 2010-06-11 23:48:14 Pacific/Auckland
+0.01016607 2010-11-21T20:30:38Z
+ - Replaced $] with { %{$^V} } to see the native version object instead of
+   this deprecated string.
 
-          First version.
+0.01014716 2010-11-04T05:26:16Z
+ - Clean source code/Update toolchain.
+ - Fixed issue with Prereqs not being discoverable.
+ - Minor refactor with More Autobox
+
+0.01005122 2010-07-31T11:43:00Z
+ - Dep on version 4.101540 of Dist::Zilla::Role::ConfigDumper. ( This
+   should reduce some test failures due to 'around dump_config' ) 
+
+0.01005020 2010-07-30T09:06:26Z
+ - Skip 'perl' automatically when found in modules list. Can't depend on
+   perl.pm.
+ - Added 'uname' reporting feature. This should mostly work still, and only
+   warn when its run on a machine with no uname support and not publish
+   uname data.
+ - Added dump_config reporting support for MetaConfig
+
+0.01000216 2010-06-13T05:07:31Z
+ - Added a very overkill MetaData::BuiltWith::All module for those with
+   suicidal tendencies.
+
+0.01000022 2010-06-11T11:48:14Z
+ - First version.
 
