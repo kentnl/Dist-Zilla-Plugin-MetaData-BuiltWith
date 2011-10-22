@@ -26,6 +26,7 @@ Revision history for {{$dist->name}}
  - Gituhub URLS now all https://
  - Stop using Autoversion for versioning, use Git instead.
  - Declare x_authority
+ - set Encoding in POD
 
  [Tests]
  - 00-compile.t regenerated
