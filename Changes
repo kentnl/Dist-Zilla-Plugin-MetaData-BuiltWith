@@ -3,6 +3,13 @@ Revision history for {{$dist->name}}
 {{$NEXT}}
  - Package Maintenance Release
 
+ [Dependencies::New::Requires]
+ - strict
+ - warnings
+
+ [Dependencies::Removed::Test]
+ - English
+
  [Internals]
  - Version no longer set during BEGIN
  - Now declares $AUTHORITY in all packages.
@@ -20,20 +27,12 @@ Revision history for {{$dist->name}}
  - Stop using Autoversion for versioning, use Git instead.
  - Declare x_authority
 
-
- [Dependencies::Removed::Test]
- - English
-
- [Dependencies::New::Requires]
- - strict
- - warnings
-
  [Tests]
  - 00-compile.t regenerated
 
 0.01018204 2010-12-07T17:05:34Z
  - Finally fixed that pesky \n in the uname string.
- - Moral of the story:	$/ is actually evil. ( Thanks to Apocalypse for
+ - Moral of the story: $/ is actually evil. ( Thanks to Apocalypse for
    prodding me into finally fixing this )
 
 0.01016607 2010-11-21T20:30:38Z
