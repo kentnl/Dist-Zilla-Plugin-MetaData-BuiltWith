@@ -1,6 +1,8 @@
 Revision history for {{$dist->name}}
 
 {{$NEXT}}
+
+0.01018205 2011-10-22T12:24:24Z
  - Package Maintenance Release
 
  [Dependencies::New::Requires]
