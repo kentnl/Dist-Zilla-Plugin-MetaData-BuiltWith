@@ -1,6 +1,35 @@
 Revision history for {{$dist->name}}
 
 {{$NEXT}}
+ - Package Maintenance Release
+
+ [Internals]
+ - Version no longer set during BEGIN
+ - Now declares $AUTHORITY in all packages.
+ - Use log( [ $format ) instead of log( sprintf $format notation.
+ - Replace an autoboxed map{} with a plain map{}
+
+ [Packaging]
+ - Changelog moved to CPAN::Changes form.
+ - Ship .perltidyrc
+ - Update Copyright notice ( Year, Indentation, Address )
+ - Move perlcriticrc to perlcritic.rc
+ - Author/Release tests no longer in t/
+ - Use @Author::KENTNL instead of @KENTNT
+ - Gituhub URLS now all https://
+ - Stop using Autoversion for versioning, use Git instead.
+ - Declare x_authority
+
+
+ [Dependencies::Removed::Test]
+ - English
+
+ [Dependencies::New::Requires]
+ - strict
+ - warnings
+
+ [Tests]
+ - 00-compile.t regenerated
 
 0.01018204 2010-12-07T17:05:34Z
  - Finally fixed that pesky \n in the uname string.
