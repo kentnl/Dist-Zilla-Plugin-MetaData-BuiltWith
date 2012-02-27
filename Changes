@@ -1,6 +1,8 @@
 Revision history for {{$dist->name}}
 
 {{$NEXT}}
+
+0.02000000 2012-02-27T03:48:01Z
  [Bugfixes]
  - This release should hopefully neuter the occasional glitch that occured
    due to $_ being clobbered in a few places yeilding a package of 'undef',
