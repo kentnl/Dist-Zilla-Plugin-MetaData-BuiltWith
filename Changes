@@ -1,6 +1,14 @@
 Revision history for {{$dist->name}}
 
 {{$NEXT}}
+ [Bugfixes]
+ - More attempts at fixing rt#63930 and the $_ aliasing bug
+
+ [Dependencies::New]
+ - runtime requires : Class::Load
+
+ [Internals]
+ - Eliminated the dangerous stringy evals in favour of Class::Load;
 
 0.02000000 2012-02-27T03:48:01Z
  [Bugfixes]
