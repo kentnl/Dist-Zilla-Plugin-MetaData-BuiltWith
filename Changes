@@ -2,6 +2,9 @@ Revision history for {{$dist->name}}
 
 {{$NEXT}}
 
+ [Bugfixes]
+ - This release should hopefully neuter the occasional glitch that occured due to $_ being clobbered in a few places yeilding a package of 'undef' , which emits broken META.yml 
+
  [Dependencies::New]
  - runtime requires : MooseX::Types::Moose
  - runtime requires : perl 5.006
