@@ -1,5 +1,15 @@
 Revision history for Dist-Zilla-Plugin-MetaData-BuiltWith
 
+0.02000100 2012-02-27T04:05:24Z
+ [Bugfixes]
+ - More attempts at fixing rt#63930 and the $_ aliasing bug
+
+ [Dependencies::New]
+ - runtime requires : Class::Load
+
+ [Internals]
+ - Eliminated the dangerous stringy evals in favour of Class::Load;
+
 0.02000000 2012-02-27T03:48:01Z
  [Bugfixes]
  - This release should hopefully neuter the occasional glitch that occured

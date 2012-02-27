@@ -6,7 +6,7 @@ BEGIN {
   $Dist::Zilla::Plugin::MetaData::BuiltWith::AUTHORITY = 'cpan:KENTNL';
 }
 {
-  $Dist::Zilla::Plugin::MetaData::BuiltWith::VERSION = '0.02000000';
+  $Dist::Zilla::Plugin::MetaData::BuiltWith::VERSION = '0.02000100';
 }
 
 # ABSTRACT: Report what versions of things your distribution was built against
@@ -14,6 +14,7 @@ BEGIN {
 
 use Dist::Zilla::Util::EmulatePhase 0.01000101 qw( get_prereqs );
 use Moose 2.0;
+use Class::Load qw( load_optional_class );
 use MooseX::Types::Moose (qw( ArrayRef Bool Str ));
 use namespace::autoclean;
 with 'Dist::Zilla::Role::MetaProvider';
@@ -165,8 +166,8 @@ sub _detect_installed {
   if ( $module eq 'perl' ) {
     return 'NA(skipped: perl)';
   }
-  ## no critic ( ProhibitStringyEval )
-  eval "require $module; \$success = 1" or do { $success = undef; };
+  $success = 1;
+  load_optional_class($module) or do { $success = undef; };
   ## no critic ( Variables::ProhibitPunctuationVars )
   my $lasterror = [ $@, $! ];
   if ( not $success ) {
@@ -175,7 +176,7 @@ sub _detect_installed {
   }
   my $modver;
   $success = undef;
-  eval "\$modver = $module->VERSION(); \$success = 1" or do { $success = undef };
+  eval { $modver = $module->VERSION(); $success = 1 } or do { $success = undef };
   $lasterror = [ $@, $! ];
   if ( not $success ) {
     $self->_logonce( $module, ' died assessing its version', $lasterror );
@@ -197,8 +198,8 @@ sub metadata {
   $self->log_debug( 'Found mods: ' . scalar @{$report} );
   my %modtable;
 
-  for ( @{$report} ) {
-    $modtable{$_} = $self->_detect_installed($_);
+  for my $module ( @{$report} ) {
+    $modtable{$module} = $self->_detect_installed($module);
   }
 
   for my $module ( $self->include ) {
@@ -234,7 +235,7 @@ Dist::Zilla::Plugin::MetaData::BuiltWith - Report what versions of things your d
 
 =head1 VERSION
 
-version 0.02000000
+version 0.02000100
 
 =head1 SYNOPSIS
 
