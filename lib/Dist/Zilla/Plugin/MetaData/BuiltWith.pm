@@ -6,29 +6,51 @@ BEGIN {
   $Dist::Zilla::Plugin::MetaData::BuiltWith::AUTHORITY = 'cpan:KENTNL';
 }
 {
-  $Dist::Zilla::Plugin::MetaData::BuiltWith::VERSION = '0.01018205';
+  $Dist::Zilla::Plugin::MetaData::BuiltWith::VERSION = '0.02000000';
 }
 
 # ABSTRACT: Report what versions of things your distribution was built against
 
 
-use Hash::Merge::Simple;
 use Dist::Zilla::Util::EmulatePhase 0.01000101 qw( get_prereqs );
-use Moose::Autobox;
-use Moose;
+use Moose 2.0;
+use MooseX::Types::Moose (qw( ArrayRef Bool Str ));
 use namespace::autoclean;
 with 'Dist::Zilla::Role::MetaProvider';
 
 
 sub mvp_multivalue_args { return qw( exclude include ) }
 
-has exclude => ( is => 'ro', isa => 'ArrayRef', default => sub { [] } );
-has include => ( is => 'ro', isa => 'ArrayRef', default => sub { [] } );
-has show_uname  => ( is       => 'ro',  isa => 'Bool', default => 0 );
-has uname_call  => ( is       => 'ro',  isa => 'Str',  default => 'uname' );
-has uname_args  => ( is       => 'ro',  isa => 'Str',  default => '-a' );
-has _uname_args => ( init_arg => undef, is  => 'ro',   isa     => 'ArrayRef', lazy_build => 1 );
-has _stash_key  => ( is       => 'ro',  isa => 'Str',  default => 'x_BuiltWith' );
+has _exclude => (
+  init_arg => 'exclude',
+  is       => 'ro',
+  isa      => ArrayRef,
+  default  => sub { [] },
+  traits   => [qw( Array )],
+  handles  => { exclude => 'elements', },
+);
+
+has _include => (
+  init_arg => 'include',
+  is       => 'ro',
+  isa      => ArrayRef,
+  default  => sub { [] },
+  traits   => [qw( Array )],
+  handles  => { include => 'elements', },
+
+);
+has show_uname => ( is => 'ro', isa => Bool, default => 0 );
+has uname_call => ( is => 'ro', isa => Str,  default => 'uname' );
+has uname_args => ( is => 'ro', isa => Str,  default => '-a' );
+has _uname_args => (
+  init_arg   => undef,
+  is         => 'ro',
+  isa        => ArrayRef,
+  lazy_build => 1,
+  traits     => [qw( Array )],
+  handles    => { _all_uname_args => 'elements', },
+);
+has _stash_key => ( is => 'ro', isa => Str, default => 'x_BuiltWith' );
 
 around dump_config => sub {
   my ( $orig, $self ) = @_;
@@ -37,19 +59,17 @@ around dump_config => sub {
   my $thisconfig = { show_uname => $self->show_uname, _stash_key => $self->_stash_key };
 
   if ( $self->show_uname ) {
-    $thisconfig->put(
-      uname => {
-        uname_call => $self->uname_call,
-        uname_args => $self->_uname_args,
-      }
-    );
+    $thisconfig->{'uname'} = {
+      uname_call => $self->uname_call,
+      uname_args => $self->_uname_args,
+    };
   }
 
-  if ( $self->exclude->flatten ) {
-    $thisconfig->{exclude} = $self->exclude;
+  if ( $self->exclude ) {
+    $thisconfig->{exclude} = [ $self->exclude ];
   }
-  if ( $self->include->flatten ) {
-    $thisconfig->{include} = $self->include;
+  if ( $self->include ) {
+    $thisconfig->{include} = [ $self->include ];
   }
 
   $config->{ q{} . __PACKAGE__ } = $thisconfig;
@@ -61,7 +81,7 @@ sub _uname {
   return () unless $self->show_uname;
   {
     my $str;
-    last unless open my $fh, q{-|}, $self->uname_call, $self->_uname_args->flatten;
+    last unless open my $fh, q{-|}, $self->uname_call, $self->_all_uname_args;
     while ( my $line = <$fh> ) {
       chomp $line;
       $str .= $line;
@@ -94,34 +114,30 @@ sub _get_prereq_modnames {
   my ($self) = @_;
 
   my $modnames = {};
+
   my $prereqs = get_prereqs( { zilla => $self->zilla } )->as_string_hash;
-  if ( not $prereqs->flatten ) {
+  if ( not %{$prereqs} ) {
     $self->log(q{WARNING: No prereqs were found, probably a bug});
     return [];
   }
-  $self->log_debug( [ '%s phases defined: %s ', scalar $prereqs->keys->flatten, ( join q{,}, $prereqs->keys->flatten ) ] );
-  $prereqs->each(
-    sub {
-      my ( $phase_name, $phase_data ) = @_;
-      return unless defined $phase_data;
-      my $phase_deps = {};
-      $phase_data->each(
-        sub {
-          my ( $type, $type_data ) = @_;
-          return unless defined $type_data;
-          $type_data->each(
-            sub {
-              my ( $module, $module_data ) = @_;
-              $phase_deps->put( $module, 1 );
-            }
-          );
-        }
-      );
-      $self->log_debug( [ 'Prereqs for %s: %s', $phase_name, $phase_deps->keys->join(q{,}) ] );
-      $modnames = $modnames->merge($phase_deps);
+  $self->log_debug( [ '%s phases defined: %s ', scalar keys %{$prereqs}, ( join q{,}, keys %{$prereqs} ) ] );
+
+  for my $phase_name ( keys %{$prereqs} ) {
+    my $phase_data = $prereqs->{$phase_name};
+    next unless defined $phase_data;
+    my $phase_deps = {};
+    for my $type ( keys %{$phase_data} ) {
+      my $type_data = $phase_data->{$type};
+      next unless defined $type_data;
+      for my $module ( keys %{$type_data} ) {
+        $phase_deps->{$module} = 1;
+      }
     }
-  );
-  return $modnames->keys->sort;
+    $self->log_debug( [ 'Prereqs for %s: %s', $phase_name, join q{,}, keys %{$phase_deps} ] );
+    $modnames = { %{$modnames}, %{$phase_deps} };
+
+  }
+  return [ sort keys %{$modnames} ];
 }
 
 {
@@ -179,11 +195,18 @@ sub metadata {
   $self->log_debug(q{Metadata called});
   my $report = $self->_get_prereq_modnames();
   $self->log_debug( 'Found mods: ' . scalar @{$report} );
-  my %modtable = map { ( $_, $self->_detect_installed($_) ) } ( $report->flatten, $self->include->flatten );
-  for my $badmodule ( $self->exclude->flatten ) {
-    %modtable->delete($badmodule) if %modtable->exists($badmodule);
+  my %modtable;
+
+  for ( @{$report} ) {
+    $modtable{$_} = $self->_detect_installed($_);
   }
 
+  for my $module ( $self->include ) {
+    $modtable{$module} = $self->_detect_installed($module);
+  }
+  for my $badmodule ( $self->exclude ) {
+    delete $modtable{$badmodule} if exists $modtable{$badmodule};
+  }
   return {
     $self->_stash_key,
     {
@@ -211,7 +234,7 @@ Dist::Zilla::Plugin::MetaData::BuiltWith - Report what versions of things your d
 
 =head1 VERSION
 
-version 0.01018205
+version 0.02000000
 
 =head1 SYNOPSIS
 
@@ -268,7 +291,7 @@ Kent Fredric <kentnl@cpan.org>
 
 =head1 COPYRIGHT AND LICENSE
 
-This software is copyright (c) 2011 by Kent Fredric <kentnl@cpan.org>.
+This software is copyright (c) 2012 by Kent Fredric <kentnl@cpan.org>.
 
 This is free software; you can redistribute it and/or modify it under
 the same terms as the Perl 5 programming language system itself.

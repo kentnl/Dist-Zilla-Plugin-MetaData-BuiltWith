@@ -20,7 +20,7 @@ my %module_build_args = (
     "Kent Fredric <kentnl\@cpan.org>"
   ],
   "dist_name" => "Dist-Zilla-Plugin-MetaData-BuiltWith",
-  "dist_version" => "0.01018205",
+  "dist_version" => "0.02000000",
   "license" => "perl",
   "module_name" => "Dist::Zilla::Plugin::MetaData::BuiltWith",
   "recommends" => {},
@@ -29,10 +29,10 @@ my %module_build_args = (
     "Dist::Zilla::Role::ConfigDumper" => "4.101540",
     "Dist::Zilla::Role::MetaProvider" => 0,
     "Dist::Zilla::Util::EmulatePhase" => "0.01000101",
-    "Hash::Merge::Simple" => 0,
-    "Moose" => 0,
-    "Moose::Autobox" => 0,
+    "Moose" => "2.0",
+    "MooseX::Types::Moose" => 0,
     "namespace::autoclean" => 0,
+    "perl" => "5.006",
     "strict" => 0,
     "warnings" => 0
   },

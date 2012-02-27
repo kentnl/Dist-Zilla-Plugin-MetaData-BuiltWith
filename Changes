@@ -1,5 +1,39 @@
 Revision history for Dist-Zilla-Plugin-MetaData-BuiltWith
 
+0.02000000 2012-02-27T03:48:01Z
+ [Bugfixes]
+ - This release should hopefully neuter the occasional glitch that occured
+   due to $_ being clobbered in a few places yeilding a package of 'undef',
+   which emits broken META.yml. Hopefully this should resolve rt#63930
+
+ [Dependencies::Changed]
+ - runtime requires : Moose 0 -> 2.0
+ - develop suggests : Dist::Zilla::PluginBundle::Author::KENTNL
+   v1.0.0 -> v1.2.0
+
+ [Dependencies::New]
+ - runtime requires : MooseX::Types::Moose
+ - runtime requires : perl 5.006
+
+ [Dependencies::Removed]
+ - runtime requires : Moose::Autobox
+ - runtime requires : Hash::Merge::Simple
+
+ [Internals]
+ - Ripped out the Autobox stuff as it was adding errors.
+ - Used MooseX::Types instead of simple stringy ones.
+ - Used Recent Moose traits to provide flattening instead of Autobox.
+ - include and exclude are now _include and _exclude with init_args to keep
+   construction the same. new methods include and exclude are 'elements'
+   accessors.
+ - _uname_args now produces _all_uname_args 'elements' trait-accessor.
+
+ [Packaging]
+ - Update LICENSE ( Address, Indent, Year )
+
+ [Tests]
+ - added minimum-version test.
+
 0.01018205 2011-10-22T12:24:24Z
  - Package Maintenance Release
 
@@ -47,7 +81,7 @@ Revision history for Dist-Zilla-Plugin-MetaData-BuiltWith
 
 0.01005122 2010-07-31T11:43:00Z
  - Dep on version 4.101540 of Dist::Zilla::Role::ConfigDumper. ( This
-   should reduce some test failures due to 'around dump_config' ) 
+   should reduce some test failures due to 'around dump_config' )
 
 0.01005020 2010-07-30T09:06:26Z
  - Skip 'perl' automatically when found in modules list. Can't depend on
