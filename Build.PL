@@ -32,6 +32,7 @@ my %module_build_args = (
     "Dist::Zilla::Util::EmulatePhase" => "0.01000101",
     "Moose" => "2.0",
     "MooseX::Types::Moose" => 0,
+    "Readonly" => 0,
     "namespace::autoclean" => 0,
     "perl" => "5.006",
     "strict" => 0,

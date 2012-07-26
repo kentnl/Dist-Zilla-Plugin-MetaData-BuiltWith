@@ -60,6 +60,7 @@ eval { $v .= pmver('File::Temp','any version') };
 eval { $v .= pmver('Module::Build','0.4001') };
 eval { $v .= pmver('Moose','2.0') };
 eval { $v .= pmver('MooseX::Types::Moose','any version') };
+eval { $v .= pmver('Readonly','any version') };
 eval { $v .= pmver('Test::More','0.98') };
 eval { $v .= pmver('namespace::autoclean','any version') };
 eval { $v .= pmver('strict','any version') };
