@@ -13,6 +13,9 @@
    v1.2.0 -> v1.4.2
  - test requires : Test-More 0.88 -> 0.98
 
+ [Dependencies::New]
+ - runtime requires : Readonly
+
 0.02000100 2012-02-27T04:05:24Z
  [Bugfixes]
  - More attempts at fixing rt#63930 and the $_ aliasing bug
