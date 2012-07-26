@@ -46,13 +46,17 @@ install in the event of a problem.
 
 =cut
 
-use Dist::Zilla::Util::EmulatePhase 0.01000101 qw( get_prereqs );
+use Dist::Zilla::Util::EmulatePhase;
 use Moose 2.0;
 use Class::Load qw( load_optional_class );
 use MooseX::Types::Moose (qw( ArrayRef Bool Str ));
 use namespace::autoclean;
 with 'Dist::Zilla::Role::MetaProvider';
-
+BEGIN {
+  if ( defined $Dist::Zilla::Util::EmulatePhase::VERSION ) {
+    Dist::Zilla::Util::EmulatePhase->VERSION(0.01000101);
+  }
+}
 =method mvp_multivalue_args
 
 This module can take, as parameters, any volume of 'exclude' or 'include' arguments.
@@ -155,7 +159,7 @@ sub _get_prereq_modnames {
 
   my $modnames = {};
 
-  my $prereqs = get_prereqs( { zilla => $self->zilla } )->as_string_hash;
+  my $prereqs = Dist::Zilla::Util::EmulatePhase::get_prereqs( { zilla => $self->zilla } )->as_string_hash;
   if ( not %{$prereqs} ) {
     $self->log(q{WARNING: No prereqs were found, probably a bug});
     return [];
