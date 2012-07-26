@@ -40,7 +40,7 @@
             "Class::Load" : "0",
             "Dist::Zilla::Role::ConfigDumper" : "4.101540",
             "Dist::Zilla::Role::MetaProvider" : "0",
-            "Dist::Zilla::Util::EmulatePhase" : "0",
+            "Dist::Zilla::Util::EmulatePhase" : "0.01000101",
             "Moose" : "2.0",
             "MooseX::Types::Moose" : "0",
             "namespace::autoclean" : "0",
