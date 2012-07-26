@@ -52,11 +52,13 @@ use Class::Load qw( load_optional_class );
 use MooseX::Types::Moose (qw( ArrayRef Bool Str ));
 use namespace::autoclean;
 with 'Dist::Zilla::Role::MetaProvider';
+
 BEGIN {
   if ( defined $Dist::Zilla::Util::EmulatePhase::VERSION ) {
     Dist::Zilla::Util::EmulatePhase->VERSION(0.01000101);
   }
 }
+
 =method mvp_multivalue_args
 
 This module can take, as parameters, any volume of 'exclude' or 'include' arguments.
