@@ -1,6 +1,6 @@
 ﻿Revision history for Dist-Zilla-Plugin-MetaData-BuiltWith
 
-0.02000101 2012-07-26T17:01:47Z
+0.02000101 2012-07-26T17:02:01Z
  [Bugfixes]
  - Defer module version checks to later to help bootstrap.
 
