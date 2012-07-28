@@ -2,6 +2,13 @@ Revision history for {{$dist->name}}
 
 {{$NEXT}}
 
+0.03000000 2012-03-12T15:06:44Z
+ [Features]
+ - new 'show_config' option which extracts selected interesting data from
+   Config.pm ( such as the git ID ), which should prove useful for showing
+   exactly what perl a dist was built on
+ - greatly improved option documentation.
+
 0.02000100 2012-02-27T04:05:24Z
  [Bugfixes]
  - More attempts at fixing rt#63930 and the $_ aliasing bug

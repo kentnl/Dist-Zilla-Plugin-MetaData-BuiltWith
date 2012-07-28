@@ -23,6 +23,51 @@ by recursively rooting around in the name-spaces and reporting every version of 
 
 Only recommended for the most extreme of situations where you find your code breaking all over the show between different versions of things, or for personal amusement.
 
+
+=option show_undef
+
+Report Packages even if C<$VERSION> is undefined in the package.
+
+    show_undef = 1 ; default is 0
+
+=option exclude
+
+Specify modules to exclude from version reporting
+
+    exclude = Foo
+    exclude = Bar
+
+=option include
+
+Specify additional modules to include the version of
+
+    include = Foo
+    include = Bar
+
+=option show_config
+
+Report "interesting" values from C<%Config::Config>
+
+    show_config = 1 ; Boolean
+
+=option show_uname
+
+Report the output from C<uname>
+
+    show_uname = 1 ; Boolean
+
+=option uname_call
+
+Specify what the system C<uname> function is called
+
+    uname_call = uname ; String
+
+=option uname_args
+
+Specify arguments passed to the C<uname> call.
+
+    uname_args = -a ; String
+
 =head1 WARNING
 
 At present this code does no recursion prevention, apart from excluding the C<main> name-space.

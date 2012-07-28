@@ -11,6 +11,7 @@ package Dist::Zilla::Plugin::MetaData::BuiltWith;
   include = Some::Module::Thats::Not::In::Preq
   exclude = Some::Module::Youre::Ashamed::Of
   show_uname = 1           ; default is 0
+  show_config = 1          ; default is 0
   uname_call = uname        ; the default
   uname_args = -s -r -m -p  ; the default is -a
 
@@ -79,6 +80,48 @@ has _include => (
   handles  => { include => 'elements', },
 
 );
+  
+=option exclude
+
+Specify modules to exclude from version reporting
+
+    exclude = Foo
+    exclude = Bar
+
+=option include
+
+Specify additional modules to include the version of
+
+    include = Foo
+    include = Bar
+
+=option show_config
+
+Report "interesting" values from C<%Config::Config>
+
+    show_config = 1 ; Boolean
+
+=option show_uname
+
+Report the output from C<uname>
+
+    show_uname = 1 ; Boolean
+
+=option uname_call
+
+Specify what the system C<uname> function is called
+
+    uname_call = uname ; String
+
+=option uname_args
+
+Specify arguments passed to the C<uname> call.
+
+    uname_args = -a ; String
+
+=cut
+
+has show_config => ( is => 'ro', isa => 'Bool', default => 0 );
 has show_uname => ( is => 'ro', isa => Bool, default => 0 );
 has uname_call => ( is => 'ro', isa => Str,  default => 'uname' );
 has uname_args => ( is => 'ro', isa => Str,  default => '-a' );
@@ -96,7 +139,7 @@ around dump_config => sub {
   my ( $orig, $self ) = @_;
 
   my $config = $self->$orig();
-  my $thisconfig = { show_uname => $self->show_uname, _stash_key => $self->_stash_key };
+  my $thisconfig = { show_uname => $self->show_uname, _stash_key => $self->_stash_key , show_config => $self->show_config };
 
   if ( $self->show_uname ) {
     $thisconfig->{'uname'} = {
@@ -115,6 +158,21 @@ around dump_config => sub {
   $config->{ q{} . __PACKAGE__ } = $thisconfig;
   return $config;
 };
+
+sub _config {
+  my $self = shift;
+  return () unless $self->show_config;
+  Class::Load::load_class('Config');
+  my @interesting = qw( git_describe git_commit_id git_commit_date myarchname gccversion osname osver );
+  my $interested  = {};
+  for my $key (@interesting) {
+    ## no critic (ProhibitPackageVars)
+    if ( defined $Config::Config{$key} and $Config::Config{$key} ne q{} ) {
+      $interested->{$key} = $Config::Config{$key};
+    }
+  }
+  return ( 'perl-config', $interested );
+}
 
 sub _uname {
   my $self = shift;
@@ -263,6 +321,7 @@ sub metadata {
       perl     => { %{$^V} },
       platform => $^O,
       $self->_uname(),
+      $self->_config(),
     }
   };
 }
