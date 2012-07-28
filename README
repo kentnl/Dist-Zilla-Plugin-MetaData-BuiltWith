@@ -3,13 +3,14 @@ NAME
     things your distribution was built against
 
 VERSION
-    version 0.02000101
+    version 0.03000100
 
 SYNOPSIS
       [MetaData::BuiltWith]
       include = Some::Module::Thats::Not::In::Preq
       exclude = Some::Module::Youre::Ashamed::Of
       show_uname = 1           ; default is 0
+      show_config = 1          ; default is 0
       uname_call = uname        ; the default
       uname_args = -s -r -m -p  ; the default is -a
 
@@ -24,6 +25,39 @@ DESCRIPTION
     Hopefully, the existence of the metadata provided by this module will
     help users on their end machines make intelligent choices about what
     modules to install in the event of a problem.
+
+OPTIONS
+  exclude
+    Specify modules to exclude from version reporting
+
+        exclude = Foo
+        exclude = Bar
+
+  include
+    Specify additional modules to include the version of
+
+        include = Foo
+        include = Bar
+
+  show_config
+    Report "interesting" values from %Config::Config
+
+        show_config = 1 ; Boolean
+
+  show_uname
+    Report the output from "uname"
+
+        show_uname = 1 ; Boolean
+
+  uname_call
+    Specify what the system "uname" function is called
+
+        uname_call = uname ; String
+
+  uname_args
+    Specify arguments passed to the "uname" call.
+
+        uname_args = -a ; String
 
 METHODS
   mvp_multivalue_args

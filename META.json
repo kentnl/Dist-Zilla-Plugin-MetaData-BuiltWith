@@ -61,11 +61,11 @@
    "provides" : {
       "Dist::Zilla::Plugin::MetaData::BuiltWith" : {
          "file" : "lib/Dist/Zilla/Plugin/MetaData/BuiltWith.pm",
-         "version" : "0.02000101"
+         "version" : "0.03000100"
       },
       "Dist::Zilla::Plugin::MetaData::BuiltWith::All" : {
          "file" : "lib/Dist/Zilla/Plugin/MetaData/BuiltWith/All.pm",
-         "version" : "0.02000101"
+         "version" : "0.03000100"
       }
    },
    "release_status" : "stable",
@@ -77,7 +77,7 @@
          "web" : "https://github.com/kentfredric/Dist-Zilla-Plugin-MetaData-BuiltWith"
       }
    },
-   "version" : "0.02000101",
+   "version" : "0.03000100",
    "x_BuiltWith" : {
       "allmodules" : {
          "App::Cmd" : "0.318",
@@ -260,6 +260,7 @@
          "Dist::Zilla::Plugin::Twitter" : "0.017",
          "Dist::Zilla::Plugin::UploadToCPAN" : "4.300020",
          "Dist::Zilla::PluginBundle::Author::KENTNL" : "1.4.2",
+         "Dist::Zilla::PluginBundle::Filter" : "4.300020",
          "Dist::Zilla::Prereqs" : "4.300020",
          "Dist::Zilla::Role::AfterBuild" : "4.300020",
          "Dist::Zilla::Role::AfterRelease" : "4.300020",
@@ -806,6 +807,11 @@
             0
          ]
       },
+      "perl-config" : {
+         "gccversion" : "4.6.3",
+         "myarchname" : "x86_64-linux",
+         "osname" : "linux"
+      },
       "platform" : "linux",
       "uname" : "Linux 3.5.0-gentoo x86_64 GenuineIntel GNU/Linux"
    },
@@ -836,6 +842,7 @@
             "config" : {
                "Dist::Zilla::Plugin::MetaData::BuiltWith" : {
                   "_stash_key" : "x_BuiltWith",
+                  "show_config" : "1",
                   "show_uname" : "1",
                   "uname" : {
                      "uname_args" : [
@@ -1070,6 +1077,7 @@
             "config" : {
                "Dist::Zilla::Plugin::MetaData::BuiltWith" : {
                   "_stash_key" : "x_BuiltWith",
+                  "show_config" : "1",
                   "show_uname" : "1",
                   "uname" : {
                      "uname_args" : [

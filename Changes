@@ -1,6 +1,11 @@
 ﻿Revision history for Dist-Zilla-Plugin-MetaData-BuiltWith
 
-0.02000101 2012-07-26T17:02:01Z
+0.03000100 2012-07-28T18:27:33Z
+ [00_Note]
+ - Accidentally lost the source code entirely for 0.03xxxyyy, so had to
+   sort of reconstruct that history. Also accidentally released it as
+   0.02000101 due to not having said code and not realising it.
+
  [Bugfixes]
  - Defer module version checks to later to help bootstrap.
 
@@ -15,6 +20,13 @@
 
  [Dependencies::New]
  - runtime requires : Readonly
+
+0.03000000 2012-03-12T15:06:44Z
+ [Features]
+ - new 'show_config' option which extracts selected interesting data from
+   Config.pm ( such as the git ID ), which should prove useful for showing
+   exactly what perl a dist was built on
+ - greatly improved option documentation.
 
 0.02000100 2012-02-27T04:05:24Z
  [Bugfixes]

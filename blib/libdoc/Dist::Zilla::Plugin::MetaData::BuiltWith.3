@@ -133,7 +133,7 @@
 .\" ========================================================================
 .\"
 .IX Title "Dist::Zilla::Plugin::MetaData::BuiltWith 3"
-.TH Dist::Zilla::Plugin::MetaData::BuiltWith 3 "2012-07-27" "perl v5.16.0" "User Contributed Perl Documentation"
+.TH Dist::Zilla::Plugin::MetaData::BuiltWith 3 "2012-07-29" "perl v5.16.0" "User Contributed Perl Documentation"
 .\" For nroff, turn off justification.  Always turn off hyphenation; it makes
 .\" way too many mistakes in technical documents.
 .if n .ad l
@@ -142,14 +142,15 @@
 Dist::Zilla::Plugin::MetaData::BuiltWith \- Report what versions of things your distribution was built against
 .SH "VERSION"
 .IX Header "VERSION"
-version 0.02000101
+version 0.03000100
 .SH "SYNOPSIS"
 .IX Header "SYNOPSIS"
-.Vb 6
+.Vb 7
 \&  [MetaData::BuiltWith]
 \&  include = Some::Module::Thats::Not::In::Preq
 \&  exclude = Some::Module::Youre::Ashamed::Of
 \&  show_uname = 1           ; default is 0
+\&  show_config = 1          ; default is 0
 \&  uname_call = uname        ; the default
 \&  uname_args = \-s \-r \-m \-p  ; the default is \-a
 .Ve
@@ -164,6 +165,52 @@ but that's also not always necessary.
 Hopefully, the existence of the metadata provided by this module will help
 users on their end machines make intelligent choices about what modules to
 install in the event of a problem.
+.SH "OPTIONS"
+.IX Header "OPTIONS"
+.SS "exclude"
+.IX Subsection "exclude"
+Specify modules to exclude from version reporting
+.PP
+.Vb 2
+\&    exclude = Foo
+\&    exclude = Bar
+.Ve
+.SS "include"
+.IX Subsection "include"
+Specify additional modules to include the version of
+.PP
+.Vb 2
+\&    include = Foo
+\&    include = Bar
+.Ve
+.SS "show_config"
+.IX Subsection "show_config"
+Report \*(L"interesting\*(R" values from \f(CW%Config::Config\fR
+.PP
+.Vb 1
+\&    show_config = 1 ; Boolean
+.Ve
+.SS "show_uname"
+.IX Subsection "show_uname"
+Report the output from \f(CW\*(C`uname\*(C'\fR
+.PP
+.Vb 1
+\&    show_uname = 1 ; Boolean
+.Ve
+.SS "uname_call"
+.IX Subsection "uname_call"
+Specify what the system \f(CW\*(C`uname\*(C'\fR function is called
+.PP
+.Vb 1
+\&    uname_call = uname ; String
+.Ve
+.SS "uname_args"
+.IX Subsection "uname_args"
+Specify arguments passed to the \f(CW\*(C`uname\*(C'\fR call.
+.PP
+.Vb 1
+\&    uname_args = \-a ; String
+.Ve
 .SH "METHODS"
 .IX Header "METHODS"
 .SS "mvp_multivalue_args"

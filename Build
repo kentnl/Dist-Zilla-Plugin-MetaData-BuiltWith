@@ -11,7 +11,7 @@ sub magic_number_matches {
   open FH, '_build/magicnum' or return 0;
   my $filenum = <FH>;
   close FH;
-  return $filenum == 738861;
+  return $filenum == 872248;
 }
 
 my $progname;
@@ -20,7 +20,7 @@ BEGIN {
   $^W = 1;  # Use warnings
   $progname = basename($0);
   $orig_dir = Cwd::cwd();
-  my $base_dir = '/home/kent/perl/Dist-Zilla-Plugin-MetaData-BuiltWith/Dist-Zilla-Plugin-MetaData-BuiltWith-0.02000101';
+  my $base_dir = '/home/kent/perl/Dist-Zilla-Plugin-MetaData-BuiltWith/Dist-Zilla-Plugin-MetaData-BuiltWith-0.03000100';
   if (!magic_number_matches()) {
     unless (chdir($base_dir)) {
       die ("Couldn't chdir($base_dir), aborting\n");

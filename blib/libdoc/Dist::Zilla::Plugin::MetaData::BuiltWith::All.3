@@ -133,7 +133,7 @@
 .\" ========================================================================
 .\"
 .IX Title "Dist::Zilla::Plugin::MetaData::BuiltWith::All 3"
-.TH Dist::Zilla::Plugin::MetaData::BuiltWith::All 3 "2012-07-27" "perl v5.16.0" "User Contributed Perl Documentation"
+.TH Dist::Zilla::Plugin::MetaData::BuiltWith::All 3 "2012-07-29" "perl v5.16.0" "User Contributed Perl Documentation"
 .\" For nroff, turn off justification.  Always turn off hyphenation; it makes
 .\" way too many mistakes in technical documents.
 .if n .ad l
@@ -142,7 +142,7 @@
 Dist::Zilla::Plugin::MetaData::BuiltWith::All \- Go overkill and report everything in all name\-spaces.
 .SH "VERSION"
 .IX Header "VERSION"
-version 0.02000101
+version 0.03000100
 .SH "SYNOPSIS"
 .IX Header "SYNOPSIS"
 .Vb 2
@@ -157,6 +157,59 @@ This further extends the verbosity of the information reported by the \f(CW\*(C`
 by recursively rooting around in the name-spaces and reporting every version of everything it finds.
 .PP
 Only recommended for the most extreme of situations where you find your code breaking all over the show between different versions of things, or for personal amusement.
+.SH "OPTIONS"
+.IX Header "OPTIONS"
+.SS "show_undef"
+.IX Subsection "show_undef"
+Report Packages even if \f(CW$VERSION\fR is undefined in the package.
+.PP
+.Vb 1
+\&    show_undef = 1 ; default is 0
+.Ve
+.SS "exclude"
+.IX Subsection "exclude"
+Specify modules to exclude from version reporting
+.PP
+.Vb 2
+\&    exclude = Foo
+\&    exclude = Bar
+.Ve
+.SS "include"
+.IX Subsection "include"
+Specify additional modules to include the version of
+.PP
+.Vb 2
+\&    include = Foo
+\&    include = Bar
+.Ve
+.SS "show_config"
+.IX Subsection "show_config"
+Report \*(L"interesting\*(R" values from \f(CW%Config::Config\fR
+.PP
+.Vb 1
+\&    show_config = 1 ; Boolean
+.Ve
+.SS "show_uname"
+.IX Subsection "show_uname"
+Report the output from \f(CW\*(C`uname\*(C'\fR
+.PP
+.Vb 1
+\&    show_uname = 1 ; Boolean
+.Ve
+.SS "uname_call"
+.IX Subsection "uname_call"
+Specify what the system \f(CW\*(C`uname\*(C'\fR function is called
+.PP
+.Vb 1
+\&    uname_call = uname ; String
+.Ve
+.SS "uname_args"
+.IX Subsection "uname_args"
+Specify arguments passed to the \f(CW\*(C`uname\*(C'\fR call.
+.PP
+.Vb 1
+\&    uname_args = \-a ; String
+.Ve
 .SH "WARNING"
 .IX Header "WARNING"
 At present this code does no recursion prevention, apart from excluding the \f(CW\*(C`main\*(C'\fR name-space.
