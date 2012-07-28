@@ -1,8 +1,12 @@
 ﻿Revision history for Dist-Zilla-Plugin-MetaData-BuiltWith
 
-0.03000100 2012-07-28T18:22:41Z
+0.03000100 2012-07-28T18:25:57Z
+ [00_Note]
+ - Accidentally lost the source code entirely for 0.03xxxyyy, so had to
+   sort of reconstruct that history. Also accidentally released it as
+   0.02000101 due to not having said code and not realising it.
 
-[Bugfixes]
+ [Bugfixes]
  - Defer module version checks to later to help bootstrap.
 
  [Dependencies::Changed]
