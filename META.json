@@ -60,11 +60,11 @@
    "provides" : {
       "Dist::Zilla::Plugin::MetaData::BuiltWith" : {
          "file" : "lib/Dist/Zilla/Plugin/MetaData/BuiltWith.pm",
-         "version" : "0.02000102"
+         "version" : "0.03000000"
       },
       "Dist::Zilla::Plugin::MetaData::BuiltWith::All" : {
          "file" : "lib/Dist/Zilla/Plugin/MetaData/BuiltWith/All.pm",
-         "version" : "0.02000102"
+         "version" : "0.03000000"
       }
    },
    "release_status" : "stable",
@@ -76,7 +76,7 @@
          "web" : "https://github.com/kentfredric/Dist-Zilla-Plugin-MetaData-BuiltWith"
       }
    },
-   "version" : "0.02000102",
+   "version" : "0.03000000",
    "x_BuiltWith" : {
       "allmodules" : {
          "App::Cmd" : "0.318",
