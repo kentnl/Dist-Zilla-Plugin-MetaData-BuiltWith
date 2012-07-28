@@ -19,10 +19,10 @@ name: Dist-Zilla-Plugin-MetaData-BuiltWith
 provides:
   Dist::Zilla::Plugin::MetaData::BuiltWith:
     file: lib/Dist/Zilla/Plugin/MetaData/BuiltWith.pm
-    version: 0.02000102
+    version: 0.0300101
   Dist::Zilla::Plugin::MetaData::BuiltWith::All:
     file: lib/Dist/Zilla/Plugin/MetaData/BuiltWith/All.pm
-    version: 0.02000102
+    version: 0.0300101
 requires:
   Class::Load: 0
   Dist::Zilla::Role::ConfigDumper: 4.101540
@@ -38,7 +38,7 @@ requires:
 resources:
   homepage: https://github.com/kentfredric/Dist-Zilla-Plugin-MetaData-BuiltWith
   repository: https://github.com/kentfredric/Dist-Zilla-Plugin-MetaData-BuiltWith.git
-version: 0.02000102
+version: 0.0300101
 x_BuiltWith:
   allmodules:
     App::Cmd: 0.318
