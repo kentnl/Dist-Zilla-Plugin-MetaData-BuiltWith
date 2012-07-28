@@ -1,6 +1,8 @@
 ﻿Revision history for {{$dist->name}}
 
 {{$NEXT}}
+
+0.03000100 2012-07-28T18:27:33Z
  [00_Note]
  - Accidentally lost the source code entirely for 0.03xxxyyy, so had to
    sort of reconstruct that history. Also accidentally released it as
