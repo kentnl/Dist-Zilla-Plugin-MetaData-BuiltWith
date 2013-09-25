@@ -244,17 +244,18 @@ sub metadata {
   for my $badmodule ( $self->exclude ) {
     $forget_module->($badmodule);
   }
-  return {
-    $self->_stash_key,
-    {
+  my $result = {
       modules => \%modtable,
       ## no critic ( Variables::ProhibitPunctuationVars )
       perl     => { %{$^V} },
       platform => $^O,
       $self->_uname(),
       $self->_config(),
-    }
   };
+  if ( keys %failures ) {
+      $result->{failures} = \%failures;
+  }
+  return {  $self->_stash_key, $result };
 }
 
 __PACKAGE__->meta->make_immutable;
