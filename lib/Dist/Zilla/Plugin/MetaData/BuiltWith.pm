@@ -187,25 +187,25 @@ sub _detect_installed {
   my ( $self, $module ) = @_;
   my $success = undef;
   if ( $module eq 'perl' ) {
-    return [ , 'perl' ];
+    return [ undef , 'perl' ];
   }
   require Module::Data;
   my $d = Module::Data->new( $module );
 
   if ( not defined $d ) {
-      return [ , 'failed to create a Module::Data wrapper' ];
+      return [ undef , 'failed to create a Module::Data wrapper' ];
   }
   
   if ( not -e -f $d->path ) {
-      return [ , 'module was not found in @INC' ];
+      return [ undef , 'module was not found in @INC' ];
   }
 
   my $v = $d->_version_emulate;
 
   if ( not $v ) {
-      return [ , 'Module::MetaData could not parse a version from ' . $d->path ];
+      return [ undef , 'Module::MetaData could not parse a version from ' . $d->path ];
   }
-  return [ $v, ];
+  return [ $v, undef ];
 
 }
 
