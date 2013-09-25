@@ -58,6 +58,7 @@ eval { $v .= pmver('File::Spec','any version') };
 eval { $v .= pmver('IO::Handle','any version') };
 eval { $v .= pmver('IPC::Open3','any version') };
 eval { $v .= pmver('Module::Build','0.4007') };
+eval { $v .= pmver('Module::Data','any version') };
 eval { $v .= pmver('Moose','2.0') };
 eval { $v .= pmver('MooseX::Types::Moose','any version') };
 eval { $v .= pmver('Pod::Coverage::TrustPod','any version') };

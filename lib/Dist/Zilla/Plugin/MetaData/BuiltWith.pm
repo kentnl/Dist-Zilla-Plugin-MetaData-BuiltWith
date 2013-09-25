@@ -187,30 +187,26 @@ sub _detect_installed {
   my ( $self, $module ) = @_;
   my $success = undef;
   if ( $module eq 'perl' ) {
-    return 'NA(skipped: perl)';
+    return [ , 'perl' ];
   }
-  $success = 1;
-  load_optional_class($module) or do { $success = undef; };
-  ## no critic ( Variables::ProhibitPunctuationVars )
-  my $lasterror = [ $@, $! ];
-  if ( not $success ) {
-    $self->_logonce( $module, 'did not load', $lasterror );
-    return 'NA(possibly not installed)';
+  require Module::Data;
+  my $d = Module::Data->new( $module );
+
+  if ( not defined $d ) {
+      return [ , 'failed to create a Module::Data wrapper' ];
   }
-  my $modver;
-  $success = undef;
-  eval { $modver = $module->VERSION(); $success = 1 } or do { $success = undef };
-  $lasterror = [ $@, $! ];
-  if ( not $success ) {
-    $self->_logonce( $module, ' died assessing its version', $lasterror );
-    return 'NA(version could not be resolved)';
+  
+  if ( not -e -f $d->path ) {
+      return [ , 'module was not found in @INC' ];
   }
-  if ( not defined $modver ) {
-    $self->_logonce( $module, ' reported an undefined version', $lasterror );
-    return 'NA(undef)';
+
+  my $v = $d->_version_emulate;
+
+  if ( not $v ) {
+      return [ , 'Module::MetaData could not parse a version from ' . $d->path ];
   }
-  $self->log_debug("Installed $module is $modver");
-  return "$modver";
+  return [ $v, ];
+
 }
 
 
@@ -220,16 +216,33 @@ sub metadata {
   my $report = $self->_get_prereq_modnames();
   $self->log_debug( 'Found mods: ' . scalar @{$report} );
   my %modtable;
+  my %failures;
+
+  my $record_module = sub {
+        my ( $module ) = @_;
+        my $result = $self->_detect_installed($module);
+        if ( defined $result->[0] ) {
+          $modtable{$module} = $result->[0];
+        }
+        if ( defined $result->[1] ) {
+          $failures{$module} = $result->[1];
+        }
+  };
+  my $forget_module = sub {
+        my ( $badmodule ) = @_;
+        delete $modtable{$badmodule} if exists $modtable{$badmodule};
+        delete $failures{$badmodule} if exists $failures{$badmodule};
+  };
 
   for my $module ( @{$report} ) {
-    $modtable{$module} = $self->_detect_installed($module);
+      $record_module->($module);
   }
 
   for my $module ( $self->include ) {
-    $modtable{$module} = $self->_detect_installed($module);
+    $record_module->($module);
   }
   for my $badmodule ( $self->exclude ) {
-    delete $modtable{$badmodule} if exists $modtable{$badmodule};
+    $forget_module->($badmodule);
   }
   return {
     $self->_stash_key,

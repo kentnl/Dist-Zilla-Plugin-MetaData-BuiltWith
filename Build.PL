@@ -27,6 +27,7 @@ my %module_build_args = (
     "Dist::Zilla::Role::ConfigDumper" => "4.101540",
     "Dist::Zilla::Role::MetaProvider" => 0,
     "Dist::Zilla::Util::EmulatePhase" => "0.01000101",
+    "Module::Data" => 0,
     "Moose" => "2.0",
     "MooseX::Types::Moose" => 0,
     "Readonly" => 0,
