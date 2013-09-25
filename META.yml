@@ -792,6 +792,8 @@ x_BuiltWith:
     version::vxs: 0.9904
     warnings: 1.18
     warnings::register: 1.02
+  failures:
+    perl: perl
   modules:
     Class::Load: 0.20
     Dist::Zilla::PluginBundle::Author::KENTNL: 1.8.3
