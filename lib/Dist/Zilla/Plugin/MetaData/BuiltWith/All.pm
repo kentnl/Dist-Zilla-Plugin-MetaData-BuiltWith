@@ -75,7 +75,6 @@ sub get_all {
 
   my ( @modules ) =  $self->_list_modules_in_memory(q{});
   for my $module ( @modules ) {
-      $self->log(['Module: %s', $module]);
       $record_module->($module);
   }
 
