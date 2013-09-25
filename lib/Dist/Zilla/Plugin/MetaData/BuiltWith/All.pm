@@ -28,6 +28,9 @@ around dump_config => sub {
 sub _list_modules_in_memory {
     my ( $self, $package )  = @_;
     my ( @out );
+    if ( $package eq 'main' or $package =~ /^main::/ ) {
+        return $package;
+    }
     if ( $package ) {
         push @out, $package;
     }
@@ -39,79 +42,14 @@ sub _list_modules_in_memory {
     for  my $child ( keys %{$ns} ) {
         if ( $child =~ /^(.*)::$/ ) {
             my $child_pkg = $1;
-            next if $child_pkg eq 'main';
-            if ( $package ) {
-
-                push @child_namespaces, $package . '::' . $child_pkg;
-            } else {
-                push @child_namespaces, $1;
-            }
+            $child_pkg =  $package . '::' . $child_pkg if $package;
+            push @child_namespaces, $child_pkg;
         }
     }
     for my $child ( @child_namespaces ) {
         push @out, $self->_list_modules_in_memory($child);
     }
     return (@out);
-}
-
-sub _versions_of {
-  my $self    = shift;
-  my $package = shift;
-  my $ns      = do {
-    ## no critic ( TestingAndDebugging::ProhibitNoStrict )
-    no strict 'refs';
-    \%{ $package . q{::} };
-  };
-  my %outhash;
-  for ( keys %{$ns} ) {
-    ## no critic ( RequireDotMatchAnything RequireExtendedFormatting RequireLineBoundaryMatching )
-    if ( $_ =~ /^(.*)::$/ ) {
-      $outhash{$1} = { children => {}, version => undef };
-    }
-  }
-  for ( keys %outhash ) {
-    my $xsn = $_;
-    $xsn = $package . q{::} . $_ unless $package eq q{};
-
-    
-    #    warn "$xsn -> VERSION\n";
-    eval { $outhash{$_}->{version} = $xsn->VERSION(); } or do {
-      1;
-    };
-  }
-  for ( keys %outhash ) {
-    next if $_ eq 'main';
-    my $xsn = $_;
-    $xsn = $package . q{::} . $_ unless $package eq q{};
-    $outhash{$_}->{children} = $self->_versions_of($xsn);
-  }
-  return \%outhash;
-}
-
-sub _flatten {
-  my $self = shift;
-  my $tree = shift;
-  my $path = shift || q{};
-  my %outhash;
-  for ( keys %{$tree} ) {
-    $outhash{ $path . $_ } = $tree->{$_}->{version};
-  }
-  for ( keys %{$tree} ) {
-    %outhash = ( %outhash, $self->_flatten( $tree->{$_}->{children}, $path . $_ . q{::} ) );
-  }
-  return %outhash;
-}
-
-sub _filter {
-  my ( $self, %in ) = @_;
-  my %out;
-  for ( keys %in ) {
-    if ( not defined $in{$_} ) {
-      next unless $self->show_undef;
-    }
-    $out{$_} = $in{$_};
-  }
-  return \%out;
 }
 
 sub get_all { 
