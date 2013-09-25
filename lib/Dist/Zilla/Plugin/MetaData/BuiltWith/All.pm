@@ -31,19 +31,22 @@ sub _list_modules_in_memory {
     if ( $package ) {
         push @out, $package;
     }
+    return @out if $package eq 'main';
     my $ns = do {
         no strict 'refs';
         \%{ $package . q{::} };
     };
-    print "${package}::\n";
+    return  
     my ( @child_namespaces );
     for  my $child ( keys %{$ns} ) {
-        print " > $child\n";
-        if ( $_ =~ /^(.*)::$/ ) {
+        
+        if ( $child =~ /^(.*)::$/ ) {
+            print " > $child\n";
             if ( $package ) {
-                push @child_namespaces, $package . '::' . $child;
+
+                push @child_namespaces, $package . '::' . $1;
             } else {
-                push @child_namespaces, $child;
+                push @child_namespaces, $1;
             }
         }
     }
