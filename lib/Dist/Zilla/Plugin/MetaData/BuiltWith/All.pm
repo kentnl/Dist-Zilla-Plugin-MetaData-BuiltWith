@@ -108,6 +108,39 @@ sub _filter {
   return \%out;
 }
 
+sub get_all { 
+  my ( $self ) = @_;
+  my %modtable;
+  my %failures;
+
+  my $record_module = sub {
+        my ( $module ) = @_;
+        my $result = $self->_detect_installed($module);
+        if ( defined $result->[0] ) {
+          $modtable{$module} = $result->[0];
+        }
+        if ( defined $result->[1] ) {
+          $failures{$module} = $result->[1];
+        }
+  };
+  my $forget_module = sub {
+        my ( $badmodule ) = @_;
+        delete $modtable{$badmodule} if exists $modtable{$badmodule};
+        delete $failures{$badmodule} if exists $failures{$badmodule};
+  };
+
+  for my $module ( $self->_list_modules_in_memory ) {
+      $record_module->($module);
+  }
+
+  for my $module ( $self->include ) {
+    $record_module->($module);
+  }
+  for my $badmodule ( $self->exclude ) {
+    $forget_module->($badmodule);
+  }
+}
+
 around 'metadata' => sub {
   my ( $orig, $self, @args )  = @_;
   my $stash = $self->$orig( @args );
