@@ -31,12 +31,10 @@ sub _list_modules_in_memory {
     if ( $package ) {
         push @out, $package;
     }
-
     my $ns = do {
         no strict 'refs';
         \%{ $package . q{::} };
     };
-    return  
     my ( @child_namespaces );
     for  my $child ( keys %{$ns} ) {
         if ( $child =~ /^(.*)::$/ ) {
