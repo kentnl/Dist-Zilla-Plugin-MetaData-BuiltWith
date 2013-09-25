@@ -31,7 +31,7 @@ sub _list_modules_in_memory {
     if ( $package ) {
         push @out, $package;
     }
-    return @out if $package eq 'main';
+
     my $ns = do {
         no strict 'refs';
         \%{ $package . q{::} };
@@ -39,12 +39,12 @@ sub _list_modules_in_memory {
     return  
     my ( @child_namespaces );
     for  my $child ( keys %{$ns} ) {
-        
         if ( $child =~ /^(.*)::$/ ) {
-            print " > $child\n";
+            my $child_pkg = $1;
+            next if $child_pkg eq 'main';
             if ( $package ) {
 
-                push @child_namespaces, $package . '::' . $1;
+                push @child_namespaces, $package . '::' . $child_pkg;
             } else {
                 push @child_namespaces, $1;
             }
