@@ -27,7 +27,10 @@ around dump_config => sub {
 
 sub _list_modules_in_memory {
     my ( $self, $package )  = @_;
-    my ( @out ) = $package;
+    my ( @out );
+    if ( $package ) {
+        push @out, $package;
+    }
     my $ns = do {
         no strict 'refs';
         \%{ $package . q{::} };
@@ -129,7 +132,9 @@ sub get_all {
         delete $failures{$badmodule} if exists $failures{$badmodule};
   };
 
-  for my $module ( $self->_list_modules_in_memory ) {
+  my ( @modules ) =  $self->_list_modules_in_memory(q{});
+  for my $module ( @modules ) {
+      $self->log(['Module: %s', $module]);
       $record_module->($module);
   }
 
@@ -139,12 +144,13 @@ sub get_all {
   for my $badmodule ( $self->exclude ) {
     $forget_module->($badmodule);
   }
+  return \%modtable;
 }
 
 around 'metadata' => sub {
   my ( $orig, $self, @args )  = @_;
   my $stash = $self->$orig( @args );
-  $stash->{ $self->_stash_key }->{allmodules} = $self->_filter( $self->_flatten( $self->_versions_of(q{}) ) );
+  $stash->{ $self->_stash_key }->{allmodules} = $self->get_all();
   return $stash;
 };
 
