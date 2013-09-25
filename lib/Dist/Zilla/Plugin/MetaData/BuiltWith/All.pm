@@ -92,7 +92,7 @@ sub get_all {
 around 'metadata' => sub {
   my ( $orig, $self, @args )  = @_;
   my $stash = $self->$orig( @args );
-  $stash->{ $self->_stash_key } = { $stash->{ $self->_stash_key } , %{ $self->get_all() } };
+  $stash->{ $self->_stash_key } = { %{$stash->{ $self->_stash_key }} , %{ $self->get_all() } };
   return $stash;
 };
 
