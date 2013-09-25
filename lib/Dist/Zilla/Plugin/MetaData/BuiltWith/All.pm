@@ -84,13 +84,15 @@ sub get_all {
   for my $badmodule ( $self->exclude ) {
     $forget_module->($badmodule);
   }
-  return \%modtable;
+  my $rval = { allmodules => \%modtable };
+  $rval->{allfailures} = \%failures if keys %failures;
+  return $rval;
 }
 
 around 'metadata' => sub {
   my ( $orig, $self, @args )  = @_;
   my $stash = $self->$orig( @args );
-  $stash->{ $self->_stash_key }->{allmodules} = $self->get_all();
+  $stash->{ $self->_stash_key } = { $stash->{ $self->_stash_key } , %{ $self->get_all() } };
   return $stash;
 };
 
