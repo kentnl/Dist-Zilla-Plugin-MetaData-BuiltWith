@@ -25,6 +25,29 @@ around dump_config => sub {
   return $config;
 };
 
+sub _list_modules_in_memory {
+    my ( $self, $package )  = @_;
+    my ( @out ) = $package;
+    my $ns = do {
+        no strict 'refs';
+        \%{ $package . q{::} };
+    };
+    my ( @child_namespaces );
+    for  my $child ( keys %{$ns} ) {
+        if ( $_ =~ /^(.*)::$/ ) {
+            if ( $package ) {
+                push @child_namespaces, $package . '::' . $child;
+            } else {
+                push @child_namespaces, $child;
+            }
+        }
+    }
+    for my $child ( @child_namespaces ) {
+        push @out, $self->_list_modules_in_memory($child);
+    }
+    return (@out);
+}
+
 sub _versions_of {
   my $self    = shift;
   my $package = shift;
@@ -44,6 +67,7 @@ sub _versions_of {
     my $xsn = $_;
     $xsn = $package . q{::} . $_ unless $package eq q{};
 
+    
     #    warn "$xsn -> VERSION\n";
     eval { $outhash{$_}->{version} = $xsn->VERSION(); } or do {
       1;

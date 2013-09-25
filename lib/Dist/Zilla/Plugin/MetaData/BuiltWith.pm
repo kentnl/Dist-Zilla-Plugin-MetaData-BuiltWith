@@ -187,7 +187,7 @@ sub _detect_installed {
   my ( $self, $module ) = @_;
   my $success = undef;
   if ( $module eq 'perl' ) {
-    return [ undef , 'perl' ];
+    return [ undef , undef ];
   }
   require Module::Data;
   my $d = Module::Data->new( $module );
