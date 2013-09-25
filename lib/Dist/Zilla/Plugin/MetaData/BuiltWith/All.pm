@@ -35,6 +35,7 @@ sub _list_modules_in_memory {
         no strict 'refs';
         \%{ $package . q{::} };
     };
+    print "$ns\n";
     my ( @child_namespaces );
     for  my $child ( keys %{$ns} ) {
         if ( $_ =~ /^(.*)::$/ ) {
