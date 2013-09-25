@@ -84,9 +84,9 @@ sub _filter {
   return \%out;
 }
 
-override 'metadata' => sub {
-  my $self  = shift;
-  my $stash = super();
+around 'metadata' => sub {
+  my ( $orig, $self, @args )  = @_;
+  my $stash = $self->$orig( @args );
   $stash->{ $self->_stash_key }->{allmodules} = $self->_filter( $self->_flatten( $self->_versions_of(q{}) ) );
   return $stash;
 };
