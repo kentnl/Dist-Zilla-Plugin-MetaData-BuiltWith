@@ -1,0 +1,108 @@
+# NAME
+
+Dist::Zilla::Plugin::MetaData::BuiltWith - Report what versions of things your distribution was built against
+
+# VERSION
+
+version 0.03000101
+
+# SYNOPSIS
+
+    [MetaData::BuiltWith]
+    include = Some::Module::Thats::Not::In::Preq
+    exclude = Some::Module::Youre::Ashamed::Of
+    show_uname = 1           ; default is 0
+    show_config = 1          ; default is 0
+    uname_call = uname        ; the default
+    uname_args = -s -r -m -p  ; the default is -a
+
+# DESCRIPTION
+
+Often, distribution authors get module dependencies wrong. So in such cases,
+its handy to be able to see what version of various packages they built with.
+
+Some would prefer to demand everyone install the same version as they did,
+but that's also not always necessary.
+
+Hopefully, the existence of the metadata provided by this module will help
+users on their end machines make intelligent choices about what modules to
+install in the event of a problem.
+
+# OPTIONS
+
+## exclude
+
+Specify modules to exclude from version reporting
+
+    exclude = Foo
+    exclude = Bar
+
+## include
+
+Specify additional modules to include the version of
+
+    include = Foo
+    include = Bar
+
+## show\_config
+
+Report "interesting" values from `%Config::Config`
+
+    show_config = 1 ; Boolean
+
+## show\_uname
+
+Report the output from `uname`
+
+    show_uname = 1 ; Boolean
+
+## uname\_call
+
+Specify what the system `uname` function is called
+
+    uname_call = uname ; String
+
+## uname\_args
+
+Specify arguments passed to the `uname` call.
+
+    uname_args = -a ; String
+
+# METHODS
+
+## mvp\_multivalue\_args
+
+This module can take, as parameters, any volume of 'exclude' or 'include' arguments.
+
+## metadata
+
+This module scrapes together the name of all modules that exist in the "`Prereqs`" section
+that Dist::Zilla collects, and then works out what version of things you have,
+applies the various include/exclude rules, and ships that data back to Dist::Zilla
+via this method. See [`Dist::Zilla`'s `MetaProvider` role](http://search.cpan.org/perldoc?Dist::Zilla::Role::MetaProvider) for more details.
+
+# EXAMPLE OUTPUT ( `META.json` )
+
+    "x_BuiltWith" : {
+       "modules" : {
+          "Dist::Zilla::Role::MetaProvider" : "4.101612",
+          "File::Find" : "1.15",
+          "File::Temp" : "0.22",
+          "Module::Build" : "0.3607",
+          "Moose" : "1.07",
+          "Test::More" : "0.94"
+       },
+       "perl" : "5.012000",
+       "platform" : "MSWin32"
+    },
+
+# AUTHOR
+
+Kent Fredric <kentnl@cpan.org>
+
+# COPYRIGHT AND LICENSE
+
+This software is copyright (c) 2013 by Kent Fredric <kentnl@cpan.org>.
+
+This is free software; you can redistribute it and/or modify it under
+the same terms as the Perl 5 programming language system itself.
