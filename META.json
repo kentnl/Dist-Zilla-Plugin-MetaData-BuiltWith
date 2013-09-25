@@ -239,6 +239,8 @@
          "Dist::Zilla::Plugin::Manifest" : "4.300039",
          "Dist::Zilla::Plugin::ManifestSkip" : "4.300039",
          "Dist::Zilla::Plugin::MetaConfig" : "4.300039",
+         "Dist::Zilla::Plugin::MetaData::BuiltWith" : "0.03000101",
+         "Dist::Zilla::Plugin::MetaData::BuiltWith::All" : "0.03000101",
          "Dist::Zilla::Plugin::MetaJSON" : "4.300039",
          "Dist::Zilla::Plugin::MetaProvides::Package" : "1.15000000",
          "Dist::Zilla::Plugin::MetaTests" : "4.300039",
@@ -954,7 +956,7 @@
                }
             },
             "name" : "@Author::KENTNL/MetaData::BuiltWith",
-            "version" : null
+            "version" : "0.03000101"
          },
          {
             "class" : "Dist::Zilla::Plugin::Git::GatherDir",
@@ -1245,7 +1247,7 @@
                }
             },
             "name" : "MetaData::BuiltWith::All",
-            "version" : null
+            "version" : "0.03000101"
          },
          {
             "class" : "Dist::Zilla::Plugin::Prereqs",
