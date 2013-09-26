@@ -1,6 +1,8 @@
 ﻿Revision history for {{$dist->name}}
 
 {{$NEXT}}
+
+0.03000101 2013-09-26T00:14:19Z
  [00 Major]
  - Guts reworked to use Module::Metadata.
  - ::All reworked to be less !@#$ insane.
