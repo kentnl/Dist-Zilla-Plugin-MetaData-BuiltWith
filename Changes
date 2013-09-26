@@ -1,6 +1,11 @@
 ﻿Revision history for {{$dist->name}}
 
 {{$NEXT}}
+ [00 Major]
+ - Not really a major, just fixing my failure to increment majorly instead
+   of patch-ly.
+ - Also, The changelog has been updated. Retroactively. Pray I do not alter
+   it further. https://www.youtube.com/watch?v=WpE_xMRiCLE
 
 0.03000101 2013-09-26T00:14:19Z
  [00 Major]
