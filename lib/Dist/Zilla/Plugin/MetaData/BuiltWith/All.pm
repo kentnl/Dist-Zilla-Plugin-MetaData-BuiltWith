@@ -53,7 +53,7 @@ sub _list_modules_in_memory {
   return (@out);
 }
 
-sub get_all {
+sub _get_all {
   my ($self) = @_;
   my %modtable;
   my %failures;
@@ -93,7 +93,7 @@ sub get_all {
 around 'metadata' => sub {
   my ( $orig, $self, @args ) = @_;
   my $stash = $self->$orig(@args);
-  $stash->{ $self->_stash_key } = { %{ $stash->{ $self->_stash_key } }, %{ $self->get_all() } };
+  $stash->{ $self->_stash_key } = { %{ $stash->{ $self->_stash_key } }, %{ $self->_get_all() } };
   return $stash;
 };
 
@@ -133,7 +133,7 @@ Only recommended for the most extreme of situations where you find your code bre
 
 =head2 show_failures
 
-Because this module reports B<ALL> namespaces, it will likely report very many namespaces
+Because this module reports B<ALL> C<namespaces>, it will likely report very many C<namespaces>
 which simply do not exist on disk as a distinct file, and as a result, are unlikely to have C<$VERSION> data.
 
 As a result, enabling this option will drop a mother load of failures into a hash somewhere in C<x_BuiltWith>.
