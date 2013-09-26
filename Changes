@@ -1,5 +1,50 @@
 ﻿Revision history for Dist-Zilla-Plugin-MetaData-BuiltWith
 
+0.03000101 2013-09-26T00:14:19Z
+ [00 Major]
+ - Guts reworked to use Module::Metadata.
+ - ::All reworked to be less !@#$ insane.
+ - Dep failures no longer say "NA()" and instead get their own hash entry.
+
+ [Dependencies::Added / develop requires]
+ - Pod::Coverage::TrustPod
+ - Test::CPAN::Changes 0.19
+ - Test::CPAN::Meta
+ - Test::Kwalitee 1.08
+ - Test::Pod 1.41
+ - Test::Pod::Coverage 1.08
+ - version 0.9901
+
+ [Dependencies::Added / runtime requires]
+ - Module::Data
+
+ [Dependencies::Added / test requires]
+ - File::Spec
+ - IO::Handle
+ - IPC::Open3
+
+ [Dependencies::Changed / build requires]
+ - Module::Build 0.4001 → 0.4007
+
+ [Dependencies::Changed / configure requires]
+ - Module::Build 0.4001 → 0.4007
+
+ [Dependencies::Changed / develop suggests]
+ - Dist::Zilla::PluginBundle::Author::KENTNL v1.4.2 → v1.8.3
+
+ [Dependencies::Removed / test requires]
+ - File::Find
+ - File::Temp
+
+ [Documentation]
+ - Add README.mkdn
+
+ [Meta]
+ - Bug tracker to github issues.
+
+ [Tests]
+ - Regenerated to shit
+
 0.03000100 2012-07-28T18:27:33Z
  [00_Note]
  - Accidentally lost the source code entirely for 0.03xxxyyy, so had to

@@ -6,7 +6,7 @@ BEGIN {
   $Dist::Zilla::Plugin::MetaData::BuiltWith::All::AUTHORITY = 'cpan:KENTNL';
 }
 {
-  $Dist::Zilla::Plugin::MetaData::BuiltWith::All::VERSION = '0.03000100';
+  $Dist::Zilla::Plugin::MetaData::BuiltWith::All::VERSION = '0.03000101';
 }
 
 # ABSTRACT: Go overkill and report everything in all name-spaces.
@@ -16,78 +16,84 @@ use namespace::autoclean;
 extends 'Dist::Zilla::Plugin::MetaData::BuiltWith';
 
 
-has 'show_undef' => ( is => 'ro', isa => 'Bool', default => 0 );
+has 'show_failures' => ( is => 'ro', isa => 'Bool', default => 0 );
 
 around dump_config => sub {
   my ( $orig, $self ) = @_;
   my $config = $self->$orig();
-  $config->{ q{} . __PACKAGE__ }->{show_undef} = $self->show_undef;
+  $config->{ q{} . __PACKAGE__ }->{show_failures} = $self->show_failures;
   return $config;
 };
 
-sub _versions_of {
-  my $self    = shift;
-  my $package = shift;
-  my $ns      = do {
-    ## no critic ( TestingAndDebugging::ProhibitNoStrict )
+sub _list_modules_in_memory {
+  my ( $self, $package ) = @_;
+  my (@out);
+  if ( $package eq 'main' or $package =~ /\Amain::/msx ) {
+    return $package;
+  }
+  if ($package) {
+    push @out, $package;
+  }
+  my $ns = do {
+    ## no critic (ProhibitNoStrict)
     no strict 'refs';
     \%{ $package . q{::} };
   };
-  my %outhash;
-  for ( keys %{$ns} ) {
-    ## no critic ( RequireDotMatchAnything RequireExtendedFormatting RequireLineBoundaryMatching )
-    if ( $_ =~ /^(.*)::$/ ) {
-      $outhash{$1} = { children => {}, version => undef };
+  my (@child_namespaces);
+  for my $child ( keys %{$ns} ) {
+    if ( $child =~ /\A(.*)::$/msx ) {
+      my $child_pkg = $1;
+      $child_pkg = $package . q[::] . $child_pkg if $package;
+      push @child_namespaces, $child_pkg;
     }
   }
-  for ( keys %outhash ) {
-    my $xsn = $_;
-    $xsn = $package . q{::} . $_ unless $package eq q{};
-
-    #    warn "$xsn -> VERSION\n";
-    eval { $outhash{$_}->{version} = $xsn->VERSION(); } or do {
-      1;
-    };
+  for my $child (@child_namespaces) {
+    push @out, $self->_list_modules_in_memory($child);
   }
-  for ( keys %outhash ) {
-    next if $_ eq 'main';
-    my $xsn = $_;
-    $xsn = $package . q{::} . $_ unless $package eq q{};
-    $outhash{$_}->{children} = $self->_versions_of($xsn);
-  }
-  return \%outhash;
+  return (@out);
 }
 
-sub _flatten {
-  my $self = shift;
-  my $tree = shift;
-  my $path = shift || q{};
-  my %outhash;
-  for ( keys %{$tree} ) {
-    $outhash{ $path . $_ } = $tree->{$_}->{version};
-  }
-  for ( keys %{$tree} ) {
-    %outhash = ( %outhash, $self->_flatten( $tree->{$_}->{children}, $path . $_ . q{::} ) );
-  }
-  return %outhash;
-}
+sub _get_all {
+  my ($self) = @_;
+  my %modtable;
+  my %failures;
 
-sub _filter {
-  my ( $self, %in ) = @_;
-  my %out;
-  for ( keys %in ) {
-    if ( not defined $in{$_} ) {
-      next unless $self->show_undef;
+  my $record_module = sub {
+    my ($module) = @_;
+    my $result = $self->_detect_installed($module);
+    if ( defined $result->[0] ) {
+      $modtable{$module} = $result->[0];
     }
-    $out{$_} = $in{$_};
+    if ( defined $result->[1] ) {
+      $failures{$module} = $result->[1];
+    }
+  };
+  my $forget_module = sub {
+    my ($badmodule) = @_;
+    delete $modtable{$badmodule} if exists $modtable{$badmodule};
+    delete $failures{$badmodule} if exists $failures{$badmodule};
+  };
+
+  my (@modules) = $self->_list_modules_in_memory(q{});
+  for my $module (@modules) {
+    $record_module->($module);
   }
-  return \%out;
+
+  for my $module ( $self->include ) {
+    $record_module->($module);
+  }
+  for my $badmodule ( $self->exclude ) {
+    $forget_module->($badmodule);
+  }
+  my $rval = { allmodules => \%modtable };
+  $rval->{allfailures} = \%failures if keys %failures and $self->show_failures;
+  return $rval;
 }
 
-override 'metadata' => sub {
-  my $self  = shift;
-  my $stash = super();
-  $stash->{ $self->_stash_key }->{allmodules} = $self->_filter( $self->_flatten( $self->_versions_of(q{}) ) );
+around 'metadata' => sub {
+  my ( $orig, $self, @args ) = @_;
+  my $stash = $self->$orig(@args);
+  $stash->{ $self->_stash_key } = { %{ $stash->{ $self->_stash_key } }, %{ $self->_get_all() } };
   return $stash;
 };
 
@@ -96,6 +102,7 @@ no Moose;
 1;
 
 __END__
+
 =pod
 
 =encoding utf-8
@@ -106,12 +113,12 @@ Dist::Zilla::Plugin::MetaData::BuiltWith::All - Go overkill and report everythin
 
 =head1 VERSION
 
-version 0.03000100
+version 0.03000101
 
 =head1 SYNOPSIS
 
   [MetaData::BuiltWith::All]
-  show_undef = 1
+  show_failures = 1 ; Not recommended
 
 This module is otherwise identical to L<< C<MetaData::BuiltWith>|Dist::Zilla::Plugin::MetaData::BuiltWith >>.
 
@@ -124,11 +131,26 @@ Only recommended for the most extreme of situations where you find your code bre
 
 =head1 OPTIONS
 
-=head2 show_undef
+=head2 show_failures
 
-Report Packages even if C<$VERSION> is undefined in the package.
+Because this module reports B<ALL> C<namespaces>, it will likely report very many C<namespaces>
+which simply do not exist on disk as a distinct file, and as a result, are unlikely to have C<$VERSION> data.
 
-    show_undef = 1 ; default is 0
+As a result, enabling this option will drop a mother load of failures into a hash somewhere in C<x_BuiltWith>.
+
+For instance, there's one for every single package in C<B::>
+
+And there's one for every single instance of C<Eval::Closure::Sandbox> named C<Eval::Closure::Sandbox_.*>
+
+There's one for every instance of C<Module::Metadata> ( I spotted about 80 myself )
+
+And there's one for each and every thing that uses C<__ANON__::>
+
+You get the idea?
+
+B<Do not turn this option on>
+
+You have been warned.
 
 =head2 exclude
 
@@ -182,10 +204,9 @@ Kent Fredric <kentnl@cpan.org>
 
 =head1 COPYRIGHT AND LICENSE
 
-This software is copyright (c) 2012 by Kent Fredric <kentnl@cpan.org>.
+This software is copyright (c) 2013 by Kent Fredric <kentnl@cpan.org>.
 
 This is free software; you can redistribute it and/or modify it under
 the same terms as the Perl 5 programming language system itself.
 
 =cut
-

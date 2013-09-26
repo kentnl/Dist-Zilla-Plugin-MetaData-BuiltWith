@@ -6,7 +6,7 @@ BEGIN {
   $Dist::Zilla::Plugin::MetaData::BuiltWith::AUTHORITY = 'cpan:KENTNL';
 }
 {
-  $Dist::Zilla::Plugin::MetaData::BuiltWith::VERSION = '0.03000100';
+  $Dist::Zilla::Plugin::MetaData::BuiltWith::VERSION = '0.03000101';
 }
 
 # ABSTRACT: Report what versions of things your distribution was built against
@@ -62,7 +62,7 @@ around dump_config => sub {
   my ( $orig, $self ) = @_;
 
   my $config = $self->$orig();
-  my $thisconfig = { show_uname => $self->show_uname, _stash_key => $self->_stash_key , show_config => $self->show_config };
+  my $thisconfig = { show_uname => $self->show_uname, _stash_key => $self->_stash_key, show_config => $self->show_config };
 
   if ( $self->show_uname ) {
     $thisconfig->{'uname'} = {
@@ -187,30 +187,26 @@ sub _detect_installed {
   my ( $self, $module ) = @_;
   my $success = undef;
   if ( $module eq 'perl' ) {
-    return 'NA(skipped: perl)';
+    return [ undef, undef ];
   }
-  $success = 1;
-  load_optional_class($module) or do { $success = undef; };
-  ## no critic ( Variables::ProhibitPunctuationVars )
-  my $lasterror = [ $@, $! ];
-  if ( not $success ) {
-    $self->_logonce( $module, 'did not load', $lasterror );
-    return 'NA(possibly not installed)';
+  require Module::Data;
+  my $d = Module::Data->new($module);
+
+  if ( not defined $d ) {
+    return [ undef, 'failed to create a Module::Data wrapper' ];
   }
-  my $modver;
-  $success = undef;
-  eval { $modver = $module->VERSION(); $success = 1 } or do { $success = undef };
-  $lasterror = [ $@, $! ];
-  if ( not $success ) {
-    $self->_logonce( $module, ' died assessing its version', $lasterror );
-    return 'NA(version could not be resolved)';
+
+  if ( not -e -f $d->path ) {
+    return [ undef, 'module was not found in INC' ];
   }
-  if ( not defined $modver ) {
-    $self->_logonce( $module, ' reported an undefined version', $lasterror );
-    return 'NA(undef)';
+
+  my $v = $d->_version_emulate;
+
+  if ( not $v ) {
+    return [ undef, 'Module::MetaData could not parse a version from ' . $d->path ];
   }
-  $self->log_debug("Installed $module is $modver");
-  return "$modver";
+  return [ $v, undef ];
+
 }
 
 
@@ -220,28 +216,46 @@ sub metadata {
   my $report = $self->_get_prereq_modnames();
   $self->log_debug( 'Found mods: ' . scalar @{$report} );
   my %modtable;
+  my %failures;
+
+  my $record_module = sub {
+    my ($module) = @_;
+    my $result = $self->_detect_installed($module);
+    if ( defined $result->[0] ) {
+      $modtable{$module} = $result->[0];
+    }
+    if ( defined $result->[1] ) {
+      $failures{$module} = $result->[1];
+    }
+  };
+  my $forget_module = sub {
+    my ($badmodule) = @_;
+    delete $modtable{$badmodule} if exists $modtable{$badmodule};
+    delete $failures{$badmodule} if exists $failures{$badmodule};
+  };
 
   for my $module ( @{$report} ) {
-    $modtable{$module} = $self->_detect_installed($module);
+    $record_module->($module);
   }
 
   for my $module ( $self->include ) {
-    $modtable{$module} = $self->_detect_installed($module);
+    $record_module->($module);
   }
   for my $badmodule ( $self->exclude ) {
-    delete $modtable{$badmodule} if exists $modtable{$badmodule};
+    $forget_module->($badmodule);
   }
-  return {
-    $self->_stash_key,
-    {
-      modules => \%modtable,
-      ## no critic ( Variables::ProhibitPunctuationVars )
-      perl     => { %{$^V} },
-      platform => $^O,
-      $self->_uname(),
-      $self->_config(),
-    }
+  my $result = {
+    modules => \%modtable,
+    ## no critic ( Variables::ProhibitPunctuationVars )
+    perl     => { %{$^V} },
+    platform => $^O,
+    $self->_uname(),
+    $self->_config(),
   };
+  if ( keys %failures ) {
+    $result->{failures} = \%failures;
+  }
+  return { $self->_stash_key, $result };
 }
 
 __PACKAGE__->meta->make_immutable;
@@ -249,6 +263,7 @@ no Moose;
 1;
 
 __END__
+
 =pod
 
 =encoding utf-8
@@ -259,7 +274,7 @@ Dist::Zilla::Plugin::MetaData::BuiltWith - Report what versions of things your d
 
 =head1 VERSION
 
-version 0.03000100
+version 0.03000101
 
 =head1 SYNOPSIS
 
@@ -357,10 +372,9 @@ Kent Fredric <kentnl@cpan.org>
 
 =head1 COPYRIGHT AND LICENSE
 
-This software is copyright (c) 2012 by Kent Fredric <kentnl@cpan.org>.
+This software is copyright (c) 2013 by Kent Fredric <kentnl@cpan.org>.
 
 This is free software; you can redistribute it and/or modify it under
 the same terms as the Perl 5 programming language system itself.
 
 =cut
-
