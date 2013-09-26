@@ -276,7 +276,7 @@ sub _detect_installed {
   }
 
   if ( not -e -f $d->path ) {
-    return [ undef, 'module was not found in @INC' ];
+    return [ undef, 'module was not found in INC' ];
   }
 
   my $v = $d->_version_emulate;
