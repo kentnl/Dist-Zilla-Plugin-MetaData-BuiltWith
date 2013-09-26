@@ -28,21 +28,22 @@ around dump_config => sub {
 sub _list_modules_in_memory {
   my ( $self, $package ) = @_;
   my (@out);
-  if ( $package eq 'main' or $package =~ /^main::/ ) {
+  if ( $package eq 'main' or $package =~ /\Amain::/msx ) {
     return $package;
   }
   if ($package) {
     push @out, $package;
   }
   my $ns = do {
+    ## no critic (ProhibitNoStrict)
     no strict 'refs';
     \%{ $package . q{::} };
   };
   my (@child_namespaces);
   for my $child ( keys %{$ns} ) {
-    if ( $child =~ /^(.*)::$/ ) {
+    if ( $child =~ /\A(.*)::$/msx ) {
       my $child_pkg = $1;
-      $child_pkg = $package . '::' . $child_pkg if $package;
+      $child_pkg = $package . q[::] . $child_pkg if $package;
       push @child_namespaces, $child_pkg;
     }
   }
