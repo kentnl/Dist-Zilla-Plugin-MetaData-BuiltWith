@@ -62,7 +62,7 @@ around dump_config => sub {
   my ( $orig, $self ) = @_;
 
   my $config = $self->$orig();
-  my $thisconfig = { show_uname => $self->show_uname, _stash_key => $self->_stash_key , show_config => $self->show_config };
+  my $thisconfig = { show_uname => $self->show_uname, _stash_key => $self->_stash_key, show_config => $self->show_config };
 
   if ( $self->show_uname ) {
     $thisconfig->{'uname'} = {
@@ -187,23 +187,23 @@ sub _detect_installed {
   my ( $self, $module ) = @_;
   my $success = undef;
   if ( $module eq 'perl' ) {
-    return [ undef , undef ];
+    return [ undef, undef ];
   }
   require Module::Data;
-  my $d = Module::Data->new( $module );
+  my $d = Module::Data->new($module);
 
   if ( not defined $d ) {
-      return [ undef , 'failed to create a Module::Data wrapper' ];
+    return [ undef, 'failed to create a Module::Data wrapper' ];
   }
-  
+
   if ( not -e -f $d->path ) {
-      return [ undef , 'module was not found in @INC' ];
+    return [ undef, 'module was not found in @INC' ];
   }
 
   my $v = $d->_version_emulate;
 
   if ( not $v ) {
-      return [ undef , 'Module::MetaData could not parse a version from ' . $d->path ];
+    return [ undef, 'Module::MetaData could not parse a version from ' . $d->path ];
   }
   return [ $v, undef ];
 
@@ -219,23 +219,23 @@ sub metadata {
   my %failures;
 
   my $record_module = sub {
-        my ( $module ) = @_;
-        my $result = $self->_detect_installed($module);
-        if ( defined $result->[0] ) {
-          $modtable{$module} = $result->[0];
-        }
-        if ( defined $result->[1] ) {
-          $failures{$module} = $result->[1];
-        }
+    my ($module) = @_;
+    my $result = $self->_detect_installed($module);
+    if ( defined $result->[0] ) {
+      $modtable{$module} = $result->[0];
+    }
+    if ( defined $result->[1] ) {
+      $failures{$module} = $result->[1];
+    }
   };
   my $forget_module = sub {
-        my ( $badmodule ) = @_;
-        delete $modtable{$badmodule} if exists $modtable{$badmodule};
-        delete $failures{$badmodule} if exists $failures{$badmodule};
+    my ($badmodule) = @_;
+    delete $modtable{$badmodule} if exists $modtable{$badmodule};
+    delete $failures{$badmodule} if exists $failures{$badmodule};
   };
 
   for my $module ( @{$report} ) {
-      $record_module->($module);
+    $record_module->($module);
   }
 
   for my $module ( $self->include ) {
@@ -245,17 +245,17 @@ sub metadata {
     $forget_module->($badmodule);
   }
   my $result = {
-      modules => \%modtable,
-      ## no critic ( Variables::ProhibitPunctuationVars )
-      perl     => { %{$^V} },
-      platform => $^O,
-      $self->_uname(),
-      $self->_config(),
+    modules => \%modtable,
+    ## no critic ( Variables::ProhibitPunctuationVars )
+    perl     => { %{$^V} },
+    platform => $^O,
+    $self->_uname(),
+    $self->_config(),
   };
   if ( keys %failures ) {
-      $result->{failures} = \%failures;
+    $result->{failures} = \%failures;
   }
-  return {  $self->_stash_key, $result };
+  return { $self->_stash_key, $result };
 }
 
 __PACKAGE__->meta->make_immutable;
