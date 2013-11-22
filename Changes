@@ -1,5 +1,27 @@
 ﻿Revision history for Dist-Zilla-Plugin-MetaData-BuiltWith
 
+0.04000001 2013-11-22T04:23:48Z
+ [00 Maint]
+ - Changes retroactively cleaned. Next time, you will be forced to wear a
+   clown shoes and ride a unicycle.
+
+ [Dependencies::Stats]
+ - Dependencies changed, see Changes.deps{,.all,.dev} for details
+ - build: ↑1
+ - configure: ↑1
+ - develop: +44 ↑1 -3
+ - test: ↑1 -3
+
+ [Documentation]
+ - Readme.mkdn → MetaCPAN
+
+ [Packaging]
+ - Build.PL updated by Dzil to have new Fallback Mechanics.
+
+ [Tests]
+ - Use Test::Compile::PerFile
+ - Newer ReportVersions::Tiny to avoid develop-deps showing.
+
 0.04000000 2013-09-26T00:25:33Z
  [00 Major]
  - Not really a major, just fixing my failure to increment majorly instead
@@ -13,35 +35,17 @@
  - ::All reworked to be less !@#$ insane.
  - Dep failures no longer say "NA()" and instead get their own hash entry.
 
- [Dependencies::Added / develop requires]
- - Pod::Coverage::TrustPod
- - Test::CPAN::Changes 0.19
- - Test::CPAN::Meta
- - Test::Kwalitee 1.08
- - Test::Pod 1.41
- - Test::Pod::Coverage 1.08
- - version 0.9901
+ [Dependencies]
+ - use Module::Data
+ - upgrade Module::Build
 
- [Dependencies::Added / runtime requires]
- - Module::Data
-
- [Dependencies::Added / test requires]
- - File::Spec
- - IO::Handle
- - IPC::Open3
-
- [Dependencies::Changed / build requires]
- - Module::Build 0.4001 → 0.4007
-
- [Dependencies::Changed / configure requires]
- - Module::Build 0.4001 → 0.4007
-
- [Dependencies::Changed / develop suggests]
- - Dist::Zilla::PluginBundle::Author::KENTNL v1.4.2 → v1.8.3
-
- [Dependencies::Removed / test requires]
- - File::Find
- - File::Temp
+ [Dependencies::Stats]
+ - Dependencies changed, see Changes.deps{,.all,.dev} for details
+ - build: ↑1
+ - configure: ↑1
+ - develop: +7 ↑1
+ - runtime: +1
+ - test: +3 -2
 
  [Documentation]
  - Add README.mkdn
@@ -61,23 +65,17 @@
  [Bugfixes]
  - Defer module version checks to later to help bootstrap.
 
- [Dependencies::Added / runtime requires]
- - Readonly
+ [Dependencies]
+ - use newer Module::Build and Test::More
+ - use Readonly
 
- [Dependencies::Changed / build requires]
- - Module::Build 0.3601 → 0.4001
-
- [Dependencies::Changed / configure requires]
- - Module::Build 0.3601 → 0.4001
-
- [Dependencies::Changed / develop recommends]
- - Dist::Zilla::PluginBundle::Author::KENTNL::Lite 0.01009803 → v1.3.0
-
- [Dependencies::Changed / develop suggests]
- - Dist::Zilla::PluginBundle::Author::KENTNL v1.2.0 → v1.4.2
-
- [Dependencies::Changed / test requires]
- - Test::More 0.88 → 0.98
+ [Dependencies::Stats]
+ - Dependencies changed, see Changes.deps{,.all,.dev} for details
+ - build: ↑1
+ - configure: ↑1
+ - develop: ↑2
+ - runtime: +1
+ - test: ↑1
 
 0.03000000 2012-03-12T15:06:44Z
  [Features]
@@ -90,8 +88,9 @@
  [Bugfixes]
  - More attempts at fixing rt#63930 and the $_ aliasing bug
 
- [Dependencies::Added / runtime requires]
- - Class::Load
+ [Dependencies::Stats]
+ - Dependencies changed, see Changes.deps{,.all,.dev} for details
+ - runtime: +1
 
  [Internals]
  - Eliminated the dangerous stringy evals in favour of Class::Load;
@@ -102,19 +101,15 @@
    due to $_ being clobbered in a few places yeilding a package of 'undef',
    which emits broken META.yml. Hopefully this should resolve rt#63930
 
- [Dependencies::Added / runtime requires]
- - MooseX::Types::Moose
- - perl 5.006
+ [Dependencies]
+ - use MooseX::Types::Moose
+ - use Moose 2.0
+ - Stop using Hash::Merge::Simple and Moose::Autobox
 
- [Dependencies::Changed / develop suggests]
- - Dist::Zilla::PluginBundle::Author::KENTNL v1.0.0 → v1.2.0
-
- [Dependencies::Changed / runtime requires]
- - Moose 0 → 2.0
-
- [Dependencies::Removed / runtime requires]
- - Hash::Merge::Simple
- - Moose::Autobox
+ [Dependencies::Stats]
+ - Dependencies changed, see Changes.deps{,.all,.dev} for details
+ - develop: ↑1
+ - runtime: +2 ↑1 -2
 
  [Internals]
  - Ripped out the Autobox stuff as it was adding errors.
@@ -134,30 +129,11 @@
 0.01018205 2011-10-22T12:24:24Z
  - Package Maintenance Release
 
- [Dependencies::Added / develop recommends]
- - Dist::Zilla::PluginBundle::Author::KENTNL::Lite 0.01009803
-
- [Dependencies::Added / develop requires]
- - Dist::Zilla::PluginBundle::Author::KENTNL::Lite
-
- [Dependencies::Added / develop suggests]
- - Dist::Zilla::PluginBundle::Author::KENTNL v1.0.0
-
- [Dependencies::Added / runtime requires]
- - strict
- - warnings
-
- [Dependencies::Removed / develop recommends]
- - Dist::Zilla::PluginBundle::KENTNL::Lite 0.01009803
-
- [Dependencies::Removed / develop requires]
- - Dist::Zilla::PluginBundle::KENTNL::Lite
-
- [Dependencies::Removed / develop suggests]
- - Dist::Zilla::PluginBundle::KENTNL 0.01017119
-
- [Dependencies::Removed / test requires]
- - English
+ [Dependencies::Stats]
+ - Dependencies changed, see Changes.deps{,.all,.dev} for details
+ - develop: +3 -3
+ - runtime: +2
+ - test: -1
 
  [Internals]
  - Version no longer set during BEGIN
@@ -194,32 +170,24 @@
  - Fixed issue with Prereqs not being discoverable.
  - Minor refactor with More Autobox
 
- [Dependencies::Added / develop recommends]
- - Dist::Zilla::PluginBundle::KENTNL::Lite 0.01009803
+ [Dependencies]
+ - require Moose::Autobox
+ - require Hash::Merge::Simple
+ - require Dist::Zilla::Util::EmulatePhase 0.01000101
 
- [Dependencies::Added / develop requires]
- - Dist::Zilla::PluginBundle::KENTNL::Lite
-
- [Dependencies::Added / develop suggests]
- - Dist::Zilla::PluginBundle::KENTNL 0.01017119
-
- [Dependencies::Added / runtime requires]
- - Dist::Zilla::Util::EmulatePhase 0.01000101
- - Hash::Merge::Simple
- - Moose::Autobox
-
- [Dependencies::Added / test requires]
- - English
-
- [Dependencies::Removed / runtime requires]
- - Carp
+ [Dependencies::Stats]
+ - Dependencies changed, see Changes.deps{,.all,.dev} for details
+ - develop: +3
+ - runtime: +3 -1
+ - test: +1
 
 0.01005122 2010-07-31T11:43:00Z
  - Dep on version 4.101540 of Dist::Zilla::Role::ConfigDumper. ( This
    should reduce some test failures due to 'around dump_config' )
 
- [Dependencies::Added / runtime requires]
- - Dist::Zilla::Role::ConfigDumper 4.101540
+ [Dependencies::Stats]
+ - Dependencies changed, see Changes.deps{,.all,.dev} for details
+ - runtime: +1
 
 0.01005020 2010-07-30T09:06:26Z
  - Skip 'perl' automatically when found in modules list. Can't depend on
@@ -229,8 +197,9 @@
    uname data.
  - Added dump_config reporting support for MetaConfig
 
- [Dependencies::Added / runtime requires]
- - Carp
+ [Dependencies::Stats]
+ - Dependencies changed, see Changes.deps{,.all,.dev} for details
+ - runtime: +1
 
 0.01000216 2010-06-13T05:07:31Z
  - Added a very overkill MetaData::BuiltWith::All module for those with

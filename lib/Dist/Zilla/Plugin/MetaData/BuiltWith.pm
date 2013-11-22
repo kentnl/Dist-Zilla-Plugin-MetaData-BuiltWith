@@ -6,7 +6,7 @@ BEGIN {
   $Dist::Zilla::Plugin::MetaData::BuiltWith::AUTHORITY = 'cpan:KENTNL';
 }
 {
-  $Dist::Zilla::Plugin::MetaData::BuiltWith::VERSION = '0.04000000';
+  $Dist::Zilla::Plugin::MetaData::BuiltWith::VERSION = '0.04000001';
 }
 
 # ABSTRACT: Report what versions of things your distribution was built against
@@ -266,7 +266,7 @@ __END__
 
 =pod
 
-=encoding utf-8
+=encoding UTF-8
 
 =head1 NAME
 
@@ -274,7 +274,7 @@ Dist::Zilla::Plugin::MetaData::BuiltWith - Report what versions of things your d
 
 =head1 VERSION
 
-version 0.04000000
+version 0.04000001
 
 =head1 SYNOPSIS
 

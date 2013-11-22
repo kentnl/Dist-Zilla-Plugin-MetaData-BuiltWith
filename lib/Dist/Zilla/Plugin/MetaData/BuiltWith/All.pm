@@ -6,7 +6,7 @@ BEGIN {
   $Dist::Zilla::Plugin::MetaData::BuiltWith::All::AUTHORITY = 'cpan:KENTNL';
 }
 {
-  $Dist::Zilla::Plugin::MetaData::BuiltWith::All::VERSION = '0.04000000';
+  $Dist::Zilla::Plugin::MetaData::BuiltWith::All::VERSION = '0.04000001';
 }
 
 # ABSTRACT: Go overkill and report everything in all name-spaces.
@@ -105,7 +105,7 @@ __END__
 
 =pod
 
-=encoding utf-8
+=encoding UTF-8
 
 =head1 NAME
 
@@ -113,7 +113,7 @@ Dist::Zilla::Plugin::MetaData::BuiltWith::All - Go overkill and report everythin
 
 =head1 VERSION
 
-version 0.04000000
+version 0.04000001
 
 =head1 SYNOPSIS
 
