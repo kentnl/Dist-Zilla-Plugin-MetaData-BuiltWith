@@ -4,7 +4,7 @@ Dist::Zilla::Plugin::MetaData::BuiltWith - Report what versions of things your d
 
 # VERSION
 
-version 0.04000000
+version 0.04000001
 
 # SYNOPSIS
 
@@ -79,7 +79,7 @@ This module can take, as parameters, any volume of 'exclude' or 'include' argume
 This module scrapes together the name of all modules that exist in the "`Prereqs`" section
 that Dist::Zilla collects, and then works out what version of things you have,
 applies the various include/exclude rules, and ships that data back to Dist::Zilla
-via this method. See [`Dist::Zilla`'s `MetaProvider` role](http://search.cpan.org/perldoc?Dist::Zilla::Role::MetaProvider) for more details.
+via this method. See [`Dist::Zilla`'s `MetaProvider` role](https://metacpan.org/pod/Dist::Zilla::Role::MetaProvider) for more details.
 
 # EXAMPLE OUTPUT ( `META.json` )
 
