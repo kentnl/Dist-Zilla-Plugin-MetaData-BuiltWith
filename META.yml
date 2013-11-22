@@ -216,6 +216,8 @@ x_BuiltWith:
     Dist::Zilla::Plugin::Manifest: 5.006
     Dist::Zilla::Plugin::ManifestSkip: 5.006
     Dist::Zilla::Plugin::MetaConfig: 5.006
+    Dist::Zilla::Plugin::MetaData::BuiltWith: 0.04000001
+    Dist::Zilla::Plugin::MetaData::BuiltWith::All: 0.04000001
     Dist::Zilla::Plugin::MetaJSON: 5.006
     Dist::Zilla::Plugin::MetaProvides: 1.15000100
     Dist::Zilla::Plugin::MetaProvides::Package: 1.15000000
@@ -905,8 +907,6 @@ x_BuiltWith:
     version::vxs: 0.9904
     warnings: 1.20
     warnings::register: 1.02
-  failures:
-    Dist::Zilla::Plugin::MetaData::BuiltWith: 'Module::MetaData could not parse a version from /home/kent/perl/Dist-Zilla-Plugin-MetaData-BuiltWith/lib/Dist/Zilla/Plugin/MetaData/BuiltWith.pm'
   modules:
     Class::Load: 0.20
     Dist::Zilla::Plugin::Author::KENTNL::MinimumPerl: 2.004000
@@ -926,6 +926,7 @@ x_BuiltWith:
     Dist::Zilla::Plugin::Manifest: 5.006
     Dist::Zilla::Plugin::ManifestSkip: 5.006
     Dist::Zilla::Plugin::MetaConfig: 5.006
+    Dist::Zilla::Plugin::MetaData::BuiltWith: 0.04000001
     Dist::Zilla::Plugin::MetaJSON: 5.006
     Dist::Zilla::Plugin::MetaProvides::Package: 1.15000000
     Dist::Zilla::Plugin::MetaTests: 5.006
@@ -1040,7 +1041,7 @@ x_Dist_Zilla:
               - '-i'
             uname_call: uname
       name: '@Author::KENTNL/MetaData::BuiltWith'
-      version: ~
+      version: 0.04000001
     -
       class: Dist::Zilla::Plugin::Git::GatherDir
       name: '@Author::KENTNL/Git::GatherDir'
@@ -1367,7 +1368,7 @@ x_Dist_Zilla:
         Dist::Zilla::Plugin::MetaData::BuiltWith::All:
           show_failures: 0
       name: MetaData::BuiltWith::All
-      version: ~
+      version: 0.04000001
     -
       class: Dist::Zilla::Plugin::Prereqs
       config:

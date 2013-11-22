@@ -303,6 +303,8 @@
          "Dist::Zilla::Plugin::Manifest" : "5.006",
          "Dist::Zilla::Plugin::ManifestSkip" : "5.006",
          "Dist::Zilla::Plugin::MetaConfig" : "5.006",
+         "Dist::Zilla::Plugin::MetaData::BuiltWith" : "0.04000001",
+         "Dist::Zilla::Plugin::MetaData::BuiltWith::All" : "0.04000001",
          "Dist::Zilla::Plugin::MetaJSON" : "5.006",
          "Dist::Zilla::Plugin::MetaProvides" : "1.15000100",
          "Dist::Zilla::Plugin::MetaProvides::Package" : "1.15000000",
@@ -993,9 +995,6 @@
          "warnings" : "1.20",
          "warnings::register" : "1.02"
       },
-      "failures" : {
-         "Dist::Zilla::Plugin::MetaData::BuiltWith" : "Module::MetaData could not parse a version from /home/kent/perl/Dist-Zilla-Plugin-MetaData-BuiltWith/lib/Dist/Zilla/Plugin/MetaData/BuiltWith.pm"
-      },
       "modules" : {
          "Class::Load" : "0.20",
          "Dist::Zilla::Plugin::Author::KENTNL::MinimumPerl" : "2.004000",
@@ -1015,6 +1014,7 @@
          "Dist::Zilla::Plugin::Manifest" : "5.006",
          "Dist::Zilla::Plugin::ManifestSkip" : "5.006",
          "Dist::Zilla::Plugin::MetaConfig" : "5.006",
+         "Dist::Zilla::Plugin::MetaData::BuiltWith" : "0.04000001",
          "Dist::Zilla::Plugin::MetaJSON" : "5.006",
          "Dist::Zilla::Plugin::MetaProvides::Package" : "1.15000000",
          "Dist::Zilla::Plugin::MetaTests" : "5.006",
@@ -1149,7 +1149,7 @@
                }
             },
             "name" : "@Author::KENTNL/MetaData::BuiltWith",
-            "version" : null
+            "version" : "0.04000001"
          },
          {
             "class" : "Dist::Zilla::Plugin::Git::GatherDir",
@@ -1563,7 +1563,7 @@
                }
             },
             "name" : "MetaData::BuiltWith::All",
-            "version" : null
+            "version" : "0.04000001"
          },
          {
             "class" : "Dist::Zilla::Plugin::Prereqs",
