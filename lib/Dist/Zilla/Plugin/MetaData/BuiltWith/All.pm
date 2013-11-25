@@ -6,7 +6,7 @@ BEGIN {
   $Dist::Zilla::Plugin::MetaData::BuiltWith::All::AUTHORITY = 'cpan:KENTNL';
 }
 {
-  $Dist::Zilla::Plugin::MetaData::BuiltWith::All::VERSION = '0.04000002'; # TRIAL
+  $Dist::Zilla::Plugin::MetaData::BuiltWith::All::VERSION = '0.04000002';
 }
 
 # ABSTRACT: Go overkill and report everything in all name-spaces.
