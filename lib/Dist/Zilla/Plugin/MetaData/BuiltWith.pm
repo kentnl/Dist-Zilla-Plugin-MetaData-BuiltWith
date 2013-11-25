@@ -6,7 +6,7 @@ BEGIN {
   $Dist::Zilla::Plugin::MetaData::BuiltWith::AUTHORITY = 'cpan:KENTNL';
 }
 {
-  $Dist::Zilla::Plugin::MetaData::BuiltWith::VERSION = '0.04000002';
+  $Dist::Zilla::Plugin::MetaData::BuiltWith::VERSION = '0.04000002'; # TRIAL
 }
 
 # ABSTRACT: Report what versions of things your distribution was built against
@@ -187,8 +187,8 @@ sub _detect_installed {
   my ( $self, $module ) = @_;
   my $success = undef;
   if ( not defined $module ) {
-     require Carp;
-     Carp::croak('Cannot determine a version if module=undef');
+    require Carp;
+    Carp::croak('Cannot determine a version if module=undef');
   }
   if ( $module eq 'perl' ) {
     return [ undef, undef ];
