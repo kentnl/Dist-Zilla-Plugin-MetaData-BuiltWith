@@ -265,6 +265,10 @@ sub _get_prereq_modnames {
 sub _detect_installed {
   my ( $self, $module ) = @_;
   my $success = undef;
+  if ( not defined $module ) {
+    require Carp;
+    Carp::croak('Cannot determine a version if module=undef');
+  }
   if ( $module eq 'perl' ) {
     return [ undef, undef ];
   }
@@ -274,8 +278,7 @@ sub _detect_installed {
   if ( not defined $d ) {
     return [ undef, 'failed to create a Module::Data wrapper' ];
   }
-
-  if ( not -e -f $d->path ) {
+  if ( not defined $d->path or not -e -f $d->path ) {
     return [ undef, 'module was not found in INC' ];
   }
 
