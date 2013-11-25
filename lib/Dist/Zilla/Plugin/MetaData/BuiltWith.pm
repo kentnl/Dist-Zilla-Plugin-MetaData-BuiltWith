@@ -6,7 +6,7 @@ BEGIN {
   $Dist::Zilla::Plugin::MetaData::BuiltWith::AUTHORITY = 'cpan:KENTNL';
 }
 {
-  $Dist::Zilla::Plugin::MetaData::BuiltWith::VERSION = '0.04000001';
+  $Dist::Zilla::Plugin::MetaData::BuiltWith::VERSION = '0.04000002';
 }
 
 # ABSTRACT: Report what versions of things your distribution was built against
@@ -186,6 +186,10 @@ sub _get_prereq_modnames {
 sub _detect_installed {
   my ( $self, $module ) = @_;
   my $success = undef;
+  if ( not defined $module ) {
+    require Carp;
+    Carp::croak('Cannot determine a version if module=undef');
+  }
   if ( $module eq 'perl' ) {
     return [ undef, undef ];
   }
@@ -195,8 +199,7 @@ sub _detect_installed {
   if ( not defined $d ) {
     return [ undef, 'failed to create a Module::Data wrapper' ];
   }
-
-  if ( not -e -f $d->path ) {
+  if ( not defined $d->path or not -e -f $d->path ) {
     return [ undef, 'module was not found in INC' ];
   }
 
@@ -274,7 +277,7 @@ Dist::Zilla::Plugin::MetaData::BuiltWith - Report what versions of things your d
 
 =head1 VERSION
 
-version 0.04000001
+version 0.04000002
 
 =head1 SYNOPSIS
 

@@ -1,5 +1,14 @@
 ﻿Revision history for Dist-Zilla-Plugin-MetaData-BuiltWith
 
+0.04000002 2013-11-25T08:35:49Z
+ [00 Bugfix]
+ - Don't try to test if it was a file or not if its undefined.
+
+ [Dependencies::Stats]
+ - Dependencies changed, see Changes.deps{,.all,.dev} for details
+ - develop: ↑1
+ - runtime: +1
+
 0.04000001 2013-11-22T04:23:48Z
  [00 Maint]
  - Changes retroactively cleaned. Next time, you will be forced to wear a
@@ -207,6 +216,10 @@
 
  [Dependencies::Added / runtime requires]
  - namespace::autoclean
+
+ [Dependencies::Stats]
+ - Dependencies changed, see Changes.deps{,.all,.dev} for details
+ - runtime: +1
 
 0.01000022 2010-06-11T11:48:14Z
  - First version.

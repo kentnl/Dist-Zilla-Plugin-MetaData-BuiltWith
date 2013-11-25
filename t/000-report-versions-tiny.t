@@ -48,6 +48,7 @@ sub pmver {
     return sprintf('%-45s => %-10s%-15s%s', $module, $pmver, $wanted, "\n");
 }
 
+eval { $v .= pmver('Carp','any version') };
 eval { $v .= pmver('Class::Load','any version') };
 eval { $v .= pmver('Dist::Zilla::Role::ConfigDumper','4.101540') };
 eval { $v .= pmver('Dist::Zilla::Role::MetaProvider','any version') };

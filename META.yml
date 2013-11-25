@@ -17,11 +17,12 @@ name: Dist-Zilla-Plugin-MetaData-BuiltWith
 provides:
   Dist::Zilla::Plugin::MetaData::BuiltWith:
     file: lib/Dist/Zilla/Plugin/MetaData/BuiltWith.pm
-    version: 0.04000001
+    version: 0.04000002
   Dist::Zilla::Plugin::MetaData::BuiltWith::All:
     file: lib/Dist/Zilla/Plugin/MetaData/BuiltWith/All.pm
-    version: 0.04000001
+    version: 0.04000002
 requires:
+  Carp: 0
   Class::Load: 0
   Dist::Zilla::Role::ConfigDumper: 4.101540
   Dist::Zilla::Role::MetaProvider: 0
@@ -38,7 +39,7 @@ resources:
   bugtracker: https://github.com/kentfredric/Dist-Zilla-Plugin-MetaData-BuiltWith/issues
   homepage: https://github.com/kentfredric/Dist-Zilla-Plugin-MetaData-BuiltWith
   repository: https://github.com/kentfredric/Dist-Zilla-Plugin-MetaData-BuiltWith.git
-version: 0.04000001
+version: 0.04000002
 x_BuiltWith:
   allmodules:
     App::Cmd: 0.322
@@ -49,19 +50,17 @@ x_BuiltWith:
     App::Cmd::Command::version: 0.322
     App::Cmd::Plugin: 0.322
     App::Cmd::Setup: 0.322
-    App::PodPreview: 0.002
     App::Prove: 3.30
     Archive::Tar: 1.96
     Archive::Tar::Constant: 1.96
-    Attribute::Handlers: 0.95
     AutoLoader: 5.74
-    B: 1.46
-    B::Deparse: 1.23
+    B: 1.47
+    B::Deparse: 1.24
     B::Hooks::EndOfScope: 0.12
     B::Hooks::EndOfScope::PP: 0.12
     B::Hooks::EndOfScope::XS: 0.12
+    B::Hooks::OP::Check: 0.19
     B::Keywords: 1.13
-    Browser::Open: 0.04
     CPAN: 2.03
     CPAN::Meta: 2.132830
     CPAN::Meta::Converter: 2.132830
@@ -103,10 +102,8 @@ x_BuiltWith:
     Class::Singleton: 1.4
     Class::Struct: 0.65
     Class::Tiny: 0.012
-    Class::XSAccessor: 1.18
-    Class::XSAccessor::Array: 1.18
     Clone: 0.35
-    Config: 5.019005
+    Config: 5.019006
     Config::INI: 0.021
     Config::INI::Reader: 0.021
     Config::INI::Writer: 0.021
@@ -122,11 +119,10 @@ x_BuiltWith:
     Config::MVP::Reader::INI: 2.101462
     Config::MVP::Section: 2.200006
     Config::MVP::Sequence: 2.200006
-    Config::Tiny: 2.19
     Cwd: 3.45
     DB: 1.07
     Data::Dump: 1.22
-    Data::Dumper: 2.145
+    Data::Dumper: 2.149
     Data::OptList: 0.108
     Data::Section: 0.200003
     Data::Visitor: 0.30
@@ -147,9 +143,11 @@ x_BuiltWith:
     Devel::GlobalDestruction: 0.12
     Devel::InnerPackage: 0.4
     Devel::LexAlias: 0.05
-    Devel::PartialDump: 0.15
+    Devel::PartialDump: 0.16
     Devel::StackTrace: 1.30
     Devel::StackTrace::Frame: 1.30
+    Devel::TypeTiny::Perl56Compat: 0.032
+    Devel::TypeTiny::Perl58Compat: 0.032
     Digest: 1.17
     Digest::MD5: 2.53
     Digest::SHA: 5.85
@@ -171,7 +169,6 @@ x_BuiltWith:
     Dist::Zilla::App::Command::new: 5.006
     Dist::Zilla::App::Command::nop: 5.006
     Dist::Zilla::App::Command::perltidy: 0.13
-    Dist::Zilla::App::Command::podpreview: 0.004
     Dist::Zilla::App::Command::release: 5.006
     Dist::Zilla::App::Command::run: 5.006
     Dist::Zilla::App::Command::setup: 5.006
@@ -194,7 +191,7 @@ x_BuiltWith:
     Dist::Zilla::MVP::Section: 5.006
     Dist::Zilla::MetaProvides::ProvideRecord: 1.15000100
     Dist::Zilla::MetaProvides::Types: 1.15000100
-    Dist::Zilla::Plugin::Author::KENTNL::MinimumPerl: 2.004000
+    Dist::Zilla::Plugin::Author::KENTNL::MinimumPerl: 2.004001
     Dist::Zilla::Plugin::Authority: 1.006
     Dist::Zilla::Plugin::AutoPrereqs: 5.006
     Dist::Zilla::Plugin::Bootstrap::lib: 0.04000002
@@ -203,24 +200,24 @@ x_BuiltWith:
     Dist::Zilla::Plugin::EOLTests: 0.02
     Dist::Zilla::Plugin::FinderCode: 5.006
     Dist::Zilla::Plugin::GatherDir: 5.006
-    Dist::Zilla::Plugin::Git: 2.017
-    Dist::Zilla::Plugin::Git::Check: 2.017
-    Dist::Zilla::Plugin::Git::Commit: 2.017
-    Dist::Zilla::Plugin::Git::CommitBuild: 2.017
-    Dist::Zilla::Plugin::Git::GatherDir: 2.017
-    Dist::Zilla::Plugin::Git::NextVersion: 2.017
-    Dist::Zilla::Plugin::Git::Tag: 2.017
+    Dist::Zilla::Plugin::Git: 2.019
+    Dist::Zilla::Plugin::Git::Check: 2.019
+    Dist::Zilla::Plugin::Git::Commit: 2.019
+    Dist::Zilla::Plugin::Git::CommitBuild: 2.019
+    Dist::Zilla::Plugin::Git::GatherDir: 2.019
+    Dist::Zilla::Plugin::Git::NextVersion: 2.019
+    Dist::Zilla::Plugin::Git::Tag: 2.019
     Dist::Zilla::Plugin::GithubMeta: 0.42
     Dist::Zilla::Plugin::InlineFiles: 5.006
     Dist::Zilla::Plugin::License: 5.006
     Dist::Zilla::Plugin::Manifest: 5.006
     Dist::Zilla::Plugin::ManifestSkip: 5.006
     Dist::Zilla::Plugin::MetaConfig: 5.006
-    Dist::Zilla::Plugin::MetaData::BuiltWith: 0.04000001
-    Dist::Zilla::Plugin::MetaData::BuiltWith::All: 0.04000001
+    Dist::Zilla::Plugin::MetaData::BuiltWith: 0.04000002
+    Dist::Zilla::Plugin::MetaData::BuiltWith::All: 0.04000002
     Dist::Zilla::Plugin::MetaJSON: 5.006
     Dist::Zilla::Plugin::MetaProvides: 1.15000100
-    Dist::Zilla::Plugin::MetaProvides::Package: 1.15000000
+    Dist::Zilla::Plugin::MetaProvides::Package: 1.15000001
     Dist::Zilla::Plugin::MetaTests: 5.006
     Dist::Zilla::Plugin::MetaYAML: 5.006
     Dist::Zilla::Plugin::MinimumPerl: 1.003
@@ -231,13 +228,13 @@ x_BuiltWith:
     Dist::Zilla::Plugin::PodSyntaxTests: 5.006
     Dist::Zilla::Plugin::PodWeaver: 4.002
     Dist::Zilla::Plugin::Prereqs: 5.006
-    Dist::Zilla::Plugin::Prereqs::MatchInstalled: 0.1.4
+    Dist::Zilla::Plugin::Prereqs::MatchInstalled: 0.1.5
     Dist::Zilla::Plugin::PruneCruft: 5.006
     Dist::Zilla::Plugin::ReadmeAnyFromPod: 0.133060
     Dist::Zilla::Plugin::ReadmeFromPod: 0.21
     Dist::Zilla::Plugin::ReportVersions::Tiny: 1.10
     Dist::Zilla::Plugin::Test::CPAN::Changes: 0.008
-    Dist::Zilla::Plugin::Test::Compile: 2.037
+    Dist::Zilla::Plugin::Test::Compile: 2.018
     Dist::Zilla::Plugin::Test::Compile::PerFile: 0.001001
     Dist::Zilla::Plugin::Test::Kwalitee: 2.07
     Dist::Zilla::Plugin::Test::MinimumVersion: 2.000005
@@ -245,7 +242,7 @@ x_BuiltWith:
     Dist::Zilla::Plugin::TestRelease: 5.006
     Dist::Zilla::Plugin::Twitter: 0.023
     Dist::Zilla::Plugin::UploadToCPAN: 5.006
-    Dist::Zilla::PluginBundle::Author::KENTNL: 2.004000
+    Dist::Zilla::PluginBundle::Author::KENTNL: 2.004001
     Dist::Zilla::PluginBundle::Author::KENTNL::Lite: 1.7.2
     Dist::Zilla::PluginBundle::Filter: 5.006
     Dist::Zilla::Prereqs: 5.006
@@ -266,8 +263,9 @@ x_BuiltWith:
     Dist::Zilla::Role::FileInjector: 5.006
     Dist::Zilla::Role::FileMunger: 5.006
     Dist::Zilla::Role::FilePruner: 5.006
-    Dist::Zilla::Role::Git::DirtyFiles: 2.017
-    Dist::Zilla::Role::Git::Repo: 2.017
+    Dist::Zilla::Role::Git::DirtyFiles: 2.019
+    Dist::Zilla::Role::Git::Repo: 2.019
+    Dist::Zilla::Role::GitConfig: 0.91
     Dist::Zilla::Role::InstallTool: 5.006
     Dist::Zilla::Role::MetaProvider: 5.006
     Dist::Zilla::Role::MetaProvider::Provider: 1.15000100
@@ -292,7 +290,7 @@ x_BuiltWith:
     Dist::Zilla::Util::EmulatePhase::PrereqCollector: 0.01025803
     Dist::Zilla::Util::RoleDB: 0.001000
     Dist::Zilla::lsplugins::Module: 0.001000
-    DynaLoader: 1.20
+    DynaLoader: 1.21
     Encode: 2.55
     Encode::Alias: 2.18
     Encode::Config: 2.05
@@ -300,12 +298,17 @@ x_BuiltWith:
     Encode::Locale: 1.03
     Encode::MIME::Name: 1.01
     English: 1.08
-    Errno: 1.20
+    Errno: 1.20_01
+    Error::TypeTiny: 0.032
+    Error::TypeTiny::Assertion: 0.032
+    Error::TypeTiny::Compilation: 0.032
     Eval::Closure: 0.11
+    Eval::TypeTiny: 0.032
     Exception::Class: 1.37
     Exception::Class::Base: 1.37
     Exporter: 5.70
     Exporter::Heavy: 5.70
+    Exporter::Tiny: 0.030
     ExtUtils::Constant: 0.23
     ExtUtils::Constant::ProxySubs: 0.08
     ExtUtils::Liblist: 6.82
@@ -321,9 +324,9 @@ x_BuiltWith:
     Fcntl: 1.11
     File::Basename: 2.85
     File::Copy: 2.28
-    File::Find: 1.25
+    File::Find: 1.26
     File::Find::Rule: 0.33
-    File::Glob: 1.22
+    File::Glob: 1.23
     File::HomeDir: 1.00
     File::HomeDir::Driver: 1.00
     File::HomeDir::FreeDesktop: 1.00
@@ -363,10 +366,9 @@ x_BuiltWith:
     HTTP::Request::Common: 6.04
     HTTP::Response: 6.04
     HTTP::Status: 6.03
-    Hash::Merge: 0.200
     Hash::Merge::Simple: 0.051
     I18N::Langinfo: 0.11
-    IO: 1.29
+    IO: 1.30
     IO::Compress::Bzip2: 2.063
     IO::Compress::Deflate: 2.063
     IO::Compress::Gzip: 2.063
@@ -378,7 +380,7 @@ x_BuiltWith:
     IO::Poll: 0.09
     IO::Scalar: 2.110
     IO::Seekable: 1.10
-    IO::Select: 1.21
+    IO::Select: 1.22
     IO::Socket: 1.37
     IO::String: 1.08
     IO::Uncompress::Bunzip2: 2.063
@@ -389,6 +391,7 @@ x_BuiltWith:
     IPC::Open3: 1.16
     IPC::Run: 0.92
     IPC::System::Simple: 1.25
+    Import::Into: 1.001001
     JSON: 2.90
     JSON::PP: 2.27203
     JSON::XS: 3.01
@@ -397,11 +400,12 @@ x_BuiltWith:
     LWP::MediaTypes: 6.02
     LWP::Protocol: 6.00
     LWP::UserAgent: 6.05
+    Lexical::SealRequireHints: 0.007
     List::AllUtils: 0.07
     List::MoreUtils: 0.33
     List::Util: 1.35
     List::UtilsBy: 0.09
-    Locale::Maketext: 1.23
+    Locale::Maketext: 1.25
     Locale::Maketext::Simple: 0.21
     Log::Dispatch: 2.41
     Log::Dispatch::Array: 1.002
@@ -415,10 +419,15 @@ x_BuiltWith:
     MIME::Base64: 3.14
     MIME::QuotedPrint: 3.13
     MRO::Compat: 0.12
+    Math::BigFloat: 1.9991
+    Math::BigInt: 1.9993
+    Math::BigInt::Calc: 1.998
+    Math::BigInt::CalcEmu: 1.9991
+    Math::BigInt::Trace: 0.36
     Mixin::Linewise: 0.102
     Mixin::Linewise::Readers: 0.102
     Module::CoreList: 3.01
-    Module::Data: 0.007
+    Module::Data: 0.012
     Module::Implementation: 0.07
     Module::Load: 0.24
     Module::Load::Conditional: 0.58
@@ -539,7 +548,7 @@ x_BuiltWith:
     Net::Twitter::Core: 4.01000
     Net::Twitter::Error: 4.01000
     Number::Compare: 0.03
-    POSIX: 1.35
+    POSIX: 1.36
     PPI: 1.215
     PPI::Document: 1.215
     PPI::Document::File: 1.215
@@ -701,8 +710,7 @@ x_BuiltWith:
     Path::Class::File: 0.32
     Path::Iterator::Rule: 1.006
     Path::ScanINC: 0.011
-    Path::Tiny: 0.044
-    Perl6::Export::Attrs: 0.0.3
+    Path::Tiny: 0.046
     Perl::Critic: 1.121
     Perl::Critic::Exception: 1.121
     Perl::Critic::Exception::Fatal: 1.121
@@ -754,7 +762,7 @@ x_BuiltWith:
     Pod::Escapes: 1.04
     Pod::Eventual: 0.094001
     Pod::Eventual::Simple: 0.094001
-    Pod::Markdown: 1.401
+    Pod::Markdown: 1.500
     Pod::Simple: 3.28
     Pod::Simple::BlackBox: 3.28
     Pod::Simple::HTML: 3.28
@@ -774,10 +782,11 @@ x_BuiltWith:
     Pod::Weaver::Config: 4.004
     Pod::Weaver::Config::Assembler: 4.004
     Pod::Weaver::Config::Finder: 4.004
-    Pod::Weaver::Plugin::Encoding: 0.02
     Pod::Weaver::Plugin::EnsurePod5: 4.004
     Pod::Weaver::Plugin::H1Nester: 4.004
+    Pod::Weaver::Plugin::SingleEncoding: 4.004
     Pod::Weaver::PluginBundle::CorePrep: 4.004
+    Pod::Weaver::Role::Dialect: 4.004
     Pod::Weaver::Role::Finalizer: 4.004
     Pod::Weaver::Role::Plugin: 4.004
     Pod::Weaver::Role::Preparer: 4.004
@@ -811,6 +820,7 @@ x_BuiltWith:
     Specio::Library::Builtins: 0.08
     StackTrace::Auto: 0.200009
     Storable: 2.47
+    String::Errf: 0.006
     String::Flogger: 1.101244
     String::Formatter: 0.102084
     String::RewritePrefix: 0.007
@@ -825,12 +835,12 @@ x_BuiltWith:
     Sub::Name: 0.05
     Sub::Quote: 1.003001
     Symbol: 1.07
-    Syntax::Keyword::Junction: 0.003006
-    Syntax::Keyword::Junction::All: 0.003006
-    Syntax::Keyword::Junction::Any: 0.003006
-    Syntax::Keyword::Junction::Base: 0.003006
-    Syntax::Keyword::Junction::None: 0.003006
-    Syntax::Keyword::Junction::One: 0.003006
+    Syntax::Keyword::Junction: 0.003007
+    Syntax::Keyword::Junction::All: 0.003007
+    Syntax::Keyword::Junction::Any: 0.003007
+    Syntax::Keyword::Junction::Base: 0.003007
+    Syntax::Keyword::Junction::None: 0.003007
+    Syntax::Keyword::Junction::One: 0.003007
     Term::Cap: 1.15
     Term::Encoding: 0.02
     Term::ReadKey: 2.31
@@ -852,9 +862,24 @@ x_BuiltWith:
     Tie::ToObject: 0.03
     Time::HiRes: 1.9726
     Time::Local: 1.2300
+    Time::Piece: 1.23
+    Time::Seconds: 1.23
     Time::Zone: 2.24
     Try::Tiny: 0.18
+    Type::Coercion: 0.032
+    Type::Coercion::FromMoose: 0.032
+    Type::Library: 0.032
+    Type::Tiny: 0.032
+    Type::Tiny::Class: 0.032
+    Type::Tiny::Duck: 0.032
+    Type::Tiny::Enum: 0.032
+    Type::Tiny::Intersection: 0.032
+    Type::Tiny::Role: 0.032
+    Type::Tiny::Union: 0.032
+    Type::Utils: 0.032
     Types::Serialiser: 0.03
+    Types::Standard: 0.032
+    Types::TypeTiny: 0.032
     UNIVERSAL: 1.11
     URI: 1.60
     URI::Escape: 3.31
@@ -878,28 +903,36 @@ x_BuiltWith:
     autodie::exception: 2.22
     autodie::exception::system: 2.22
     autodie::hints: 2.22
+    autovivification: 0.12
     base: 2.19
+    bigint: 0.36
     bytes: 1.04
     charnames: 1.39
     common::sense: 3.72
-    constant: 1.27
+    constant: 1.29
     deprecate: 0.03
-    fields: 2.16
+    encoding: 2.12
+    feature: 1.34
+    fields: 2.17
     if: 0.0603
+    indirect: 0.31
     integer: 1.01
     lib: 0.63
     metaclass: 2.1106
     mro: 1.14
+    multidimensional: 0.011
     namespace::autoclean: 0.14
     namespace::clean: 0.24
+    open: 1.10
     overload: 1.22
     overloading: 0.02
     parent: 0.228
     re: 0.26
+    sanity: 1.02
     strict: 1.08
     strictures: 1.005001
     subs: 1.02
-    threads: 1.89
+    threads: 1.90
     utf8: 1.13
     vars: 1.03
     version: 0.9904
@@ -908,27 +941,28 @@ x_BuiltWith:
     warnings: 1.20
     warnings::register: 1.02
   modules:
+    Carp: 1.32
     Class::Load: 0.20
-    Dist::Zilla::Plugin::Author::KENTNL::MinimumPerl: 2.004000
+    Dist::Zilla::Plugin::Author::KENTNL::MinimumPerl: 2.004001
     Dist::Zilla::Plugin::Authority: 1.006
     Dist::Zilla::Plugin::AutoPrereqs: 5.006
     Dist::Zilla::Plugin::CheckExtraTests: 0.016
     Dist::Zilla::Plugin::ConfirmRelease: 5.006
     Dist::Zilla::Plugin::EOLTests: 0.02
-    Dist::Zilla::Plugin::Git::Check: 2.017
-    Dist::Zilla::Plugin::Git::Commit: 2.017
-    Dist::Zilla::Plugin::Git::CommitBuild: 2.017
-    Dist::Zilla::Plugin::Git::GatherDir: 2.017
-    Dist::Zilla::Plugin::Git::NextVersion: 2.017
-    Dist::Zilla::Plugin::Git::Tag: 2.017
+    Dist::Zilla::Plugin::Git::Check: 2.019
+    Dist::Zilla::Plugin::Git::Commit: 2.019
+    Dist::Zilla::Plugin::Git::CommitBuild: 2.019
+    Dist::Zilla::Plugin::Git::GatherDir: 2.019
+    Dist::Zilla::Plugin::Git::NextVersion: 2.019
+    Dist::Zilla::Plugin::Git::Tag: 2.019
     Dist::Zilla::Plugin::GithubMeta: 0.42
     Dist::Zilla::Plugin::License: 5.006
     Dist::Zilla::Plugin::Manifest: 5.006
     Dist::Zilla::Plugin::ManifestSkip: 5.006
     Dist::Zilla::Plugin::MetaConfig: 5.006
-    Dist::Zilla::Plugin::MetaData::BuiltWith: 0.04000001
+    Dist::Zilla::Plugin::MetaData::BuiltWith: 0.04000002
     Dist::Zilla::Plugin::MetaJSON: 5.006
-    Dist::Zilla::Plugin::MetaProvides::Package: 1.15000000
+    Dist::Zilla::Plugin::MetaProvides::Package: 1.15000001
     Dist::Zilla::Plugin::MetaTests: 5.006
     Dist::Zilla::Plugin::MetaYAML: 5.006
     Dist::Zilla::Plugin::ModuleBuild: 5.006
@@ -938,7 +972,7 @@ x_BuiltWith:
     Dist::Zilla::Plugin::PodSyntaxTests: 5.006
     Dist::Zilla::Plugin::PodWeaver: 4.002
     Dist::Zilla::Plugin::Prereqs: 5.006
-    Dist::Zilla::Plugin::Prereqs::MatchInstalled: 0.1.4
+    Dist::Zilla::Plugin::Prereqs::MatchInstalled: 0.1.5
     Dist::Zilla::Plugin::PruneCruft: 5.006
     Dist::Zilla::Plugin::ReadmeAnyFromPod: 0.133060
     Dist::Zilla::Plugin::ReadmeFromPod: 0.21
@@ -951,13 +985,13 @@ x_BuiltWith:
     Dist::Zilla::Plugin::TestRelease: 5.006
     Dist::Zilla::Plugin::Twitter: 0.023
     Dist::Zilla::Plugin::UploadToCPAN: 5.006
-    Dist::Zilla::PluginBundle::Author::KENTNL: 2.004000
+    Dist::Zilla::PluginBundle::Author::KENTNL: 2.004001
     Dist::Zilla::PluginBundle::Author::KENTNL::Lite: 1.7.2
     Dist::Zilla::Role::ConfigDumper: 5.006
     Dist::Zilla::Role::MetaProvider: 5.006
     Dist::Zilla::Util::EmulatePhase: 0.01025803
     Module::Build: 0.4202
-    Module::Data: 0.007
+    Module::Data: 0.012
     Moose: 2.1106
     MooseX::Types::Moose: 0.38
     Pod::Coverage::TrustPod: 0.100003
@@ -973,12 +1007,12 @@ x_BuiltWith:
     version: 0.9904
     warnings: 1.20
   perl:
-    original: v5.19.5
+    original: v5.19.6
     qv: 1
     version:
       - 5
       - 19
-      - 5
+      - 6
   perl-config:
     gccversion: 4.7.3
     myarchname: x86_64-linux
@@ -987,14 +1021,14 @@ x_BuiltWith:
   uname: 'Linux 3.12.0-gentoo x86_64 GenuineIntel GNU/Linux'
 x_Dist_Zilla:
   perl:
-    version: 5.019005
+    version: 5.019006
   plugins:
     -
       class: Dist::Zilla::Plugin::Bootstrap::lib
       config:
         Dist::Zilla::Role::Bootstrap:
           distname: Dist-Zilla-Plugin-MetaData-BuiltWith
-          fallback: 1
+          fallback: 0
           try_built: 1
           try_built_method: mtime
       name: Bootstrap::lib
@@ -1002,7 +1036,7 @@ x_Dist_Zilla:
     -
       class: Dist::Zilla::Plugin::Git::NextVersion
       name: '@Author::KENTNL/Git::NextVersion'
-      version: 2.017
+      version: 2.019
     -
       class: Dist::Zilla::Plugin::MetaConfig
       name: '@Author::KENTNL/MetaConfig'
@@ -1024,7 +1058,7 @@ x_Dist_Zilla:
           inherit_version: 1
           meta_noindex: 1
       name: '@Author::KENTNL/MetaProvides::Package'
-      version: 1.15000000
+      version: 1.15000001
     -
       class: Dist::Zilla::Plugin::MetaData::BuiltWith
       config:
@@ -1041,11 +1075,11 @@ x_Dist_Zilla:
               - '-i'
             uname_call: uname
       name: '@Author::KENTNL/MetaData::BuiltWith'
-      version: 0.04000001
+      version: 0.04000002
     -
       class: Dist::Zilla::Plugin::Git::GatherDir
       name: '@Author::KENTNL/Git::GatherDir'
-      version: 2.017
+      version: 2.019
     -
       class: Dist::Zilla::Plugin::License
       name: '@Author::KENTNL/License'
@@ -1141,9 +1175,9 @@ x_Dist_Zilla:
               name: '@CorePrep/H1Nester'
               version: 4.004
             -
-              class: Pod::Weaver::Plugin::Encoding
-              name: '-Encoding'
-              version: 0.02
+              class: Pod::Weaver::Plugin::SingleEncoding
+              name: '-SingleEncoding'
+              version: 4.004
             -
               class: Pod::Weaver::Section::Name
               name: Name
@@ -1245,7 +1279,7 @@ x_Dist_Zilla:
     -
       class: Dist::Zilla::Plugin::Author::KENTNL::MinimumPerl
       name: '@Author::KENTNL/Author::KENTNL::MinimumPerl'
-      version: 2.004000
+      version: 2.004001
     -
       class: Dist::Zilla::Plugin::Authority
       name: '@Author::KENTNL/Authority'
@@ -1281,23 +1315,23 @@ x_Dist_Zilla:
     -
       class: Dist::Zilla::Plugin::Git::Check
       name: '@Author::KENTNL/Git::Check'
-      version: 2.017
+      version: 2.019
     -
       class: Dist::Zilla::Plugin::Git::Tag
       name: '@Author::KENTNL/Git::Tag/tag_master'
-      version: 2.017
+      version: 2.019
     -
       class: Dist::Zilla::Plugin::Git::Commit
       name: '@Author::KENTNL/Git::Commit'
-      version: 2.017
+      version: 2.019
     -
       class: Dist::Zilla::Plugin::Git::CommitBuild
       name: '@Author::KENTNL/Git::CommitBuild'
-      version: 2.017
+      version: 2.019
     -
       class: Dist::Zilla::Plugin::Git::Tag
       name: '@Author::KENTNL/Git::Tag/tag_release'
-      version: 2.017
+      version: 2.019
     -
       class: Dist::Zilla::Plugin::UploadToCPAN
       name: '@Author::KENTNL/UploadToCPAN'
@@ -1341,7 +1375,7 @@ x_Dist_Zilla:
             - Test::More
             - Dist::Zilla::PluginBundle::Author::KENTNL
       name: '@Author::KENTNL/Prereqs::MatchInstalled'
-      version: 0.1.4
+      version: 0.1.5
     -
       class: Dist::Zilla::Plugin::Prereqs
       config:
@@ -1368,7 +1402,7 @@ x_Dist_Zilla:
         Dist::Zilla::Plugin::MetaData::BuiltWith::All:
           show_failures: 0
       name: MetaData::BuiltWith::All
-      version: 0.04000001
+      version: 0.04000002
     -
       class: Dist::Zilla::Plugin::Prereqs
       config:
