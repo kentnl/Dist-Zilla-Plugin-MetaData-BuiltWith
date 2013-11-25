@@ -17,12 +17,13 @@ my %module_build_args = (
     "Kent Fredric <kentnl\@cpan.org>"
   ],
   "dist_name" => "Dist-Zilla-Plugin-MetaData-BuiltWith",
-  "dist_version" => "0.04000001",
+  "dist_version" => "0.04000002",
   "license" => "perl",
   "module_name" => "Dist::Zilla::Plugin::MetaData::BuiltWith",
   "recommends" => {},
   "recursive_test_files" => 1,
   "requires" => {
+    "Carp" => 0,
     "Class::Load" => 0,
     "Dist::Zilla::Role::ConfigDumper" => "4.101540",
     "Dist::Zilla::Role::MetaProvider" => 0,
