@@ -2,14 +2,49 @@ use strict;
 use warnings;
 
 package Dist::Zilla::Plugin::MetaData::BuiltWith;
-BEGIN {
-  $Dist::Zilla::Plugin::MetaData::BuiltWith::AUTHORITY = 'cpan:KENTNL';
-}
-{
-  $Dist::Zilla::Plugin::MetaData::BuiltWith::VERSION = '0.04000002';
-}
-
+$Dist::Zilla::Plugin::MetaData::BuiltWith::VERSION = '1.000000';
 # ABSTRACT: Report what versions of things your distribution was built against
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 use Dist::Zilla::Util::EmulatePhase;
@@ -20,6 +55,11 @@ use Class::Load qw( load_optional_class );
 use MooseX::Types::Moose (qw( ArrayRef Bool Str ));
 use namespace::autoclean;
 with 'Dist::Zilla::Role::MetaProvider';
+
+
+
+
+
 
 
 sub mvp_multivalue_args { return qw( exclude include ) }
@@ -42,6 +82,45 @@ has _include => (
   handles  => { include => 'elements', },
 
 );
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 has show_config => ( is => 'ro', isa => 'Bool', default => 0 );
@@ -213,6 +292,14 @@ sub _detect_installed {
 }
 
 
+
+
+
+
+
+
+
+
 sub metadata {
   my ($self) = @_;
   $self->log_debug(q{Metadata called});
@@ -277,7 +364,7 @@ Dist::Zilla::Plugin::MetaData::BuiltWith - Report what versions of things your d
 
 =head1 VERSION
 
-version 0.04000002
+version 1.000000
 
 =head1 SYNOPSIS
 
@@ -375,7 +462,7 @@ Kent Fredric <kentnl@cpan.org>
 
 =head1 COPYRIGHT AND LICENSE
 
-This software is copyright (c) 2013 by Kent Fredric <kentnl@cpan.org>.
+This software is copyright (c) 2014 by Kent Fredric <kentnl@cpan.org>.
 
 This is free software; you can redistribute it and/or modify it under
 the same terms as the Perl 5 programming language system itself.

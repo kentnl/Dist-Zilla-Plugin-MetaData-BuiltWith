@@ -2,18 +2,95 @@ use strict;
 use warnings;
 
 package Dist::Zilla::Plugin::MetaData::BuiltWith::All;
-BEGIN {
-  $Dist::Zilla::Plugin::MetaData::BuiltWith::All::AUTHORITY = 'cpan:KENTNL';
-}
-{
-  $Dist::Zilla::Plugin::MetaData::BuiltWith::All::VERSION = '0.04000002';
-}
-
+$Dist::Zilla::Plugin::MetaData::BuiltWith::All::VERSION = '1.000000';
 # ABSTRACT: Go overkill and report everything in all name-spaces.
 
 use Moose;
 use namespace::autoclean;
 extends 'Dist::Zilla::Plugin::MetaData::BuiltWith';
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 has 'show_failures' => ( is => 'ro', isa => 'Bool', default => 0 );
@@ -31,6 +108,14 @@ sub _list_modules_in_memory {
   if ( $package eq 'main' or $package =~ /\Amain::/msx ) {
     return $package;
   }
+  # Anonymous Classes
+  if ( $package =~ /\A__ANON__/msx ) {
+    return ();
+  }
+  # Moose Parameterized Types
+  if ( $package =~ /[[]/msx ) {
+    return ();
+  }
   if ($package) {
     push @out, $package;
   }
@@ -41,11 +126,10 @@ sub _list_modules_in_memory {
   };
   my (@child_namespaces);
   for my $child ( keys %{$ns} ) {
-    if ( $child =~ /\A(.*)::$/msx ) {
-      my $child_pkg = $1;
-      $child_pkg = $package . q[::] . $child_pkg if $package;
-      push @child_namespaces, $child_pkg;
-    }
+    next unless $child =~ /\A(.*)::$/msx;
+    my $child_pkg = $1;
+    $child_pkg = $package . q[::] . $child_pkg if $package;
+    push @child_namespaces, $child_pkg;
   }
   for my $child (@child_namespaces) {
     push @out, $self->_list_modules_in_memory($child);
@@ -113,7 +197,7 @@ Dist::Zilla::Plugin::MetaData::BuiltWith::All - Go overkill and report everythin
 
 =head1 VERSION
 
-version 0.04000002
+version 1.000000
 
 =head1 SYNOPSIS
 
@@ -204,7 +288,7 @@ Kent Fredric <kentnl@cpan.org>
 
 =head1 COPYRIGHT AND LICENSE
 
-This software is copyright (c) 2013 by Kent Fredric <kentnl@cpan.org>.
+This software is copyright (c) 2014 by Kent Fredric <kentnl@cpan.org>.
 
 This is free software; you can redistribute it and/or modify it under
 the same terms as the Perl 5 programming language system itself.

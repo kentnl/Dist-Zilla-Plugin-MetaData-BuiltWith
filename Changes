@@ -1,5 +1,7 @@
 ﻿Revision history for Dist-Zilla-Plugin-MetaData-BuiltWith
 
+1.000000 2014-05-17T02:59:46Z
+
 0.04000002 2013-11-25T08:35:49Z
  [00 Bugfix]
  - Don't try to test if it was a file or not if its undefined.
