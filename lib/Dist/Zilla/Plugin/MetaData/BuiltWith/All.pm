@@ -108,14 +108,6 @@ sub _list_modules_in_memory {
   if ( $package eq 'main' or $package =~ /\Amain::/msx ) {
     return $package;
   }
-  # Anonymous Classes
-  if ( $package =~ /\A__ANON__/msx ) {
-    return ();
-  }
-  # Moose Parameterized Types
-  if ( $package =~ /[[]/msx ) {
-    return ();
-  }
   if ($package) {
     push @out, $package;
   }
@@ -144,6 +136,14 @@ sub _get_all {
 
   my $record_module = sub {
     my ($module) = @_;
+    if ( $module =~ /\A__ANON__/ ) {
+      $failures{$module} = "Skipped: Anonymous Class";
+      return;
+    }
+    if ( $module =~ /\[/ ) {
+      $failures{$module} = "Skipped: Parameterized Type";
+      return;
+    }
     my $result = $self->_detect_installed($module);
     if ( defined $result->[0] ) {
       $modtable{$module} = $result->[0];
