@@ -5,6 +5,8 @@ package Dist::Zilla::Plugin::MetaData::BuiltWith::All;
 
 # ABSTRACT: Go overkill and report everything in all name-spaces.
 
+# AUTHORITY
+
 use Moose;
 use namespace::autoclean;
 extends 'Dist::Zilla::Plugin::MetaData::BuiltWith';

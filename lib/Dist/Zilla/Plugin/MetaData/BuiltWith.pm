@@ -5,6 +5,8 @@ package Dist::Zilla::Plugin::MetaData::BuiltWith;
 
 # ABSTRACT: Report what versions of things your distribution was built against
 
+# AUTHORITY
+
 =head1 SYNOPSIS
 
   [MetaData::BuiltWith]
