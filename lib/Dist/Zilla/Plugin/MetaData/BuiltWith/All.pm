@@ -5,6 +5,8 @@ package Dist::Zilla::Plugin::MetaData::BuiltWith::All;
 $Dist::Zilla::Plugin::MetaData::BuiltWith::All::VERSION = '1.000000';
 # ABSTRACT: Go overkill and report everything in all name-spaces.
 
+our $AUTHORITY = 'cpan:KENTNL'; # AUTHORITY
+
 use Moose;
 use namespace::autoclean;
 extends 'Dist::Zilla::Plugin::MetaData::BuiltWith';
