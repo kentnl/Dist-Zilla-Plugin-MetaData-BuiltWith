@@ -1,4 +1,23 @@
-0.04000002
+1.000000
+ [Added / configure requires]
+ - ExtUtils::MakeMaker 6.30
+
+ [Added / test requires]
+ - ExtUtils::MakeMaker
+ - File::Spec::Functions
+ - List::Util
+ - version
+
+ [Changed / test requires]
+ - Test::More 1.001002 → 0.89
+
+ [Removed / build requires]
+ - Module::Build 0.4202
+
+ [Removed / configure requires]
+ - Module::Build 0.4202
+
+0.04000002 2013-11-25T08:35:49Z
  [Added / runtime requires]
  - Carp
 
