@@ -118,11 +118,10 @@ sub _list_modules_in_memory {
   };
   my (@child_namespaces);
   for my $child ( keys %{$ns} ) {
-    if ( $child =~ /\A(.*)::$/msx ) {
-      my $child_pkg = $1;
-      $child_pkg = $package . q[::] . $child_pkg if $package;
-      push @child_namespaces, $child_pkg;
-    }
+    next unless $child =~ /\A(.*)::$/msx;
+    my $child_pkg = $1;
+    $child_pkg = $package . q[::] . $child_pkg if $package;
+    push @child_namespaces, $child_pkg;
   }
   for my $child (@child_namespaces) {
     push @out, $self->_list_modules_in_memory($child);
