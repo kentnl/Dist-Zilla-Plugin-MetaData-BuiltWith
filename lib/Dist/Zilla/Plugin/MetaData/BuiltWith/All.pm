@@ -108,7 +108,7 @@ around dump_config => sub {
 sub _list_modules_in_memory {
   my ( $self, $package ) = @_;
   my (@out);
-  if ( $package eq 'main' or $package =~ /\Amain::/msx ) {
+  if ( 'main' eq $package or $package =~ /\Amain::/msx ) {
     return $package;
   }
   if ($package) {
