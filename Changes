@@ -1,6 +1,22 @@
 ﻿Revision history for {{$dist->name}}
 
 {{$NEXT}}
+ [00 Major]
+ - Moderately sized packaging changes, a few small code changes.
+
+ [01 Tooling]
+ - Now uses ExtUtils::MakeMaker for installer.
+ - "Latest" dependency logic now only added to /recommends/
+
+ [02 Versioning]
+ - Version scheme is now x.yyyyyy ( mantissa = 6 )
+ - This is the primary reason for the 1.x on the box.
+
+ [Bugfix]
+ - BuiltWith::All ocasionally messed up when it found certain modules in
+   %INC which had names such that it was impossible to load them ( Anon
+   classes, Mx Types ), and these needlessly caused failures. Fixed.
+
  [Dependencies::Stats]
  - Dependencies changed since 0.04000002, see Changes.deps* for details
  - build: -1
