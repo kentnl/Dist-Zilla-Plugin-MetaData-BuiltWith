@@ -2,11 +2,17 @@
  [Added / configure requires]
  - ExtUtils::MakeMaker 6.30
 
+ [Added / runtime requires]
+ - utf8
+
  [Added / test requires]
  - ExtUtils::MakeMaker
  - File::Spec::Functions
  - List::Util
  - version
+
+ [Changed / runtime requires]
+ - perl 5.006 → 5.008
 
  [Changed / test requires]
  - Test::More 1.001002 → 0.89
