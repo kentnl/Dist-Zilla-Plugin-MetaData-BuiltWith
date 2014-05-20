@@ -1,25 +1,70 @@
+use 5.008;    #  utf8
 use strict;
 use warnings;
+use utf8;
 
 package Dist::Zilla::Plugin::MetaData::BuiltWith;
-BEGIN {
-  $Dist::Zilla::Plugin::MetaData::BuiltWith::AUTHORITY = 'cpan:KENTNL';
-}
-{
-  $Dist::Zilla::Plugin::MetaData::BuiltWith::VERSION = '0.04000002';
-}
-
+$Dist::Zilla::Plugin::MetaData::BuiltWith::VERSION = '1.000000';
 # ABSTRACT: Report what versions of things your distribution was built against
+
+our $AUTHORITY = 'cpan:KENTNL'; # AUTHORITY
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 use Dist::Zilla::Util::EmulatePhase;
-use Readonly;
+use Readonly qw( Readonly );
 Readonly my $MIN_EMULATE_PHASE => '0.01000101';
 use Moose 2.0;
+use Moose qw( with has around );
 use Class::Load qw( load_optional_class );
-use MooseX::Types::Moose (qw( ArrayRef Bool Str ));
+use MooseX::Types::Moose qw( ArrayRef Bool Str );
 use namespace::autoclean;
 with 'Dist::Zilla::Role::MetaProvider';
+
+
+
+
+
 
 
 sub mvp_multivalue_args { return qw( exclude include ) }
@@ -42,6 +87,45 @@ has _include => (
   handles  => { include => 'elements', },
 
 );
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 has show_config => ( is => 'ro', isa => 'Bool', default => 0 );
@@ -139,7 +223,9 @@ sub _get_prereq_modnames {
   if ( defined $Dist::Zilla::Util::EmulatePhase::VERSION ) {
     Dist::Zilla::Util::EmulatePhase->VERSION($MIN_EMULATE_PHASE);
   }
+  ## no critic (Subroutines::ProhibitCallsToUnexportedSubs)
   my $prereqs = Dist::Zilla::Util::EmulatePhase::get_prereqs( { zilla => $self->zilla } )->as_string_hash;
+  ## use critic
   if ( not %{$prereqs} ) {
     $self->log(q{WARNING: No prereqs were found, probably a bug});
     return [];
@@ -184,13 +270,12 @@ sub _get_prereq_modnames {
 }
 
 sub _detect_installed {
-  my ( $self, $module ) = @_;
-  my $success = undef;
+  my ( undef, $module ) = @_;
   if ( not defined $module ) {
     require Carp;
     Carp::croak('Cannot determine a version if module=undef');
   }
-  if ( $module eq 'perl' ) {
+  if ( 'perl' eq $module ) {
     return [ undef, undef ];
   }
   require Module::Data;
@@ -199,7 +284,7 @@ sub _detect_installed {
   if ( not defined $d ) {
     return [ undef, 'failed to create a Module::Data wrapper' ];
   }
-  if ( not defined $d->path or not -e -f $d->path ) {
+  if ( not defined $d->path or not -e $d->path or -d $d->path ) {
     return [ undef, 'module was not found in INC' ];
   }
 
@@ -211,6 +296,14 @@ sub _detect_installed {
   return [ $v, undef ];
 
 }
+
+
+
+
+
+
+
+
 
 
 sub metadata {
@@ -277,7 +370,7 @@ Dist::Zilla::Plugin::MetaData::BuiltWith - Report what versions of things your d
 
 =head1 VERSION
 
-version 0.04000002
+version 1.000000
 
 =head1 SYNOPSIS
 
@@ -375,7 +468,7 @@ Kent Fredric <kentnl@cpan.org>
 
 =head1 COPYRIGHT AND LICENSE
 
-This software is copyright (c) 2013 by Kent Fredric <kentnl@cpan.org>.
+This software is copyright (c) 2014 by Kent Fredric <kentnl@cpan.org>.
 
 This is free software; you can redistribute it and/or modify it under
 the same terms as the Perl 5 programming language system itself.

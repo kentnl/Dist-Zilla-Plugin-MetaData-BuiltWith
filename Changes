@@ -1,11 +1,43 @@
 ﻿Revision history for Dist-Zilla-Plugin-MetaData-BuiltWith
 
+1.000000 2014-05-20T05:33:17Z
+ [00 Major]
+ - Moderately sized packaging changes, a few small code changes.
+
+ [01 Tooling]
+ - Now uses ExtUtils::MakeMaker for installer.
+ - "Latest" dependency logic now only added to /recommends/
+
+ [02 Versioning]
+ - Version scheme is now x.yyyyyy ( mantissa = 6 )
+ - This is the primary reason for the 1.x on the box.
+
+ [Bugfix]
+ - BuiltWith::All ocasionally messed up when it found certain modules in
+   %INC which had names such that it was impossible to load them ( Anon
+   classes, Mx Types ), and these needlessly caused failures. Fixed.
+
+ [Dependencies::Aggregate]
+ - 5.008009 : 202 → 206
+ - 5.010001 : 180 → 185
+ - 5.018002 : ? → 172
+ - 5.019000 : 166 → ?
+ - 5.019009 : ? → 166
+
+ [Dependencies::Stats]
+ - Dependencies changed since 0.04000002, see Changes.deps* for details
+ - build: -1
+ - configure: +1 -1 (recommends: +1)
+ - develop: +7 ↑1 -9
+ - runtime: +1 ↑1
+ - test: +4 ↓1 (recommends: +4)
+
 0.04000002 2013-11-25T08:35:49Z
  [00 Bugfix]
  - Don't try to test if it was a file or not if its undefined.
 
  [Dependencies::Stats]
- - Dependencies changed, see Changes.deps{,.all,.dev} for details
+ - Dependencies changed since 0.04000001, see Changes.deps* for details
  - develop: ↑1
  - runtime: +1
 
@@ -15,10 +47,10 @@
    clown shoes and ride a unicycle.
 
  [Dependencies::Stats]
- - Dependencies changed, see Changes.deps{,.all,.dev} for details
+ - Dependencies changed since 0.04000000, see Changes.deps* for details
  - build: ↑1
  - configure: ↑1
- - develop: +44 ↑1 -3
+ - develop: +43 ↑1 -1 (recommends: -1, suggests: +1 -1)
  - test: ↑1 -3
 
  [Documentation]
@@ -49,10 +81,10 @@
  - upgrade Module::Build
 
  [Dependencies::Stats]
- - Dependencies changed, see Changes.deps{,.all,.dev} for details
+ - Dependencies changed since 0.03000100, see Changes.deps* for details
  - build: ↑1
  - configure: ↑1
- - develop: +7 ↑1
+ - develop: +7 (suggests: ↑1)
  - runtime: +1
  - test: +3 -2
 
@@ -79,10 +111,10 @@
  - use Readonly
 
  [Dependencies::Stats]
- - Dependencies changed, see Changes.deps{,.all,.dev} for details
+ - Dependencies changed since 0.02000100, see Changes.deps* for details
  - build: ↑1
  - configure: ↑1
- - develop: ↑2
+ - develop: (recommends: ↑1, suggests: ↑1)
  - runtime: +1
  - test: ↑1
 
@@ -98,7 +130,7 @@
  - More attempts at fixing rt#63930 and the $_ aliasing bug
 
  [Dependencies::Stats]
- - Dependencies changed, see Changes.deps{,.all,.dev} for details
+ - Dependencies changed since 0.02000000, see Changes.deps* for details
  - runtime: +1
 
  [Internals]
@@ -116,8 +148,8 @@
  - Stop using Hash::Merge::Simple and Moose::Autobox
 
  [Dependencies::Stats]
- - Dependencies changed, see Changes.deps{,.all,.dev} for details
- - develop: ↑1
+ - Dependencies changed since 0.01018205, see Changes.deps* for details
+ - develop: (suggests: ↑1)
  - runtime: +2 ↑1 -2
 
  [Internals]
@@ -139,8 +171,8 @@
  - Package Maintenance Release
 
  [Dependencies::Stats]
- - Dependencies changed, see Changes.deps{,.all,.dev} for details
- - develop: +3 -3
+ - Dependencies changed since 0.01018204, see Changes.deps* for details
+ - develop: +1 -1 (recommends: +1 -1, suggests: +1 -1)
  - runtime: +2
  - test: -1
 
@@ -185,8 +217,8 @@
  - require Dist::Zilla::Util::EmulatePhase 0.01000101
 
  [Dependencies::Stats]
- - Dependencies changed, see Changes.deps{,.all,.dev} for details
- - develop: +3
+ - Dependencies changed since 0.01005122, see Changes.deps* for details
+ - develop: +1 (recommends: +1, suggests: +1)
  - runtime: +3 -1
  - test: +1
 
@@ -195,7 +227,7 @@
    should reduce some test failures due to 'around dump_config' )
 
  [Dependencies::Stats]
- - Dependencies changed, see Changes.deps{,.all,.dev} for details
+ - Dependencies changed since 0.01005020, see Changes.deps* for details
  - runtime: +1
 
 0.01005020 2010-07-30T09:06:26Z
@@ -207,7 +239,7 @@
  - Added dump_config reporting support for MetaConfig
 
  [Dependencies::Stats]
- - Dependencies changed, see Changes.deps{,.all,.dev} for details
+ - Dependencies changed since 0.01000216, see Changes.deps* for details
  - runtime: +1
 
 0.01000216 2010-06-13T05:07:31Z
@@ -218,7 +250,7 @@
  - namespace::autoclean
 
  [Dependencies::Stats]
- - Dependencies changed, see Changes.deps{,.all,.dev} for details
+ - Dependencies changed since 0.01000022, see Changes.deps* for details
  - runtime: +1
 
 0.01000022 2010-06-11T11:48:14Z

@@ -1,19 +1,100 @@
+use 5.008;    # utf8
 use strict;
 use warnings;
+use utf8;
 
 package Dist::Zilla::Plugin::MetaData::BuiltWith::All;
-BEGIN {
-  $Dist::Zilla::Plugin::MetaData::BuiltWith::All::AUTHORITY = 'cpan:KENTNL';
-}
-{
-  $Dist::Zilla::Plugin::MetaData::BuiltWith::All::VERSION = '0.04000002';
-}
-
+$Dist::Zilla::Plugin::MetaData::BuiltWith::All::VERSION = '1.000000';
 # ABSTRACT: Go overkill and report everything in all name-spaces.
 
-use Moose;
+our $AUTHORITY = 'cpan:KENTNL'; # AUTHORITY
+
+use Moose qw( extends has around );
 use namespace::autoclean;
 extends 'Dist::Zilla::Plugin::MetaData::BuiltWith';
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 has 'show_failures' => ( is => 'ro', isa => 'Bool', default => 0 );
@@ -28,7 +109,7 @@ around dump_config => sub {
 sub _list_modules_in_memory {
   my ( $self, $package ) = @_;
   my (@out);
-  if ( $package eq 'main' or $package =~ /\Amain::/msx ) {
+  if ( 'main' eq $package or $package =~ /\Amain::/msx ) {
     return $package;
   }
   if ($package) {
@@ -41,11 +122,10 @@ sub _list_modules_in_memory {
   };
   my (@child_namespaces);
   for my $child ( keys %{$ns} ) {
-    if ( $child =~ /\A(.*)::$/msx ) {
-      my $child_pkg = $1;
-      $child_pkg = $package . q[::] . $child_pkg if $package;
-      push @child_namespaces, $child_pkg;
-    }
+    next unless $child =~ /\A(.*)::$/msx;
+    my $child_pkg = $1;
+    $child_pkg = $package . q[::] . $child_pkg if $package;
+    push @child_namespaces, $child_pkg;
   }
   for my $child (@child_namespaces) {
     push @out, $self->_list_modules_in_memory($child);
@@ -60,6 +140,14 @@ sub _get_all {
 
   my $record_module = sub {
     my ($module) = @_;
+    if ( $module =~ /\A__ANON__/msx ) {
+      $failures{$module} = 'Skipped: Anonymous Class';
+      return;
+    }
+    if ( $module =~ /\[/msx ) {
+      $failures{$module} = 'Skipped: Parameterized Type';
+      return;
+    }
     my $result = $self->_detect_installed($module);
     if ( defined $result->[0] ) {
       $modtable{$module} = $result->[0];
@@ -113,7 +201,7 @@ Dist::Zilla::Plugin::MetaData::BuiltWith::All - Go overkill and report everythin
 
 =head1 VERSION
 
-version 0.04000002
+version 1.000000
 
 =head1 SYNOPSIS
 
@@ -204,7 +292,7 @@ Kent Fredric <kentnl@cpan.org>
 
 =head1 COPYRIGHT AND LICENSE
 
-This software is copyright (c) 2013 by Kent Fredric <kentnl@cpan.org>.
+This software is copyright (c) 2014 by Kent Fredric <kentnl@cpan.org>.
 
 This is free software; you can redistribute it and/or modify it under
 the same terms as the Perl 5 programming language system itself.
