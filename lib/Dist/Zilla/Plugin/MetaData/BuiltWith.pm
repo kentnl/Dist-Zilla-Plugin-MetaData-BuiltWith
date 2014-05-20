@@ -50,11 +50,11 @@ our $AUTHORITY = 'cpan:KENTNL'; # AUTHORITY
 
 
 
-use Dist::Zilla::Util::EmulatePhase;
+use Dist::Zilla::Util::EmulatePhase qw( get_prereqs );
 use Readonly qw( Readonly );
 Readonly my $MIN_EMULATE_PHASE => '0.01000101';
 use Moose 2.0;
-use Moose qw( with has );
+use Moose qw( with has around );
 use Class::Load qw( load_optional_class );
 use MooseX::Types::Moose qw( ArrayRef Bool Str );
 use namespace::autoclean;
