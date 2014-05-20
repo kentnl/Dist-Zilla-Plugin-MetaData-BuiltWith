@@ -1,5 +1,6 @@
 use strict;
 use warnings;
+use utf8;
 
 package Dist::Zilla::Plugin::MetaData::BuiltWith;
 $Dist::Zilla::Plugin::MetaData::BuiltWith::VERSION = '1.000000';
