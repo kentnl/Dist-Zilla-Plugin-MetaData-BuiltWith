@@ -141,11 +141,11 @@ sub _get_all {
   my $record_module = sub {
     my ($module) = @_;
     if ( $module =~ /\A__ANON__/msx ) {
-      $failures{$module} = "Skipped: Anonymous Class";
+      $failures{$module} = 'Skipped: Anonymous Class';
       return;
     }
     if ( $module =~ /\[/msx ) {
-      $failures{$module} = "Skipped: Parameterized Type";
+      $failures{$module} = 'Skipped: Parameterized Type';
       return;
     }
     my $result = $self->_detect_installed($module);
