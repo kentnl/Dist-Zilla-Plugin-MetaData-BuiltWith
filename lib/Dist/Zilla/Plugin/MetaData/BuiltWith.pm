@@ -1,3 +1,8 @@
+use 5.008;    # 08 => [utf8],
+
+# 06 => [pragmas, our, open my, 3arg-open, $^V],
+# 05 => [error vars],
+# 04 => [for my $var, ->VERSION, CODEREF->(), __PACKAGE__ ]
 use strict;
 use warnings;
 use utf8;
