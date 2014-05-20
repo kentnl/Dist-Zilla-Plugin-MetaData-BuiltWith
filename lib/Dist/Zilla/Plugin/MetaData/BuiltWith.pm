@@ -283,7 +283,7 @@ sub _detect_installed {
   if ( not defined $d ) {
     return [ undef, 'failed to create a Module::Data wrapper' ];
   }
-  if ( not defined $d->path or not -e -f $d->path ) {
+  if ( not defined $d->path or not -e $d->path or -d $d->path ) {
     return [ undef, 'module was not found in INC' ];
   }
 
