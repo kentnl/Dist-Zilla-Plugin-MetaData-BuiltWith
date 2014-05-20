@@ -274,7 +274,7 @@ sub _detect_installed {
     require Carp;
     Carp::croak('Cannot determine a version if module=undef');
   }
-  if ( $module eq 'perl' ) {
+  if ( 'perl' eq $module ) {
     return [ undef, undef ];
   }
   require Module::Data;
