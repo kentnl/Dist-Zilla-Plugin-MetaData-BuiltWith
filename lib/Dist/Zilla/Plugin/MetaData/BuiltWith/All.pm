@@ -8,7 +8,7 @@ package Dist::Zilla::Plugin::MetaData::BuiltWith::All;
 
 # AUTHORITY
 
-use Moose;
+use Moose qw( extends has around );
 use namespace::autoclean;
 extends 'Dist::Zilla::Plugin::MetaData::BuiltWith';
 
