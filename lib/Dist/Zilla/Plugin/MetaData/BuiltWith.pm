@@ -50,7 +50,7 @@ our $AUTHORITY = 'cpan:KENTNL'; # AUTHORITY
 
 
 
-use Dist::Zilla::Util::EmulatePhase qw( get_prereqs );
+use Dist::Zilla::Util::EmulatePhase;
 use Readonly qw( Readonly );
 Readonly my $MIN_EMULATE_PHASE => '0.01000101';
 use Moose 2.0;
@@ -222,7 +222,9 @@ sub _get_prereq_modnames {
   if ( defined $Dist::Zilla::Util::EmulatePhase::VERSION ) {
     Dist::Zilla::Util::EmulatePhase->VERSION($MIN_EMULATE_PHASE);
   }
+  ## no critic (Subroutines::ProhibitCallsToUnexportedSubs)
   my $prereqs = Dist::Zilla::Util::EmulatePhase::get_prereqs( { zilla => $self->zilla } )->as_string_hash;
+  ## use critic
   if ( not %{$prereqs} ) {
     $self->log(q{WARNING: No prereqs were found, probably a bug});
     return [];
