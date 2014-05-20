@@ -269,8 +269,7 @@ sub _get_prereq_modnames {
 }
 
 sub _detect_installed {
-  my ( $self, $module ) = @_;
-  my $success = undef;
+  my ( undef, $module ) = @_;
   if ( not defined $module ) {
     require Carp;
     Carp::croak('Cannot determine a version if module=undef');
