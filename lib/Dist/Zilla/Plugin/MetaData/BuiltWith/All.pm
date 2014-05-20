@@ -1,4 +1,4 @@
-use 5.008;    # 08 => utf8. 06 => pragmas, our, 04 => for my, CODEREF->(), __PACKAGE__
+use 5.008;    # utf8
 use strict;
 use warnings;
 use utf8;
