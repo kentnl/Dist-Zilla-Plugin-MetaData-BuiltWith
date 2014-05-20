@@ -1,6 +1,6 @@
 ﻿Revision history for Dist-Zilla-Plugin-MetaData-BuiltWith
 
-1.000000 2014-05-20T05:15:35Z
+1.000000 2014-05-20T05:33:17Z
  [00 Major]
  - Moderately sized packaging changes, a few small code changes.
 
@@ -16,6 +16,13 @@
  - BuiltWith::All ocasionally messed up when it found certain modules in
    %INC which had names such that it was impossible to load them ( Anon
    classes, Mx Types ), and these needlessly caused failures. Fixed.
+
+ [Dependencies::Aggregate]
+ - 5.008009 : 202 → 206
+ - 5.010001 : 180 → 185
+ - 5.018002 : ? → 172
+ - 5.019000 : 166 → ?
+ - 5.019009 : ? → 166
 
  [Dependencies::Stats]
  - Dependencies changed since 0.04000002, see Changes.deps* for details
