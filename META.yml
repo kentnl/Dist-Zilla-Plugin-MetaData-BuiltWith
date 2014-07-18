@@ -220,8 +220,8 @@ x_BuiltWith:
     Dist::Zilla::Plugin::Manifest: '5.019'
     Dist::Zilla::Plugin::ManifestSkip: '5.019'
     Dist::Zilla::Plugin::MetaConfig: '5.019'
-    Dist::Zilla::Plugin::MetaData::BuiltWith: '1.000000'
-    Dist::Zilla::Plugin::MetaData::BuiltWith::All: '1.000000'
+    Dist::Zilla::Plugin::MetaData::BuiltWith: '1.000001'
+    Dist::Zilla::Plugin::MetaData::BuiltWith::All: '1.000001'
     Dist::Zilla::Plugin::MetaJSON: '5.019'
     Dist::Zilla::Plugin::MetaProvides: '2.000002'
     Dist::Zilla::Plugin::MetaProvides::Package: '2.000002'
@@ -947,7 +947,7 @@ x_BuiltWith:
     Dist::Zilla::Plugin::Manifest: '5.019'
     Dist::Zilla::Plugin::ManifestSkip: '5.019'
     Dist::Zilla::Plugin::MetaConfig: '5.019'
-    Dist::Zilla::Plugin::MetaData::BuiltWith: '1.000000'
+    Dist::Zilla::Plugin::MetaData::BuiltWith: '1.000001'
     Dist::Zilla::Plugin::MetaJSON: '5.019'
     Dist::Zilla::Plugin::MetaProvides::Package: '2.000002'
     Dist::Zilla::Plugin::MetaTests: '5.019'
@@ -1463,7 +1463,7 @@ x_Dist_Zilla:
         Dist::Zilla::Plugin::MetaData::BuiltWith::All:
           show_failures: '0'
       name: MetaData::BuiltWith::All
-      version: '1.000000'
+      version: '1.000001'
     -
       class: Dist::Zilla::Plugin::Prereqs
       config:
