@@ -72,7 +72,7 @@ x_BuiltWith:
     Dist::Zilla::Plugin::Manifest: '5.019'
     Dist::Zilla::Plugin::ManifestSkip: '5.019'
     Dist::Zilla::Plugin::MetaConfig: '5.019'
-    Dist::Zilla::Plugin::MetaData::BuiltWith: '1.000001'
+    Dist::Zilla::Plugin::MetaData::BuiltWith: '1.000002'
     Dist::Zilla::Plugin::MetaJSON: '5.019'
     Dist::Zilla::Plugin::MetaProvides::Package: '2.000002'
     Dist::Zilla::Plugin::MetaTests: '5.019'
@@ -187,7 +187,7 @@ x_Dist_Zilla:
               - -i
             uname_call: uname
       name: '@Author::KENTNL/MetaData::BuiltWith'
-      version: '1.000001'
+      version: '1.000002'
     -
       class: Dist::Zilla::Plugin::Git::GatherDir
       config:
