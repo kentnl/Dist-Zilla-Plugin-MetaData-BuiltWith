@@ -3,7 +3,7 @@
 {{$NEXT}}
  [Dependencies::Stats]
  - Dependencies changed since 1.000000, see misc/*.deps* for details
- - develop: -1 (suggests: +2 -1)
+ - develop: +2 -3 (suggests: +2 -1)
  - test: +2 ↑1 (recommends: +1)
 
 1.000000 2014-05-20T05:33:17Z

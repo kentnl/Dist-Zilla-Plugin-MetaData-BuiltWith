@@ -18,6 +18,7 @@ normal_form      = numify
 mantissa         = 6
 git_versions     = 1
 twitter_hash_tags = #perl #cpan
+bumpversions      = 1
 
 ;version_major     = 0
 ;version_minor     = 1
