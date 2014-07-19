@@ -1,5 +1,14 @@
 ﻿Revision history for Dist-Zilla-Plugin-MetaData-BuiltWith
 
+1.000001 2014-07-19T02:16:32Z
+ [00 Trivial]
+ - Misc packaging cleanups
+
+ [Dependencies::Stats]
+ - Dependencies changed since 1.000000, see misc/*.deps* for details
+ - develop: +3 -3 (suggests: +2 -1)
+ - test: +2 ↑1 (recommends: +1)
+
 1.000000 2014-05-20T05:33:17Z
  [00 Major]
  - Moderately sized packaging changes, a few small code changes.
@@ -13,9 +22,8 @@
  - This is the primary reason for the 1.x on the box.
 
  [Bugfix]
- - BuiltWith::All ocasionally messed up when it found certain modules in
-   %INC which had names such that it was impossible to load them ( Anon
-   classes, Mx Types ), and these needlessly caused failures. Fixed.
+ - BuiltWith::All ocasionally messed up when it found certain modules in %INC which had names such that it was
+   impossible to load them ( Anon classes, Mx Types ), and these needlessly caused failures. Fixed.
 
  [Dependencies::Aggregate]
  - 5.008009 : 202 → 206
@@ -25,7 +33,7 @@
  - 5.019009 : ? → 166
 
  [Dependencies::Stats]
- - Dependencies changed since 0.04000002, see Changes.deps* for details
+ - Dependencies changed since 0.04000002, see misc/*.deps* for details
  - build: -1
  - configure: +1 -1 (recommends: +1)
  - develop: +7 ↑1 -9
@@ -37,17 +45,16 @@
  - Don't try to test if it was a file or not if its undefined.
 
  [Dependencies::Stats]
- - Dependencies changed since 0.04000001, see Changes.deps* for details
+ - Dependencies changed since 0.04000001, see misc/*.deps* for details
  - develop: ↑1
  - runtime: +1
 
 0.04000001 2013-11-22T04:23:48Z
  [00 Maint]
- - Changes retroactively cleaned. Next time, you will be forced to wear a
-   clown shoes and ride a unicycle.
+ - Changes retroactively cleaned. Next time, you will be forced to wear a clown shoes and ride a unicycle.
 
  [Dependencies::Stats]
- - Dependencies changed since 0.04000000, see Changes.deps* for details
+ - Dependencies changed since 0.04000000, see misc/*.deps* for details
  - build: ↑1
  - configure: ↑1
  - develop: +43 ↑1 -1 (recommends: -1, suggests: +1 -1)
@@ -65,10 +72,9 @@
 
 0.04000000 2013-09-26T00:25:33Z
  [00 Major]
- - Not really a major, just fixing my failure to increment majorly instead
-   of patch-ly.
- - Also, The changelog has been updated. Retroactively. Pray I do not alter
-   it further. https://www.youtube.com/watch?v=WpE_xMRiCLE
+ - Not really a major, just fixing my failure to increment majorly instead of patch-ly.
+ - Also, The changelog has been updated. Retroactively. Pray I do not alter it further.
+   https://www.youtube.com/watch?v=WpE_xMRiCLE
 
 0.03000101 2013-09-26T00:14:19Z
  [00 Major]
@@ -81,7 +87,7 @@
  - upgrade Module::Build
 
  [Dependencies::Stats]
- - Dependencies changed since 0.03000100, see Changes.deps* for details
+ - Dependencies changed since 0.03000100, see misc/*.deps* for details
  - build: ↑1
  - configure: ↑1
  - develop: +7 (suggests: ↑1)
@@ -99,9 +105,8 @@
 
 0.03000100 2012-07-28T18:27:33Z
  [00_Note]
- - Accidentally lost the source code entirely for 0.03xxxyyy, so had to
-   sort of reconstruct that history. Also accidentally released it as
-   0.02000101 due to not having said code and not realising it.
+ - Accidentally lost the source code entirely for 0.03xxxyyy, so had to sort of reconstruct that history. Also
+   accidentally released it as 0.02000101 due to not having said code and not realising it.
 
  [Bugfixes]
  - Defer module version checks to later to help bootstrap.
@@ -111,7 +116,7 @@
  - use Readonly
 
  [Dependencies::Stats]
- - Dependencies changed since 0.02000100, see Changes.deps* for details
+ - Dependencies changed since 0.02000100, see misc/*.deps* for details
  - build: ↑1
  - configure: ↑1
  - develop: (recommends: ↑1, suggests: ↑1)
@@ -120,9 +125,8 @@
 
 0.03000000 2012-03-12T15:06:44Z
  [Features]
- - new 'show_config' option which extracts selected interesting data from
-   Config.pm ( such as the git ID ), which should prove useful for showing
-   exactly what perl a dist was built on
+ - new 'show_config' option which extracts selected interesting data from Config.pm ( such as the git ID ), which
+   should prove useful for showing exactly what perl a dist was built on
  - greatly improved option documentation.
 
 0.02000100 2012-02-27T04:05:24Z
@@ -130,7 +134,7 @@
  - More attempts at fixing rt#63930 and the $_ aliasing bug
 
  [Dependencies::Stats]
- - Dependencies changed since 0.02000000, see Changes.deps* for details
+ - Dependencies changed since 0.02000000, see misc/*.deps* for details
  - runtime: +1
 
  [Internals]
@@ -138,9 +142,8 @@
 
 0.02000000 2012-02-27T03:48:01Z
  [Bugfixes]
- - This release should hopefully neuter the occasional glitch that occured
-   due to $_ being clobbered in a few places yeilding a package of 'undef',
-   which emits broken META.yml. Hopefully this should resolve rt#63930
+ - This release should hopefully neuter the occasional glitch that occured due to $_ being clobbered in a few places
+   yeilding a package of 'undef', which emits broken META.yml. Hopefully this should resolve rt#63930
 
  [Dependencies]
  - use MooseX::Types::Moose
@@ -148,7 +151,7 @@
  - Stop using Hash::Merge::Simple and Moose::Autobox
 
  [Dependencies::Stats]
- - Dependencies changed since 0.01018205, see Changes.deps* for details
+ - Dependencies changed since 0.01018205, see misc/*.deps* for details
  - develop: (suggests: ↑1)
  - runtime: +2 ↑1 -2
 
@@ -156,9 +159,8 @@
  - Ripped out the Autobox stuff as it was adding errors.
  - Used MooseX::Types instead of simple stringy ones.
  - Used Recent Moose traits to provide flattening instead of Autobox.
- - include and exclude are now _include and _exclude with init_args to keep
-   construction the same. new methods include and exclude are 'elements'
-   accessors.
+ - include and exclude are now _include and _exclude with init_args to keep construction the same. new methods include
+   and exclude are 'elements' accessors.
  - _uname_args now produces _all_uname_args 'elements' trait-accessor.
 
  [Packaging]
@@ -171,7 +173,7 @@
  - Package Maintenance Release
 
  [Dependencies::Stats]
- - Dependencies changed since 0.01018204, see Changes.deps* for details
+ - Dependencies changed since 0.01018204, see misc/*.deps* for details
  - develop: +1 -1 (recommends: +1 -1, suggests: +1 -1)
  - runtime: +2
  - test: -1
@@ -199,12 +201,10 @@
 
 0.01018204 2010-12-07T17:05:34Z
  - Finally fixed that pesky \n in the uname string.
- - Moral of the story: $/ is actually evil. ( Thanks to Apocalypse for
-   prodding me into finally fixing this )
+ - Moral of the story: $/ is actually evil. ( Thanks to Apocalypse for prodding me into finally fixing this )
 
 0.01016607 2010-11-21T20:30:38Z
- - Replaced $] with { %{$^V} } to see the native version object instead of
-   this deprecated string.
+ - Replaced $] with { %{$^V} } to see the native version object instead of this deprecated string.
 
 0.01014716 2010-11-04T05:26:16Z
  - Clean source code/Update toolchain.
@@ -217,40 +217,37 @@
  - require Dist::Zilla::Util::EmulatePhase 0.01000101
 
  [Dependencies::Stats]
- - Dependencies changed since 0.01005122, see Changes.deps* for details
+ - Dependencies changed since 0.01005122, see misc/*.deps* for details
  - develop: +1 (recommends: +1, suggests: +1)
  - runtime: +3 -1
  - test: +1
 
 0.01005122 2010-07-31T11:43:00Z
- - Dep on version 4.101540 of Dist::Zilla::Role::ConfigDumper. ( This
-   should reduce some test failures due to 'around dump_config' )
+ - Dep on version 4.101540 of Dist::Zilla::Role::ConfigDumper. ( This should reduce some test failures due to 'around
+   dump_config' )
 
  [Dependencies::Stats]
- - Dependencies changed since 0.01005020, see Changes.deps* for details
+ - Dependencies changed since 0.01005020, see misc/*.deps* for details
  - runtime: +1
 
 0.01005020 2010-07-30T09:06:26Z
- - Skip 'perl' automatically when found in modules list. Can't depend on
-   perl.pm.
- - Added 'uname' reporting feature. This should mostly work still, and only
-   warn when its run on a machine with no uname support and not publish
-   uname data.
+ - Skip 'perl' automatically when found in modules list. Can't depend on perl.pm.
+ - Added 'uname' reporting feature. This should mostly work still, and only warn when its run on a machine with no
+   uname support and not publish uname data.
  - Added dump_config reporting support for MetaConfig
 
  [Dependencies::Stats]
- - Dependencies changed since 0.01000216, see Changes.deps* for details
+ - Dependencies changed since 0.01000216, see misc/*.deps* for details
  - runtime: +1
 
 0.01000216 2010-06-13T05:07:31Z
- - Added a very overkill MetaData::BuiltWith::All module for those with
-   suicidal tendencies.
+ - Added a very overkill MetaData::BuiltWith::All module for those with suicidal tendencies.
 
  [Dependencies::Added / runtime requires]
  - namespace::autoclean
 
  [Dependencies::Stats]
- - Dependencies changed since 0.01000022, see Changes.deps* for details
+ - Dependencies changed since 0.01000022, see misc/*.deps* for details
  - runtime: +1
 
 0.01000022 2010-06-11T11:48:14Z

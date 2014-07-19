@@ -4,14 +4,16 @@ author:
   - 'Kent Fredric <kentnl@cpan.org>'
 build_requires:
   ExtUtils::MakeMaker: '0'
+  File::Spec: '0'
   File::Spec::Functions: '0'
   List::Util: '0'
+  Scalar::Util: '0'
   Test::More: '0.89'
-  version: '0'
+  version: '0.77'
 configure_requires:
   ExtUtils::MakeMaker: '6.30'
 dynamic_config: 0
-generated_by: 'Dist::Zilla version 5.017, CPAN::Meta::Converter version 2.141170'
+generated_by: 'Dist::Zilla version 5.019, CPAN::Meta::Converter version 2.141520'
 license: perl
 meta-spec:
   url: http://module-build.sourceforge.net/META-spec-v1.4.html
@@ -20,10 +22,10 @@ name: Dist-Zilla-Plugin-MetaData-BuiltWith
 provides:
   Dist::Zilla::Plugin::MetaData::BuiltWith:
     file: lib/Dist/Zilla/Plugin/MetaData/BuiltWith.pm
-    version: '1.000000'
+    version: '1.000001'
   Dist::Zilla::Plugin::MetaData::BuiltWith::All:
     file: lib/Dist/Zilla/Plugin/MetaData/BuiltWith/All.pm
-    version: '1.000000'
+    version: '1.000001'
 requires:
   Carp: '0'
   Class::Load: '0'
@@ -40,978 +42,101 @@ requires:
   utf8: '0'
   warnings: '0'
 resources:
-  bugtracker: https://github.com/kentfredric/Dist-Zilla-Plugin-MetaData-BuiltWith/issues
-  homepage: https://github.com/kentfredric/Dist-Zilla-Plugin-MetaData-BuiltWith
-  repository: https://github.com/kentfredric/Dist-Zilla-Plugin-MetaData-BuiltWith.git
-version: '1.000000'
+  bugtracker: https://github.com/kentnl/Dist-Zilla-Plugin-MetaData-BuiltWith/issues
+  homepage: https://github.com/kentnl/Dist-Zilla-Plugin-MetaData-BuiltWith
+  repository: https://github.com/kentnl/Dist-Zilla-Plugin-MetaData-BuiltWith.git
+version: '1.000001'
 x_BuiltWith:
-  allmodules:
-    App::Cmd: '0.323'
-    App::Cmd::ArgProcessor: '0.323'
-    App::Cmd::Command: '0.323'
-    App::Cmd::Command::commands: '0.323'
-    App::Cmd::Command::help: '0.323'
-    App::Cmd::Command::version: '0.323'
-    App::Cmd::Plugin: '0.323'
-    App::Cmd::Setup: '0.323'
-    App::Prove: '3.30'
-    Archive::Tar: '1.96'
-    Archive::Tar::Constant: '1.96'
-    AutoLoader: '5.74'
-    B: '1.48'
-    B::Deparse: '1.26'
-    B::Hooks::EndOfScope: '0.13'
-    B::Hooks::EndOfScope::XS: '0.13'
-    B::Keywords: '1.13'
-    CPAN: '2.05'
-    CPAN::Meta: '2.141170'
-    CPAN::Meta::Converter: '2.141170'
-    CPAN::Meta::Prereqs: '2.141170'
-    CPAN::Meta::Requirements: '2.125'
-    CPAN::Meta::Validator: '2.141170'
-    CPAN::Meta::YAML: '0.012'
-    CPAN::Uploader: '0.103007'
-    Carp: '1.3301'
-    Carp::Clan: '6.04'
-    Carp::Heavy: '1.3301'
-    Class::Data::Inheritable: '0.08'
-    Class::Inspector: '1.28'
-    Class::Load: '0.21'
-    Class::Load::XS: '0.08'
-    Class::MOP: '2.1206'
-    Class::MOP::Attribute: '2.1206'
-    Class::MOP::Class: '2.1206'
-    Class::MOP::Class::Immutable::Trait: '2.1206'
-    Class::MOP::Deprecated: '2.1206'
-    Class::MOP::Instance: '2.1206'
-    Class::MOP::Method: '2.1206'
-    Class::MOP::Method::Accessor: '2.1206'
-    Class::MOP::Method::Constructor: '2.1206'
-    Class::MOP::Method::Generated: '2.1206'
-    Class::MOP::Method::Inlined: '2.1206'
-    Class::MOP::Method::Meta: '2.1206'
-    Class::MOP::Method::Overload: '2.1206'
-    Class::MOP::Method::Wrapped: '2.1206'
-    Class::MOP::MiniTrait: '2.1206'
-    Class::MOP::Mixin: '2.1206'
-    Class::MOP::Mixin::AttributeCore: '2.1206'
-    Class::MOP::Mixin::HasAttributes: '2.1206'
-    Class::MOP::Mixin::HasMethods: '2.1206'
-    Class::MOP::Module: '2.1206'
-    Class::MOP::Object: '2.1206'
-    Class::MOP::Package: '2.1206'
-    Class::Method::Modifiers: '2.10'
-    Class::Singleton: '1.4'
-    Class::Struct: '0.65'
-    Class::Tiny: '0.014'
-    Clone: '0.37'
-    Config: '5.019011'
-    Config::INI: '0.024'
-    Config::INI::Reader: '0.024'
-    Config::INI::Writer: '0.024'
-    Config::MVP: '2.200007'
-    Config::MVP::Assembler: '2.200007'
-    Config::MVP::Assembler::WithBundles: '2.200007'
-    Config::MVP::Error: '2.200007'
-    Config::MVP::Reader: '2.200007'
-    Config::MVP::Reader::Findable: '2.200007'
-    Config::MVP::Reader::Findable::ByExtension: '2.200007'
-    Config::MVP::Reader::Finder: '2.200007'
-    Config::MVP::Reader::Hash: '2.200007'
-    Config::MVP::Reader::INI: '2.101462'
-    Config::MVP::Section: '2.200007'
-    Config::MVP::Sequence: '2.200007'
-    Cwd: '3.47'
-    DB: '1.07'
-    Data::Dump: '1.22'
-    Data::Dumper: '2.151'
-    Data::OptList: '0.109'
-    Data::Section: '0.200006'
-    Data::Visitor: '0.30'
-    Data::Visitor::Callback: '0.30'
-    DateTime: '1.10'
-    DateTime::Duration: '1.10'
-    DateTime::Helpers: '1.10'
-    DateTime::Infinite: '1.10'
-    DateTime::Locale: '0.45'
-    DateTime::TimeZone: '1.69'
-    DateTime::TimeZone::Catalog: '1.69'
-    DateTime::TimeZone::Floating: '1.69'
-    DateTime::TimeZone::Local: '1.69'
-    DateTime::TimeZone::OffsetOnly: '1.69'
-    DateTime::TimeZone::OlsonDB: '1.69'
-    DateTime::TimeZone::OlsonDB::Change: '1.69'
-    DateTime::TimeZone::UTC: '1.69'
-    Devel::GlobalDestruction: '0.12'
-    Devel::InnerPackage: '0.4'
-    Devel::LexAlias: '0.05'
-    Devel::PartialDump: '0.17'
-    Devel::StackTrace: '1.32'
-    Devel::StackTrace::Frame: '1.32'
-    Digest: '1.17'
-    Digest::MD5: '2.53'
-    Digest::SHA: '5.91'
-    Digest::base: '1.16'
-    DirHandle: '1.04'
-    Dist::Zilla: '5.017'
-    Dist::Zilla::App: '5.017'
-    Dist::Zilla::App::Command: '5.017'
-    Dist::Zilla::App::Command::add: '5.017'
-    Dist::Zilla::App::Command::authordeps: '5.017'
-    Dist::Zilla::App::Command::build: '5.017'
-    Dist::Zilla::App::Command::clean: '5.017'
-    Dist::Zilla::App::Command::critic: '0.001001'
-    Dist::Zilla::App::Command::gh: '0.36'
-    Dist::Zilla::App::Command::install: '5.017'
-    Dist::Zilla::App::Command::listdeps: '5.017'
-    Dist::Zilla::App::Command::new: '5.017'
-    Dist::Zilla::App::Command::nop: '5.017'
-    Dist::Zilla::App::Command::perltidy: '0.16'
-    Dist::Zilla::App::Command::release: '5.017'
-    Dist::Zilla::App::Command::run: '5.017'
-    Dist::Zilla::App::Command::setup: '5.017'
-    Dist::Zilla::App::Command::smoke: '5.017'
-    Dist::Zilla::App::Command::stale: '0.023'
-    Dist::Zilla::App::Command::test: '5.017'
-    Dist::Zilla::App::Command::version: '5.017'
-    Dist::Zilla::App::Command::xtest: '0.021'
-    Dist::Zilla::Chrome::Term: '5.017'
-    Dist::Zilla::Dist::Builder: '5.017'
-    Dist::Zilla::Dist::Minter: '5.017'
-    Dist::Zilla::File::FromCode: '5.017'
-    Dist::Zilla::File::InMemory: '5.017'
-    Dist::Zilla::File::OnDisk: '5.017'
-    Dist::Zilla::MVP::Assembler: '5.017'
-    Dist::Zilla::MVP::Assembler::GlobalConfig: '5.017'
-    Dist::Zilla::MVP::Assembler::Zilla: '5.017'
-    Dist::Zilla::MVP::Reader::Finder: '5.017'
-    Dist::Zilla::MVP::Reader::Perl: '5.017'
-    Dist::Zilla::MVP::RootSection: '5.017'
-    Dist::Zilla::MVP::Section: '5.017'
-    Dist::Zilla::MetaProvides::ProvideRecord: '2.000000'
-    Dist::Zilla::MetaProvides::Types: '2.000000'
-    Dist::Zilla::Plugin::Authority: '1.006'
-    Dist::Zilla::Plugin::AutoPrereqs: '5.017'
-    Dist::Zilla::Plugin::Bootstrap::lib: '1.000001'
-    Dist::Zilla::Plugin::ConfirmRelease: '5.017'
-    Dist::Zilla::Plugin::EOLTests: '0.02'
-    Dist::Zilla::Plugin::FinderCode: '5.017'
-    Dist::Zilla::Plugin::GatherDir: '5.017'
-    Dist::Zilla::Plugin::Git: '2.022'
-    Dist::Zilla::Plugin::Git::Check: '2.022'
-    Dist::Zilla::Plugin::Git::Commit: '2.022'
-    Dist::Zilla::Plugin::Git::CommitBuild: '2.022'
-    Dist::Zilla::Plugin::Git::GatherDir: '2.022'
-    Dist::Zilla::Plugin::Git::NextRelease: '0.002010'
-    Dist::Zilla::Plugin::Git::NextVersion: '2.022'
-    Dist::Zilla::Plugin::Git::NextVersion::Sanitized: '0.001000'
-    Dist::Zilla::Plugin::Git::Tag: '2.022'
-    Dist::Zilla::Plugin::GithubMeta: '0.46'
-    Dist::Zilla::Plugin::InlineFiles: '5.017'
-    Dist::Zilla::Plugin::License: '5.017'
-    Dist::Zilla::Plugin::MakeMaker: '5.017'
-    Dist::Zilla::Plugin::MakeMaker::Runner: '5.017'
-    Dist::Zilla::Plugin::Manifest: '5.017'
-    Dist::Zilla::Plugin::ManifestSkip: '5.017'
-    Dist::Zilla::Plugin::MetaConfig: '5.017'
-    Dist::Zilla::Plugin::MetaData::BuiltWith: '1.000000'
-    Dist::Zilla::Plugin::MetaData::BuiltWith::All: '1.000000'
-    Dist::Zilla::Plugin::MetaJSON: '5.017'
-    Dist::Zilla::Plugin::MetaProvides: '2.000000'
-    Dist::Zilla::Plugin::MetaProvides::Package: '2.000001'
-    Dist::Zilla::Plugin::MetaTests: '5.017'
-    Dist::Zilla::Plugin::MetaYAML: '5.017'
-    Dist::Zilla::Plugin::MinimumPerl: '1.003'
-    Dist::Zilla::Plugin::NextRelease: '5.017'
-    Dist::Zilla::Plugin::PkgVersion: '5.017'
-    Dist::Zilla::Plugin::PodCoverageTests: '5.017'
-    Dist::Zilla::Plugin::PodSyntaxTests: '5.017'
-    Dist::Zilla::Plugin::PodWeaver: '4.005'
-    Dist::Zilla::Plugin::Prereqs: '5.017'
-    Dist::Zilla::Plugin::Prereqs::Recommend::MatchInstalled: '0.001000'
-    Dist::Zilla::Plugin::PromptIfStale: '0.023'
-    Dist::Zilla::Plugin::ReadmeAnyFromPod: '0.141120'
-    Dist::Zilla::Plugin::ReadmeFromPod: '0.21'
-    Dist::Zilla::Plugin::RunExtraTests: '0.021'
-    Dist::Zilla::Plugin::Test::CPAN::Changes: '0.008'
-    Dist::Zilla::Plugin::Test::Compile: '2.040'
-    Dist::Zilla::Plugin::Test::Compile::PerFile: '0.002000'
-    Dist::Zilla::Plugin::Test::Kwalitee: '2.07'
-    Dist::Zilla::Plugin::Test::MinimumVersion: '2.000005'
-    Dist::Zilla::Plugin::Test::Perl::Critic: '2.112410'
-    Dist::Zilla::Plugin::Test::ReportPrereqs: '0.013'
-    Dist::Zilla::Plugin::TestRelease: '5.017'
-    Dist::Zilla::Plugin::Twitter: '0.025'
-    Dist::Zilla::Plugin::UploadToCPAN: '5.017'
-    Dist::Zilla::PluginBundle::Author::KENTNL: '2.013004'
-    Dist::Zilla::PluginBundle::Author::KENTNL::Lite: 1.7.2
-    Dist::Zilla::PluginBundle::Filter: '5.017'
-    Dist::Zilla::Prereqs: '5.017'
-    Dist::Zilla::Role::AfterBuild: '5.017'
-    Dist::Zilla::Role::AfterRelease: '5.017'
-    Dist::Zilla::Role::BeforeRelease: '5.017'
-    Dist::Zilla::Role::Bootstrap: '1.000001'
-    Dist::Zilla::Role::BuildRunner: '5.017'
-    Dist::Zilla::Role::BundleDeps: '0.001001'
-    Dist::Zilla::Role::Chrome: '5.017'
-    Dist::Zilla::Role::ConfigDumper: '5.017'
-    Dist::Zilla::Role::File: '5.017'
-    Dist::Zilla::Role::File::ChangeNotification: '0.003'
-    Dist::Zilla::Role::FileFinder: '5.017'
-    Dist::Zilla::Role::FileFinderUser: '5.017'
-    Dist::Zilla::Role::FileGatherer: '5.017'
-    Dist::Zilla::Role::FileInjector: '5.017'
-    Dist::Zilla::Role::FileMunger: '5.017'
-    Dist::Zilla::Role::FilePruner: '5.017'
-    Dist::Zilla::Role::Git::DirtyFiles: '2.022'
-    Dist::Zilla::Role::Git::Repo: '2.022'
-    Dist::Zilla::Role::GitConfig: '0.92'
-    Dist::Zilla::Role::InstallTool: '5.017'
-    Dist::Zilla::Role::MetaProvider: '5.017'
-    Dist::Zilla::Role::MetaProvider::Provider: '2.000000'
-    Dist::Zilla::Role::MutableFile: '5.017'
-    Dist::Zilla::Role::PPI: '5.017'
-    Dist::Zilla::Role::Plugin: '5.017'
-    Dist::Zilla::Role::PluginBundle: '5.017'
-    Dist::Zilla::Role::PrereqSource: '5.017'
-    Dist::Zilla::Role::Releaser: '5.017'
-    Dist::Zilla::Role::Stash: '5.017'
-    Dist::Zilla::Role::Stash::Authors: '5.017'
-    Dist::Zilla::Role::StubBuild: '5.017'
-    Dist::Zilla::Role::TestRunner: '5.017'
-    Dist::Zilla::Role::TextTemplate: '5.017'
-    Dist::Zilla::Role::Version::Sanitize: '0.001002'
-    Dist::Zilla::Role::VersionProvider: '5.017'
-    Dist::Zilla::Stash::Rights: '5.017'
-    Dist::Zilla::Stash::User: '5.017'
-    Dist::Zilla::Types: '5.017'
-    Dist::Zilla::Util: '5.017'
-    Dist::Zilla::Util::AuthorDeps: '5.017'
-    Dist::Zilla::Util::EmulatePhase: '1.000000'
-    Dist::Zilla::Util::EmulatePhase::PrereqCollector: '1.000000'
-    DynaLoader: '1.25'
-    Encode: '2.60'
-    Encode::Alias: '2.18'
-    Encode::Config: '2.05'
-    Encode::Encoding: '2.07'
-    Encode::Locale: '1.03'
-    Encode::MIME::Name: '1.01'
-    English: '1.09'
-    Errno: 1.20_02
-    Eval::Closure: '0.11'
-    Exception::Class: '1.38'
-    Exception::Class::Base: '1.38'
-    Exporter: '5.70'
-    Exporter::Heavy: '5.70'
-    ExtUtils::Constant: '0.23'
-    ExtUtils::Constant::ProxySubs: '0.08'
-    ExtUtils::Liblist: '6.98'
-    ExtUtils::Liblist::Kid: '6.98'
-    ExtUtils::MM: '6.98'
-    ExtUtils::MM_Any: '6.98'
-    ExtUtils::MM_Unix: '6.98'
-    ExtUtils::MY: '6.98'
-    ExtUtils::MakeMaker: '6.98'
-    ExtUtils::MakeMaker::Config: '6.98'
-    ExtUtils::Manifest: '1.63'
-    Fatal: '2.25'
-    Fcntl: '1.11'
-    File::Basename: '2.85'
-    File::Copy: '2.29'
-    File::Find: '1.27'
-    File::Find::Rule: '0.33'
-    File::Glob: '1.23'
-    File::HomeDir: '1.00'
-    File::HomeDir::Driver: '1.00'
-    File::HomeDir::FreeDesktop: '1.00'
-    File::HomeDir::Unix: '1.00'
-    File::Path: '2.09'
-    File::ShareDir: '1.102'
-    File::Spec: '3.47'
-    File::Spec::Functions: '3.47'
-    File::Spec::Unix: '3.47'
-    File::Temp: '0.2304'
-    File::Which: '1.09'
-    File::chdir: '0.1008'
-    File::pushd: '1.006'
-    File::stat: '1.07'
-    FileHandle: '2.02'
-    Getopt::Long: '2.42'
-    Getopt::Long::Descriptive: '0.097'
-    Getopt::Long::Descriptive::Opts: '0.097'
-    Getopt::Long::Descriptive::Usage: '0.097'
-    Git::Wrapper: '0.032'
-    Git::Wrapper::Exception: '0.032'
-    Git::Wrapper::File::RawModification: '0.032'
-    Git::Wrapper::Log: '0.032'
-    Git::Wrapper::Plus: '0.004010'
-    Git::Wrapper::Plus::Branches: '0.004010'
-    Git::Wrapper::Plus::Refs: '0.004010'
-    Git::Wrapper::Plus::Support: '0.004010'
-    Git::Wrapper::Plus::Tags: '0.004010'
-    Git::Wrapper::Plus::Versions: '0.004010'
-    Git::Wrapper::Status: '0.032'
-    Git::Wrapper::Statuses: '0.032'
-    HTML::Entities: '3.69'
-    HTML::HeadParser: '3.71'
-    HTML::Parser: '3.71'
-    HTTP::Config: '6.00'
-    HTTP::Cookies: '6.01'
-    HTTP::Date: '6.02'
-    HTTP::Headers: '6.05'
-    HTTP::Headers::Util: '6.03'
-    HTTP::Message: '6.06'
-    HTTP::Request: '6.00'
-    HTTP::Request::Common: '6.04'
-    HTTP::Response: '6.04'
-    HTTP::Status: '6.03'
-    Hash::Merge::Simple: '0.051'
-    Hash::Util: '0.16'
-    Hash::Util::FieldHash: '1.15'
-    I18N::Langinfo: '0.11'
-    IO: '1.31'
-    IO::Compress::Bzip2: '2.064'
-    IO::Compress::Deflate: '2.064'
-    IO::Compress::Gzip: '2.064'
-    IO::Dir: '1.10'
-    IO::File: '1.16'
-    IO::HTML: '1.00'
-    IO::Handle: '1.35'
-    IO::Pipe: '1.15'
-    IO::Poll: '0.09'
-    IO::Scalar: '2.110'
-    IO::Seekable: '1.10'
-    IO::Select: '1.22'
-    IO::Socket: '1.37'
-    IO::String: '1.08'
-    IO::Uncompress::Bunzip2: '2.064'
-    IO::Uncompress::Gunzip: '2.064'
-    IO::Uncompress::Inflate: '2.064'
-    IO::Uncompress::RawInflate: '2.064'
-    IPC::Cmd: '0.92'
-    IPC::Open3: '1.16'
-    IPC::Run: '0.92'
-    IPC::System::Simple: '1.25'
-    Import::Into: '1.002002'
-    JSON: '2.90'
-    JSON::PP: '2.27203'
-    JSON::XS: '3.01'
-    LWP: '6.06'
-    LWP::ConnCache: '6.02'
-    LWP::MediaTypes: '6.02'
-    LWP::Protocol: '6.06'
-    LWP::UserAgent: '6.06'
-    List::AllUtils: '0.08'
-    List::MoreUtils: '0.33'
-    List::Util: '1.38'
-    List::UtilsBy: '0.09'
-    Locale::Maketext: '1.25'
-    Locale::Maketext::Simple: '0.21'
-    Log::Dispatch: '2.41'
-    Log::Dispatch::Array: '1.003'
-    Log::Dispatch::Base: '2.41'
-    Log::Dispatch::File: '2.41'
-    Log::Dispatch::Output: '2.41'
-    Log::Dispatch::Screen: '2.41'
-    Log::Dispatch::Syslog: '2.41'
-    Log::Dispatchouli: '2.009'
-    Log::Dispatchouli::Proxy: '2.009'
-    MIME::Base64: '3.14'
-    MIME::QuotedPrint: '3.13'
-    MRO::Compat: '0.12'
-    Mixin::Linewise: '0.106'
-    Mixin::Linewise::Readers: '0.106'
-    Module::CoreList: '3.10'
-    Module::Data: '0.007'
-    Module::Implementation: '0.07'
-    Module::Load: '0.32'
-    Module::Load::Conditional: '0.62'
-    Module::Metadata: '1.000022'
-    Module::Path: '0.13'
-    Module::Pluggable: '5.1'
-    Module::Pluggable::Object: '5.1'
-    Module::Runtime: '0.014'
-    Moo: '1.004002'
-    Moo::Role: '1.004002'
-    Moose: '2.1206'
-    Moose::Autobox: '0.15'
-    Moose::Autobox::Array: '0.15'
-    Moose::Autobox::Code: '0.15'
-    Moose::Autobox::Defined: '0.15'
-    Moose::Autobox::Hash: '0.15'
-    Moose::Autobox::Indexed: '0.15'
-    Moose::Autobox::Item: '0.15'
-    Moose::Autobox::List: '0.15'
-    Moose::Autobox::Number: '0.15'
-    Moose::Autobox::Ref: '0.15'
-    Moose::Autobox::Scalar: '0.15'
-    Moose::Autobox::String: '0.15'
-    Moose::Autobox::Undef: '0.15'
-    Moose::Autobox::Value: '0.15'
-    Moose::Deprecated: '2.1206'
-    Moose::Exporter: '2.1206'
-    Moose::Meta::Attribute: '2.1206'
-    Moose::Meta::Attribute::Native: '2.1206'
-    Moose::Meta::Attribute::Native::Trait: '2.1206'
-    Moose::Meta::Attribute::Native::Trait::Array: '2.1206'
-    Moose::Meta::Attribute::Native::Trait::Bool: '2.1206'
-    Moose::Meta::Attribute::Native::Trait::Hash: '2.1206'
-    Moose::Meta::Class: '2.1206'
-    Moose::Meta::Class::Immutable::Trait: '2.1206'
-    Moose::Meta::Instance: '2.1206'
-    Moose::Meta::Method: '2.1206'
-    Moose::Meta::Method::Accessor: '2.1206'
-    Moose::Meta::Method::Accessor::Native: '2.1206'
-    Moose::Meta::Method::Accessor::Native::Array: '2.1206'
-    Moose::Meta::Method::Accessor::Native::Array::Writer: '2.1206'
-    Moose::Meta::Method::Accessor::Native::Array::count: '2.1206'
-    Moose::Meta::Method::Accessor::Native::Array::elements: '2.1206'
-    Moose::Meta::Method::Accessor::Native::Array::push: '2.1206'
-    Moose::Meta::Method::Accessor::Native::Bool::set: '2.1206'
-    Moose::Meta::Method::Accessor::Native::Collection: '2.1206'
-    Moose::Meta::Method::Accessor::Native::Hash: '2.1206'
-    Moose::Meta::Method::Accessor::Native::Hash::exists: '2.1206'
-    Moose::Meta::Method::Accessor::Native::Reader: '2.1206'
-    Moose::Meta::Method::Accessor::Native::Writer: '2.1206'
-    Moose::Meta::Method::Augmented: '2.1206'
-    Moose::Meta::Method::Constructor: '2.1206'
-    Moose::Meta::Method::Delegation: '2.1206'
-    Moose::Meta::Method::Destructor: '2.1206'
-    Moose::Meta::Method::Meta: '2.1206'
-    Moose::Meta::Method::Overridden: '2.1206'
-    Moose::Meta::Mixin::AttributeCore: '2.1206'
-    Moose::Meta::Object::Trait: '2.1206'
-    Moose::Meta::Role: '2.1206'
-    Moose::Meta::Role::Application: '2.1206'
-    Moose::Meta::Role::Application::RoleSummation: '2.1206'
-    Moose::Meta::Role::Application::ToClass: '2.1206'
-    Moose::Meta::Role::Application::ToInstance: '2.1206'
-    Moose::Meta::Role::Application::ToRole: '2.1206'
-    Moose::Meta::Role::Attribute: '2.1206'
-    Moose::Meta::Role::Composite: '2.1206'
-    Moose::Meta::Role::Method: '2.1206'
-    Moose::Meta::Role::Method::Conflicting: '2.1206'
-    Moose::Meta::Role::Method::Required: '2.1206'
-    Moose::Meta::TypeCoercion: '2.1206'
-    Moose::Meta::TypeCoercion::Union: '2.1206'
-    Moose::Meta::TypeConstraint: '2.1206'
-    Moose::Meta::TypeConstraint::Class: '2.1206'
-    Moose::Meta::TypeConstraint::DuckType: '2.1206'
-    Moose::Meta::TypeConstraint::Enum: '2.1206'
-    Moose::Meta::TypeConstraint::Parameterizable: '2.1206'
-    Moose::Meta::TypeConstraint::Parameterized: '2.1206'
-    Moose::Meta::TypeConstraint::Registry: '2.1206'
-    Moose::Meta::TypeConstraint::Role: '2.1206'
-    Moose::Meta::TypeConstraint::Union: '2.1206'
-    Moose::Object: '2.1206'
-    Moose::Role: '2.1206'
-    Moose::Util: '2.1206'
-    Moose::Util::MetaRole: '2.1206'
-    Moose::Util::TypeConstraints: '2.1206'
-    Moose::Util::TypeConstraints::Builtins: '2.1206'
-    MooseX::AttributeShortcuts: '0.024'
-    MooseX::Has::Sugar: '1.000000'
-    MooseX::LazyRequire: '0.10'
-    MooseX::LazyRequire::Meta::Attribute::Trait::LazyRequire: '0.10'
-    MooseX::OneArgNew: '0.004'
-    MooseX::Role::Parameterized: '1.02'
-    MooseX::Role::Parameterized::Meta::Role::Parameterizable: '1.02'
-    MooseX::Role::Parameterized::Meta::Role::Parameterized: '1.02'
-    MooseX::Role::Parameterized::Meta::Trait::Parameterized: '1.02'
-    MooseX::Role::Parameterized::Parameters: '1.02'
-    MooseX::SetOnce: '0.200002'
-    MooseX::StrictConstructor: '0.19'
-    MooseX::StrictConstructor::Trait::Class: '0.19'
-    MooseX::StrictConstructor::Trait::Method::Constructor: '0.19'
-    MooseX::Types: '0.44'
-    MooseX::Types::Base: '0.44'
-    MooseX::Types::CheckedUtilExports: '0.44'
-    MooseX::Types::Common: '0.001012'
-    MooseX::Types::Common::String: '0.001012'
-    MooseX::Types::Moose: '0.44'
-    MooseX::Types::Path::Class: '0.06'
-    MooseX::Types::Path::Tiny: '0.010'
-    MooseX::Types::Perl: '0.101343'
-    MooseX::Types::Stringlike: '0.003'
-    MooseX::Types::TypeDecorator: '0.44'
-    MooseX::Types::URI: '0.05'
-    MooseX::Types::UndefinedType: '0.44'
-    MooseX::Types::Util: '0.44'
-    Net::Netrc: '2.14'
-    Net::Twitter: '4.01004'
-    Net::Twitter::Core: '4.01004'
-    Net::Twitter::Error: '4.01004'
-    Number::Compare: '0.03'
-    POSIX: 1.38_03
-    PPI: '1.215'
-    PPI::Document: '1.215'
-    PPI::Document::File: '1.215'
-    PPI::Document::Fragment: '1.215'
-    PPI::Document::Normalized: '1.215'
-    PPI::Element: '1.215'
-    PPI::Exception: '1.215'
-    PPI::Exception::ParserRejection: '1.215'
-    PPI::Exception::ParserTimeout: '1.215'
-    PPI::Lexer: '1.215'
-    PPI::Node: '1.215'
-    PPI::Normal: '1.215'
-    PPI::Normal::Standard: '1.215'
-    PPI::Statement: '1.215'
-    PPI::Statement::Break: '1.215'
-    PPI::Statement::Compound: '1.215'
-    PPI::Statement::Data: '1.215'
-    PPI::Statement::End: '1.215'
-    PPI::Statement::Expression: '1.215'
-    PPI::Statement::Given: '1.215'
-    PPI::Statement::Include: '1.215'
-    PPI::Statement::Include::Perl6: '1.215'
-    PPI::Statement::Null: '1.215'
-    PPI::Statement::Package: '1.215'
-    PPI::Statement::Scheduled: '1.215'
-    PPI::Statement::Sub: '1.215'
-    PPI::Statement::Unknown: '1.215'
-    PPI::Statement::UnmatchedBrace: '1.215'
-    PPI::Statement::Variable: '1.215'
-    PPI::Statement::When: '1.215'
-    PPI::Structure: '1.215'
-    PPI::Structure::Block: '1.215'
-    PPI::Structure::Condition: '1.215'
-    PPI::Structure::Constructor: '1.215'
-    PPI::Structure::For: '1.215'
-    PPI::Structure::Given: '1.215'
-    PPI::Structure::List: '1.215'
-    PPI::Structure::Subscript: '1.215'
-    PPI::Structure::Unknown: '1.215'
-    PPI::Structure::When: '1.215'
-    PPI::Token: '1.215'
-    PPI::Token::ArrayIndex: '1.215'
-    PPI::Token::Attribute: '1.215'
-    PPI::Token::BOM: '1.215'
-    PPI::Token::Cast: '1.215'
-    PPI::Token::Comment: '1.215'
-    PPI::Token::DashedWord: '1.215'
-    PPI::Token::Data: '1.215'
-    PPI::Token::End: '1.215'
-    PPI::Token::HereDoc: '1.215'
-    PPI::Token::Label: '1.215'
-    PPI::Token::Magic: '1.215'
-    PPI::Token::Number: '1.215'
-    PPI::Token::Number::Binary: '1.215'
-    PPI::Token::Number::Exp: '1.215'
-    PPI::Token::Number::Float: '1.215'
-    PPI::Token::Number::Hex: '1.215'
-    PPI::Token::Number::Octal: '1.215'
-    PPI::Token::Number::Version: '1.215'
-    PPI::Token::Operator: '1.215'
-    PPI::Token::Pod: '1.215'
-    PPI::Token::Prototype: '1.215'
-    PPI::Token::Quote: '1.215'
-    PPI::Token::Quote::Double: '1.215'
-    PPI::Token::Quote::Interpolate: '1.215'
-    PPI::Token::Quote::Literal: '1.215'
-    PPI::Token::Quote::Single: '1.215'
-    PPI::Token::QuoteLike: '1.215'
-    PPI::Token::QuoteLike::Backtick: '1.215'
-    PPI::Token::QuoteLike::Command: '1.215'
-    PPI::Token::QuoteLike::Readline: '1.215'
-    PPI::Token::QuoteLike::Regexp: '1.215'
-    PPI::Token::QuoteLike::Words: '1.215'
-    PPI::Token::Regexp: '1.215'
-    PPI::Token::Regexp::Match: '1.215'
-    PPI::Token::Regexp::Substitute: '1.215'
-    PPI::Token::Regexp::Transliterate: '1.215'
-    PPI::Token::Separator: '1.215'
-    PPI::Token::Structure: '1.215'
-    PPI::Token::Symbol: '1.215'
-    PPI::Token::Unknown: '1.215'
-    PPI::Token::Whitespace: '1.215'
-    PPI::Token::Word: '1.215'
-    PPI::Token::_QuoteEngine: '1.215'
-    PPI::Token::_QuoteEngine::Full: '1.215'
-    PPI::Token::_QuoteEngine::Simple: '1.215'
-    PPI::Tokenizer: '1.215'
-    PPI::Util: '1.215'
-    PPIx::Regexp: '0.036'
-    PPIx::Regexp::Constant: '0.036'
-    PPIx::Regexp::Element: '0.036'
-    PPIx::Regexp::Lexer: '0.036'
-    PPIx::Regexp::Node: '0.036'
-    PPIx::Regexp::Node::Range: '0.036'
-    PPIx::Regexp::Structure: '0.036'
-    PPIx::Regexp::Structure::Assertion: '0.036'
-    PPIx::Regexp::Structure::BranchReset: '0.036'
-    PPIx::Regexp::Structure::Capture: '0.036'
-    PPIx::Regexp::Structure::CharClass: '0.036'
-    PPIx::Regexp::Structure::Code: '0.036'
-    PPIx::Regexp::Structure::Main: '0.036'
-    PPIx::Regexp::Structure::Modifier: '0.036'
-    PPIx::Regexp::Structure::NamedCapture: '0.036'
-    PPIx::Regexp::Structure::Quantifier: '0.036'
-    PPIx::Regexp::Structure::RegexSet: '0.036'
-    PPIx::Regexp::Structure::Regexp: '0.036'
-    PPIx::Regexp::Structure::Replacement: '0.036'
-    PPIx::Regexp::Structure::Subexpression: '0.036'
-    PPIx::Regexp::Structure::Switch: '0.036'
-    PPIx::Regexp::Structure::Unknown: '0.036'
-    PPIx::Regexp::Support: '0.036'
-    PPIx::Regexp::Token: '0.036'
-    PPIx::Regexp::Token::Assertion: '0.036'
-    PPIx::Regexp::Token::Backreference: '0.036'
-    PPIx::Regexp::Token::Backtrack: '0.036'
-    PPIx::Regexp::Token::CharClass: '0.036'
-    PPIx::Regexp::Token::CharClass::POSIX: '0.036'
-    PPIx::Regexp::Token::CharClass::POSIX::Unknown: '0.036'
-    PPIx::Regexp::Token::CharClass::Simple: '0.036'
-    PPIx::Regexp::Token::Code: '0.036'
-    PPIx::Regexp::Token::Comment: '0.036'
-    PPIx::Regexp::Token::Condition: '0.036'
-    PPIx::Regexp::Token::Control: '0.036'
-    PPIx::Regexp::Token::Delimiter: '0.036'
-    PPIx::Regexp::Token::Greediness: '0.036'
-    PPIx::Regexp::Token::GroupType: '0.036'
-    PPIx::Regexp::Token::GroupType::Assertion: '0.036'
-    PPIx::Regexp::Token::GroupType::BranchReset: '0.036'
-    PPIx::Regexp::Token::GroupType::Code: '0.036'
-    PPIx::Regexp::Token::GroupType::Modifier: '0.036'
-    PPIx::Regexp::Token::GroupType::NamedCapture: '0.036'
-    PPIx::Regexp::Token::GroupType::Subexpression: '0.036'
-    PPIx::Regexp::Token::GroupType::Switch: '0.036'
-    PPIx::Regexp::Token::Interpolation: '0.036'
-    PPIx::Regexp::Token::Literal: '0.036'
-    PPIx::Regexp::Token::Modifier: '0.036'
-    PPIx::Regexp::Token::Operator: '0.036'
-    PPIx::Regexp::Token::Quantifier: '0.036'
-    PPIx::Regexp::Token::Recursion: '0.036'
-    PPIx::Regexp::Token::Reference: '0.036'
-    PPIx::Regexp::Token::Structure: '0.036'
-    PPIx::Regexp::Token::Unknown: '0.036'
-    PPIx::Regexp::Token::Unmatched: '0.036'
-    PPIx::Regexp::Token::Whitespace: '0.036'
-    PPIx::Regexp::Tokenizer: '0.036'
-    PPIx::Regexp::Util: '0.036'
-    Package::DeprecationManager: '0.13'
-    Package::Stash: '0.36'
-    Package::Stash::XS: '0.28'
-    Params::Check: '0.38'
-    Params::Util: '1.07'
-    Params::Validate: '1.10'
-    Params::Validate::Constants: '1.10'
-    Params::Validate::XS: '1.10'
-    Parse::CPAN::Meta: '1.4414'
-    Path::Class: '0.33'
-    Path::Class::Dir: '0.33'
-    Path::Class::Entity: '0.33'
-    Path::Class::File: '0.33'
-    Path::Iterator::Rule: '1.008'
-    Path::ScanINC: '0.020'
-    Path::Tiny: '0.054'
-    Perl::Critic: '1.121'
-    Perl::Critic::Exception: '1.121'
-    Perl::Critic::Exception::Fatal: '1.121'
-    Perl::Critic::Exception::Fatal::Generic: '1.121'
-    Perl::Critic::Utils: '1.121'
-    Perl::Critic::Utils::Constants: '1.121'
-    Perl::Critic::Utils::PPI: '1.121'
-    Perl::Critic::Violation: '1.121'
-    Perl::MinimumVersion: '1.37'
-    Perl::MinimumVersion::Reason: '1.37'
-    Perl::OSType: '1.007'
-    Perl::PrereqScanner: '1.019'
-    Perl::PrereqScanner::Scanner: '1.019'
-    Perl::PrereqScanner::Scanner::Aliased: '1.019'
-    Perl::PrereqScanner::Scanner::Moose: '1.019'
-    Perl::PrereqScanner::Scanner::POE: '1.019'
-    Perl::PrereqScanner::Scanner::Perl5: '1.019'
-    Perl::PrereqScanner::Scanner::Superclass: '1.019'
-    Perl::PrereqScanner::Scanner::TestMore: '1.019'
-    Perl::Tidy: '20140328'
-    Perl::Tidy::Sweetened: '0.24'
-    PerlIO: '1.09'
-    PerlIO::encoding: '0.18'
-    PerlIO::scalar: '0.18'
-    PerlIO::utf8_strict: '0.004'
-    Pod::Coverage: '0.23'
-    Pod::Coverage::TrustPod: '0.100003'
-    Pod::Elemental: '0.103000'
-    Pod::Elemental::Autoblank: '0.103000'
-    Pod::Elemental::Autochomp: '0.103000'
-    Pod::Elemental::Command: '0.103000'
-    Pod::Elemental::Document: '0.103000'
-    Pod::Elemental::Element::Generic::Blank: '0.103000'
-    Pod::Elemental::Element::Generic::Command: '0.103000'
-    Pod::Elemental::Element::Generic::Nonpod: '0.103000'
-    Pod::Elemental::Element::Generic::Text: '0.103000'
-    Pod::Elemental::Element::Nested: '0.103000'
-    Pod::Elemental::Element::Pod5::Command: '0.103000'
-    Pod::Elemental::Element::Pod5::Data: '0.103000'
-    Pod::Elemental::Element::Pod5::Nonpod: '0.103000'
-    Pod::Elemental::Element::Pod5::Ordinary: '0.103000'
-    Pod::Elemental::Element::Pod5::Region: '0.103000'
-    Pod::Elemental::Element::Pod5::Verbatim: '0.103000'
-    Pod::Elemental::Flat: '0.103000'
-    Pod::Elemental::Node: '0.103000'
-    Pod::Elemental::Objectifier: '0.103000'
-    Pod::Elemental::Paragraph: '0.103000'
-    Pod::Elemental::PerlMunger: '0.200002'
-    Pod::Elemental::Selectors: '0.103000'
-    Pod::Elemental::Transformer: '0.103000'
-    Pod::Elemental::Transformer::Gatherer: '0.103000'
-    Pod::Elemental::Transformer::Nester: '0.103000'
-    Pod::Elemental::Transformer::Pod5: '0.103000'
-    Pod::Elemental::Types: '0.103000'
-    Pod::Escapes: '1.06'
-    Pod::Eventual: '0.094001'
-    Pod::Eventual::Simple: '0.094001'
-    Pod::Markdown: '2.001'
-    Pod::Simple: '3.28'
-    Pod::Simple::BlackBox: '3.28'
-    Pod::Simple::HTML: '3.28'
-    Pod::Simple::LinkSection: '3.28'
-    Pod::Simple::Methody: '3.28'
-    Pod::Simple::PullParser: '3.28'
-    Pod::Simple::PullParserEndToken: '3.28'
-    Pod::Simple::PullParserStartToken: '3.28'
-    Pod::Simple::PullParserTextToken: '3.28'
-    Pod::Simple::PullParserToken: '3.28'
-    Pod::Simple::Text: '3.28'
-    Pod::Simple::TiedOutFH: '3.28'
-    Pod::Simple::Transcode: '3.28'
-    Pod::Text: '3.18'
-    Pod::Usage: '1.63'
-    Pod::Weaver: '4.006'
-    Pod::Weaver::Config: '4.006'
-    Pod::Weaver::Config::Assembler: '4.006'
-    Pod::Weaver::Config::Finder: '4.006'
-    Pod::Weaver::Plugin::EnsurePod5: '4.006'
-    Pod::Weaver::Plugin::H1Nester: '4.006'
-    Pod::Weaver::Plugin::SingleEncoding: '4.006'
-    Pod::Weaver::PluginBundle::CorePrep: '4.006'
-    Pod::Weaver::Role::Dialect: '4.006'
-    Pod::Weaver::Role::Finalizer: '4.006'
-    Pod::Weaver::Role::Plugin: '4.006'
-    Pod::Weaver::Role::Preparer: '4.006'
-    Pod::Weaver::Role::Section: '4.006'
-    Pod::Weaver::Role::StringFromComment: '4.006'
-    Pod::Weaver::Role::Transformer: '4.006'
-    Pod::Weaver::Section::Authors: '4.006'
-    Pod::Weaver::Section::Collect: '4.006'
-    Pod::Weaver::Section::Generic: '4.006'
-    Pod::Weaver::Section::Leftovers: '4.006'
-    Pod::Weaver::Section::Legal: '4.006'
-    Pod::Weaver::Section::Name: '4.006'
-    Pod::Weaver::Section::Region: '4.006'
-    Pod::Weaver::Section::Version: '4.006'
-    Readonly: '1.04'
-    Readonly::Array: '1.04'
-    Readonly::Hash: '1.04'
-    Readonly::Scalar: '1.04'
-    Role::HasMessage: '0.006'
-    Role::Identifiable::HasIdent: '0.007'
-    Role::Tiny: '1.003003'
-    Scalar::Util: '1.38'
-    Scope::Guard: '0.20'
-    SelectSaver: '1.02'
-    Socket: '2.013'
-    Software::License: '0.103010'
-    Software::License::Artistic_1_0: '0.103010'
-    Software::License::GPL_1: '0.103010'
-    Software::License::Perl_5: '0.103010'
-    Software::LicenseUtils: '0.103010'
-    Sort::Versions: '1.5'
-    Specio: '0.08'
-    Specio::Library::Builtins: '0.08'
-    StackTrace::Auto: '0.200011'
-    Storable: '2.49'
-    String::Errf: '0.007'
-    String::Flogger: '1.101244'
-    String::Formatter: '0.102084'
-    String::RewritePrefix: '0.007'
-    String::Truncate: '1.100602'
-    Sub::Defer: '1.004002'
-    Sub::Exporter: '0.987'
-    Sub::Exporter::ForMethods: '0.100051'
-    Sub::Exporter::Progressive: '0.001011'
-    Sub::Exporter::Util: '0.987'
-    Sub::Identify: '0.04'
-    Sub::Install: '0.927'
-    Sub::Name: '0.05'
-    Sub::Quote: '1.004002'
-    Symbol: '1.07'
-    Syntax::Keyword::Junction: '0.003007'
-    Syntax::Keyword::Junction::All: '0.003007'
-    Syntax::Keyword::Junction::Any: '0.003007'
-    Syntax::Keyword::Junction::Base: '0.003007'
-    Syntax::Keyword::Junction::None: '0.003007'
-    Syntax::Keyword::Junction::One: '0.003007'
-    Term::ANSIColor: '4.03'
-    Term::Cap: '1.16'
-    Term::Encoding: '0.02'
-    Term::ReadKey: '2.32'
-    Term::ReadLine: '1.14'
-    Term::UI: '0.42'
-    Test: '1.26'
-    Test::Kwalitee: '1.18'
-    Text::Abbrev: '1.02'
-    Text::Glob: '0.09'
-    Text::ParseWords: '3.29'
-    Text::Tabs: '2013.0523'
-    Text::Template: '1.46'
-    Text::Wrap: '2013.0523'
-    Throwable: '0.200011'
-    Tie::Hash: '1.05'
-    Tie::Hash::NamedCapture: '0.09'
-    Tie::IxHash: '1.23'
-    Tie::RefHash: '1.39'
-    Tie::ToObject: '0.03'
-    Time::HiRes: '1.9726'
-    Time::Local: '1.2300'
-    Time::Piece: '1.27'
-    Time::Seconds: '1.27'
-    Time::Zone: '2.24'
-    Try::Tiny: '0.22'
-    Types::Serialiser: '1.0'
-    UNIVERSAL: '1.11'
-    URI: '1.60'
-    URI::Escape: '3.31'
-    URI::FromHash: '0.04'
-    URI::WithBase: '2.20'
-    URI::file: '4.21'
-    Unicode::UTF8: '0.60'
-    Variable::Magic: '0.53'
-    Version::Next: '0.004'
-    WWW::Shorten: '3.05'
-    WWW::Shorten::Simple: '0.01'
-    WWW::Shorten::TinyURL: '1.90'
-    WWW::Shorten::generic: '1.92'
-    XSLoader: '0.17'
-    YAML: '0.90'
-    YAML::Tiny: '1.62'
-    aliased: '0.31'
-    attributes: '0.22'
-    autobox: '2.82'
-    autobox::Core: '1.27'
-    autobox::Junctions: '0.001'
-    autodie: '2.25'
-    autodie::Scope::Guard: '2.25'
-    autodie::Scope::GuardStack: '2.25'
-    autodie::ScopeUtil: '2.25'
-    autodie::exception: '2.25'
-    autodie::exception::system: '2.25'
-    autodie::hints: '2.25'
-    base: '2.22'
-    bytes: '1.04'
-    charnames: '1.40'
-    common::sense: '3.72'
-    constant: '1.31'
-    deprecate: '0.03'
-    fields: '2.17'
-    if: '0.0603'
-    integer: '1.01'
-    lib: '0.63'
-    metaclass: '2.1206'
-    mro: '1.16'
-    namespace::autoclean: '0.15'
-    namespace::clean: '0.25'
-    overload: '1.22'
-    overloading: '0.02'
-    parent: '0.228'
-    re: '0.26'
-    strict: '1.08'
-    strictures: '1.005004'
-    subs: '1.02'
-    threads: '1.93'
-    utf8: '1.13'
-    vars: '1.03'
-    version: '0.9908'
-    version::regex: '0.9908'
-    warnings: '1.23'
-    warnings::register: '1.03'
   modules:
-    CPAN::Meta: '2.141170'
+    CPAN::Meta: '2.141520'
+    CPAN::Meta::Prereqs: '2.141520'
     CPAN::Meta::Requirements: '2.125'
-    Carp: '1.3301'
+    Carp: '1.34'
     Class::Load: '0.21'
+    Dist::Zilla::App::Command::bakeini: '0.001001'
     Dist::Zilla::Plugin::Authority: '1.006'
-    Dist::Zilla::Plugin::AutoPrereqs: '5.017'
-    Dist::Zilla::Plugin::ConfirmRelease: '5.017'
+    Dist::Zilla::Plugin::AutoPrereqs: '5.019'
+    Dist::Zilla::Plugin::BumpVersionAfterRelease: '0.002'
+    Dist::Zilla::Plugin::ConfirmRelease: '5.019'
+    Dist::Zilla::Plugin::CopyFilesFromBuild: '0.103510'
     Dist::Zilla::Plugin::EOLTests: '0.02'
-    Dist::Zilla::Plugin::Git::Check: '2.022'
-    Dist::Zilla::Plugin::Git::Commit: '2.022'
-    Dist::Zilla::Plugin::Git::CommitBuild: '2.022'
-    Dist::Zilla::Plugin::Git::GatherDir: '2.022'
-    Dist::Zilla::Plugin::Git::NextRelease: '0.002010'
-    Dist::Zilla::Plugin::Git::NextVersion::Sanitized: '0.001000'
-    Dist::Zilla::Plugin::Git::Tag: '2.022'
+    Dist::Zilla::Plugin::Git::Check: '2.023'
+    Dist::Zilla::Plugin::Git::Commit: '2.023'
+    Dist::Zilla::Plugin::Git::CommitBuild: '2.023'
+    Dist::Zilla::Plugin::Git::GatherDir: '2.023'
+    Dist::Zilla::Plugin::Git::NextRelease: '0.002011'
+    Dist::Zilla::Plugin::Git::Tag: '2.023'
     Dist::Zilla::Plugin::GithubMeta: '0.46'
-    Dist::Zilla::Plugin::License: '5.017'
-    Dist::Zilla::Plugin::MakeMaker: '5.017'
-    Dist::Zilla::Plugin::Manifest: '5.017'
-    Dist::Zilla::Plugin::ManifestSkip: '5.017'
-    Dist::Zilla::Plugin::MetaConfig: '5.017'
-    Dist::Zilla::Plugin::MetaData::BuiltWith: '1.000000'
-    Dist::Zilla::Plugin::MetaJSON: '5.017'
-    Dist::Zilla::Plugin::MetaProvides::Package: '2.000001'
-    Dist::Zilla::Plugin::MetaTests: '5.017'
-    Dist::Zilla::Plugin::MetaYAML: '5.017'
+    Dist::Zilla::Plugin::License: '5.019'
+    Dist::Zilla::Plugin::MakeMaker: '5.019'
+    Dist::Zilla::Plugin::Manifest: '5.019'
+    Dist::Zilla::Plugin::ManifestSkip: '5.019'
+    Dist::Zilla::Plugin::MetaConfig: '5.019'
+    Dist::Zilla::Plugin::MetaData::BuiltWith: '1.000001'
+    Dist::Zilla::Plugin::MetaJSON: '5.019'
+    Dist::Zilla::Plugin::MetaProvides::Package: '2.000002'
+    Dist::Zilla::Plugin::MetaTests: '5.019'
+    Dist::Zilla::Plugin::MetaYAML: '5.019'
     Dist::Zilla::Plugin::MinimumPerl: '1.003'
-    Dist::Zilla::Plugin::PkgVersion: '5.017'
-    Dist::Zilla::Plugin::PodCoverageTests: '5.017'
-    Dist::Zilla::Plugin::PodSyntaxTests: '5.017'
+    Dist::Zilla::Plugin::PodCoverageTests: '5.019'
+    Dist::Zilla::Plugin::PodSyntaxTests: '5.019'
     Dist::Zilla::Plugin::PodWeaver: '4.005'
-    Dist::Zilla::Plugin::Prereqs: '5.017'
-    Dist::Zilla::Plugin::Prereqs::Recommend::MatchInstalled: '0.001000'
-    Dist::Zilla::Plugin::ReadmeAnyFromPod: '0.141120'
+    Dist::Zilla::Plugin::Prereqs: '5.019'
+    Dist::Zilla::Plugin::Prereqs::Recommend::MatchInstalled: '0.002000'
+    Dist::Zilla::Plugin::ReadmeAnyFromPod: '0.141760'
     Dist::Zilla::Plugin::ReadmeFromPod: '0.21'
-    Dist::Zilla::Plugin::RunExtraTests: '0.021'
+    Dist::Zilla::Plugin::RewriteVersion::Sanitized: '0.001000'
+    Dist::Zilla::Plugin::RunExtraTests: '0.022'
     Dist::Zilla::Plugin::Test::CPAN::Changes: '0.008'
     Dist::Zilla::Plugin::Test::Compile::PerFile: '0.002000'
     Dist::Zilla::Plugin::Test::Kwalitee: '2.07'
     Dist::Zilla::Plugin::Test::MinimumVersion: '2.000005'
     Dist::Zilla::Plugin::Test::Perl::Critic: '2.112410'
-    Dist::Zilla::Plugin::Test::ReportPrereqs: '0.013'
-    Dist::Zilla::Plugin::TestRelease: '5.017'
+    Dist::Zilla::Plugin::Test::ReportPrereqs: '0.014'
+    Dist::Zilla::Plugin::TestRelease: '5.019'
     Dist::Zilla::Plugin::Twitter: '0.025'
-    Dist::Zilla::Plugin::UploadToCPAN: '5.017'
-    Dist::Zilla::PluginBundle::Author::KENTNL: '2.013004'
-    Dist::Zilla::PluginBundle::Author::KENTNL::Lite: 1.7.2
-    Dist::Zilla::Role::ConfigDumper: '5.017'
-    Dist::Zilla::Role::MetaProvider: '5.017'
-    Dist::Zilla::Util::EmulatePhase: '1.000000'
+    Dist::Zilla::Plugin::UploadToCPAN: '5.019'
+    Dist::Zilla::PluginBundle::Author::KENTNL: '2.016004'
+    Dist::Zilla::Role::ConfigDumper: '5.019'
+    Dist::Zilla::Role::MetaProvider: '5.019'
+    Dist::Zilla::Util::EmulatePhase: '1.000001'
     ExtUtils::MakeMaker: '6.98'
-    File::Spec::Functions: '3.47'
-    List::Util: '1.38'
+    File::Spec: '3.48'
+    File::Spec::Functions: '3.48'
+    List::Util: '1.39'
     Module::Data: '0.007'
-    Moose: '2.1206'
+    Moose: '2.1210'
     MooseX::Types::Moose: '0.44'
     Pod::Coverage::TrustPod: '0.100003'
-    Readonly: '1.04'
-    Test::CPAN::Changes: '0.27'
+    Readonly: '2.00'
+    Scalar::Util: '1.39'
+    Test::CPAN::Changes: '0.28'
     Test::CPAN::Meta: '0.23'
     Test::Kwalitee: '1.18'
     Test::More: '1.001003'
     Test::Pod: '1.48'
     Test::Pod::Coverage: '1.08'
-    namespace::autoclean: '0.15'
+    namespace::autoclean: '0.19'
     strict: '1.08'
-    utf8: '1.13'
+    utf8: '1.14'
     version: '0.9908'
-    warnings: '1.23'
+    warnings: '1.24'
   perl:
-    original: v5.19.11
+    original: v5.21.1
     qv: 1
     version:
       - 5
-      - 19
-      - 11
+      - 21
+      - 1
   perl-config:
-    gccversion: 4.8.2
+    gccversion: 4.8.3
     myarchname: x86_64-linux
     osname: linux
   platform: linux
-  uname: 'Linux 3.14.0-gentoo x86_64 GenuineIntel GNU/Linux'
+  uname: 'Linux 3.15.2-aufs x86_64 GenuineIntel GNU/Linux'
 x_Dist_Zilla:
   perl:
-    version: '5.019011'
+    version: '5.021001'
   plugins:
     -
       class: Dist::Zilla::Plugin::Bootstrap::lib
@@ -1022,25 +147,11 @@ x_Dist_Zilla:
           try_built: '1'
           try_built_method: mtime
       name: Bootstrap::lib
-      version: '1.000001'
-    -
-      class: Dist::Zilla::Plugin::Git::NextVersion::Sanitized
-      config:
-        Dist::Zilla::Plugin::Git::NextVersion:
-          first_version: '0.001000'
-          version_by_branch: '0'
-          version_regexp: (?^:^(.*)-source$)
-        Dist::Zilla::Role::Git::Repo:
-          repo_root: .
-        Dist::Zilla::Role::Version::Sanitize:
-          mantissa: '6'
-          normal_form: numify
-      name: '@Author::KENTNL/Git::NextVersion::Sanitized'
-      version: '0.001000'
+      version: '1.000003'
     -
       class: Dist::Zilla::Plugin::MetaConfig
       name: '@Author::KENTNL/MetaConfig'
-      version: '5.017'
+      version: '5.019'
     -
       class: Dist::Zilla::Plugin::GithubMeta
       name: '@Author::KENTNL/GithubMeta'
@@ -1053,13 +164,30 @@ x_Dist_Zilla:
             -
               class: Dist::Zilla::Plugin::FinderCode
               name: '@Author::KENTNL/MetaProvides::Package/AUTOVIV/:InstallModulesPM'
-              version: '5.017'
+              version: '5.019'
         Dist::Zilla::Role::MetaProvider::Provider:
           inherit_missing: '1'
           inherit_version: '1'
           meta_noindex: '1'
       name: '@Author::KENTNL/MetaProvides::Package'
-      version: '2.000001'
+      version: '2.000002'
+    -
+      class: Dist::Zilla::Plugin::MetaData::BuiltWith
+      config:
+        Dist::Zilla::Plugin::MetaData::BuiltWith:
+          _stash_key: x_BuiltWith
+          show_config: '1'
+          show_uname: '1'
+          uname:
+            uname_args:
+              - -s
+              - -o
+              - -r
+              - -m
+              - -i
+            uname_call: uname
+      name: '@Author::KENTNL/MetaData::BuiltWith'
+      version: '1.000001'
     -
       class: Dist::Zilla::Plugin::Git::GatherDir
       config:
@@ -1068,39 +196,43 @@ x_Dist_Zilla:
         Dist::Zilla::Role::Git::Repo:
           repo_root: .
       name: '@Author::KENTNL/Git::GatherDir'
-      version: '2.022'
+      version: '2.023'
     -
       class: Dist::Zilla::Plugin::License
       name: '@Author::KENTNL/License'
-      version: '5.017'
+      version: '5.019'
     -
       class: Dist::Zilla::Plugin::MetaJSON
       name: '@Author::KENTNL/MetaJSON'
-      version: '5.017'
+      version: '5.019'
     -
       class: Dist::Zilla::Plugin::MetaYAML
       name: '@Author::KENTNL/MetaYAML'
-      version: '5.017'
+      version: '5.019'
     -
       class: Dist::Zilla::Plugin::Manifest
       name: '@Author::KENTNL/Manifest'
-      version: '5.017'
+      version: '5.019'
+    -
+      class: Dist::Zilla::Plugin::CopyFilesFromBuild
+      name: '@Author::KENTNL/CopyXBuild'
+      version: '0.103510'
     -
       class: Dist::Zilla::Plugin::MetaTests
       name: '@Author::KENTNL/MetaTests'
-      version: '5.017'
+      version: '5.019'
     -
       class: Dist::Zilla::Plugin::PodCoverageTests
       name: '@Author::KENTNL/PodCoverageTests'
-      version: '5.017'
+      version: '5.019'
     -
       class: Dist::Zilla::Plugin::PodSyntaxTests
       name: '@Author::KENTNL/PodSyntaxTests'
-      version: '5.017'
+      version: '5.019'
     -
       class: Dist::Zilla::Plugin::Test::ReportPrereqs
       name: '@Author::KENTNL/Test::ReportPrereqs'
-      version: '0.013'
+      version: '0.014'
     -
       class: Dist::Zilla::Plugin::Test::Kwalitee
       name: '@Author::KENTNL/Test::Kwalitee'
@@ -1116,7 +248,7 @@ x_Dist_Zilla:
     -
       class: Dist::Zilla::Plugin::FinderCode
       name: '@Author::KENTNL/Test::Compile::PerFile/AUTOVIV/:InstallModulesPM'
-      version: '5.017'
+      version: '5.019'
     -
       class: Dist::Zilla::Plugin::Test::Compile::PerFile
       config:
@@ -1138,11 +270,15 @@ x_Dist_Zilla:
     -
       class: Dist::Zilla::Plugin::ManifestSkip
       name: '@Author::KENTNL/ManifestSkip'
-      version: '5.017'
+      version: '5.019'
     -
-      class: Dist::Zilla::Plugin::PkgVersion
-      name: '@Author::KENTNL/PkgVersion'
-      version: '5.017'
+      class: Dist::Zilla::Plugin::RewriteVersion::Sanitized
+      config:
+        Dist::Zilla::Role::Version::Sanitize:
+          mantissa: '6'
+          normal_form: numify
+      name: '@Author::KENTNL/RewriteVersion::Sanitized'
+      version: '0.001000'
     -
       class: Dist::Zilla::Plugin::PodWeaver
       config:
@@ -1238,13 +374,9 @@ x_Dist_Zilla:
       name: '@Author::KENTNL/PodWeaver'
       version: '4.005'
     -
-      class: Dist::Zilla::Plugin::Git::NextRelease
-      name: '@Author::KENTNL/Git::NextRelease'
-      version: '0.002010'
-    -
       class: Dist::Zilla::Plugin::AutoPrereqs
       name: '@Author::KENTNL/AutoPrereqs'
-      version: '5.017'
+      version: '5.019'
     -
       class: Dist::Zilla::Plugin::Prereqs
       config:
@@ -1252,15 +384,7 @@ x_Dist_Zilla:
           phase: develop
           type: suggests
       name: '@Author::KENTNL/BundleDevelSuggests'
-      version: '5.017'
-    -
-      class: Dist::Zilla::Plugin::Prereqs
-      config:
-        Dist::Zilla::Plugin::Prereqs:
-          phase: develop
-          type: requires
-      name: '@Author::KENTNL/BundleDevelRequires'
-      version: '5.017'
+      version: '5.019'
     -
       class: Dist::Zilla::Plugin::MinimumPerl
       name: '@Author::KENTNL/MinimumPerl'
@@ -1273,9 +397,9 @@ x_Dist_Zilla:
       class: Dist::Zilla::Plugin::MakeMaker
       config:
         Dist::Zilla::Role::TestRunner:
-          default_jobs: 10
+          default_jobs: '10'
       name: '@Author::KENTNL/MakeMaker'
-      version: '5.017'
+      version: '5.019'
     -
       class: Dist::Zilla::Plugin::ReadmeFromPod
       name: '@Author::KENTNL/ReadmeFromPod'
@@ -1283,7 +407,7 @@ x_Dist_Zilla:
     -
       class: Dist::Zilla::Plugin::ReadmeAnyFromPod
       name: '@Author::KENTNL/ReadmeAnyFromPod'
-      version: '0.141120'
+      version: '0.141760'
     -
       class: Dist::Zilla::Plugin::Test::CPAN::Changes
       name: '@Author::KENTNL/Test::CPAN::Changes'
@@ -1292,17 +416,17 @@ x_Dist_Zilla:
       class: Dist::Zilla::Plugin::RunExtraTests
       config:
         Dist::Zilla::Role::TestRunner:
-          default_jobs: 10
+          default_jobs: '10'
       name: '@Author::KENTNL/RunExtraTests'
-      version: '0.021'
+      version: '0.022'
     -
       class: Dist::Zilla::Plugin::TestRelease
       name: '@Author::KENTNL/TestRelease'
-      version: '5.017'
+      version: '5.019'
     -
       class: Dist::Zilla::Plugin::ConfirmRelease
       name: '@Author::KENTNL/ConfirmRelease'
-      version: '5.017'
+      version: '5.019'
     -
       class: Dist::Zilla::Plugin::Git::Check
       config:
@@ -1317,21 +441,7 @@ x_Dist_Zilla:
         Dist::Zilla::Role::Git::Repo:
           repo_root: .
       name: '@Author::KENTNL/Git::Check'
-      version: '2.022'
-    -
-      class: Dist::Zilla::Plugin::Git::Tag
-      config:
-        Dist::Zilla::Plugin::Git::Tag:
-          branch: ~
-          signed: 0
-          tag: 1.000000-source
-          tag_format: '%v-source'
-          tag_message: v%v
-          time_zone: local
-        Dist::Zilla::Role::Git::Repo:
-          repo_root: .
-      name: '@Author::KENTNL/tag_master'
-      version: '2.022'
+      version: '2.023'
     -
       class: Dist::Zilla::Plugin::Git::Commit
       config:
@@ -1347,8 +457,48 @@ x_Dist_Zilla:
           changelog: Changes
         Dist::Zilla::Role::Git::Repo:
           repo_root: .
-      name: '@Author::KENTNL/Git::Commit'
-      version: '2.022'
+      name: '@Author::KENTNL/commit_dirty_files'
+      version: '2.023'
+    -
+      class: Dist::Zilla::Plugin::Git::Tag
+      config:
+        Dist::Zilla::Plugin::Git::Tag:
+          branch: ~
+          signed: 0
+          tag: 1.000001-source
+          tag_format: '%v-source'
+          tag_message: v%v
+          time_zone: local
+        Dist::Zilla::Role::Git::Repo:
+          repo_root: .
+      name: '@Author::KENTNL/tag_master'
+      version: '2.023'
+    -
+      class: Dist::Zilla::Plugin::Git::NextRelease
+      name: '@Author::KENTNL/Git::NextRelease'
+      version: '0.002011'
+    -
+      class: Dist::Zilla::Plugin::BumpVersionAfterRelease
+      name: '@Author::KENTNL/BumpVersionAfterRelease'
+      version: '0.002'
+    -
+      class: Dist::Zilla::Plugin::Git::Commit
+      config:
+        Dist::Zilla::Plugin::Git::Commit:
+          add_files_in: []
+          commit_msg: v%v%n%n%c
+          time_zone: local
+        Dist::Zilla::Role::Git::DirtyFiles:
+          allow_dirty:
+            - dist.ini
+            - Changes
+          allow_dirty_match:
+            - (?^u:^lib/)
+          changelog: Changes
+        Dist::Zilla::Role::Git::Repo:
+          repo_root: .
+      name: '@Author::KENTNL/commit_release_changes'
+      version: '2.023'
     -
       class: Dist::Zilla::Plugin::Git::CommitBuild
       config:
@@ -1362,25 +512,25 @@ x_Dist_Zilla:
         Dist::Zilla::Role::Git::Repo:
           repo_root: .
       name: '@Author::KENTNL/Git::CommitBuild'
-      version: '2.022'
+      version: '2.023'
     -
       class: Dist::Zilla::Plugin::Git::Tag
       config:
         Dist::Zilla::Plugin::Git::Tag:
           branch: releases
           signed: 0
-          tag: '1.000000'
+          tag: '1.000001'
           tag_format: '%v'
           tag_message: v%v
           time_zone: local
         Dist::Zilla::Role::Git::Repo:
           repo_root: .
       name: '@Author::KENTNL/tag_release'
-      version: '2.022'
+      version: '2.023'
     -
       class: Dist::Zilla::Plugin::UploadToCPAN
       name: '@Author::KENTNL/UploadToCPAN'
-      version: '5.017'
+      version: '5.019'
     -
       class: Dist::Zilla::Plugin::Twitter
       name: '@Author::KENTNL/Twitter'
@@ -1405,19 +555,20 @@ x_Dist_Zilla:
             - ExtUtils::MakeMaker
             - Test::More
       name: '@Author::KENTNL/Prereqs::Recommend::MatchInstalled'
-      version: '0.001000'
+      version: '0.002000'
     -
       class: Dist::Zilla::Plugin::Prereqs::Recommend::MatchInstalled
       config:
         Dist::Zilla::Plugin::Prereqs::Recommend::MatchInstalled:
           applyto_map:
-            - 'develop.requires = develop.requires'
+            - 'develop.suggests = develop.suggests'
           applyto_phase:
             - develop
           modules:
             - Dist::Zilla::PluginBundle::Author::KENTNL
+            - Dist::Zilla::App::Command::bakeini
       name: '@Author::KENTNL/always_latest_develop_bundle'
-      version: '0.001000'
+      version: '0.002000'
     -
       class: Dist::Zilla::Plugin::Prereqs
       config:
@@ -1425,26 +576,7 @@ x_Dist_Zilla:
           phase: develop
           type: requires
       name: '@Author::KENTNL/::Role::BundleDeps'
-      version: '5.017'
-    -
-      class: Dist::Zilla::Plugin::MetaData::BuiltWith::All
-      config:
-        Dist::Zilla::Plugin::MetaData::BuiltWith:
-          _stash_key: x_BuiltWith
-          show_config: '1'
-          show_uname: '1'
-          uname:
-            uname_args:
-              - -s
-              - -o
-              - -r
-              - -m
-              - -i
-            uname_call: uname
-        Dist::Zilla::Plugin::MetaData::BuiltWith::All:
-          show_failures: '0'
-      name: MetaData::BuiltWith::All
-      version: '1.000000'
+      version: '5.019'
     -
       class: Dist::Zilla::Plugin::Prereqs
       config:
@@ -1452,46 +584,46 @@ x_Dist_Zilla:
           phase: runtime
           type: requires
       name: Prereqs
-      version: '5.017'
+      version: '5.019'
     -
       class: Dist::Zilla::Plugin::FinderCode
       name: ':InstallModules'
-      version: '5.017'
+      version: '5.019'
     -
       class: Dist::Zilla::Plugin::FinderCode
       name: ':IncModules'
-      version: '5.017'
+      version: '5.019'
     -
       class: Dist::Zilla::Plugin::FinderCode
       name: ':TestFiles'
-      version: '5.017'
+      version: '5.019'
     -
       class: Dist::Zilla::Plugin::FinderCode
       name: ':ExecFiles'
-      version: '5.017'
+      version: '5.019'
     -
       class: Dist::Zilla::Plugin::FinderCode
       name: ':ShareFiles'
-      version: '5.017'
+      version: '5.019'
     -
       class: Dist::Zilla::Plugin::FinderCode
       name: ':MainModule'
-      version: '5.017'
+      version: '5.019'
     -
       class: Dist::Zilla::Plugin::FinderCode
       name: ':AllFiles'
-      version: '5.017'
+      version: '5.019'
     -
       class: Dist::Zilla::Plugin::FinderCode
       name: ':NoFiles'
-      version: '5.017'
+      version: '5.019'
     -
       class: Dist::Zilla::Plugin::FinderCode
       name: '@Author::KENTNL/MetaProvides::Package/AUTOVIV/:InstallModulesPM'
-      version: '5.017'
+      version: '5.019'
   zilla:
     class: Dist::Zilla::Dist::Builder
     config:
       is_trial: '0'
-    version: '5.017'
+    version: '5.019'
 x_authority: cpan:KENTNL
