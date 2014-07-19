@@ -4,7 +4,9 @@ use warnings;
 use utf8;
 
 package Dist::Zilla::Plugin::MetaData::BuiltWith::All;
-$Dist::Zilla::Plugin::MetaData::BuiltWith::All::VERSION = '1.000001';
+
+our $VERSION = '1.000001';
+
 # ABSTRACT: Go overkill and report everything in all name-spaces.
 
 our $AUTHORITY = 'cpan:KENTNL'; # AUTHORITY

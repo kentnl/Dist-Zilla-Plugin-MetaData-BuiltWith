@@ -4,7 +4,9 @@ use warnings;
 use utf8;
 
 package Dist::Zilla::Plugin::MetaData::BuiltWith;
-$Dist::Zilla::Plugin::MetaData::BuiltWith::VERSION = '1.000001';
+
+our $VERSION = '1.000001';
+
 # ABSTRACT: Report what versions of things your distribution was built against
 
 our $AUTHORITY = 'cpan:KENTNL'; # AUTHORITY
