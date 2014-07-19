@@ -9,9 +9,7 @@ copyright_holder = Kent Fredric <kentnl@cpan.org>
 try_built = 1
 fallback  = 0
 
-[@Filter]
--bundle = @Author::KENTNL
--remove = MetaData::BuiltWith
+[@Author::KENTNL]
 toolkit          = eumm
 toolkit_hardness = soft
 normal_form      = numify
@@ -29,10 +27,10 @@ bumpversions      = 1
 ;version_rel_hour  = 1
 ;version_rel_time_zone = Pacific/Auckland
 
-[MetaData::BuiltWith::All]
-show_uname = 1
-show_config = 1
-uname_args = -s -o -r -m -i
+;[MetaData::BuiltWith::All]
+;show_uname = 1
+;show_config = 1
+;uname_args = -s -o -r -m -i
 ;show_undef = 1
 ;include = MooseX::Types::Moose
 ;include = Acme::BadExample
