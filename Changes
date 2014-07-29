@@ -1,6 +1,10 @@
 ﻿Revision history for {{$dist->name}}
 
 {{$NEXT}}
+ [00 Minor]
+ - Dependence on EmulatePhase sent to hell.
+ - A test added \o/
+
  [Dependencies::Stats]
  - Dependencies changed since 1.000001, see misc/*.deps* for details
  - configure: ↓1
