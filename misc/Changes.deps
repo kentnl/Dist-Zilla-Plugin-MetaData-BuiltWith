@@ -1,8 +1,17 @@
 This file contains changes in REQUIRED dependencies for standard CPAN phases (configure/build/runtime/test)
 
 1.000002
+ [Added / test requires]
+ - JSON
+ - Path::Tiny
+ - Test::DZil
+
  [Changed / configure requires]
  - ExtUtils::MakeMaker 6.30 → 0
+
+ [Removed / runtime requires]
+ - Dist::Zilla::Util::EmulatePhase 0.01000101
+ - Readonly
 
 1.000001 2014-07-19T02:16:32Z
  [Added / test requires]
