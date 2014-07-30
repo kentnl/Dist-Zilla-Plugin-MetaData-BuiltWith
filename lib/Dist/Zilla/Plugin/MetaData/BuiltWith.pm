@@ -59,7 +59,7 @@ use Moose 2.0;
 use Moose qw( with has around );
 use MooseX::Types::Moose qw( ArrayRef Bool Str );
 use namespace::autoclean;
-with 'Dist::Zilla::Role::MetaProvider';
+with 'Dist::Zilla::Role::FileMunger';
 
 
 
@@ -300,7 +300,7 @@ sub _detect_installed {
 
 
 
-sub metadata {
+sub _metadata {
   my ($self) = @_;
   $self->log_debug(q{Metadata called});
   my $report = $self->_get_prereq_modnames();
@@ -345,7 +345,51 @@ sub metadata {
   if ( keys %failures ) {
     $result->{failures} = \%failures;
   }
-  return { $self->_stash_key, $result };
+  return $result;
+}
+
+sub munge_files {
+  my ($self) = @_;
+
+  my $munged = {};
+
+  for my $file ( @{ $self->zilla->files } ) {
+    if ( 'META.json' eq $file->name ) {
+      require JSON;
+      require CPAN::Meta::Converter;
+      my $json = JSON->new->pretty->canonical(1);
+      my $old  = $file->code;
+      $file->code(
+        sub {
+          my $content = $json->decode( $old->() );
+          $content->{ $self->_stash_key } = $self->_metadata;
+          my $normal = CPAN::Meta::Converter->new($content)->convert( version => $content->{'meta-spec'}->{version} );
+          return $json->encode($normal);
+        }
+      );
+      $munged->{'META.json'} = 1;
+      next;
+    }
+    if ( 'META.yml' eq $file->name ) {
+      require YAML::Tiny;
+      require CPAN::Meta::Converter;
+      my $old = $file->code;
+      $file->code(
+        sub {
+          my $content = YAML::Tiny::Load( $old->() );
+          $content->{ $self->_stash_key } = $self->_metadata;
+          my $normal = CPAN::Meta::Converter->new($content)->convert( version => $content->{'meta-spec'}->{version} );
+          return YAML::Tiny::Dump($normal);
+        }
+      );
+      $munged->{'META.yml'} = 1;
+      next;
+    }
+  }
+  if ( not keys %{$munged} ) {
+    $self->log_fatal('No META.* files to munge. BuiltWith cannot operate without one in tree prior to it');
+  }
+  return;
 }
 
 __PACKAGE__->meta->make_immutable;
@@ -434,7 +478,7 @@ Specify arguments passed to the C<uname> call.
 
 This module can take, as parameters, any volume of 'exclude' or 'include' arguments.
 
-=head2 metadata
+=head2 munge_files
 
 This module scrapes together the name of all modules that exist in the "C<Prereqs>" section
 that Dist::Zilla collects, and then works out what version of things you have,

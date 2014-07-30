@@ -11,6 +11,7 @@ This file contains changes in REQUIRED dependencies for standard CPAN phases (co
 
  [Removed / runtime requires]
  - Class::Load
+ - Dist::Zilla::Util::EmulatePhase 0.01000101
  - Readonly
 
  [Removed / test requires]
