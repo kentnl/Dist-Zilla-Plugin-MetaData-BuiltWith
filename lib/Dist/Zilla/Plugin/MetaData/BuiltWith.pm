@@ -301,12 +301,12 @@ sub _detect_installed_lookup {
 
 }
 
-=method metadata
+=method C<munge_files>
+
 
 This module scrapes together the name of all modules that exist in the "C<Prereqs>" section
 that Dist::Zilla collects, and then works out what version of things you have,
-applies the various include/exclude rules, and ships that data back to Dist::Zilla
-via this method. See L<< C<Dist::Zilla>'s C<MetaProvider> role|Dist::Zilla::Role::MetaProvider >> for more details.
+applies the various include/exclude rules, and the mutates your C<META.json> and C<META.yml> files to contain x_BuiltWith data.
 
 =cut
 
@@ -359,13 +359,13 @@ sub _gen_meta {
   return $result;
 }
 
-sub inject_package {
+sub _inject_package {
   my ( $self, $hash ) = @_;
   $hash->{ $self->_stash_key } = $self->_gen_meta;
   return CPAN::Meta::Converter->new($hash)->convert( version => $hash->{'meta-spec'}->{version} );
 }
 
-sub munge_meta_json {
+sub _munge_meta_json {
   my ($self) = @_;
 
   my ($found_file) = grep { 'META.json' eq $_->name } @{ $self->zilla->files };
@@ -377,11 +377,11 @@ sub munge_meta_json {
   my $old  = $found_file->code;
   my $json = JSON->new()->pretty->canonical(1);
 
-  $found_file->code( sub { return $json->encode( $self->inject_package( $json->decode( $old->() ) ) ) } );
+  $found_file->code( sub { return $json->encode( $self->_inject_package( $json->decode( $old->() ) ) ) } );
   return 1;
 }
 
-sub munge_meta_yaml {
+sub _munge_meta_yaml {
   my ($self) = @_;
 
   my ($found_file) = grep { 'META.yml' eq $_->name } @{ $self->zilla->files };
@@ -391,14 +391,14 @@ sub munge_meta_yaml {
   require YAML::Tiny;
   require CPAN::Meta::Converter;
   my $old = $found_file->code;
-  $found_file->code( sub { return YAML::Tiny::Dump( $self->inject_package( YAML::Tiny::Load( $old->() ) ) ) } );
+  $found_file->code( sub { return YAML::Tiny::Dump( $self->_inject_package( YAML::Tiny::Load( $old->() ) ) ) } );
   return 1;
 }
 
 sub munge_files {
   my ($self) = @_;
-  $self->munge_meta_json if $self->do_meta_json;
-  $self->munge_meta_yaml if $self->do_meta_yaml;
+  $self->_munge_meta_json if $self->do_meta_json;
+  $self->_munge_meta_yaml if $self->do_meta_yaml;
   return;
 }
 

@@ -74,12 +74,11 @@ Specify arguments passed to the `uname` call.
 
 This module can take, as parameters, any volume of 'exclude' or 'include' arguments.
 
-## metadata
+## `munge_files`
 
 This module scrapes together the name of all modules that exist in the "`Prereqs`" section
 that Dist::Zilla collects, and then works out what version of things you have,
-applies the various include/exclude rules, and ships that data back to Dist::Zilla
-via this method. See [`Dist::Zilla`'s `MetaProvider` role](https://metacpan.org/pod/Dist::Zilla::Role::MetaProvider) for more details.
+applies the various include/exclude rules, and the mutates your `META.json` and `META.yml` files to contain x\_BuiltWith data.
 
 # EXAMPLE OUTPUT ( `META.json` )
 
