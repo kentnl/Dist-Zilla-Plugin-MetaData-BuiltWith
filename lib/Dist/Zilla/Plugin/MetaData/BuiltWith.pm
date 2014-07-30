@@ -387,7 +387,10 @@ sub munge_files {
     }
   }
   if ( not keys %{$munged} ) {
-    my $message = 'No META.* files to munge. BuiltWith cannot operate without one in tree prior to it';
+    my $message = <<'EOF';
+No META.* files to munge.
+BuiltWith cannot operate without one in tree prior to it
+EOF
     $self->log_fatal($message);
   }
   return;
