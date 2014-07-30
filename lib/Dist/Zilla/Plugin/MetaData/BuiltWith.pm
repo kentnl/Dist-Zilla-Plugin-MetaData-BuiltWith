@@ -365,7 +365,7 @@ sub munge_files {
           $content->{ $self->_stash_key } = $self->_metadata;
           my $normal = CPAN::Meta::Converter->new($content)->convert( version => $content->{'meta-spec'}->{version} );
           return $json->encode($normal);
-        }
+        },
       );
       $munged->{'META.json'} = 1;
       next;
@@ -380,14 +380,15 @@ sub munge_files {
           $content->{ $self->_stash_key } = $self->_metadata;
           my $normal = CPAN::Meta::Converter->new($content)->convert( version => $content->{'meta-spec'}->{version} );
           return YAML::Tiny::Dump($normal);
-        }
+        },
       );
       $munged->{'META.yml'} = 1;
       next;
     }
   }
   if ( not keys %{$munged} ) {
-    $self->log_fatal('No META.* files to munge. BuiltWith cannot operate without one in tree prior to it');
+    my $message = 'No META.* files to munge. BuiltWith cannot operate without one in tree prior to it';
+    $self->log_fatal($message);
   }
   return;
 }
