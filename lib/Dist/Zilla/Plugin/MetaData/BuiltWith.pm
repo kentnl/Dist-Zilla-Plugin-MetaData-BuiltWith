@@ -334,10 +334,12 @@ sub _metadata {
   for my $badmodule ( $self->exclude ) {
     $forget_module->($badmodule);
   }
+  ## no critic ( Variables::ProhibitPunctuationVars )
+  my $perlver = $] < 5.010000 ? { %{ version->parse($]) } } : { %{$^V} };
+
   my $result = {
-    modules => \%modtable,
-    ## no critic ( Variables::ProhibitPunctuationVars )
-    perl     => { %{$^V} },
+    modules  => \%modtable,
+    perl     => $perlver,
     platform => $^O,
     $self->_uname(),
     $self->_config(),
