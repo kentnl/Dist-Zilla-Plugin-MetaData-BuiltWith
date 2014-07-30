@@ -74,7 +74,7 @@ Specify arguments passed to the `uname` call.
 
 This module can take, as parameters, any volume of 'exclude' or 'include' arguments.
 
-## metadata
+## munge\_files
 
 This module scrapes together the name of all modules that exist in the "`Prereqs`" section
 that Dist::Zilla collects, and then works out what version of things you have,

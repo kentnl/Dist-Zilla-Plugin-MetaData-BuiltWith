@@ -59,7 +59,7 @@ use Moose 2.0;
 use Moose qw( with has around );
 use MooseX::Types::Moose qw( ArrayRef Bool Str );
 use namespace::autoclean;
-with 'Dist::Zilla::Role::MetaProvider';
+with 'Dist::Zilla::Role::FileMunger';
 
 =method mvp_multivalue_args
 
@@ -291,7 +291,7 @@ sub _detect_installed {
 
 }
 
-=method metadata
+=method munge_files
 
 This module scrapes together the name of all modules that exist in the "C<Prereqs>" section
 that Dist::Zilla collects, and then works out what version of things you have,
@@ -348,9 +348,52 @@ sub _metadata {
   return $result;
 }
 
-sub metadata {
+sub munge_files {
   my ($self) = @_;
-  return { $self->_stash_key, $self->_metadata };
+
+  my $munged = {};
+
+  for my $file ( @{ $self->zilla->files } ) {
+    if ( 'META.json' eq $file->name ) {
+      require JSON;
+      require CPAN::Meta::Converter;
+      my $json = JSON->new->pretty->canonical(1);
+      my $old  = $file->code;
+      $file->code(
+        sub {
+          my $content = $json->decode( $old->() );
+          $content->{ $self->_stash_key } = $self->_metadata;
+          my $normal = CPAN::Meta::Converter->new($content)->convert( version => $content->{'meta-spec'}->{version} );
+          return $json->encode($normal);
+        },
+      );
+      $munged->{'META.json'} = 1;
+      next;
+    }
+    if ( 'META.yml' eq $file->name ) {
+      require YAML::Tiny;
+      require CPAN::Meta::Converter;
+      my $old = $file->code;
+      $file->code(
+        sub {
+          my $content = YAML::Tiny::Load( $old->() );
+          $content->{ $self->_stash_key } = $self->_metadata;
+          my $normal = CPAN::Meta::Converter->new($content)->convert( version => $content->{'meta-spec'}->{version} );
+          return YAML::Tiny::Dump($normal);
+        },
+      );
+      $munged->{'META.yml'} = 1;
+      next;
+    }
+  }
+  if ( not keys %{$munged} ) {
+    my $message = <<'EOF';
+No META.* files to munge.
+BuiltWith cannot operate without one in tree prior to it
+EOF
+    $self->log_fatal($message);
+  }
+  return;
 }
 
 __PACKAGE__->meta->make_immutable;
