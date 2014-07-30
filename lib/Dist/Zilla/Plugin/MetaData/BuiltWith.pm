@@ -5,7 +5,7 @@ use utf8;
 
 package Dist::Zilla::Plugin::MetaData::BuiltWith;
 
-our $VERSION = '1.000002';
+our $VERSION = '1.001000';
 
 # ABSTRACT: Report what versions of things your distribution was built against
 
@@ -412,7 +412,7 @@ Dist::Zilla::Plugin::MetaData::BuiltWith - Report what versions of things your d
 
 =head1 VERSION
 
-version 1.000002
+version 1.001000
 
 =head1 SYNOPSIS
 

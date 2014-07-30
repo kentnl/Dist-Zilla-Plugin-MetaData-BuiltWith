@@ -3,7 +3,7 @@ NAME
     things your distribution was built against
 
 VERSION
-    version 1.000002
+    version 1.001000
 
 SYNOPSIS
       [MetaData::BuiltWith]
