@@ -222,7 +222,6 @@ sub _get_prereq_modnames {
   my $modnames = {};
 
   my $prereqs = $self->zilla->prereqs->as_string_hash;
-
   ## use critic
   if ( not %{$prereqs} ) {
     $self->log(q{WARNING: No prereqs were found, probably a bug});
@@ -267,7 +266,15 @@ sub _get_prereq_modnames {
 
 }
 
+my $module_cache = {};
+
 sub _detect_installed {
+  my ( $self, $module ) = @_;
+  return $module_cache->{$module} if exists $module_cache->{$module};
+  return ( $module_cache->{$module} = $self->_detect_installed_lookup($module) );
+}
+
+sub _detect_installed_lookup {
   my ( undef, $module ) = @_;
   if ( not defined $module ) {
     Carp::croak('Cannot determine a version if module=undef');
