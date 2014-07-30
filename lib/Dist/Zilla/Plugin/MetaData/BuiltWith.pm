@@ -59,7 +59,7 @@ use Config qw();
 use Moose qw( with has around );
 use MooseX::Types::Moose qw( ArrayRef Bool Str );
 use namespace::autoclean;
-with 'Dist::Zilla::Role::MetaProvider';
+with 'Dist::Zilla::Role::FileMunger';
 
 =method mvp_multivalue_args
 
@@ -140,7 +140,9 @@ has _uname_args => (
   traits     => [qw( Array )],
   handles    => { _all_uname_args => 'elements', },
 );
-has _stash_key => ( is => 'ro', isa => Str, default => 'x_BuiltWith' );
+has _stash_key   => ( is => 'ro', isa => Str,  default => 'x_BuiltWith' );
+has do_meta_json => ( is => 'ro', isa => Bool, default => 1 );
+has do_meta_yaml => ( is => 'ro', isa => Bool, default => 1 );
 
 around dump_config => sub {
   my ( $orig, $self ) = @_;
@@ -301,8 +303,10 @@ via this method. See L<< C<Dist::Zilla>'s C<MetaProvider> role|Dist::Zilla::Role
 
 =cut
 
-sub metadata {
+sub _gen_meta {
   my ($self) = @_;
+  my $fake_result = {};
+
   $self->log_debug(q{Metadata called});
   my $report = $self->_get_prereq_modnames();
   $self->log_debug( 'Found mods: ' . scalar @{$report} );
@@ -346,7 +350,48 @@ sub metadata {
   if ( keys %failures ) {
     $result->{failures} = \%failures;
   }
-  return { $self->_stash_key, $result };
+  return $result;
+}
+
+sub inject_package {
+  my ( $self, $hash ) = @_;
+  $hash->{ $self->_stash_key } = $self->_gen_meta;
+  return CPAN::Meta::Converter->new($hash)->convert( version => $hash->{'meta-spec'}->{version} );
+}
+
+sub munge_meta_json {
+  my ($self) = @_;
+
+  my ($found_file) = grep { 'META.json' eq $_->name } @{ $self->zilla->files };
+
+  croak "META.json not found" unless $found_file;
+
+  require JSON;
+  require CPAN::Meta::Converter;
+  my $old  = $found_file->code;
+  my $json = JSON->new()->pretty->canonical(1);
+
+  $found_file->code( sub { return $json->encode( $self->inject_package( $json->decode( $old->() ) ) ) } );
+}
+
+sub munge_meta_yaml {
+  my ($self) = @_;
+
+  my ($found_file) = grep { 'META.yml' eq $_->name } @{ $self->zilla->files };
+
+  croak "META.yml not found" unless $found_file;
+
+  require YAML::Tiny;
+  require CPAN::Meta::Converter;
+  my $old = $found_file->code;
+  $found_file->code( sub { return YAML::Tiny::Dump( $self->inject_package( YAML::Tiny::Load( $old->() ) ) ) } );
+}
+
+sub munge_files {
+  my ($self) = @_;
+  $self->munge_meta_json if $self->do_meta_json;
+  $self->munge_meta_yaml if $self->do_meta_yaml;
+  return;
 }
 
 __PACKAGE__->meta->make_immutable;
