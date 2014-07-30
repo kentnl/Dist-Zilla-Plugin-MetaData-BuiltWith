@@ -25,7 +25,7 @@ matrix:
       env:  STERILIZE_ENV=1
     - perl: "5.20"
       env:  STERILIZE_ENV=1
-    - perl: "5.20"
+    - perl: "5.21"
       env:  STERILIZE_ENV=1
     - perl: "5.21"
       env: STERILIZE_ENV=0 DEVELOPER_DEPS=1
