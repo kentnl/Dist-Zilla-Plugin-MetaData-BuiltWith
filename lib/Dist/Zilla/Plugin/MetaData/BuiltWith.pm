@@ -54,6 +54,7 @@ our $AUTHORITY = 'cpan:KENTNL'; # AUTHORITY
 
 
 use Carp qw( carp croak );
+use Config qw();
 use Dist::Zilla::Util::EmulatePhase;
 use Readonly qw( Readonly );
 Readonly my $MIN_EMULATE_PHASE => '0.01000101';

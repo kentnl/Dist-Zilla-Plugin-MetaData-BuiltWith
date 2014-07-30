@@ -9,6 +9,9 @@ This file contains changes in REQUIRED dependencies for standard CPAN phases (co
  [Changed / configure requires]
  - ExtUtils::MakeMaker 6.30 → 0
 
+ [Removed / runtime requires]
+ - Class::Load
+
  [Removed / test requires]
  - version 0.77
 
