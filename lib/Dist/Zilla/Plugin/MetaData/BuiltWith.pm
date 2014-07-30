@@ -53,6 +53,7 @@ our $AUTHORITY = 'cpan:KENTNL'; # AUTHORITY
 
 
 
+use Carp qw( carp croak );
 use Dist::Zilla::Util::EmulatePhase;
 use Readonly qw( Readonly );
 Readonly my $MIN_EMULATE_PHASE => '0.01000101';
@@ -274,8 +275,7 @@ sub _get_prereq_modnames {
 sub _detect_installed {
   my ( undef, $module ) = @_;
   if ( not defined $module ) {
-    require Carp;
-    Carp::croak('Cannot determine a version if module=undef');
+    croak('Cannot determine a version if module=undef');
   }
   if ( 'perl' eq $module ) {
     return [ undef, undef ];

@@ -1,6 +1,11 @@
 This file contains ALL changes in dependencies in both REQUIRED / OPTIONAL dependencies for all phases (configure/build/runtime/test/develop)
 
 1.000002
+ [Added / test requires]
+ - JSON
+ - Path::Tiny
+ - Test::DZil
+
  [Changed / configure requires]
  - ExtUtils::MakeMaker 6.30 → 0
 

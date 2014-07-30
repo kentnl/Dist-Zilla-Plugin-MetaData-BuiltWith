@@ -1,6 +1,11 @@
 This file contains changes in REQUIRED dependencies for standard CPAN phases (configure/build/runtime/test)
 
 1.000002
+ [Added / test requires]
+ - JSON
+ - Path::Tiny
+ - Test::DZil
+
  [Changed / configure requires]
  - ExtUtils::MakeMaker 6.30 → 0
 
