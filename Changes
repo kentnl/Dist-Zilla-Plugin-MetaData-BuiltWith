@@ -9,8 +9,8 @@
  - Dependencies changed since 1.000001, see misc/*.deps* for details
  - configure: ↓1
  - develop: (suggests: ↑1)
- - runtime: -2
- - test: +3
+ - runtime: +4 -4
+ - test: +2 -1 (recommends: ↑1 -2)
 
 1.000001 2014-07-19T02:16:32Z
  [00 Trivial]
