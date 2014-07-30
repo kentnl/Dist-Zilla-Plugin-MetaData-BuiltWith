@@ -300,7 +300,7 @@ via this method. See L<< C<Dist::Zilla>'s C<MetaProvider> role|Dist::Zilla::Role
 
 =cut
 
-sub metadata {
+sub _metadata {
   my ($self) = @_;
   $self->log_debug(q{Metadata called});
   my $report = $self->_get_prereq_modnames();
@@ -345,7 +345,12 @@ sub metadata {
   if ( keys %failures ) {
     $result->{failures} = \%failures;
   }
-  return { $self->_stash_key, $result };
+  return $result;
+}
+
+sub metadata {
+  my ($self) = @_;
+  return { $self->_stash_key, $self->_metadata };
 }
 
 __PACKAGE__->meta->make_immutable;
