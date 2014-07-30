@@ -1,6 +1,6 @@
 ﻿Revision history for Dist-Zilla-Plugin-MetaData-BuiltWith
 
-1.001000 2014-07-30T12:02:39Z
+1.001000 2014-07-30T13:13:53Z
  [00 Major]
  - Added tests
  - Prereqs retrieved directly from Dist::Zilla now *WITHOUT* using EmulatePhase.
