@@ -335,7 +335,14 @@ sub _metadata {
     $forget_module->($badmodule);
   }
   ## no critic ( Variables::ProhibitPunctuationVars )
-  my $perlver = $] < 5.010000 ? { %{ version->parse($]) } } : { %{$^V} };
+  my $perlver;
+
+  if ( $] < 5.010000 ) {
+    $perlver = { %{ version->parse( version->parse($])->normal ) } };
+  }
+  else {
+    $perlver = { %{$^V} };
+  }
 
   my $result = {
     modules  => \%modtable,
