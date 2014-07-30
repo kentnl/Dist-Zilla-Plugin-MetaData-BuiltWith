@@ -21,7 +21,6 @@ my %WriteMakefileArgs = (
   "NAME" => "Dist::Zilla::Plugin::MetaData::BuiltWith",
   "PREREQ_PM" => {
     "Carp" => 0,
-    "Class::Load" => 0,
     "Dist::Zilla::Role::ConfigDumper" => "4.101540",
     "Dist::Zilla::Role::MetaProvider" => 0,
     "Dist::Zilla::Util::EmulatePhase" => "0.01000101",
@@ -54,7 +53,6 @@ my %WriteMakefileArgs = (
 
 my %FallbackPrereqs = (
   "Carp" => 0,
-  "Class::Load" => 0,
   "Dist::Zilla::Role::ConfigDumper" => "4.101540",
   "Dist::Zilla::Role::MetaProvider" => 0,
   "Dist::Zilla::Util::EmulatePhase" => "0.01000101",

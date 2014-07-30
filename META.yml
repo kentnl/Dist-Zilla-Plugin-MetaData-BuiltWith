@@ -30,7 +30,6 @@ provides:
     version: '1.000002'
 requires:
   Carp: '0'
-  Class::Load: '0'
   Dist::Zilla::Role::ConfigDumper: '4.101540'
   Dist::Zilla::Role::MetaProvider: '0'
   Dist::Zilla::Util::EmulatePhase: '0.01000101'
@@ -52,7 +51,6 @@ x_BuiltWith:
   modules:
     CPAN::Meta: '2.142060'
     Carp: '1.34'
-    Class::Load: '0.21'
     Dist::Zilla::App::Command::bakeini: '0.001001'
     Dist::Zilla::Plugin::Authority: '1.006'
     Dist::Zilla::Plugin::AutoPrereqs: '5.020'
