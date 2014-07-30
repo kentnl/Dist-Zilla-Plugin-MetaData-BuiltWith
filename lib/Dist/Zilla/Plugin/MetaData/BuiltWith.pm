@@ -54,12 +54,12 @@ install in the event of a problem.
 =cut
 
 use Carp qw( carp croak );
+use Config qw();
 use Dist::Zilla::Util::EmulatePhase;
 use Readonly qw( Readonly );
 Readonly my $MIN_EMULATE_PHASE => '0.01000101';
 use Moose 2.0;
 use Moose qw( with has around );
-use Class::Load qw( load_optional_class );
 use MooseX::Types::Moose qw( ArrayRef Bool Str );
 use namespace::autoclean;
 with 'Dist::Zilla::Role::MetaProvider';
@@ -172,7 +172,6 @@ around dump_config => sub {
 sub _config {
   my $self = shift;
   return () unless $self->show_config;
-  Class::Load::load_class('Config');
   my @interesting = qw( git_describe git_commit_id git_commit_date myarchname gccversion osname osver );
   my $interested  = {};
   for my $key (@interesting) {
