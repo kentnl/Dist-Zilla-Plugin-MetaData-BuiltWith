@@ -4,6 +4,8 @@
  [00 Minor]
  - Dependence on EmulatePhase sent to hell.
  - A test added \o/
+ - MetaData injection done using a Munger on META.* instead of mutating dist meta ( because of race problems )
+ - Munging of JSON and YAML adjustable via do_meta_(yaml|json) attributes.
 
  [Dependencies::Stats]
  - Dependencies changed since 1.000001, see misc/*.deps* for details
