@@ -72,7 +72,6 @@ do { my $x = {
                                       'Module::Data' => '0',
                                       'Moose' => '2.0',
                                       'MooseX::Types::Moose' => '0',
-                                      'Readonly' => '0',
                                       'namespace::autoclean' => '0',
                                       'perl' => '5.008',
                                       'strict' => '0',
