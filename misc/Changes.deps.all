@@ -17,6 +17,7 @@ This file contains ALL changes in dependencies in both REQUIRED / OPTIONAL depen
 
  [Removed / runtime requires]
  - Class::Load
+ - Readonly
 
  [Removed / test recommends]
  - CPAN::Meta::Prereqs
