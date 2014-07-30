@@ -54,6 +54,7 @@ install in the event of a problem.
 =cut
 
 use Moose 2.0;
+use Carp qw( carp croak );
 use Config qw();
 use Moose qw( with has around );
 use MooseX::Types::Moose qw( ArrayRef Bool Str );
@@ -267,7 +268,6 @@ sub _get_prereq_modnames {
 sub _detect_installed {
   my ( undef, $module ) = @_;
   if ( not defined $module ) {
-    require Carp;
     Carp::croak('Cannot determine a version if module=undef');
   }
   if ( 'perl' eq $module ) {
