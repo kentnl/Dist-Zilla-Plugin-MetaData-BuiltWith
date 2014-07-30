@@ -29,6 +29,8 @@ my $ini = simple_ini(
     }
   ],
   [ 'MetaJSON' => {} ],
+  [ 'MetaYAML' => {} ],
+
 );
 
 my $root = Path::Tiny->tempdir;

@@ -312,7 +312,6 @@ via this method. See L<< C<Dist::Zilla>'s C<MetaProvider> role|Dist::Zilla::Role
 
 sub _gen_meta {
   my ($self) = @_;
-  my $fake_result = {};
 
   $self->log_debug(q{Metadata called});
   my $report = $self->_get_prereq_modnames();
@@ -371,7 +370,7 @@ sub munge_meta_json {
 
   my ($found_file) = grep { 'META.json' eq $_->name } @{ $self->zilla->files };
 
-  croak "META.json not found" unless $found_file;
+  croak 'META.json not found' unless $found_file;
 
   require JSON;
   require CPAN::Meta::Converter;
@@ -379,6 +378,7 @@ sub munge_meta_json {
   my $json = JSON->new()->pretty->canonical(1);
 
   $found_file->code( sub { return $json->encode( $self->inject_package( $json->decode( $old->() ) ) ) } );
+  return 1;
 }
 
 sub munge_meta_yaml {
@@ -386,12 +386,13 @@ sub munge_meta_yaml {
 
   my ($found_file) = grep { 'META.yml' eq $_->name } @{ $self->zilla->files };
 
-  croak "META.yml not found" unless $found_file;
+  croak 'META.yml not found' unless $found_file;
 
   require YAML::Tiny;
   require CPAN::Meta::Converter;
   my $old = $found_file->code;
   $found_file->code( sub { return YAML::Tiny::Dump( $self->inject_package( YAML::Tiny::Load( $old->() ) ) ) } );
+  return 1;
 }
 
 sub munge_files {
