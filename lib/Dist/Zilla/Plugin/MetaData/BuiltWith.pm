@@ -55,9 +55,6 @@ install in the event of a problem.
 
 use Carp qw( carp croak );
 use Config qw();
-use Dist::Zilla::Util::EmulatePhase;
-use Readonly qw( Readonly );
-Readonly my $MIN_EMULATE_PHASE => '0.01000101';
 use Moose 2.0;
 use Moose qw( with has around );
 use MooseX::Types::Moose qw( ArrayRef Bool Str );
@@ -222,11 +219,7 @@ sub _get_prereq_modnames {
 
   my $modnames = {};
 
-  if ( defined $Dist::Zilla::Util::EmulatePhase::VERSION ) {
-    Dist::Zilla::Util::EmulatePhase->VERSION($MIN_EMULATE_PHASE);
-  }
-  ## no critic (Subroutines::ProhibitCallsToUnexportedSubs)
-  my $prereqs = Dist::Zilla::Util::EmulatePhase::get_prereqs( { zilla => $self->zilla } )->as_string_hash;
+  my $prereqs = $self->zilla->prereqs->as_string_hash;
   ## use critic
   if ( not %{$prereqs} ) {
     $self->log(q{WARNING: No prereqs were found, probably a bug});

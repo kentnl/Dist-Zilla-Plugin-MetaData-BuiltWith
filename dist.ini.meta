@@ -41,5 +41,4 @@ srcreadme         = mkdn
 
 [Prereqs]
 Dist::Zilla::Role::ConfigDumper = 4.101540
-Dist::Zilla::Util::EmulatePhase = 0.01000101
 

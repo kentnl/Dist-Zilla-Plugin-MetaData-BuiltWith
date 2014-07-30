@@ -3,12 +3,13 @@
 {{$NEXT}}
  [00 Major]
  - Added tests
+ - Prereqs retrieved directly from Dist::Zilla now *WITHOUT* using EmulatePhase.
 
  [Dependencies::Stats]
  - Dependencies changed since 1.000001, see misc/*.deps* for details
  - configure: ↓1
  - develop: (suggests: ↑1)
- - runtime: -1
+ - runtime: -3
  - test: +3 -1 (recommends: ↑1 -2)
 
 1.000001 2014-07-19T02:16:32Z
