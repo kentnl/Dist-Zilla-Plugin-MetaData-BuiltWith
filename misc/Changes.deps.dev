@@ -1,6 +1,6 @@
 This file contains changes to DEVELOPMENT dependencies only ( both REQUIRED and OPTIONAL )
 
-1.000002
+1.001000
  [Changed / develop suggests]
  - Dist::Zilla::PluginBundle::Author::KENTNL 2.016004 → 2.016006
 

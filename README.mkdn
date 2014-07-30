@@ -4,7 +4,7 @@ Dist::Zilla::Plugin::MetaData::BuiltWith - Report what versions of things your d
 
 # VERSION
 
-version 1.000002
+version 1.001000
 
 # SYNOPSIS
 
