@@ -1,6 +1,8 @@
 ﻿Revision history for {{$dist->name}}
 
 {{$NEXT}}
+
+1.001000 2014-07-30T13:22:16Z
  [00 Major]
  - Added tests
  - Prereqs retrieved directly from Dist::Zilla now *WITHOUT* using EmulatePhase.
