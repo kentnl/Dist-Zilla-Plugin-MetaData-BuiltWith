@@ -3,7 +3,7 @@ NAME
     things your distribution was built against
 
 VERSION
-    version 1.000001
+    version 1.001000
 
 SYNOPSIS
       [MetaData::BuiltWith]
@@ -64,7 +64,7 @@ METHODS
     This module can take, as parameters, any volume of 'exclude' or
     'include' arguments.
 
-  metadata
+  munge_files
     This module scrapes together the name of all modules that exist in the
     ""Prereqs"" section that Dist::Zilla collects, and then works out what
     version of things you have, applies the various include/exclude rules,

@@ -4,7 +4,7 @@ do { my $x = {
                                           'ExtUtils::MakeMaker' => '6.98'
                                         },
                         'requires' => {
-                                        'ExtUtils::MakeMaker' => '6.30'
+                                        'ExtUtils::MakeMaker' => '0'
                                       }
                       },
        'develop' => {
@@ -60,20 +60,20 @@ do { my $x = {
                                     },
                       'suggests' => {
                                       'Dist::Zilla::App::Command::bakeini' => '0.001001',
-                                      'Dist::Zilla::PluginBundle::Author::KENTNL' => '2.016004'
+                                      'Dist::Zilla::PluginBundle::Author::KENTNL' => '2.016006'
                                     }
                     },
        'runtime' => {
                       'requires' => {
+                                      'CPAN::Meta::Converter' => '0',
                                       'Carp' => '0',
-                                      'Class::Load' => '0',
                                       'Dist::Zilla::Role::ConfigDumper' => '4.101540',
-                                      'Dist::Zilla::Role::MetaProvider' => '0',
-                                      'Dist::Zilla::Util::EmulatePhase' => '0.01000101',
+                                      'Dist::Zilla::Role::FileMunger' => '0',
+                                      'JSON' => '0',
                                       'Module::Data' => '0',
                                       'Moose' => '2.0',
                                       'MooseX::Types::Moose' => '0',
-                                      'Readonly' => '0',
+                                      'YAML::Tiny' => '0',
                                       'namespace::autoclean' => '0',
                                       'perl' => '5.008',
                                       'strict' => '0',
@@ -83,9 +83,7 @@ do { my $x = {
                     },
        'test' => {
                    'recommends' => {
-                                     'CPAN::Meta' => '0',
-                                     'CPAN::Meta::Prereqs' => '0',
-                                     'CPAN::Meta::Requirements' => '2.120900',
+                                     'CPAN::Meta' => '2.120900',
                                      'ExtUtils::MakeMaker' => '6.98',
                                      'Test::More' => '1.001003'
                                    },
@@ -94,9 +92,10 @@ do { my $x = {
                                    'File::Spec' => '0',
                                    'File::Spec::Functions' => '0',
                                    'List::Util' => '0',
+                                   'Path::Tiny' => '0',
                                    'Scalar::Util' => '0',
-                                   'Test::More' => '0.89',
-                                   'version' => '0.77'
+                                   'Test::DZil' => '0',
+                                   'Test::More' => '0.89'
                                  }
                  }
      };

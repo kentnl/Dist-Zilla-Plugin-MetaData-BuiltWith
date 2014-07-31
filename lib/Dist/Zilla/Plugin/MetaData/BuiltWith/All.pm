@@ -5,7 +5,7 @@ use utf8;
 
 package Dist::Zilla::Plugin::MetaData::BuiltWith::All;
 
-our $VERSION = '1.000001';
+our $VERSION = '1.001000';
 
 # ABSTRACT: Go overkill and report everything in all name-spaces.
 
@@ -180,11 +180,10 @@ sub _get_all {
   return $rval;
 }
 
-around 'metadata' => sub {
+around '_metadata' => sub {
   my ( $orig, $self, @args ) = @_;
   my $stash = $self->$orig(@args);
-  $stash->{ $self->_stash_key } = { %{ $stash->{ $self->_stash_key } }, %{ $self->_get_all() } };
-  return $stash;
+  return { %{$stash}, %{ $self->_get_all() } };
 };
 
 __PACKAGE__->meta->make_immutable;
@@ -203,7 +202,7 @@ Dist::Zilla::Plugin::MetaData::BuiltWith::All - Go overkill and report everythin
 
 =head1 VERSION
 
-version 1.000001
+version 1.001000
 
 =head1 SYNOPSIS
 

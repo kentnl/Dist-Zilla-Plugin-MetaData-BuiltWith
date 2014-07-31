@@ -5,7 +5,7 @@ use utf8;
 
 package Dist::Zilla::Plugin::MetaData::BuiltWith;
 
-our $VERSION = '1.000001';
+our $VERSION = '1.001000';
 
 # ABSTRACT: Report what versions of things your distribution was built against
 
@@ -53,15 +53,13 @@ our $AUTHORITY = 'cpan:KENTNL'; # AUTHORITY
 
 
 
-use Dist::Zilla::Util::EmulatePhase;
-use Readonly qw( Readonly );
-Readonly my $MIN_EMULATE_PHASE => '0.01000101';
+use Carp qw( carp croak );
+use Config qw();
 use Moose 2.0;
 use Moose qw( with has around );
-use Class::Load qw( load_optional_class );
 use MooseX::Types::Moose qw( ArrayRef Bool Str );
 use namespace::autoclean;
-with 'Dist::Zilla::Role::MetaProvider';
+with 'Dist::Zilla::Role::FileMunger';
 
 
 
@@ -171,7 +169,6 @@ around dump_config => sub {
 sub _config {
   my $self = shift;
   return () unless $self->show_config;
-  Class::Load::load_class('Config');
   my @interesting = qw( git_describe git_commit_id git_commit_date myarchname gccversion osname osver );
   my $interested  = {};
   for my $key (@interesting) {
@@ -222,11 +219,7 @@ sub _get_prereq_modnames {
 
   my $modnames = {};
 
-  if ( defined $Dist::Zilla::Util::EmulatePhase::VERSION ) {
-    Dist::Zilla::Util::EmulatePhase->VERSION($MIN_EMULATE_PHASE);
-  }
-  ## no critic (Subroutines::ProhibitCallsToUnexportedSubs)
-  my $prereqs = Dist::Zilla::Util::EmulatePhase::get_prereqs( { zilla => $self->zilla } )->as_string_hash;
+  my $prereqs = $self->zilla->prereqs->as_string_hash;
   ## use critic
   if ( not %{$prereqs} ) {
     $self->log(q{WARNING: No prereqs were found, probably a bug});
@@ -274,8 +267,7 @@ sub _get_prereq_modnames {
 sub _detect_installed {
   my ( undef, $module ) = @_;
   if ( not defined $module ) {
-    require Carp;
-    Carp::croak('Cannot determine a version if module=undef');
+    croak('Cannot determine a version if module=undef');
   }
   if ( 'perl' eq $module ) {
     return [ undef, undef ];
@@ -308,7 +300,7 @@ sub _detect_installed {
 
 
 
-sub metadata {
+sub _metadata {
   my ($self) = @_;
   $self->log_debug(q{Metadata called});
   my $report = $self->_get_prereq_modnames();
@@ -342,10 +334,19 @@ sub metadata {
   for my $badmodule ( $self->exclude ) {
     $forget_module->($badmodule);
   }
+  ## no critic ( Variables::ProhibitPunctuationVars )
+  my $perlver;
+
+  if ( $] < 5.010000 ) {
+    $perlver = { %{ version->parse( version->parse($])->normal ) } };
+  }
+  else {
+    $perlver = { %{$^V} };
+  }
+
   my $result = {
-    modules => \%modtable,
-    ## no critic ( Variables::ProhibitPunctuationVars )
-    perl     => { %{$^V} },
+    modules  => \%modtable,
+    perl     => $perlver,
     platform => $^O,
     $self->_uname(),
     $self->_config(),
@@ -353,7 +354,55 @@ sub metadata {
   if ( keys %failures ) {
     $result->{failures} = \%failures;
   }
-  return { $self->_stash_key, $result };
+  return $result;
+}
+
+sub munge_files {
+  my ($self) = @_;
+
+  my $munged = {};
+
+  for my $file ( @{ $self->zilla->files } ) {
+    if ( 'META.json' eq $file->name ) {
+      require JSON;
+      require CPAN::Meta::Converter;
+      my $json = JSON->new->pretty->canonical(1);
+      my $old  = $file->code;
+      $file->code(
+        sub {
+          my $content = $json->decode( $old->() );
+          $content->{ $self->_stash_key } = $self->_metadata;
+          my $normal = CPAN::Meta::Converter->new($content)->convert( version => $content->{'meta-spec'}->{version} );
+          return $json->encode($normal);
+        },
+      );
+      $munged->{'META.json'} = 1;
+      next;
+    }
+    if ( 'META.yml' eq $file->name ) {
+      require YAML::Tiny;
+      require CPAN::Meta::Converter;
+      my $old = $file->code;
+      $file->code(
+        sub {
+          my $content = YAML::Tiny::Load( $old->() );
+          $content->{ $self->_stash_key } = $self->_metadata;
+          my $normal = CPAN::Meta::Converter->new($content)->convert( version => $content->{'meta-spec'}->{version} );
+          return YAML::Tiny::Dump($normal);
+        },
+      );
+      $munged->{'META.yml'} = 1;
+      next;
+    }
+  }
+  if ( not keys %{$munged} ) {
+    my $message = <<'EOF';
+No META.* files to munge.
+BuiltWith cannot operate without one in tree prior to it
+EOF
+    $self->log_fatal($message);
+  }
+  return;
 }
 
 __PACKAGE__->meta->make_immutable;
@@ -372,7 +421,7 @@ Dist::Zilla::Plugin::MetaData::BuiltWith - Report what versions of things your d
 
 =head1 VERSION
 
-version 1.000001
+version 1.001000
 
 =head1 SYNOPSIS
 
@@ -442,7 +491,7 @@ Specify arguments passed to the C<uname> call.
 
 This module can take, as parameters, any volume of 'exclude' or 'include' arguments.
 
-=head2 metadata
+=head2 munge_files
 
 This module scrapes together the name of all modules that exist in the "C<Prereqs>" section
 that Dist::Zilla collects, and then works out what version of things you have,

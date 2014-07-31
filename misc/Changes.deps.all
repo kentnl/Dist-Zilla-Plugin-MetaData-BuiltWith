@@ -1,6 +1,39 @@
 This file contains ALL changes in dependencies in both REQUIRED / OPTIONAL dependencies for all phases (configure/build/runtime/test/develop)
 
-1.000001
+1.001000
+ [Added / runtime requires]
+ - CPAN::Meta::Converter
+ - Dist::Zilla::Role::FileMunger
+ - JSON
+ - YAML::Tiny
+
+ [Added / test requires]
+ - Path::Tiny
+ - Test::DZil
+
+ [Changed / configure requires]
+ - ExtUtils::MakeMaker 6.30 → 0
+
+ [Changed / develop suggests]
+ - Dist::Zilla::PluginBundle::Author::KENTNL 2.016004 → 2.016006
+
+ [Changed / test recommends]
+ - CPAN::Meta 0 → 2.120900
+
+ [Removed / runtime requires]
+ - Class::Load
+ - Dist::Zilla::Role::MetaProvider
+ - Dist::Zilla::Util::EmulatePhase 0.01000101
+ - Readonly
+
+ [Removed / test recommends]
+ - CPAN::Meta::Prereqs
+ - CPAN::Meta::Requirements 2.120900
+
+ [Removed / test requires]
+ - version 0.77
+
+1.000001 2014-07-19T02:16:32Z
  [Added / develop requires]
  - Dist::Zilla::Plugin::BumpVersionAfterRelease
  - Dist::Zilla::Plugin::CopyFilesFromBuild

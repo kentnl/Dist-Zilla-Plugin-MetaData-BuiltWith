@@ -1,5 +1,19 @@
 ﻿Revision history for Dist-Zilla-Plugin-MetaData-BuiltWith
 
+1.001000 2014-07-30T13:22:16Z
+ [00 Major]
+ - Added tests
+ - Prereqs retrieved directly from Dist::Zilla now *WITHOUT* using EmulatePhase.
+ - x_BuiltWith keys now added during META.* write out, which happens after prereqs finalization, by currying the
+   FromCode coderef and injecting the data raw and de/reserializing.
+
+ [Dependencies::Stats]
+ - Dependencies changed since 1.000001, see misc/*.deps* for details
+ - configure: ↓1
+ - develop: (suggests: ↑1)
+ - runtime: +4 -4
+ - test: +2 -1 (recommends: ↑1 -2)
+
 1.000001 2014-07-19T02:16:32Z
  [00 Trivial]
  - Misc packaging cleanups
