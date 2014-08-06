@@ -1,6 +1,13 @@
 ﻿Revision history for {{$dist->name}}
 
 {{$NEXT}}
+ [00 Trivial]
+ - update reportprereqs test
+
+ [Dependencies::Stats]
+ - Dependencies changed since 1.001000, see misc/*.deps* for details
+ - develop: (suggests: ↑1)
+ - test: -3
 
 1.001000 2014-07-30T13:22:16Z
  [00 Major]
