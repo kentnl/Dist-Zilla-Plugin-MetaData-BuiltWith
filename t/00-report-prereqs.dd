@@ -60,7 +60,7 @@ do { my $x = {
                                     },
                       'suggests' => {
                                       'Dist::Zilla::App::Command::bakeini' => '0.001001',
-                                      'Dist::Zilla::PluginBundle::Author::KENTNL' => '2.016006'
+                                      'Dist::Zilla::PluginBundle::Author::KENTNL' => '2.016007'
                                     }
                     },
        'runtime' => {
@@ -90,10 +90,7 @@ do { my $x = {
                    'requires' => {
                                    'ExtUtils::MakeMaker' => '0',
                                    'File::Spec' => '0',
-                                   'File::Spec::Functions' => '0',
-                                   'List::Util' => '0',
                                    'Path::Tiny' => '0',
-                                   'Scalar::Util' => '0',
                                    'Test::DZil' => '0',
                                    'Test::More' => '0.89'
                                  }
