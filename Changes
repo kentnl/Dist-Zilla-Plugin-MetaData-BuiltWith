@@ -1,7 +1,8 @@
 ﻿Revision history for Dist-Zilla-Plugin-MetaData-BuiltWith
 
-1.001001 2014-08-15T18:34:30Z
+1.001001 2014-08-15T19:40:22Z
  [00 Trivial]
+ - CPANDAY!
  - no code changes.
  - tests augmented.
  - whitespace adjusted.
