@@ -15,21 +15,6 @@ use Moose qw( extends has around );
 use namespace::autoclean;
 extends 'Dist::Zilla::Plugin::MetaData::BuiltWith';
 
-=head1 SYNOPSIS
-
-  [MetaData::BuiltWith::All]
-  show_failures = 1 ; Not recommended
-
-This module is otherwise identical to L<< C<MetaData::BuiltWith>|Dist::Zilla::Plugin::MetaData::BuiltWith >>.
-
-=head1 DESCRIPTION
-
-This further extends the verbosity of the information reported by the L<< C<BuiltWith>|Dist::Zilla::Plugin::MetaData::BuiltWith >> plug-in,
-by recursively rooting around in the name-spaces and reporting every version of everything it finds.
-
-Only recommended for the most extreme of situations where you find your code breaking all over the show between different versions of things, or for personal amusement.
-
-
 =option show_failures
 
 Because this module reports B<ALL> C<namespaces>, it will likely report very many C<namespaces>
@@ -88,14 +73,6 @@ Specify what the system C<uname> function is called
 Specify arguments passed to the C<uname> call.
 
     uname_args = -a ; String
-
-=head1 WARNING
-
-At present this code does no recursion prevention, apart from excluding the C<main> name-space.
-
-If it sees other name-spaces which recur into their self indefinitely ( like main does ), then it may not terminate normally.
-
-Also, using this module will likely add 1000 lines to C<META.yml>, so please for the love of sanity don't use this too often.
 
 =cut
 
@@ -189,3 +166,27 @@ around '_metadata' => sub {
 __PACKAGE__->meta->make_immutable;
 no Moose;
 1;
+
+=head1 SYNOPSIS
+
+  [MetaData::BuiltWith::All]
+  show_failures = 1 ; Not recommended
+
+This module is otherwise identical to L<< C<MetaData::BuiltWith>|Dist::Zilla::Plugin::MetaData::BuiltWith >>.
+
+=head1 DESCRIPTION
+
+This further extends the verbosity of the information reported by the L<< C<BuiltWith>|Dist::Zilla::Plugin::MetaData::BuiltWith >> plug-in,
+by recursively rooting around in the name-spaces and reporting every version of everything it finds.
+
+Only recommended for the most extreme of situations where you find your code breaking all over the show between different versions of things, or for personal amusement.
+
+=head1 WARNING
+
+At present this code does no recursion prevention, apart from excluding the C<main> name-space.
+
+If it sees other name-spaces which recur into their self indefinitely ( like main does ), then it may not terminate normally.
+
+Also, using this module will likely add 1000 lines to C<META.yml>, so please for the love of sanity don't use this too often.
+
+=cut

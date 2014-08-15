@@ -11,48 +11,6 @@ our $VERSION = '1.001001';
 
 # AUTHORITY
 
-=head1 SYNOPSIS
-
-  [MetaData::BuiltWith]
-  include = Some::Module::Thats::Not::In::Preq
-  exclude = Some::Module::Youre::Ashamed::Of
-  show_uname = 1           ; default is 0
-  show_config = 1          ; default is 0
-  uname_call = uname        ; the default
-  uname_args = -s -r -m -p  ; the default is -a
-
-
-=head1 DESCRIPTION
-
-Often, distribution authors get module dependencies wrong. So in such cases,
-its handy to be able to see what version of various packages they built with.
-
-Some would prefer to demand everyone install the same version as they did,
-but that's also not always necessary.
-
-Hopefully, the existence of the metadata provided by this module will help
-users on their end machines make intelligent choices about what modules to
-install in the event of a problem.
-
-
-
-=head1 EXAMPLE OUTPUT ( C<META.json> )
-
-    "x_BuiltWith" : {
-       "modules" : {
-          "Dist::Zilla::Role::MetaProvider" : "4.101612",
-          "File::Find" : "1.15",
-          "File::Temp" : "0.22",
-          "Module::Build" : "0.3607",
-          "Moose" : "1.07",
-          "Test::More" : "0.94"
-       },
-       "perl" : "5.012000",
-       "platform" : "MSWin32"
-    },
-
-=cut
-
 use Carp qw( carp croak );
 use Config qw();
 use Moose 2.0;
@@ -69,6 +27,15 @@ This module can take, as parameters, any volume of 'exclude' or 'include' argume
 
 sub mvp_multivalue_args { return qw( exclude include ) }
 
+=option exclude
+
+Specify modules to exclude from version reporting
+
+    exclude = Foo
+    exclude = Bar
+
+=cut
+
 has _exclude => (
   init_arg => 'exclude',
   is       => 'ro',
@@ -77,6 +44,15 @@ has _exclude => (
   traits   => [qw( Array )],
   handles  => { exclude => 'elements', },
 );
+
+=option include
+
+Specify additional modules to include the version of
+
+    include = Foo
+    include = Bar
+
+=cut
 
 has _include => (
   init_arg => 'include',
@@ -88,25 +64,15 @@ has _include => (
 
 );
 
-=option exclude
-
-Specify modules to exclude from version reporting
-
-    exclude = Foo
-    exclude = Bar
-
-=option include
-
-Specify additional modules to include the version of
-
-    include = Foo
-    include = Bar
-
 =option show_config
 
 Report "interesting" values from C<%Config::Config>
 
     show_config = 1 ; Boolean
+
+=cut
+
+has show_config => ( is => 'ro', isa => 'Bool', default => 0 );
 
 =option show_uname
 
@@ -114,11 +80,19 @@ Report the output from C<uname>
 
     show_uname = 1 ; Boolean
 
+=cut
+
+has show_uname => ( is => 'ro', isa => Bool, default => 0 );
+
 =option uname_call
 
 Specify what the system C<uname> function is called
 
     uname_call = uname ; String
+
+=cut
+
+has uname_call => ( is => 'ro', isa => Str, default => 'uname' );
 
 =option uname_args
 
@@ -128,10 +102,7 @@ Specify arguments passed to the C<uname> call.
 
 =cut
 
-has show_config => ( is => 'ro', isa => 'Bool', default => 0 );
-has show_uname => ( is => 'ro', isa => Bool, default => 0 );
-has uname_call => ( is => 'ro', isa => Str,  default => 'uname' );
-has uname_args => ( is => 'ro', isa => Str,  default => '-a' );
+has uname_args => ( is => 'ro', isa => Str, default => '-a' );
 has _uname_args => (
   init_arg   => undef,
   is         => 'ro',
@@ -408,3 +379,45 @@ EOF
 __PACKAGE__->meta->make_immutable;
 no Moose;
 1;
+
+=head1 SYNOPSIS
+
+  [MetaData::BuiltWith]
+  include = Some::Module::Thats::Not::In::Preq
+  exclude = Some::Module::Youre::Ashamed::Of
+  show_uname = 1           ; default is 0
+  show_config = 1          ; default is 0
+  uname_call = uname        ; the default
+  uname_args = -s -r -m -p  ; the default is -a
+
+
+=head1 DESCRIPTION
+
+Often, distribution authors get module dependencies wrong. So in such cases,
+its handy to be able to see what version of various packages they built with.
+
+Some would prefer to demand everyone install the same version as they did,
+but that's also not always necessary.
+
+Hopefully, the existence of the metadata provided by this module will help
+users on their end machines make intelligent choices about what modules to
+install in the event of a problem.
+
+
+
+=head1 EXAMPLE OUTPUT ( C<META.json> )
+
+    "x_BuiltWith" : {
+       "modules" : {
+          "Dist::Zilla::Role::MetaProvider" : "4.101612",
+          "File::Find" : "1.15",
+          "File::Temp" : "0.22",
+          "Module::Build" : "0.3607",
+          "Moose" : "1.07",
+          "Test::More" : "0.94"
+       },
+       "perl" : "5.012000",
+       "platform" : "MSWin32"
+    },
+
+=cut
