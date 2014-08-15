@@ -11,48 +11,6 @@ our $VERSION = '1.001001';
 
 our $AUTHORITY = 'cpan:KENTNL'; # AUTHORITY
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 use Carp qw( carp croak );
 use Config qw();
 use Moose 2.0;

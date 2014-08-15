@@ -76,29 +76,6 @@ extends 'Dist::Zilla::Plugin::MetaData::BuiltWith';
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 has 'show_failures' => ( is => 'ro', isa => 'Bool', default => 0 );
 
 around dump_config => sub {
