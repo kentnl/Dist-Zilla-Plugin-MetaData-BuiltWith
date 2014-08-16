@@ -1,5 +1,23 @@
 ﻿Revision history for Dist-Zilla-Plugin-MetaData-BuiltWith
 
+1.001001 2014-08-15T21:17:00Z
+ [00 Trivial]
+ - CPANDAY!
+ - no code changes.
+ - tests augmented.
+ - whitespace adjusted.
+
+ [Dependencies::Stats]
+ - Dependencies changed since 1.001000, see misc/*.deps* for details
+ - develop: +1 (suggests: ↑1)
+ - test: -3
+
+ [Misc]
+ - Improve source side POD to reduce build side whitespace.
+
+ [Tests]
+ - update reportprereqs test
+
 1.001000 2014-07-30T13:22:16Z
  [00 Major]
  - Added tests

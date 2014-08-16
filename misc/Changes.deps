@@ -1,6 +1,12 @@
 This file contains changes in REQUIRED dependencies for standard CPAN phases (configure/build/runtime/test)
 
-1.001000
+1.001001
+ [Removed / test requires]
+ - File::Spec::Functions
+ - List::Util
+ - Scalar::Util
+
+1.001000 2014-07-30T13:22:16Z
  [Added / runtime requires]
  - CPAN::Meta::Converter
  - Dist::Zilla::Role::FileMunger

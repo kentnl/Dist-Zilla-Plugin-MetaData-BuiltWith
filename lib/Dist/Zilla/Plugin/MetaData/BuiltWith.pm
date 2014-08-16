@@ -5,53 +5,11 @@ use utf8;
 
 package Dist::Zilla::Plugin::MetaData::BuiltWith;
 
-our $VERSION = '1.001000';
+our $VERSION = '1.001001';
 
 # ABSTRACT: Report what versions of things your distribution was built against
 
 our $AUTHORITY = 'cpan:KENTNL'; # AUTHORITY
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 use Carp qw( carp croak );
 use Config qw();
@@ -69,6 +27,15 @@ with 'Dist::Zilla::Role::FileMunger';
 
 sub mvp_multivalue_args { return qw( exclude include ) }
 
+
+
+
+
+
+
+
+
+
 has _exclude => (
   init_arg => 'exclude',
   is       => 'ro',
@@ -77,6 +44,15 @@ has _exclude => (
   traits   => [qw( Array )],
   handles  => { exclude => 'elements', },
 );
+
+
+
+
+
+
+
+
+
 
 has _include => (
   init_arg => 'include',
@@ -96,42 +72,37 @@ has _include => (
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 has show_config => ( is => 'ro', isa => 'Bool', default => 0 );
+
+
+
+
+
+
+
+
+
 has show_uname => ( is => 'ro', isa => Bool, default => 0 );
-has uname_call => ( is => 'ro', isa => Str,  default => 'uname' );
-has uname_args => ( is => 'ro', isa => Str,  default => '-a' );
+
+
+
+
+
+
+
+
+
+has uname_call => ( is => 'ro', isa => Str, default => 'uname' );
+
+
+
+
+
+
+
+
+
+has uname_args => ( is => 'ro', isa => Str, default => '-a' );
 has _uname_args => (
   init_arg   => undef,
   is         => 'ro',
@@ -421,7 +392,7 @@ Dist::Zilla::Plugin::MetaData::BuiltWith - Report what versions of things your d
 
 =head1 VERSION
 
-version 1.001000
+version 1.001001
 
 =head1 SYNOPSIS
 
