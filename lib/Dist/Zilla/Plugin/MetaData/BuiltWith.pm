@@ -335,9 +335,9 @@ sub munge_files {
 
   for my $file ( @{ $self->zilla->files } ) {
     if ( 'META.json' eq $file->name ) {
-      require JSON;
+      require JSON::MaybeXS;
       require CPAN::Meta::Converter;
-      my $json = JSON->new->pretty->canonical(1);
+      my $json = JSON::MaybeXS->new->pretty->canonical(1);
       my $old  = $file->code;
       $file->code(
         sub {
