@@ -4,7 +4,7 @@ use warnings;
 use Test::More;
 use Test::DZil;
 use Path::Tiny;
-use JSON;
+use JSON::MaybeXS;
 
 # ABSTRACT: Basic test
 
@@ -50,7 +50,7 @@ my $json = path( $dist->tempdir )->child( 'build', 'META.json' );
 ok( -e $json,  'json file exists' );
 ok( !-z $json, 'json file is nonzero' );
 
-my $content = JSON->new->decode( $json->slurp_raw );
+my $content = JSON::MaybeXS->new->decode( $json->slurp_raw );
 
 ok( exists $content->{x_BuiltWith}, 'x_BuiltWith is there' );
 
