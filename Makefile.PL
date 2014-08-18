@@ -24,7 +24,7 @@ my %WriteMakefileArgs = (
     "Carp" => 0,
     "Dist::Zilla::Role::ConfigDumper" => "4.101540",
     "Dist::Zilla::Role::FileMunger" => 0,
-    "JSON" => 0,
+    "JSON::MaybeXS" => 0,
     "Module::Data" => 0,
     "Moose" => "2.0",
     "MooseX::Types::Moose" => 0,
@@ -41,7 +41,7 @@ my %WriteMakefileArgs = (
     "Test::DZil" => 0,
     "Test::More" => "0.89"
   },
-  "VERSION" => "1.001001",
+  "VERSION" => "1.002000",
   "test" => {
     "TESTS" => "t/*.t t/00-compile/*.t"
   }
@@ -55,7 +55,7 @@ my %FallbackPrereqs = (
   "Dist::Zilla::Role::FileMunger" => 0,
   "ExtUtils::MakeMaker" => 0,
   "File::Spec" => 0,
-  "JSON" => 0,
+  "JSON::MaybeXS" => 0,
   "Module::Data" => 0,
   "Moose" => "2.0",
   "MooseX::Types::Moose" => 0,
