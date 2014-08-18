@@ -1,6 +1,11 @@
 This file contains changes in REQUIRED dependencies for standard CPAN phases (configure/build/runtime/test)
 
 1.001002
+ [Added / runtime requires]
+ - JSON::MaybeXS
+
+ [Removed / runtime requires]
+ - JSON
 
 1.001001 2014-08-15T21:17:00Z
  [Removed / test requires]
