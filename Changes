@@ -1,5 +1,7 @@
 ﻿Revision history for Dist-Zilla-Plugin-MetaData-BuiltWith
 
+1.002001 2014-08-18T03:27:13Z
+
 1.002000 2014-08-18T03:26:39Z
  [00 Minor]
  - use JSON::MaybeXS instead of JSON
