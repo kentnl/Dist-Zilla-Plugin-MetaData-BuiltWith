@@ -50,7 +50,7 @@ x_BuiltWith:
     CPAN::Meta::Converter: '2.142060'
     Carp: '1.34'
     Dist::Zilla::App::Command::bakeini: '0.001002'
-    Dist::Zilla::Plugin::Author::KENTNL::RecommendFixes: '0.002001'
+    Dist::Zilla::Plugin::Author::KENTNL::RecommendFixes: '0.002002'
     Dist::Zilla::Plugin::Authority: '1.006'
     Dist::Zilla::Plugin::AutoPrereqs: '5.020'
     Dist::Zilla::Plugin::BumpVersionAfterRelease: '0.002'
@@ -94,7 +94,7 @@ x_BuiltWith:
     Dist::Zilla::Plugin::TestRelease: '5.020'
     Dist::Zilla::Plugin::Twitter: '0.025'
     Dist::Zilla::Plugin::UploadToCPAN: '5.020'
-    Dist::Zilla::PluginBundle::Author::KENTNL: '2.018000'
+    Dist::Zilla::PluginBundle::Author::KENTNL: '2.019000'
     Dist::Zilla::Role::ConfigDumper: '5.020'
     Dist::Zilla::Role::FileMunger: '5.020'
     ExtUtils::MakeMaker: '6.98'
@@ -412,7 +412,7 @@ x_Dist_Zilla:
     -
       class: Dist::Zilla::Plugin::Author::KENTNL::RecommendFixes
       name: '@Author::KENTNL/Author::KENTNL::RecommendFixes'
-      version: '0.002001'
+      version: '0.002002'
     -
       class: Dist::Zilla::Plugin::ReadmeFromPod
       name: '@Author::KENTNL/ReadmeFromPod'
