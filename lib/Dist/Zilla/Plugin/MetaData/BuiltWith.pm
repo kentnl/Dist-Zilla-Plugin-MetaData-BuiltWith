@@ -5,7 +5,7 @@ use utf8;
 
 package Dist::Zilla::Plugin::MetaData::BuiltWith;
 
-our $VERSION = '1.002000';
+our $VERSION = '1.003000';
 
 # ABSTRACT: Report what versions of things your distribution was built against
 
@@ -16,6 +16,8 @@ use Config qw();
 use Moose 2.0;
 use Moose qw( with has around );
 use MooseX::Types::Moose qw( ArrayRef Bool Str );
+use Dist::Zilla::Util::ConfigDumper qw( config_dumper );
+use Module::Runtime qw( is_module_name );
 use namespace::autoclean;
 with 'Dist::Zilla::Role::FileMunger';
 
@@ -113,29 +115,25 @@ has _uname_args => (
 );
 has _stash_key => ( is => 'ro', isa => Str, default => 'x_BuiltWith' );
 
-around dump_config => sub {
-  my ( $orig, $self ) = @_;
+around dump_config => config_dumper( __PACKAGE__,
+  qw( show_uname _stash_key show_config ),
+  sub {
+    my ( $self, $payload ) = @_;
+    if ( $self->show_uname ) {
+      $payload->{'uname'} = {
+        uname_call => $self->uname_call,
+        uname_args => $self->_uname_args,
+      };
+    }
 
-  my $config = $self->$orig();
-  my $thisconfig = { show_uname => $self->show_uname, _stash_key => $self->_stash_key, show_config => $self->show_config };
-
-  if ( $self->show_uname ) {
-    $thisconfig->{'uname'} = {
-      uname_call => $self->uname_call,
-      uname_args => $self->_uname_args,
-    };
-  }
-
-  if ( $self->exclude ) {
-    $thisconfig->{exclude} = [ $self->exclude ];
-  }
-  if ( $self->include ) {
-    $thisconfig->{include} = [ $self->include ];
-  }
-
-  $config->{ q{} . __PACKAGE__ } = $thisconfig;
-  return $config;
-};
+    if ( $self->exclude ) {
+      $payload->{exclude} = [ $self->exclude ];
+    }
+    if ( $self->include ) {
+      $payload->{include} = [ $self->include ];
+    }
+  },
+);
 
 sub _config {
   my $self = shift;
@@ -216,25 +214,6 @@ sub _get_prereq_modnames {
   return [ sort keys %{$modnames} ];
 }
 
-{
-  my $context = 0;
-
-  sub _logonce {
-    my ( $self, $module, $reason, $error ) = @_;
-    my $message = "Possible Error: Module '$module' $reason.";
-    if ( not $context ) {
-      $context++;
-      $message .= q{see "dzil build -v" for details};
-    }
-    $self->log($message);
-    ## no critic ( RequireInterpolationOfMetachars )
-    $self->log_debug( '$@ : ' . $error->[0] );
-    $self->log_debug( '$! : ' . $error->[1] );
-    return;
-  }
-
-}
-
 sub _detect_installed {
   my ( undef, $module ) = @_;
   if ( not defined $module ) {
@@ -242,6 +221,9 @@ sub _detect_installed {
   }
   if ( 'perl' eq $module ) {
     return [ undef, undef ];
+  }
+  if ( not is_module_name($module) ) {
+    return [ undef, 'not a valid module name' ];
   }
   require Module::Data;
   my $d = Module::Data->new($module);
@@ -392,7 +374,7 @@ Dist::Zilla::Plugin::MetaData::BuiltWith - Report what versions of things your d
 
 =head1 VERSION
 
-version 1.002000
+version 1.003000
 
 =head1 SYNOPSIS
 

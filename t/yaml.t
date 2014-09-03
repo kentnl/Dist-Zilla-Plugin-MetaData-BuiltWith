@@ -5,7 +5,7 @@ use Test::More;
 use Test::DZil qw( simple_ini );
 use Dist::Zilla::Util::Test::KENTNL 1.003001 qw( dztest );
 use Path::Tiny;
-use JSON::MaybeXS;
+use YAML::Tiny;
 
 # ABSTRACT: Basic test
 
@@ -18,7 +18,7 @@ my $ini = simple_ini(
       -type         => 'requires',
     }
   ],
-  [ 'MetaData::BuiltWith' => { include => ['perl'] } ],
+  [ 'MetaData::BuiltWith' => {} ],
   [
     'Prereqs',
     'After' => {
@@ -27,18 +27,18 @@ my $ini = simple_ini(
       -type  => 'requires',
     }
   ],
-  [ 'MetaJSON' => {} ],
+  [ 'MetaYAML' => {} ],
 );
 my $test = dztest();
 $test->add_file( 'dist.ini', $ini );
 $test->build_ok;
 
-## Note: this is required because MD:BW wraps the META.json
+## Note: this is required because MD:BW wraps the META.yml
 ## file fromCode object to inject during write.
 ## I'm not sure I like that. But either way, it hides from distmeta!
-my $json = $test->test_has_built_file('META.json');
+my $json = $test->test_has_built_file('META.yml');
 
-my $content = JSON::MaybeXS->new->decode( $json->slurp_raw );
+my $content = YAML::Tiny::Load( $json->slurp_raw );
 
 ok( exists $content->{x_BuiltWith}, 'x_BuiltWith is there' );
 

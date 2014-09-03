@@ -5,13 +5,14 @@ use utf8;
 
 package Dist::Zilla::Plugin::MetaData::BuiltWith::All;
 
-our $VERSION = '1.002000';
+our $VERSION = '1.003000';
 
 # ABSTRACT: Go overkill and report everything in all name-spaces.
 
 our $AUTHORITY = 'cpan:KENTNL'; # AUTHORITY
 
 use Moose qw( extends has around );
+use Dist::Zilla::Util::ConfigDumper qw( config_dumper );
 use namespace::autoclean;
 extends 'Dist::Zilla::Plugin::MetaData::BuiltWith';
 
@@ -78,12 +79,7 @@ extends 'Dist::Zilla::Plugin::MetaData::BuiltWith';
 
 has 'show_failures' => ( is => 'ro', isa => 'Bool', default => 0 );
 
-around dump_config => sub {
-  my ( $orig, $self ) = @_;
-  my $config = $self->$orig();
-  $config->{ q{} . __PACKAGE__ }->{show_failures} = $self->show_failures;
-  return $config;
-};
+around dump_config => config_dumper( __PACKAGE__, qw( show_failures ) );
 
 sub _list_modules_in_memory {
   my ( $self, $package ) = @_;
@@ -179,7 +175,7 @@ Dist::Zilla::Plugin::MetaData::BuiltWith::All - Go overkill and report everythin
 
 =head1 VERSION
 
-version 1.002000
+version 1.003000
 
 =head1 SYNOPSIS
 

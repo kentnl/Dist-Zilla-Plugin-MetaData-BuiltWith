@@ -9,7 +9,11 @@ use JSON::MaybeXS;
 
 # ABSTRACT: Basic test
 
+use constant HATEFULMODNAME    => 'Please::Do::Not::Invent::This::Module::Or::Install::It';
+use constant HATEFULMODNAMETWO => 'Also::Please::Do::Not::Invent::This::Module::Or::Install::It';
+
 my $ini = simple_ini(
+  ['GatherDir'],
   [
     'Prereqs',
     'Before' => {
@@ -18,7 +22,12 @@ my $ini = simple_ini(
       -type         => 'requires',
     }
   ],
-  [ 'MetaData::BuiltWith' => { include => ['perl'] } ],
+  [
+    'MetaData::BuiltWith' => {
+      include => [HATEFULMODNAME],
+      exclude => [ 'Moose', HATEFULMODNAMETWO ],
+    }
+  ],
   [
     'Prereqs',
     'After' => {
@@ -32,7 +41,7 @@ my $ini = simple_ini(
 my $test = dztest();
 $test->add_file( 'dist.ini', $ini );
 $test->build_ok;
-
+note explain $test->builder->log_events;
 ## Note: this is required because MD:BW wraps the META.json
 ## file fromCode object to inject during write.
 ## I'm not sure I like that. But either way, it hides from distmeta!
@@ -44,13 +53,15 @@ ok( exists $content->{x_BuiltWith}, 'x_BuiltWith is there' );
 
 my $xb = $content->{x_BuiltWith};
 
+note explain $xb;
+
 subtest 'platform' => sub {
   ok( exists $xb->{platform}, 'platform key exists' );
   ok( length $xb->{platform}, 'platform has length' );
 };
 subtest 'modules' => sub {
   return unless ok( exists $xb->{modules}, 'modules key exists' );
-  for my $module (qw( Moose Dist::Zilla )) {
+  for my $module (qw( Dist::Zilla )) {
     ok( exists $xb->{modules}->{$module}, $module . ' is there' );
     like( $xb->{modules}->{$module}, qr/\d/, $module . ' has a number' );
   }
@@ -61,6 +72,13 @@ subtest 'perl' => sub {
     ok( exists $xb->{perl}->{$field}, $field . ' is there' );
   }
 };
+
+ok( exists $xb->{failures}, 'Failures reported' );
+
+ok( exists $xb->{modules}->{'Dist::Zilla'},      'Dist::Zilla still reported' );
+ok( !exists $xb->{modules}->{'Moose'},           'Moose excluded' );
+ok( !exists $xb->{modules}->{ +HATEFULMODNAME }, 'Bad mod was not found' );
+ok( exists $xb->{failures}->{ +HATEFULMODNAME }, 'Bad mod gave failure' );
 
 done_testing;
 
