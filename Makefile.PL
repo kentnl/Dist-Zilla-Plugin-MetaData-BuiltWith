@@ -41,7 +41,8 @@ my %WriteMakefileArgs = (
     "File::Spec" => 0,
     "Path::Tiny" => 0,
     "Test::DZil" => 0,
-    "Test::More" => "0.89"
+    "Test::More" => "0.89",
+    "constant" => 0
   },
   "VERSION" => "1.003000",
   "test" => {
@@ -67,6 +68,7 @@ my %FallbackPrereqs = (
   "Test::DZil" => 0,
   "Test::More" => "0.89",
   "YAML::Tiny" => 0,
+  "constant" => 0,
   "namespace::autoclean" => 0,
   "strict" => 0,
   "utf8" => 0,

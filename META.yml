@@ -9,6 +9,7 @@ build_requires:
   Path::Tiny: '0'
   Test::DZil: '0'
   Test::More: '0.89'
+  constant: '0'
 configure_requires:
   ExtUtils::MakeMaker: '0'
 dynamic_config: '0'
@@ -117,6 +118,7 @@ x_BuiltWith:
     Test::Pod: '1.48'
     Test::Pod::Coverage: '1.10'
     YAML::Tiny: '1.63'
+    constant: '1.31'
     namespace::autoclean: '0.19'
     strict: '1.08'
     utf8: '1.14'
