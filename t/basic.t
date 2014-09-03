@@ -18,7 +18,7 @@ my $ini = simple_ini(
       -type         => 'requires',
     }
   ],
-  [ 'MetaData::BuiltWith' => {} ],
+  [ 'MetaData::BuiltWith' => { include => ['perl'] } ],
   [
     'Prereqs',
     'After' => {
