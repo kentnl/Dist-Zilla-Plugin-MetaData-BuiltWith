@@ -17,6 +17,7 @@ use Moose 2.0;
 use Moose qw( with has around );
 use MooseX::Types::Moose qw( ArrayRef Bool Str );
 use Dist::Zilla::Util::ConfigDumper qw( config_dumper );
+use Module::Runtime qw( is_module_name );
 use namespace::autoclean;
 with 'Dist::Zilla::Role::FileMunger';
 
@@ -220,6 +221,9 @@ sub _detect_installed {
   }
   if ( 'perl' eq $module ) {
     return [ undef, undef ];
+  }
+  if ( not is_module_name($module) ) {
+    return [ undef, 'not a valid module name' ];
   }
   require Module::Data;
   my $d = Module::Data->new($module);
