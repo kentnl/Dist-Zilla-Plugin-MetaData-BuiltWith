@@ -9,8 +9,11 @@ use JSON::MaybeXS;
 
 # ABSTRACT: Basic test
 
-use constant HATEFULMODNAME => 'Please::Do::Not::Invent::This::Module::Or::Install::It';
+use constant HATEFULMODNAME    => 'Please::Do::Not::Invent::This::Module::Or::Install::It';
+use constant HATEFULMODNAMETWO => 'Also::Please::Do::Not::Invent::This::Module::Or::Install::It';
+
 my $ini = simple_ini(
+  ['GatherDir'],
   [
     'Prereqs',
     'Before' => {
@@ -22,7 +25,7 @@ my $ini = simple_ini(
   [
     'MetaData::BuiltWith' => {
       include => [HATEFULMODNAME],
-      exclude => ['Moose'],
+      exclude => [ 'Moose', HATEFULMODNAMETWO ],
     }
   ],
   [
