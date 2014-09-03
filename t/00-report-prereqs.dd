@@ -74,6 +74,7 @@ do { my $x = {
                                       'Dist::Zilla::Util::ConfigDumper' => '0',
                                       'JSON::MaybeXS' => '0',
                                       'Module::Data' => '0',
+                                      'Module::Runtime' => '0',
                                       'Moose' => '2.0',
                                       'MooseX::Types::Moose' => '0',
                                       'YAML::Tiny' => '0',

@@ -123,10 +123,6 @@ sub _get_all {
       $failures{$module} = 'Skipped: Parameterized Type';
       return;
     }
-    if ( $module =~ /\A_</msx ) {
-      $failures{$module} = 'Skipped: Moose Accessor';
-      return;
-    }
     my $result = $self->_detect_installed($module);
     if ( defined $result->[0] ) {
       $modtable{$module} = $result->[0];
