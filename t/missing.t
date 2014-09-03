@@ -14,6 +14,7 @@ use constant HATEFULMODNAMETWO => 'Also::Please::Do::Not::Invent::This::Module::
 
 my $ini = simple_ini(
   [
+    'GatherDir',
     'Prereqs',
     'Before' => {
       'Dist::Zilla' => 0,
