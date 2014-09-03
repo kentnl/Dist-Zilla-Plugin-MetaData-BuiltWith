@@ -132,7 +132,7 @@ around dump_config => config_dumper( __PACKAGE__,
     if ( $self->include ) {
       $payload->{include} = [ $self->include ];
     }
-  }
+  },
 );
 
 sub _config {
