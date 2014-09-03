@@ -5,7 +5,7 @@ use utf8;
 
 package Dist::Zilla::Plugin::MetaData::BuiltWith::All;
 
-our $VERSION = '1.002001';
+our $VERSION = '1.003001';
 
 # ABSTRACT: Go overkill and report everything in all name-spaces.
 

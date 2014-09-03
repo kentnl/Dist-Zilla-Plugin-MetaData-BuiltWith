@@ -1,6 +1,8 @@
 ﻿Revision history for {{$dist->name}}
 
 {{$NEXT}}
+
+1.003000 2014-09-03T22:13:41Z
  [00 Minor]
  - Internals.
  - Tests.
