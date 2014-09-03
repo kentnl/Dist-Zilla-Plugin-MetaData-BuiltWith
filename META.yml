@@ -3,6 +3,7 @@ abstract: 'Report what versions of things your distribution was built against'
 author:
   - 'Kent Fredric <kentnl@cpan.org>'
 build_requires:
+  Dist::Zilla::Util::Test::KENTNL: '1.003001'
   ExtUtils::MakeMaker: '0'
   File::Spec: '0'
   Path::Tiny: '0'
@@ -71,7 +72,7 @@ x_BuiltWith:
     Dist::Zilla::Plugin::Manifest: '5.020'
     Dist::Zilla::Plugin::ManifestSkip: '5.020'
     Dist::Zilla::Plugin::MetaConfig: '5.020'
-    Dist::Zilla::Plugin::MetaData::BuiltWith: '1.002001'
+    Dist::Zilla::Plugin::MetaData::BuiltWith: '1.003000'
     Dist::Zilla::Plugin::MetaJSON: '5.020'
     Dist::Zilla::Plugin::MetaProvides::Package: '2.001001'
     Dist::Zilla::Plugin::MetaTests: '5.020'
@@ -99,6 +100,7 @@ x_BuiltWith:
     Dist::Zilla::Role::ConfigDumper: '5.020'
     Dist::Zilla::Role::FileMunger: '5.020'
     Dist::Zilla::Util::ConfigDumper: '0.003004'
+    Dist::Zilla::Util::Test::KENTNL: '1.003001'
     ExtUtils::MakeMaker: '6.98'
     File::Spec: '3.49'
     JSON::MaybeXS: '1.002002'
@@ -187,7 +189,7 @@ x_Dist_Zilla:
               - -i
             uname_call: uname
       name: '@Author::KENTNL/MetaData::BuiltWith'
-      version: '1.002001'
+      version: '1.003000'
     -
       class: Dist::Zilla::Plugin::Git::Contributors
       config:

@@ -2,14 +2,14 @@ use strict;
 use warnings;
 
 use Test::More;
-use Test::DZil;
+use Test::DZil qw( simple_ini );
+use Dist::Zilla::Util::Test::KENTNL 1.003001 qw( dztest );
 use Path::Tiny;
 use JSON::MaybeXS;
 
 # ABSTRACT: Basic test
 
 my $ini = simple_ini(
-  [ 'GatherDir' => {} ],
   [
     'Prereqs',
     'Before' => {
@@ -18,7 +18,6 @@ my $ini = simple_ini(
       -type         => 'requires',
     }
   ],
-  [ 'MetaConfig'          => {} ],
   [ 'MetaData::BuiltWith' => {} ],
   [
     'Prereqs',
@@ -29,26 +28,15 @@ my $ini = simple_ini(
     }
   ],
   [ 'MetaJSON' => {} ],
-  [ 'MetaYAML' => {} ],
-
 );
+my $test = dztest();
+$test->add_file('dist.ini', $ini );
+$test->build_ok;
 
-my $root = Path::Tiny->tempdir;
-
-$root->child('dist.ini')->spew_raw($ini);
-
-my $dist = Builder->from_config(
-  {
-    dist_root => $root,
-  }
-);
-
-$dist->build;
-
-my $json = path( $dist->tempdir )->child( 'build', 'META.json' );
-
-ok( -e $json,  'json file exists' );
-ok( !-z $json, 'json file is nonzero' );
+## Note: this is required because MD:BW wraps the META.json
+## file fromCode object to inject during write.
+## I'm not sure I like that. But either way, it hides from distmeta!
+my $json = $test->test_has_built_file('META.json');
 
 my $content = JSON::MaybeXS->new->decode( $json->slurp_raw );
 
