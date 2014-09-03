@@ -213,25 +213,6 @@ sub _get_prereq_modnames {
   return [ sort keys %{$modnames} ];
 }
 
-{
-  my $context = 0;
-
-  sub _logonce {
-    my ( $self, $module, $reason, $error ) = @_;
-    my $message = "Possible Error: Module '$module' $reason.";
-    if ( not $context ) {
-      $context++;
-      $message .= q{see "dzil build -v" for details};
-    }
-    $self->log($message);
-    ## no critic ( RequireInterpolationOfMetachars )
-    $self->log_debug( '$@ : ' . $error->[0] );
-    $self->log_debug( '$! : ' . $error->[1] );
-    return;
-  }
-
-}
-
 sub _detect_installed {
   my ( undef, $module ) = @_;
   if ( not defined $module ) {

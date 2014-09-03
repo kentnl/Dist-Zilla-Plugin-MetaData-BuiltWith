@@ -70,14 +70,12 @@ subtest 'perl' => sub {
   }
 };
 
-ok( exists $xb->{failures}, 'Failures reported');
+ok( exists $xb->{failures}, 'Failures reported' );
 
-ok( exists $xb->{modules}->{'Dist::Zilla'}, 'Dist::Zilla still reported');
-ok( !exists $xb->{modules}->{'Moose'}, 'Moose excluded');
-ok( !exists $xb->{modules}->{+HATEFULMODNAME}, 'Bad mod was not found' );
-ok( exists $xb->{failures}->{+HATEFULMODNAME}, 'Bad mod gave failure' );
-
-
+ok( exists $xb->{modules}->{'Dist::Zilla'},      'Dist::Zilla still reported' );
+ok( !exists $xb->{modules}->{'Moose'},           'Moose excluded' );
+ok( !exists $xb->{modules}->{ +HATEFULMODNAME }, 'Bad mod was not found' );
+ok( exists $xb->{failures}->{ +HATEFULMODNAME }, 'Bad mod gave failure' );
 
 done_testing;
 
