@@ -10,11 +10,11 @@ try_built = 1
 fallback  = 0
 
 [@Author::KENTNL]
+:version         = 2.020
 toolkit          = eumm
 toolkit_hardness = soft
 normal_form      = numify
 mantissa         = 6
-git_versions     = 1
 twitter_hash_tags = #perl #cpan
 bumpversions      = 1
 copyfiles         = LICENSE
