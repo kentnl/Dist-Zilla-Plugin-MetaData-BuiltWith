@@ -1,9 +1,16 @@
 ﻿Revision history for {{$dist->name}}
 
 {{$NEXT}}
+ [00 Minor]
+ - Internals.
+
  [Dependencies::Stats]
  - Dependencies changed since 1.002000, see misc/*.deps* for details
  - develop: (suggests: ↑1)
+ - runtime: +1
+
+ [Internals]
+ - dump_config impemented with config_dumper
 
 1.002000 2014-08-18T03:26:39Z
  [00 Minor]

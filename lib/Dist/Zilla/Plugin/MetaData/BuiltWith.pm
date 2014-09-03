@@ -5,7 +5,7 @@ use utf8;
 
 package Dist::Zilla::Plugin::MetaData::BuiltWith;
 
-our $VERSION = '1.002001';
+our $VERSION = '1.003000';
 
 # ABSTRACT: Report what versions of things your distribution was built against
 
@@ -16,6 +16,7 @@ use Config qw();
 use Moose 2.0;
 use Moose qw( with has around );
 use MooseX::Types::Moose qw( ArrayRef Bool Str );
+use Dist::Zilla::Util::ConfigDumper qw( config_dumper );
 use namespace::autoclean;
 with 'Dist::Zilla::Role::FileMunger';
 
@@ -113,29 +114,25 @@ has _uname_args => (
 );
 has _stash_key => ( is => 'ro', isa => Str, default => 'x_BuiltWith' );
 
-around dump_config => sub {
-  my ( $orig, $self ) = @_;
+around dump_config => config_dumper( __PACKAGE__,
+  qw( show_uname _stash_key show_config ),
+  sub {
+    my ( $self, $payload ) = @_;
+    if ( $self->show_uname ) {
+      $payload->{'uname'} = {
+        uname_call => $self->uname_call,
+        uname_args => $self->_uname_args,
+      };
+    }
 
-  my $config = $self->$orig();
-  my $thisconfig = { show_uname => $self->show_uname, _stash_key => $self->_stash_key, show_config => $self->show_config };
-
-  if ( $self->show_uname ) {
-    $thisconfig->{'uname'} = {
-      uname_call => $self->uname_call,
-      uname_args => $self->_uname_args,
-    };
-  }
-
-  if ( $self->exclude ) {
-    $thisconfig->{exclude} = [ $self->exclude ];
-  }
-  if ( $self->include ) {
-    $thisconfig->{include} = [ $self->include ];
-  }
-
-  $config->{ q{} . __PACKAGE__ } = $thisconfig;
-  return $config;
-};
+    if ( $self->exclude ) {
+      $payload->{exclude} = [ $self->exclude ];
+    }
+    if ( $self->include ) {
+      $payload->{include} = [ $self->include ];
+    }
+  },
+);
 
 sub _config {
   my $self = shift;

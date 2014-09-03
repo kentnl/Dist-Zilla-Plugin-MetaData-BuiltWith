@@ -12,6 +12,7 @@ our $VERSION = '1.002001';
 # AUTHORITY
 
 use Moose qw( extends has around );
+use Dist::Zilla::Util::ConfigDumper qw( config_dumper );
 use namespace::autoclean;
 extends 'Dist::Zilla::Plugin::MetaData::BuiltWith';
 
@@ -78,12 +79,7 @@ Specify arguments passed to the C<uname> call.
 
 has 'show_failures' => ( is => 'ro', isa => 'Bool', default => 0 );
 
-around dump_config => sub {
-  my ( $orig, $self ) = @_;
-  my $config = $self->$orig();
-  $config->{ q{} . __PACKAGE__ }->{show_failures} = $self->show_failures;
-  return $config;
-};
+around dump_config => config_dumper( __PACKAGE__, qw( show_failures ) );
 
 sub _list_modules_in_memory {
   my ( $self, $package ) = @_;
