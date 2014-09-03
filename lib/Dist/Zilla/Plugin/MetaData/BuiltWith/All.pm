@@ -124,7 +124,7 @@ sub _get_all {
       return;
     }
     if ( $module =~ /\A_</msx ) {
-      $failure{$module} = 'Skipped: Predicate';
+      $failures{$module} = 'Skipped: Moose Accessor';
       return;
     }
     my $result = $self->_detect_installed($module);
