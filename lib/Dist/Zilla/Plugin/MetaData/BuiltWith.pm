@@ -5,7 +5,7 @@ use utf8;
 
 package Dist::Zilla::Plugin::MetaData::BuiltWith;
 
-our $VERSION = '1.003000';
+our $VERSION = '1.003001';
 
 # ABSTRACT: Report what versions of things your distribution was built against
 
@@ -18,6 +18,7 @@ use Moose qw( with has around );
 use MooseX::Types::Moose qw( ArrayRef Bool Str );
 use Dist::Zilla::Util::ConfigDumper qw( config_dumper );
 use Module::Runtime qw( is_module_name );
+use Devel::CheckBin qw( can_run );
 use namespace::autoclean;
 with 'Dist::Zilla::Role::FileMunger';
 
@@ -154,6 +155,10 @@ sub _uname {
   return () unless $self->show_uname;
   {
     my $str;
+    if ( not can_run( $self->uname_call ) ) {
+      $self->log( q[can't invoke ] . $self->uname_call . q[ on this device] );
+      return ();
+    }
     last unless open my $fh, q{-|}, $self->uname_call, $self->_all_uname_args;
     while ( my $line = <$fh> ) {
       chomp $line;
@@ -374,7 +379,7 @@ Dist::Zilla::Plugin::MetaData::BuiltWith - Report what versions of things your d
 
 =head1 VERSION
 
-version 1.003000
+version 1.003001
 
 =head1 SYNOPSIS
 

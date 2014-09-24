@@ -22,6 +22,7 @@ my %WriteMakefileArgs = (
   "PREREQ_PM" => {
     "CPAN::Meta::Converter" => 0,
     "Carp" => 0,
+    "Devel::CheckBin" => 0,
     "Dist::Zilla::Role::ConfigDumper" => "4.101540",
     "Dist::Zilla::Role::FileMunger" => 0,
     "Dist::Zilla::Util::ConfigDumper" => 0,
@@ -45,7 +46,7 @@ my %WriteMakefileArgs = (
     "Test::More" => "0.89",
     "constant" => 0
   },
-  "VERSION" => "1.003000",
+  "VERSION" => "1.003001",
   "test" => {
     "TESTS" => "t/*.t t/00-compile/*.t"
   }
@@ -55,6 +56,7 @@ my %WriteMakefileArgs = (
 my %FallbackPrereqs = (
   "CPAN::Meta::Converter" => 0,
   "Carp" => 0,
+  "Devel::CheckBin" => 0,
   "Dist::Zilla::Role::ConfigDumper" => "4.101540",
   "Dist::Zilla::Role::FileMunger" => 0,
   "Dist::Zilla::Util::ConfigDumper" => 0,

@@ -1,6 +1,10 @@
 This file contains changes in REQUIRED dependencies for standard CPAN phases (configure/build/runtime/test)
 
-1.003000
+1.003001
+ [Added / runtime requires]
+ - Devel::CheckBin
+
+1.003000 2014-09-03T22:13:41Z
  [Added / runtime requires]
  - Dist::Zilla::Util::ConfigDumper
  - Module::Runtime
