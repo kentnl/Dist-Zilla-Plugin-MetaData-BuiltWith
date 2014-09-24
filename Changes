@@ -1,6 +1,9 @@
 ﻿Revision history for Dist-Zilla-Plugin-MetaData-BuiltWith
 
-1.003001 2014-09-24T06:19:39Z
+1.003001 2014-09-24T06:24:18Z
+ [Bugfix]
+ - Don't call unname on devices where there is no uname.
+
  [Dependencies::Stats]
  - Dependencies changed since 1.003000, see misc/*.deps* for details
  - develop: (suggests: ↑1)
