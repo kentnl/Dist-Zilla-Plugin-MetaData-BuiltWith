@@ -157,6 +157,7 @@ sub _uname {
     my $str;
     if ( not can_run( $self->uname_call ) ) {
       $self->log( q[can't invoke ] . $self->uname_call . q[ on this device] );
+      return ();
     }
     last unless open my $fh, q{-|}, $self->uname_call, $self->_all_uname_args;
     while ( my $line = <$fh> ) {
