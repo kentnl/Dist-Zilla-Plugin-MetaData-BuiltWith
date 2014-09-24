@@ -121,11 +121,11 @@
    "provides" : {
       "Dist::Zilla::Plugin::MetaData::BuiltWith" : {
          "file" : "lib/Dist/Zilla/Plugin/MetaData/BuiltWith.pm",
-         "version" : "1.003001"
+         "version" : "1.003002"
       },
       "Dist::Zilla::Plugin::MetaData::BuiltWith::All" : {
          "file" : "lib/Dist/Zilla/Plugin/MetaData/BuiltWith/All.pm",
-         "version" : "1.003001"
+         "version" : "1.003002"
       }
    },
    "release_status" : "stable",
@@ -140,7 +140,7 @@
          "web" : "https://github.com/kentnl/Dist-Zilla-Plugin-MetaData-BuiltWith"
       }
    },
-   "version" : "1.003001",
+   "version" : "1.003002",
    "x_BuiltWith" : {
       "modules" : {
          "CPAN::Meta" : "2.142060",
@@ -692,7 +692,7 @@
                "Dist::Zilla::Plugin::Git::Tag" : {
                   "branch" : null,
                   "signed" : 0,
-                  "tag" : "1.003001-source",
+                  "tag" : "1.003002-source",
                   "tag_format" : "%v-source",
                   "tag_message" : "v%v",
                   "time_zone" : "local"
@@ -763,7 +763,7 @@
                "Dist::Zilla::Plugin::Git::Tag" : {
                   "branch" : "releases",
                   "signed" : 0,
-                  "tag" : "1.003001",
+                  "tag" : "1.003002",
                   "tag_format" : "%v",
                   "tag_message" : "v%v",
                   "time_zone" : "local"
