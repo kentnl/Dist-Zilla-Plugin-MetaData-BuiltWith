@@ -18,6 +18,7 @@ use Moose qw( with has around );
 use MooseX::Types::Moose qw( ArrayRef Bool Str );
 use Dist::Zilla::Util::ConfigDumper qw( config_dumper );
 use Module::Runtime qw( is_module_name );
+use Devel::CheckBin qw( can_run );
 use namespace::autoclean;
 with 'Dist::Zilla::Role::FileMunger';
 
@@ -154,6 +155,9 @@ sub _uname {
   return () unless $self->show_uname;
   {
     my $str;
+    if ( not can_run( $self->uname_call ) ) {
+      $self->log( q[can't invoke ] . $self->uname_call . q[ on this device] );
+    }
     last unless open my $fh, q{-|}, $self->uname_call, $self->_all_uname_args;
     while ( my $line = <$fh> ) {
       chomp $line;

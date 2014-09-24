@@ -84,6 +84,7 @@
          "requires" : {
             "CPAN::Meta::Converter" : "0",
             "Carp" : "0",
+            "Devel::CheckBin" : "0",
             "Dist::Zilla::Role::ConfigDumper" : "4.101540",
             "Dist::Zilla::Role::FileMunger" : "0",
             "Dist::Zilla::Util::ConfigDumper" : "0",
@@ -145,21 +146,22 @@
          "CPAN::Meta" : "2.142060",
          "CPAN::Meta::Converter" : "2.142060",
          "Carp" : "1.34",
+         "Devel::CheckBin" : "0.02",
          "Dist::Zilla::App::Command::bakeini" : "0.001002",
-         "Dist::Zilla::Plugin::Author::KENTNL::RecommendFixes" : "0.003002",
+         "Dist::Zilla::Plugin::Author::KENTNL::RecommendFixes" : "0.003004",
          "Dist::Zilla::Plugin::Authority" : "1.006",
          "Dist::Zilla::Plugin::AutoPrereqs" : "5.020",
          "Dist::Zilla::Plugin::BumpVersionAfterRelease" : "0.002",
          "Dist::Zilla::Plugin::ConfirmRelease" : "5.020",
          "Dist::Zilla::Plugin::CopyFilesFromBuild" : "0.103510",
          "Dist::Zilla::Plugin::EOLTests" : "0.02",
-         "Dist::Zilla::Plugin::Git::Check" : "2.023",
-         "Dist::Zilla::Plugin::Git::Commit" : "2.023",
-         "Dist::Zilla::Plugin::Git::CommitBuild" : "2.023",
+         "Dist::Zilla::Plugin::Git::Check" : "2.024",
+         "Dist::Zilla::Plugin::Git::Commit" : "2.024",
+         "Dist::Zilla::Plugin::Git::CommitBuild" : "2.024",
          "Dist::Zilla::Plugin::Git::Contributors" : "0.007",
-         "Dist::Zilla::Plugin::Git::GatherDir" : "2.023",
+         "Dist::Zilla::Plugin::Git::GatherDir" : "2.024",
          "Dist::Zilla::Plugin::Git::NextRelease" : "0.003000",
-         "Dist::Zilla::Plugin::Git::Tag" : "2.023",
+         "Dist::Zilla::Plugin::Git::Tag" : "2.024",
          "Dist::Zilla::Plugin::GithubMeta" : "0.46",
          "Dist::Zilla::Plugin::License" : "5.020",
          "Dist::Zilla::Plugin::MakeMaker" : "5.020",
@@ -179,10 +181,10 @@
          "Dist::Zilla::Plugin::Prereqs::Recommend::MatchInstalled" : "0.003001",
          "Dist::Zilla::Plugin::ReadmeAnyFromPod" : "0.142470",
          "Dist::Zilla::Plugin::ReadmeFromPod" : "0.21",
-         "Dist::Zilla::Plugin::RewriteVersion::Sanitized" : "0.001003",
+         "Dist::Zilla::Plugin::RewriteVersion::Sanitized" : "0.001004",
          "Dist::Zilla::Plugin::RunExtraTests" : "0.022",
          "Dist::Zilla::Plugin::Test::CPAN::Changes" : "0.008",
-         "Dist::Zilla::Plugin::Test::Compile::PerFile" : "0.002002",
+         "Dist::Zilla::Plugin::Test::Compile::PerFile" : "0.003000",
          "Dist::Zilla::Plugin::Test::Kwalitee" : "2.11",
          "Dist::Zilla::Plugin::Test::MinimumVersion" : "2.000005",
          "Dist::Zilla::Plugin::Test::Perl::Critic" : "2.112410",
@@ -200,9 +202,9 @@
          "JSON::MaybeXS" : "1.002002",
          "Module::Data" : "0.007",
          "Module::Runtime" : "0.014",
-         "Moose" : "2.1211",
+         "Moose" : "2.1212",
          "MooseX::Types::Moose" : "0.45",
-         "Path::Tiny" : "0.056",
+         "Path::Tiny" : "0.057",
          "Pod::Coverage::TrustPod" : "0.100003",
          "Test::CPAN::Changes" : "0.30",
          "Test::CPAN::Meta" : "0.23",
@@ -332,7 +334,7 @@
                }
             },
             "name" : "@Author::KENTNL/Git::GatherDir",
-            "version" : "2.023"
+            "version" : "2.024"
          },
          {
             "class" : "Dist::Zilla::Plugin::License",
@@ -421,7 +423,7 @@
                }
             },
             "name" : "@Author::KENTNL/Test::Compile::PerFile",
-            "version" : "0.002002"
+            "version" : "0.003000"
          },
          {
             "class" : "Dist::Zilla::Plugin::Test::Perl::Critic",
@@ -442,7 +444,7 @@
                }
             },
             "name" : "@Author::KENTNL/RewriteVersion::Sanitized",
-            "version" : "0.001003"
+            "version" : "0.001004"
          },
          {
             "class" : "Dist::Zilla::Plugin::PodWeaver",
@@ -603,7 +605,7 @@
          {
             "class" : "Dist::Zilla::Plugin::Author::KENTNL::RecommendFixes",
             "name" : "@Author::KENTNL/Author::KENTNL::RecommendFixes",
-            "version" : "0.003002"
+            "version" : "0.003004"
          },
          {
             "class" : "Dist::Zilla::Plugin::ReadmeFromPod",
@@ -659,7 +661,7 @@
                }
             },
             "name" : "@Author::KENTNL/Git::Check",
-            "version" : "2.023"
+            "version" : "2.024"
          },
          {
             "class" : "Dist::Zilla::Plugin::Git::Commit",
@@ -682,7 +684,7 @@
                }
             },
             "name" : "@Author::KENTNL/commit_dirty_files",
-            "version" : "2.023"
+            "version" : "2.024"
          },
          {
             "class" : "Dist::Zilla::Plugin::Git::Tag",
@@ -700,7 +702,7 @@
                }
             },
             "name" : "@Author::KENTNL/tag_master",
-            "version" : "2.023"
+            "version" : "2.024"
          },
          {
             "class" : "Dist::Zilla::Plugin::Git::NextRelease",
@@ -735,7 +737,7 @@
                }
             },
             "name" : "@Author::KENTNL/commit_release_changes",
-            "version" : "2.023"
+            "version" : "2.024"
          },
          {
             "class" : "Dist::Zilla::Plugin::Git::CommitBuild",
@@ -753,7 +755,7 @@
                }
             },
             "name" : "@Author::KENTNL/Git::CommitBuild",
-            "version" : "2.023"
+            "version" : "2.024"
          },
          {
             "class" : "Dist::Zilla::Plugin::Git::Tag",
@@ -771,7 +773,7 @@
                }
             },
             "name" : "@Author::KENTNL/tag_release",
-            "version" : "2.023"
+            "version" : "2.024"
          },
          {
             "class" : "Dist::Zilla::Plugin::UploadToCPAN",
