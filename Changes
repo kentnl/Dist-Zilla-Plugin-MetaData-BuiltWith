@@ -1,6 +1,8 @@
 ﻿Revision history for {{$dist->name}}
 
 {{$NEXT}}
+
+1.003001 2014-09-24T06:28:04Z
  [Bugfix]
  - Don't call unname on devices where there is no uname.
 
