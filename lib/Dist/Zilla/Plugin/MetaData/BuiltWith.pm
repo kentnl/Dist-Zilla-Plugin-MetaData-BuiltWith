@@ -351,8 +351,9 @@ sub gather_files {
   if ( 'JSON' eq $type ) {
     require JSON::MaybeXS;
     require Dist::Zilla::File::FromCode;
-    my $json = JSON::MaybeXS->new->pretty->canonical(1);
+    my $json = JSON::MaybeXS->new->pretty->canonical(1)->convert_blessed(1);
     $code = sub {
+
       return $json->encode( $self->_metadata );
     };
   }
