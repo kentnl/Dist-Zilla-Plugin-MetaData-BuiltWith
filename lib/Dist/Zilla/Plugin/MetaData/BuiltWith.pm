@@ -132,6 +132,18 @@ has _stash_key => ( is => 'ro', isa => Str, default => 'x_BuiltWith' );
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
 has 'use_external_file' => (
   is         => 'ro',
   lazy_build => 1,
@@ -555,6 +567,18 @@ An external file will be created as long as this value is a true value.
 If this true value is the string C<only>, then it won't also be exported to META.yml/META.json
 
   use_external_file = only
+
+NOTE:
+
+This will still leave an x_BuiltWith section in your META.*, however, its much less fragile
+and will simply be:
+
+   x_BuiltWith: { 
+      external_file: "your/path/here" 
+   }
+
+This is mostly a compatibility pointer so any tools spidering a distributions history will know where and when to change
+behaviour.
 
 =head2 external_file_name
 
