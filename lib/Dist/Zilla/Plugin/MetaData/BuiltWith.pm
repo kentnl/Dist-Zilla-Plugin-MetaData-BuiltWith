@@ -159,7 +159,7 @@ has 'external_file_name' => (
 );
 
 around dump_config => config_dumper( __PACKAGE__,
-  qw( show_uname _stash_key show_config ),
+  qw( show_uname _stash_key show_config use_external_file external_file_name ),
   sub {
     my ( $self, $payload ) = @_;
     if ( $self->show_uname ) {
