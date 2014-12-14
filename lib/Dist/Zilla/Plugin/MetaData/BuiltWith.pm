@@ -366,7 +366,7 @@ sub gather_files {
   $self->add_file(
     Dist::Zilla::File::FromCode->new(
       name             => $self->external_file_name,
-      content          => $code,
+      code          => $code,
       code_return_type => 'text',
     ),
   );
