@@ -56,6 +56,7 @@
       "Dist::Zilla::Role::ConfigDumper" : null,
       "Dist::Zilla::Role::FileGatherer" : null,
       "Dist::Zilla::Role::FileMunger" : null,
+      "Dist::Zilla::Role::MetaProvider" : null,
       "Dist::Zilla::Util::ConfigDumper" : null,
       "Dist::Zilla::Util::Test::KENTNL" : null,
       "ExtUtils::MakeMaker" : null,

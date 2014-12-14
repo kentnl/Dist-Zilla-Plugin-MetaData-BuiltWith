@@ -22,6 +22,7 @@ use Devel::CheckBin qw( can_run );
 use namespace::autoclean;
 with 'Dist::Zilla::Role::FileGatherer';
 with 'Dist::Zilla::Role::FileMunger';
+with 'Dist::Zilla::Role::MetaProvider';
 
 
 
