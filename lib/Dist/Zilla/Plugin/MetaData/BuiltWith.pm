@@ -573,8 +573,8 @@ NOTE:
 This will still leave an x_BuiltWith section in your META.*, however, its much less fragile
 and will simply be:
 
-   x_BuiltWith: { 
-      external_file: "your/path/here" 
+   x_BuiltWith: {
+      external_file: "your/path/here"
    }
 
 This is mostly a compatibility pointer so any tools spidering a distributions history will know where and when to change
