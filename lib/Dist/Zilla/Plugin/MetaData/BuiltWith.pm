@@ -231,7 +231,6 @@ sub _build__uname_args {
 }
 
 sub _build_use_external_file {
-  my $self = shift;
   return;
 }
 
@@ -372,8 +371,8 @@ sub gather_files {
   return unless $self->use_external_file;
 
   my $type =
-      $self->external_file_name =~ /\.json$/i  ? 'JSON'
-    : $self->external_file_name =~ /\.ya?ml$/i ? 'YAML'
+      $self->external_file_name =~ /[.]json\z/msix  ? 'JSON'
+    : $self->external_file_name =~ /[.]ya?ml\z/msix ? 'YAML'
     :                                            croak 'Cant guess file type for ' . $self->external_file_name;
 
   my $code;
