@@ -253,7 +253,7 @@ sub _build_external_file_name {
 
 sub metadata {
   my ($self) = @_;
-  return {} unless 'only' eq $self->use_external_file || '';
+  return {} unless 'only' eq $self->use_external_file || q[];
   return { $self->_stash_key, { external_file => $self->external_file_name }, };
 }
 
@@ -577,8 +577,8 @@ and will simply be:
       external_file: "your/path/here"
    }
 
-This is mostly a compatibility pointer so any tools spidering a distributions history will know where and when to change
-behaviour.
+This is mostly a compatibility pointer so any tools traversing a distributions history will know where and when to change
+behavior.
 
 =head2 external_file_name
 

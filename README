@@ -93,8 +93,8 @@ OPTIONS
           external_file: "your/path/here"
        }
 
-    This is mostly a compatibility pointer so any tools spidering a
-    distributions history will know where and when to change behaviour.
+    This is mostly a compatibility pointer so any tools traversing a
+    distributions history will know where and when to change behavior.
 
  external_file_name
 
