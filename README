@@ -1,23 +1,28 @@
 NAME
+
     Dist::Zilla::Plugin::MetaData::BuiltWith - Report what versions of
     things your distribution was built against
 
 VERSION
-    version 1.003001
+
+    version 1.004000
 
 SYNOPSIS
+
       [MetaData::BuiltWith]
       include = Some::Module::Thats::Not::In::Preq
       exclude = Some::Module::Youre::Ashamed::Of
-      show_uname = 1           ; default is 0
-      show_config = 1          ; default is 0
-      uname_call = uname        ; the default
-      uname_args = -s -r -m -p  ; the default is -a
+      show_uname = 1             ; default is 0
+      show_config = 1            ; default is 0
+      uname_call = uname         ; the default
+      uname_args = -s -r -m -p   ; the default is -a
+      use_external_file = only   ; the default is undef
 
 DESCRIPTION
+
     Often, distribution authors get module dependencies wrong. So in such
-    cases, its handy to be able to see what version of various packages they
-    built with.
+    cases, its handy to be able to see what version of various packages
+    they built with.
 
     Some would prefer to demand everyone install the same version as they
     did, but that's also not always necessary.
@@ -27,51 +32,102 @@ DESCRIPTION
     modules to install in the event of a problem.
 
 OPTIONS
-  exclude
+
+ exclude
+
     Specify modules to exclude from version reporting
 
         exclude = Foo
         exclude = Bar
 
-  include
+ include
+
     Specify additional modules to include the version of
 
         include = Foo
         include = Bar
 
-  show_config
+ show_config
+
     Report "interesting" values from %Config::Config
 
         show_config = 1 ; Boolean
 
-  show_uname
-    Report the output from "uname"
+ show_uname
+
+    Report the output from uname
 
         show_uname = 1 ; Boolean
 
-  uname_call
-    Specify what the system "uname" function is called
+ uname_call
+
+    Specify what the system uname function is called
 
         uname_call = uname ; String
 
-  uname_args
-    Specify arguments passed to the "uname" call.
+ uname_args
+
+    Specify arguments passed to the uname call.
 
         uname_args = -a ; String
 
+ use_external_file
+
+    This option regulates the optional output to an isolated file.
+
+    An external file will be created as long as this value is a true value.
+
+      use_external_file = 1
+
+    If this true value is the string only, then it won't also be exported
+    to META.yml/META.json
+
+      use_external_file = only
+
+    NOTE:
+
+    This will still leave an x_BuiltWith section in your META.*, however,
+    its much less fragile and will simply be:
+
+       x_BuiltWith: {
+          external_file: "your/path/here"
+       }
+
+    This is mostly a compatibility pointer so any tools traversing a
+    distributions history will know where and when to change behavior.
+
+ external_file_name
+
+    This option controls what the external file will be called in
+    conjunction with use_external_file
+
+    Default value is:
+
+      misc/built_with.json
+
+    Extensions:
+
+      .json => JSON is used.
+      .yml  => YAML is used (untested)
+      .yaml => YAML is used (untested)
+
 METHODS
-  mvp_multivalue_args
+
+ mvp_multivalue_args
+
     This module can take, as parameters, any volume of 'exclude' or
     'include' arguments.
 
-  munge_files
+ munge_files
+
     This module scrapes together the name of all modules that exist in the
-    ""Prereqs"" section that Dist::Zilla collects, and then works out what
+    "Prereqs" section that Dist::Zilla collects, and then works out what
     version of things you have, applies the various include/exclude rules,
     and ships that data back to Dist::Zilla via this method. See
-    "Dist::Zilla"'s "MetaProvider" role for more details.
+    Dist::Zilla's MetaProvider role for more details.
 
-EXAMPLE OUTPUT ( "META.json" )
+EXAMPLE OUTPUT ( META.json )
+
         "x_BuiltWith" : {
            "modules" : {
               "Dist::Zilla::Role::MetaProvider" : "4.101612",
@@ -86,9 +142,11 @@ EXAMPLE OUTPUT ( "META.json" )
         },
 
 AUTHOR
+
     Kent Fredric <kentnl@cpan.org>
 
 COPYRIGHT AND LICENSE
+
     This software is copyright (c) 2014 by Kent Fredric <kentnl@cpan.org>.
 
     This is free software; you can redistribute it and/or modify it under
