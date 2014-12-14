@@ -95,6 +95,7 @@ x_Dist_Zilla:
       config:
         Dist::Zilla::Plugin::MetaData::BuiltWith:
           _stash_key: x_BuiltWith
+          external_file_name: misc/built_with.json
           show_config: '1'
           show_uname: '1'
           uname:
@@ -105,6 +106,7 @@ x_Dist_Zilla:
               - -m
               - -i
             uname_call: uname
+          use_external_file: only
       name: '@Author::KENTNL/MetaData::BuiltWith'
       version: '1.003002'
     -
