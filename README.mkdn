@@ -4,17 +4,18 @@ Dist::Zilla::Plugin::MetaData::BuiltWith - Report what versions of things your d
 
 # VERSION
 
-version 1.003002
+version 1.004000
 
 # SYNOPSIS
 
     [MetaData::BuiltWith]
     include = Some::Module::Thats::Not::In::Preq
     exclude = Some::Module::Youre::Ashamed::Of
-    show_uname = 1           ; default is 0
-    show_config = 1          ; default is 0
-    uname_call = uname        ; the default
-    uname_args = -s -r -m -p  ; the default is -a
+    show_uname = 1             ; default is 0
+    show_config = 1            ; default is 0
+    uname_call = uname         ; the default
+    uname_args = -s -r -m -p   ; the default is -a
+    use_external_file = only   ; the default is undef
 
 # DESCRIPTION
 
@@ -67,6 +68,44 @@ Specify what the system `uname` function is called
 Specify arguments passed to the `uname` call.
 
     uname_args = -a ; String
+
+## use\_external\_file
+
+This option regulates the optional output to an isolated file.
+
+An external file will be created as long as this value is a true value.
+
+    use_external_file = 1
+
+If this true value is the string `only`, then it won't also be exported to META.yml/META.json
+
+    use_external_file = only
+
+NOTE:
+
+This will still leave an x\_BuiltWith section in your META.\*, however, its much less fragile
+and will simply be:
+
+    x_BuiltWith: {
+       external_file: "your/path/here"
+    }
+
+This is mostly a compatibility pointer so any tools traversing a distributions history will know where and when to change
+behavior.
+
+## external\_file\_name
+
+This option controls what the external file will be called in conjunction with `use_external_file`
+
+Default value is:
+
+    misc/built_with.json
+
+Extensions:
+
+    .json => JSON is used.
+    .yml  => YAML is used (untested)
+    .yaml => YAML is used (untested)
 
 # METHODS
 

@@ -1,8 +1,13 @@
 This file contains changes in REQUIRED dependencies for standard CPAN phases (configure/build/runtime/test)
 
-1.003002
+1.004000
  [Added / configure requires]
  - perl 5.008
+
+ [Added / runtime requires]
+ - Dist::Zilla::File::FromCode
+ - Dist::Zilla::Role::FileGatherer
+ - Dist::Zilla::Role::MetaProvider
 
  [Added / test requires]
  - perl 5.008

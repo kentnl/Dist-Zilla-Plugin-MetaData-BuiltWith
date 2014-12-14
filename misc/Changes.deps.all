@@ -1,6 +1,6 @@
 This file contains ALL changes in dependencies in both REQUIRED / OPTIONAL dependencies for all phases (configure/build/runtime/test/develop)
 
-1.003002
+1.004000
  [Added / configure requires]
  - perl 5.008
 
@@ -14,6 +14,11 @@ This file contains ALL changes in dependencies in both REQUIRED / OPTIONAL depen
  - Dist::Zilla::Plugin::Test::EOL
  - Test::EOL
  - Test::More
+
+ [Added / runtime requires]
+ - Dist::Zilla::File::FromCode
+ - Dist::Zilla::Role::FileGatherer
+ - Dist::Zilla::Role::MetaProvider
 
  [Added / test requires]
  - perl 5.008

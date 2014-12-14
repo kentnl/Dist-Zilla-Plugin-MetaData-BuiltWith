@@ -20,7 +20,9 @@ use Dist::Zilla::Util::ConfigDumper qw( config_dumper );
 use Module::Runtime qw( is_module_name );
 use Devel::CheckBin qw( can_run );
 use namespace::autoclean;
+with 'Dist::Zilla::Role::FileGatherer';
 with 'Dist::Zilla::Role::FileMunger';
+with 'Dist::Zilla::Role::MetaProvider';
 
 =method mvp_multivalue_args
 
@@ -116,8 +118,61 @@ has _uname_args => (
 );
 has _stash_key => ( is => 'ro', isa => Str, default => 'x_BuiltWith' );
 
+=option use_external_file
+
+This option regulates the optional output to an isolated file.
+
+An external file will be created as long as this value is a true value.
+
+  use_external_file = 1
+
+If this true value is the string C<only>, then it won't also be exported to META.yml/META.json
+
+  use_external_file = only
+
+NOTE:
+
+This will still leave an x_BuiltWith section in your META.*, however, its much less fragile
+and will simply be:
+
+   x_BuiltWith: {
+      external_file: "your/path/here"
+   }
+
+This is mostly a compatibility pointer so any tools traversing a distributions history will know where and when to change
+behavior.
+
+=cut
+
+has 'use_external_file' => (
+  is         => 'ro',
+  lazy_build => 1,
+);
+
+=option external_file_name
+
+This option controls what the external file will be called in conjunction with C<use_external_file>
+
+Default value is:
+
+  misc/built_with.json
+
+Extensions:
+
+  .json => JSON is used.
+  .yml  => YAML is used (untested)
+  .yaml => YAML is used (untested)
+
+=cut
+
+has 'external_file_name' => (
+  is         => 'ro',
+  isa        => Str,
+  lazy_build => 1,
+);
+
 around dump_config => config_dumper( __PACKAGE__,
-  qw( show_uname _stash_key show_config ),
+  qw( show_uname _stash_key show_config use_external_file external_file_name ),
   sub {
     my ( $self, $payload ) = @_;
     if ( $self->show_uname ) {
@@ -186,6 +241,24 @@ sub _build__uname_args {
   my $self = shift;
   ## no critic ( RequireDotMatchAnything RequireExtendedFormatting RequireLineBoundaryMatching )
   return [ grep { defined $_ && $_ ne q{} } split /\s+/, $self->uname_args ];
+}
+
+sub _build_use_external_file {
+  return;
+}
+
+sub _build_external_file_name {
+  return 'misc/built_with.json';
+}
+
+=for Pod::Coverage metadata
+
+=cut
+
+sub metadata {
+  my ($self) = @_;
+  return {} unless 'only' eq ( $self->use_external_file || q[] );
+  return { $self->_stash_key, { external_file => $self->external_file_name }, };
 }
 
 sub _get_prereq_modnames {
@@ -315,10 +388,57 @@ sub _metadata {
   return $result;
 }
 
+=for Pod::Coverage gather_files
+
+=cut
+
+sub gather_files {
+  my ($self) = @_;
+
+  return unless $self->use_external_file;
+
+  my $type =
+      $self->external_file_name =~ /[.]json\z/msix  ? 'JSON'
+    : $self->external_file_name =~ /[.]ya?ml\z/msix ? 'YAML'
+    :                                                 croak 'Cant guess file type for ' . $self->external_file_name;
+
+  my $code;
+
+  if ( 'JSON' eq $type ) {
+    require JSON::MaybeXS;
+    require Dist::Zilla::File::FromCode;
+    my $json = JSON::MaybeXS->new;
+    $json->pretty(1);
+    $json->canonical(1);
+    $json->convert_blessed(1);
+    $json->allow_blessed(1);
+    $code = sub {
+      return $json->encode( $self->_metadata );
+    };
+  }
+  if ( 'YAML' eq $type ) {
+    require YAML::Tiny;
+    $code = sub {
+      return YAML::Tiny::Dump( $self->_metadata );
+    };
+  }
+
+  $self->add_file(
+    Dist::Zilla::File::FromCode->new(
+      name             => $self->external_file_name,
+      code             => $code,
+      code_return_type => 'text',
+    ),
+  );
+  return;
+}
+
 sub munge_files {
   my ($self) = @_;
 
   my $munged = {};
+
+  return if 'only' eq ( $self->use_external_file || q[] );
 
   for my $file ( @{ $self->zilla->files } ) {
     if ( 'META.json' eq $file->name ) {
@@ -372,10 +492,11 @@ no Moose;
   [MetaData::BuiltWith]
   include = Some::Module::Thats::Not::In::Preq
   exclude = Some::Module::Youre::Ashamed::Of
-  show_uname = 1           ; default is 0
-  show_config = 1          ; default is 0
-  uname_call = uname        ; the default
-  uname_args = -s -r -m -p  ; the default is -a
+  show_uname = 1             ; default is 0
+  show_config = 1            ; default is 0
+  uname_call = uname         ; the default
+  uname_args = -s -r -m -p   ; the default is -a
+  use_external_file = only   ; the default is undef
 
 
 =head1 DESCRIPTION
