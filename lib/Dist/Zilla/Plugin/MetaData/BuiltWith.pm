@@ -240,11 +240,9 @@ sub _build_external_file_name {
 }
 
 sub metadata {
-  my ( $self ) = @_;
+  my ($self) = @_;
   return {} unless 'only' eq $self->use_external_file || '';
-  return { 
-    $self->stash_key , { external_file => $self->external_file }
-  };
+  return { $self->_stash_key, { external_file => $self->external_file }, };
 }
 
 sub _get_prereq_modnames {
