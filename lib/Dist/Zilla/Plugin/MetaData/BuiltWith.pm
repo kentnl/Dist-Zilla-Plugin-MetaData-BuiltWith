@@ -239,6 +239,14 @@ sub _build_external_file_name {
   return 'misc/built_with.json';
 }
 
+sub metadata {
+  my ( $self ) = @_;
+  return {} unless 'only' eq $self->use_external_file || '';
+  return { 
+    $self->stash_key , { external_file => $self->external_file }
+  };
+}
+
 sub _get_prereq_modnames {
   my ($self) = @_;
 
