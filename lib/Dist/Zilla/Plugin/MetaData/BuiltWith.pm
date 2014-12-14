@@ -373,14 +373,18 @@ sub gather_files {
   my $type =
       $self->external_file_name =~ /[.]json\z/msix  ? 'JSON'
     : $self->external_file_name =~ /[.]ya?ml\z/msix ? 'YAML'
-    :                                            croak 'Cant guess file type for ' . $self->external_file_name;
+    :                                                 croak 'Cant guess file type for ' . $self->external_file_name;
 
   my $code;
 
   if ( 'JSON' eq $type ) {
     require JSON::MaybeXS;
     require Dist::Zilla::File::FromCode;
-    my $json = JSON::MaybeXS->new->pretty->canonical(1)->convert_blessed(1)->allow_blessed(1);
+    my $json = JSON::MaybeXS->new;
+    $json->pretty(1);
+    $json->canonical(1);
+    $json->convert_blessed(1);
+    $json->allow_blessed(1);
     $code = sub {
       return $json->encode( $self->_metadata );
     };
