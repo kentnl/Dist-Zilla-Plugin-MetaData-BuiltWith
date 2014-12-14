@@ -251,6 +251,10 @@ sub _build_external_file_name {
   return 'misc/built_with.json';
 }
 
+
+
+
+
 sub metadata {
   my ($self) = @_;
   return {} unless 'only' eq ( $self->use_external_file || q[] );
@@ -383,6 +387,10 @@ sub _metadata {
   }
   return $result;
 }
+
+
+
+
 
 sub gather_files {
   my ($self) = @_;
@@ -606,6 +614,10 @@ This module scrapes together the name of all modules that exist in the "C<Prereq
 that Dist::Zilla collects, and then works out what version of things you have,
 applies the various include/exclude rules, and ships that data back to Dist::Zilla
 via this method. See L<< C<Dist::Zilla>'s C<MetaProvider> role|Dist::Zilla::Role::MetaProvider >> for more details.
+
+=for Pod::Coverage metadata
+
+=for Pod::Coverage gather_files
 
 =head1 EXAMPLE OUTPUT ( C<META.json> )
 
