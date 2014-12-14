@@ -111,7 +111,7 @@ x_Dist_Zilla:
             uname_call: uname
           use_external_file: only
       name: '@Author::KENTNL/MetaData::BuiltWith'
-      version: '1.004000'
+      version: '1.004001'
     -
       class: Dist::Zilla::Plugin::Git::Contributors
       config:
