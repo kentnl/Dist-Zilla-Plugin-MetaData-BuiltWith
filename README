@@ -12,10 +12,11 @@ SYNOPSIS
       [MetaData::BuiltWith]
       include = Some::Module::Thats::Not::In::Preq
       exclude = Some::Module::Youre::Ashamed::Of
-      show_uname = 1           ; default is 0
-      show_config = 1          ; default is 0
-      uname_call = uname        ; the default
-      uname_args = -s -r -m -p  ; the default is -a
+      show_uname = 1             ; default is 0
+      show_config = 1            ; default is 0
+      uname_call = uname         ; the default
+      uname_args = -s -r -m -p   ; the default is -a
+      use_external_file = only   ; the default is undef
 
 DESCRIPTION
 
@@ -69,6 +70,34 @@ OPTIONS
     Specify arguments passed to the uname call.
 
         uname_args = -a ; String
+
+ use_external_file
+
+    This option regulates the optional output to an isolated file.
+
+    An external file will be created as long as this value is a true value.
+
+      use_external_file = 1
+
+    If this true value is the string only, then it won't also be exported
+    to META.yml/META.json
+
+      use_external_file = only
+
+ external_file_name
+
+    This option controls what the external file will be called in
+    conjunction with use_external_file
+
+    Default value is:
+
+      misc/built_with.json
+
+    Extensions:
+
+      .json => JSON is used.
+      .yml  => YAML is used (untested)
+      .yaml => YAML is used (untested)
 
 METHODS
 

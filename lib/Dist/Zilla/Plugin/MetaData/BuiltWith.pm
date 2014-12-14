@@ -117,10 +117,40 @@ has _uname_args => (
 );
 has _stash_key => ( is => 'ro', isa => Str, default => 'x_BuiltWith' );
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 has 'use_external_file' => (
   is         => 'ro',
   lazy_build => 1,
 );
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 has 'external_file_name' => (
   is         => 'ro',
@@ -353,7 +383,6 @@ sub gather_files {
     require Dist::Zilla::File::FromCode;
     my $json = JSON::MaybeXS->new->pretty->canonical(1)->convert_blessed(1)->allow_blessed(1);
     $code = sub {
-
       return $json->encode( $self->_metadata );
     };
   }
@@ -367,7 +396,7 @@ sub gather_files {
   $self->add_file(
     Dist::Zilla::File::FromCode->new(
       name             => $self->external_file_name,
-      code          => $code,
+      code             => $code,
       code_return_type => 'text',
     ),
   );
@@ -447,10 +476,11 @@ version 1.003002
   [MetaData::BuiltWith]
   include = Some::Module::Thats::Not::In::Preq
   exclude = Some::Module::Youre::Ashamed::Of
-  show_uname = 1           ; default is 0
-  show_config = 1          ; default is 0
-  uname_call = uname        ; the default
-  uname_args = -s -r -m -p  ; the default is -a
+  show_uname = 1             ; default is 0
+  show_config = 1            ; default is 0
+  uname_call = uname         ; the default
+  uname_args = -s -r -m -p   ; the default is -a
+  use_external_file = only   ; the default is undef
 
 =head1 DESCRIPTION
 
@@ -503,6 +533,32 @@ Specify what the system C<uname> function is called
 Specify arguments passed to the C<uname> call.
 
     uname_args = -a ; String
+
+=head2 use_external_file
+
+This option regulates the optional output to an isolated file.
+
+An external file will be created as long as this value is a true value.
+
+  use_external_file = 1
+
+If this true value is the string C<only>, then it won't also be exported to META.yml/META.json
+
+  use_external_file = only
+
+=head2 external_file_name
+
+This option controls what the external file will be called in conjunction with C<use_external_file>
+
+Default value is:
+
+  misc/built_with.json
+
+Extensions:
+
+  .json => JSON is used.
+  .yml  => YAML is used (untested)
+  .yaml => YAML is used (untested)
 
 =head1 METHODS
 

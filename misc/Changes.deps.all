@@ -15,6 +15,10 @@ This file contains ALL changes in dependencies in both REQUIRED / OPTIONAL depen
  - Test::EOL
  - Test::More
 
+ [Added / runtime requires]
+ - Dist::Zilla::File::FromCode
+ - Dist::Zilla::Role::FileGatherer
+
  [Added / test requires]
  - perl 5.008
 
