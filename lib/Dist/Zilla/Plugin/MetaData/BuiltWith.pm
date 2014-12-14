@@ -20,6 +20,7 @@ use Dist::Zilla::Util::ConfigDumper qw( config_dumper );
 use Module::Runtime qw( is_module_name );
 use Devel::CheckBin qw( can_run );
 use namespace::autoclean;
+with 'Dist::Zilla::Role::FileGatherer';
 with 'Dist::Zilla::Role::FileMunger';
 
 
@@ -116,6 +117,17 @@ has _uname_args => (
 );
 has _stash_key => ( is => 'ro', isa => Str, default => 'x_BuiltWith' );
 
+has 'use_external_file' => (
+  is         => 'ro',
+  lazy_build => 1,
+);
+
+has 'external_file_name' => (
+  is         => 'ro',
+  isa        => Str,
+  lazy_build => 1,
+);
+
 around dump_config => config_dumper( __PACKAGE__,
   qw( show_uname _stash_key show_config ),
   sub {
@@ -186,6 +198,15 @@ sub _build__uname_args {
   my $self = shift;
   ## no critic ( RequireDotMatchAnything RequireExtendedFormatting RequireLineBoundaryMatching )
   return [ grep { defined $_ && $_ ne q{} } split /\s+/, $self->uname_args ];
+}
+
+sub _build_use_external_file {
+  my $self = shift;
+  return;
+}
+
+sub _build_external_file_name {
+  return 'misc/built_with.json';
 }
 
 sub _get_prereq_modnames {
@@ -315,10 +336,49 @@ sub _metadata {
   return $result;
 }
 
+sub gather_files {
+  my ($self) = @_;
+
+  return unless $self->use_external_file;
+
+  my $type =
+      $self->external_file_name =~ /\.json$/i  ? 'JSON'
+    : $self->external_file_name =~ /\.ya?ml$/i ? 'YAML'
+    :                                            croak 'Cant guess file type for ' . $self->external_file_name;
+
+  my $code;
+
+  if ( 'JSON' eq $type ) {
+    require JSON::MaybeXS;
+    require Dist::Zilla::File::FromCode;
+    my $json = JSON::MaybeXS->new->pretty->canonical(1);
+    $code = sub {
+      return $json->encode( $self->_metadata );
+    };
+  }
+  if ( 'YAML' eq $type ) {
+    require YAML::Tiny;
+    $code = sub {
+      return YAML::Tiny::Dump( $self->_metadata );
+    };
+  }
+
+  $self->add_file(
+    Dist::Zilla::File::FromCode->new(
+      name             => $self->external_file_name,
+      content          => $code,
+      code_return_type => 'text',
+    ),
+  );
+  return;
+}
+
 sub munge_files {
   my ($self) = @_;
 
   my $munged = {};
+
+  return if 'only' eq ( $self->use_external_file || q[] );
 
   for my $file ( @{ $self->zilla->files } ) {
     if ( 'META.json' eq $file->name ) {
