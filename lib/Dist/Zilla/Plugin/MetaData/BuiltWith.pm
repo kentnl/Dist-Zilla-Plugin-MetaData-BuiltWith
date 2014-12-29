@@ -339,8 +339,8 @@ sub _metadata {
   my %modtable;
   my %failures;
 
-  for my $module ( @{$report} , $self->include ) {
-    my $result = $self->_detect_installed( $module );
+  for my $module ( @{$report}, $self->include ) {
+    my $result = $self->_detect_installed($module);
     $modtable{$module} = $result->[0] if defined $result->[0];
     $failures{$module} = $result->[1] if defined $result->[1];
   }
