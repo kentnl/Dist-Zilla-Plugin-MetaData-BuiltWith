@@ -9,6 +9,9 @@
  - develop: +1 ↑1 (recommends: ↑1, suggests: ↑1)
  - test: (recommends: ↑1)
 
+ [Internals]
+ - Slightly better code refactory in main loop.
+
 1.004000 2014-12-14T08:34:41Z 24fbb48
  [Dependencies::Stats]
  - Dependencies changed since 1.003001, see misc/*.deps* for details
