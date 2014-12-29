@@ -81,7 +81,6 @@
       "constant" : "1.32",
       "namespace::autoclean" : "0.23",
       "strict" : "1.08",
-      "utf8" : "1.14",
       "warnings" : "1.29"
    },
    "perl" : {
