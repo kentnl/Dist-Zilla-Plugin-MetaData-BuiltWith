@@ -413,6 +413,7 @@ sub gather_files {
     $json->convert_blessed(1);
     $json->allow_blessed(1);
     $code = sub {
+      local *UNIVERSAL::TO_JSON = sub { "$_[0]" };
       return $json->encode( $self->_metadata );
     };
   }

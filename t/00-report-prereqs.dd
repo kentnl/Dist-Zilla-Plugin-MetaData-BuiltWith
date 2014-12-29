@@ -10,7 +10,7 @@ do { my $x = {
                       },
        'develop' => {
                       'recommends' => {
-                                        'Test::More' => '1.001009'
+                                        'Test::More' => '1.001014'
                                       },
                       'requires' => {
                                       'Dist::Zilla' => '5',
@@ -70,7 +70,7 @@ do { my $x = {
                                     },
                       'suggests' => {
                                       'Dist::Zilla::App::Command::bakeini' => '0.002000',
-                                      'Dist::Zilla::PluginBundle::Author::KENTNL' => '2.022001'
+                                      'Dist::Zilla::PluginBundle::Author::KENTNL' => '2.022003'
                                     }
                     },
        'runtime' => {
@@ -101,7 +101,7 @@ do { my $x = {
                    'recommends' => {
                                      'CPAN::Meta' => '2.120900',
                                      'ExtUtils::MakeMaker' => '7.04',
-                                     'Test::More' => '1.001009'
+                                     'Test::More' => '1.001014'
                                    },
                    'requires' => {
                                    'Dist::Zilla::Util::Test::KENTNL' => '1.003001',
