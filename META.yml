@@ -10,12 +10,12 @@ build_requires:
   Test::DZil: '0'
   Test::More: '0.89'
   constant: '0'
-  perl: '5.008'
+  perl: '5.006'
 configure_requires:
   ExtUtils::MakeMaker: '0'
-  perl: '5.008'
+  perl: '5.006'
 dynamic_config: 0
-generated_by: 'Dist::Zilla version 5.028, CPAN::Meta::Converter version 2.143240'
+generated_by: 'Dist::Zilla version 5.029, CPAN::Meta::Converter version 2.143240'
 license: perl
 meta-spec:
   url: http://module-build.sourceforge.net/META-spec-v1.4.html
@@ -24,10 +24,10 @@ name: Dist-Zilla-Plugin-MetaData-BuiltWith
 provides:
   Dist::Zilla::Plugin::MetaData::BuiltWith:
     file: lib/Dist/Zilla/Plugin/MetaData/BuiltWith.pm
-    version: '1.004000'
+    version: '1.004001'
   Dist::Zilla::Plugin::MetaData::BuiltWith::All:
     file: lib/Dist/Zilla/Plugin/MetaData/BuiltWith/All.pm
-    version: '1.004000'
+    version: '1.004001'
 requires:
   CPAN::Meta::Converter: '0'
   Carp: '0'
@@ -45,20 +45,19 @@ requires:
   MooseX::Types::Moose: '0'
   YAML::Tiny: '0'
   namespace::autoclean: '0'
-  perl: '5.008'
+  perl: '5.006'
   strict: '0'
-  utf8: '0'
   warnings: '0'
 resources:
   bugtracker: https://github.com/kentnl/Dist-Zilla-Plugin-MetaData-BuiltWith/issues
   homepage: https://github.com/kentnl/Dist-Zilla-Plugin-MetaData-BuiltWith
   repository: https://github.com/kentnl/Dist-Zilla-Plugin-MetaData-BuiltWith.git
-version: '1.004000'
+version: '1.004001'
 x_BuiltWith:
   external_file: misc/built_with.json
 x_Dist_Zilla:
   perl:
-    version: '5.021003'
+    version: '5.021006'
   plugins:
     -
       class: Dist::Zilla::Plugin::Bootstrap::lib
@@ -73,7 +72,7 @@ x_Dist_Zilla:
     -
       class: Dist::Zilla::Plugin::MetaConfig
       name: '@Author::KENTNL/MetaConfig'
-      version: '5.028'
+      version: '5.029'
     -
       class: Dist::Zilla::Plugin::GithubMeta
       name: '@Author::KENTNL/GithubMeta'
@@ -86,7 +85,7 @@ x_Dist_Zilla:
             -
               class: Dist::Zilla::Plugin::FinderCode
               name: '@Author::KENTNL/MetaProvides::Package/AUTOVIV/:InstallModulesPM'
-              version: '5.028'
+              version: '5.029'
         Dist::Zilla::Role::MetaProvider::Provider:
           inherit_missing: '1'
           inherit_version: '1'
@@ -111,7 +110,7 @@ x_Dist_Zilla:
             uname_call: uname
           use_external_file: only
       name: '@Author::KENTNL/MetaData::BuiltWith'
-      version: '1.004000'
+      version: '1.004001'
     -
       class: Dist::Zilla::Plugin::Git::Contributors
       config:
@@ -142,23 +141,23 @@ x_Dist_Zilla:
         Dist::Zilla::Role::Git::Repo:
           repo_root: .
       name: '@Author::KENTNL/Git::GatherDir'
-      version: '2.028'
+      version: '2.029'
     -
       class: Dist::Zilla::Plugin::License
       name: '@Author::KENTNL/License'
-      version: '5.028'
+      version: '5.029'
     -
       class: Dist::Zilla::Plugin::MetaJSON
       name: '@Author::KENTNL/MetaJSON'
-      version: '5.028'
+      version: '5.029'
     -
       class: Dist::Zilla::Plugin::MetaYAML
       name: '@Author::KENTNL/MetaYAML'
-      version: '5.028'
+      version: '5.029'
     -
       class: Dist::Zilla::Plugin::Manifest
       name: '@Author::KENTNL/Manifest'
-      version: '5.028'
+      version: '5.029'
     -
       class: Dist::Zilla::Plugin::CopyFilesFromBuild
       name: '@Author::KENTNL/CopyXBuild'
@@ -166,15 +165,15 @@ x_Dist_Zilla:
     -
       class: Dist::Zilla::Plugin::MetaTests
       name: '@Author::KENTNL/MetaTests'
-      version: '5.028'
+      version: '5.029'
     -
       class: Dist::Zilla::Plugin::PodCoverageTests
       name: '@Author::KENTNL/PodCoverageTests'
-      version: '5.028'
+      version: '5.029'
     -
       class: Dist::Zilla::Plugin::PodSyntaxTests
       name: '@Author::KENTNL/PodSyntaxTests'
-      version: '5.028'
+      version: '5.029'
     -
       class: Dist::Zilla::Plugin::Test::ReportPrereqs
       name: '@Author::KENTNL/Test::ReportPrereqs'
@@ -201,7 +200,7 @@ x_Dist_Zilla:
     -
       class: Dist::Zilla::Plugin::FinderCode
       name: '@Author::KENTNL/Test::Compile::PerFile/AUTOVIV/:InstallModulesPM'
-      version: '5.028'
+      version: '5.029'
     -
       class: Dist::Zilla::Plugin::Test::Compile::PerFile
       config:
@@ -223,7 +222,7 @@ x_Dist_Zilla:
     -
       class: Dist::Zilla::Plugin::ManifestSkip
       name: '@Author::KENTNL/ManifestSkip'
-      version: '5.028'
+      version: '5.029'
     -
       class: Dist::Zilla::Plugin::RewriteVersion::Sanitized
       config:
@@ -329,7 +328,7 @@ x_Dist_Zilla:
     -
       class: Dist::Zilla::Plugin::AutoPrereqs
       name: '@Author::KENTNL/AutoPrereqs'
-      version: '5.028'
+      version: '5.029'
     -
       class: Dist::Zilla::Plugin::Prereqs
       config:
@@ -337,7 +336,7 @@ x_Dist_Zilla:
           phase: develop
           type: suggests
       name: '@Author::KENTNL/BundleDevelSuggests'
-      version: '5.028'
+      version: '5.029'
     -
       class: Dist::Zilla::Plugin::Prereqs::AuthorDeps
       name: '@Author::KENTNL/Prereqs::AuthorDeps'
@@ -356,15 +355,15 @@ x_Dist_Zilla:
         Dist::Zilla::Role::TestRunner:
           default_jobs: '10'
       name: '@Author::KENTNL/MakeMaker'
-      version: '5.028'
+      version: '5.029'
     -
       class: Dist::Zilla::Plugin::Author::KENTNL::RecommendFixes
       name: '@Author::KENTNL/Author::KENTNL::RecommendFixes'
       version: '0.004001'
     -
-      class: Dist::Zilla::Plugin::ReadmeAnyFromPod
+      class: Dist::Zilla::Plugin::Pod2Readme
       name: '@Author::KENTNL/ShippedReadme'
-      version: '0.142470'
+      version: '0.001'
     -
       class: Dist::Zilla::Plugin::ReadmeAnyFromPod
       name: '@Author::KENTNL/ReadmeAnyFromPod'
@@ -383,11 +382,11 @@ x_Dist_Zilla:
     -
       class: Dist::Zilla::Plugin::TestRelease
       name: '@Author::KENTNL/TestRelease'
-      version: '5.028'
+      version: '5.029'
     -
       class: Dist::Zilla::Plugin::ConfirmRelease
       name: '@Author::KENTNL/ConfirmRelease'
-      version: '5.028'
+      version: '5.029'
     -
       class: Dist::Zilla::Plugin::Git::Check
       config:
@@ -402,7 +401,7 @@ x_Dist_Zilla:
         Dist::Zilla::Role::Git::Repo:
           repo_root: .
       name: '@Author::KENTNL/Git::Check'
-      version: '2.028'
+      version: '2.029'
     -
       class: Dist::Zilla::Plugin::Git::Commit
       config:
@@ -419,21 +418,21 @@ x_Dist_Zilla:
         Dist::Zilla::Role::Git::Repo:
           repo_root: .
       name: '@Author::KENTNL/commit_dirty_files'
-      version: '2.028'
+      version: '2.029'
     -
       class: Dist::Zilla::Plugin::Git::Tag
       config:
         Dist::Zilla::Plugin::Git::Tag:
           branch: ~
           signed: 0
-          tag: 1.004000-source
+          tag: 1.004001-source
           tag_format: '%v-source'
           tag_message: v%v
           time_zone: local
         Dist::Zilla::Role::Git::Repo:
           repo_root: .
       name: '@Author::KENTNL/tag_master'
-      version: '2.028'
+      version: '2.029'
     -
       class: Dist::Zilla::Plugin::Git::NextRelease
       name: '@Author::KENTNL/Git::NextRelease'
@@ -459,7 +458,7 @@ x_Dist_Zilla:
         Dist::Zilla::Role::Git::Repo:
           repo_root: .
       name: '@Author::KENTNL/commit_release_changes'
-      version: '2.028'
+      version: '2.029'
     -
       class: Dist::Zilla::Plugin::Git::CommitBuild
       config:
@@ -473,25 +472,25 @@ x_Dist_Zilla:
         Dist::Zilla::Role::Git::Repo:
           repo_root: .
       name: '@Author::KENTNL/Git::CommitBuild'
-      version: '2.028'
+      version: '2.029'
     -
       class: Dist::Zilla::Plugin::Git::Tag
       config:
         Dist::Zilla::Plugin::Git::Tag:
           branch: releases
           signed: 0
-          tag: '1.004000'
+          tag: '1.004001'
           tag_format: '%v'
           tag_message: v%v
           time_zone: local
         Dist::Zilla::Role::Git::Repo:
           repo_root: .
       name: '@Author::KENTNL/tag_release'
-      version: '2.028'
+      version: '2.029'
     -
       class: Dist::Zilla::Plugin::UploadToCPAN
       name: '@Author::KENTNL/UploadToCPAN'
-      version: '5.028'
+      version: '5.029'
     -
       class: Dist::Zilla::Plugin::Twitter
       name: '@Author::KENTNL/Twitter'
@@ -541,7 +540,7 @@ x_Dist_Zilla:
           phase: develop
           type: requires
       name: '@Author::KENTNL/::Role::BundleDeps'
-      version: '5.028'
+      version: '5.029'
     -
       class: Dist::Zilla::Plugin::Prereqs
       config:
@@ -549,46 +548,46 @@ x_Dist_Zilla:
           phase: runtime
           type: requires
       name: Prereqs
-      version: '5.028'
+      version: '5.029'
     -
       class: Dist::Zilla::Plugin::FinderCode
       name: ':InstallModules'
-      version: '5.028'
+      version: '5.029'
     -
       class: Dist::Zilla::Plugin::FinderCode
       name: ':IncModules'
-      version: '5.028'
+      version: '5.029'
     -
       class: Dist::Zilla::Plugin::FinderCode
       name: ':TestFiles'
-      version: '5.028'
+      version: '5.029'
     -
       class: Dist::Zilla::Plugin::FinderCode
       name: ':ExecFiles'
-      version: '5.028'
+      version: '5.029'
     -
       class: Dist::Zilla::Plugin::FinderCode
       name: ':ShareFiles'
-      version: '5.028'
+      version: '5.029'
     -
       class: Dist::Zilla::Plugin::FinderCode
       name: ':MainModule'
-      version: '5.028'
+      version: '5.029'
     -
       class: Dist::Zilla::Plugin::FinderCode
       name: ':AllFiles'
-      version: '5.028'
+      version: '5.029'
     -
       class: Dist::Zilla::Plugin::FinderCode
       name: ':NoFiles'
-      version: '5.028'
+      version: '5.029'
     -
       class: Dist::Zilla::Plugin::FinderCode
       name: '@Author::KENTNL/MetaProvides::Package/AUTOVIV/:InstallModulesPM'
-      version: '5.028'
+      version: '5.029'
   zilla:
     class: Dist::Zilla::Dist::Builder
     config:
       is_trial: '0'
-    version: '5.028'
+    version: '5.029'
 x_authority: cpan:KENTNL

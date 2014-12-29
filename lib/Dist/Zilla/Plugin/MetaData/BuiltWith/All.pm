@@ -1,11 +1,10 @@
-use 5.008;    # utf8
+use 5.006;
 use strict;
 use warnings;
-use utf8;
 
 package Dist::Zilla::Plugin::MetaData::BuiltWith::All;
 
-our $VERSION = '1.004000';
+our $VERSION = '1.004001';
 
 # ABSTRACT: Go overkill and report everything in all name-spaces.
 
@@ -175,7 +174,7 @@ Dist::Zilla::Plugin::MetaData::BuiltWith::All - Go overkill and report everythin
 
 =head1 VERSION
 
-version 1.004000
+version 1.004001
 
 =head1 SYNOPSIS
 

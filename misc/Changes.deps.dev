@@ -1,6 +1,19 @@
 This file contains changes to DEVELOPMENT dependencies only ( both REQUIRED and OPTIONAL )
 
-1.004000
+1.004001
+ [Added / develop requires]
+ - Dist::Zilla::Plugin::Pod2Readme
+
+ [Changed / develop recommends]
+ - Test::More 1.001009 → 1.001014
+
+ [Changed / develop requires]
+ - Dist::Zilla::Plugin::MetaData::BuiltWith 0 → 1.004000
+
+ [Changed / develop suggests]
+ - Dist::Zilla::PluginBundle::Author::KENTNL 2.022001 → 2.022003
+
+1.004000 2014-12-14T08:34:41Z
  [Added / develop recommends]
  - Test::More 1.001009
 

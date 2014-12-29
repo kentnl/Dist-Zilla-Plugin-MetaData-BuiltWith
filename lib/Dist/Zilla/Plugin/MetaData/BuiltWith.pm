@@ -1,11 +1,10 @@
-use 5.008;    #  utf8
+use 5.006;
 use strict;
 use warnings;
-use utf8;
 
 package Dist::Zilla::Plugin::MetaData::BuiltWith;
 
-our $VERSION = '1.004000';
+our $VERSION = '1.004001';
 
 # ABSTRACT: Report what versions of things your distribution was built against
 
@@ -294,30 +293,24 @@ sub _get_prereq_modnames {
 
 sub _detect_installed {
   my ( undef, $module ) = @_;
-  if ( not defined $module ) {
-    croak('Cannot determine a version if module=undef');
-  }
-  if ( 'perl' eq $module ) {
-    return [ undef, undef ];
-  }
-  if ( not is_module_name($module) ) {
-    return [ undef, 'not a valid module name' ];
-  }
+
+  croak('Cannot determine a version if module=undef') if not defined $module;
+
+  return [ undef, undef ] if 'perl' eq $module;
+
+  return [ undef, 'not a valid module name' ] if not is_module_name($module);
+
   require Module::Data;
   my $d = Module::Data->new($module);
 
-  if ( not defined $d ) {
-    return [ undef, 'failed to create a Module::Data wrapper' ];
-  }
-  if ( not defined $d->path or not -e $d->path or -d $d->path ) {
-    return [ undef, 'module was not found in INC' ];
-  }
+  return [ undef, 'failed to create a Module::Data wrapper' ] if not defined $d;
+
+  return [ undef, 'module was not found in INC' ] if ( not defined $d->path or not -e $d->path or -d $d->path );
 
   my $v = $d->_version_emulate;
 
-  if ( not $v ) {
-    return [ undef, 'Module::MetaData could not parse a version from ' . $d->path ];
-  }
+  return [ undef, 'Module::MetaData could not parse a version from ' . $d->path ] if not $v;
+
   return [ $v, undef ];
 
 }
@@ -339,31 +332,15 @@ sub _metadata {
   my %modtable;
   my %failures;
 
-  my $record_module = sub {
-    my ($module) = @_;
+  for my $module ( @{$report}, $self->include ) {
     my $result = $self->_detect_installed($module);
-    if ( defined $result->[0] ) {
-      $modtable{$module} = $result->[0];
-    }
-    if ( defined $result->[1] ) {
-      $failures{$module} = $result->[1];
-    }
-  };
-  my $forget_module = sub {
-    my ($badmodule) = @_;
+    $modtable{$module} = $result->[0] if defined $result->[0];
+    $failures{$module} = $result->[1] if defined $result->[1];
+  }
+
+  for my $badmodule ( $self->exclude ) {
     delete $modtable{$badmodule} if exists $modtable{$badmodule};
     delete $failures{$badmodule} if exists $failures{$badmodule};
-  };
-
-  for my $module ( @{$report} ) {
-    $record_module->($module);
-  }
-
-  for my $module ( $self->include ) {
-    $record_module->($module);
-  }
-  for my $badmodule ( $self->exclude ) {
-    $forget_module->($badmodule);
   }
   ## no critic ( Variables::ProhibitPunctuationVars )
   my $perlver;
@@ -413,6 +390,7 @@ sub gather_files {
     $json->convert_blessed(1);
     $json->allow_blessed(1);
     $code = sub {
+      local *UNIVERSAL::TO_JSON = sub { "$_[0]" };
       return $json->encode( $self->_metadata );
     };
   }
@@ -499,7 +477,7 @@ Dist::Zilla::Plugin::MetaData::BuiltWith - Report what versions of things your d
 
 =head1 VERSION
 
-version 1.004000
+version 1.004001
 
 =head1 SYNOPSIS
 
