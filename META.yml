@@ -362,9 +362,9 @@ x_Dist_Zilla:
       name: '@Author::KENTNL/Author::KENTNL::RecommendFixes'
       version: '0.004001'
     -
-      class: Dist::Zilla::Plugin::ReadmeAnyFromPod
+      class: Dist::Zilla::Plugin::Pod2Readme
       name: '@Author::KENTNL/ShippedReadme'
-      version: '0.142470'
+      version: '0.001'
     -
       class: Dist::Zilla::Plugin::ReadmeAnyFromPod
       name: '@Author::KENTNL/ReadmeAnyFromPod'

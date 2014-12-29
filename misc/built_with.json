@@ -33,6 +33,7 @@
       "Dist::Zilla::Plugin::MetaTests" : "5.029",
       "Dist::Zilla::Plugin::MetaYAML" : "5.029",
       "Dist::Zilla::Plugin::MinimumPerl" : "1.006",
+      "Dist::Zilla::Plugin::Pod2Readme" : "0.001",
       "Dist::Zilla::Plugin::PodCoverageTests" : "5.029",
       "Dist::Zilla::Plugin::PodSyntaxTests" : "5.029",
       "Dist::Zilla::Plugin::PodWeaver" : "4.006",

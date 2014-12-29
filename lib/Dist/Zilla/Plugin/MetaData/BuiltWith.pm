@@ -341,13 +341,8 @@ sub _metadata {
 
   for my $module ( @{$report} , $self->include ) {
     my $result = $self->_detect_installed( $module );
-    $self->log_debug( [ '%s => %s : %s' , $module, @{$result} ] );
-    if ( defined $result->[0] ) {
-      $modtable{$module} = $result->[0];
-    }
-    if ( defined $result->[1] ) {
-      $failures{$module} = $result->[1];
-    }
+    $modtable{$module} = $result->[0] if defined $result->[0];
+    $failures{$module} = $result->[1] if defined $result->[1];
   }
 
   for my $badmodule ( $self->exclude ) {

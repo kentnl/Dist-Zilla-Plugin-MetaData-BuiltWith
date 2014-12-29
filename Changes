@@ -1,6 +1,10 @@
 ﻿Revision history for Dist-Zilla-Plugin-MetaData-BuiltWith
 
 1.004001 2014-12-14T08:38:28Z 2e5e4e6
+ [Dependencies::Stats]
+ - Dependencies changed since 1.004000, see misc/*.deps* for details
+ - develop: (recommends: ↑1, suggests: ↑1)
+ - test: (recommends: ↑1)
 
 1.004000 2014-12-14T08:34:41Z 24fbb48
  [Dependencies::Stats]

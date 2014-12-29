@@ -49,12 +49,13 @@
             "Dist::Zilla::Plugin::Manifest" : "0",
             "Dist::Zilla::Plugin::ManifestSkip" : "0",
             "Dist::Zilla::Plugin::MetaConfig" : "0",
-            "Dist::Zilla::Plugin::MetaData::BuiltWith" : "0",
+            "Dist::Zilla::Plugin::MetaData::BuiltWith" : "1.004000",
             "Dist::Zilla::Plugin::MetaJSON" : "0",
             "Dist::Zilla::Plugin::MetaProvides::Package" : "1.14000001",
             "Dist::Zilla::Plugin::MetaTests" : "0",
             "Dist::Zilla::Plugin::MetaYAML" : "0",
             "Dist::Zilla::Plugin::MinimumPerl" : "0",
+            "Dist::Zilla::Plugin::Pod2Readme" : "0",
             "Dist::Zilla::Plugin::PodCoverageTests" : "0",
             "Dist::Zilla::Plugin::PodSyntaxTests" : "0",
             "Dist::Zilla::Plugin::PodWeaver" : "0",
@@ -551,9 +552,9 @@
             "version" : "0.004001"
          },
          {
-            "class" : "Dist::Zilla::Plugin::ReadmeAnyFromPod",
+            "class" : "Dist::Zilla::Plugin::Pod2Readme",
             "name" : "@Author::KENTNL/ShippedReadme",
-            "version" : "0.142470"
+            "version" : "0.001"
          },
          {
             "class" : "Dist::Zilla::Plugin::ReadmeAnyFromPod",
