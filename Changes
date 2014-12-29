@@ -1,6 +1,6 @@
 ﻿Revision history for Dist-Zilla-Plugin-MetaData-BuiltWith
 
-1.004001 2014-12-29T14:33:27Z 2480ce7
+1.004001 2014-12-29T14:33:59Z 8a275b9
  [Bugfix]
  - Fix emitting 'null' for version in external file format.
 
