@@ -294,30 +294,24 @@ sub _get_prereq_modnames {
 
 sub _detect_installed {
   my ( undef, $module ) = @_;
-  if ( not defined $module ) {
-    croak('Cannot determine a version if module=undef');
-  }
-  if ( 'perl' eq $module ) {
-    return [ undef, undef ];
-  }
-  if ( not is_module_name($module) ) {
-    return [ undef, 'not a valid module name' ];
-  }
+
+  croak('Cannot determine a version if module=undef') if not defined $module;
+
+  return [ undef, undef ] if 'perl' eq $module;
+
+  return [ undef, 'not a valid module name' ] if not is_module_name($module);
+
   require Module::Data;
   my $d = Module::Data->new($module);
 
-  if ( not defined $d ) {
-    return [ undef, 'failed to create a Module::Data wrapper' ];
-  }
-  if ( not defined $d->path or not -e $d->path or -d $d->path ) {
-    return [ undef, 'module was not found in INC' ];
-  }
+  return [ undef, 'failed to create a Module::Data wrapper' ] if not defined $d;
+
+  return [ undef, 'module was not found in INC' ] if ( not defined $d->path or not -e $d->path or -d $d->path );
 
   my $v = $d->_version_emulate;
 
-  if ( not $v ) {
-    return [ undef, 'Module::MetaData could not parse a version from ' . $d->path ];
-  }
+  return [ undef, 'Module::MetaData could not parse a version from ' . $d->path ] if not $v;
+
   return [ $v, undef ];
 
 }
