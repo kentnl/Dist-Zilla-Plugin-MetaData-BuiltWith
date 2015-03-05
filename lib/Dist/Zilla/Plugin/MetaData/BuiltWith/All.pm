@@ -112,15 +112,14 @@ sub _get_all {
   my %modtable;
   my %failures;
 
-  my $record_module = sub {
-    my ($module) = @_;
+  for my $module ( $self->_list_modules_in_memory(q{}), $self->include ) {
     if ( $module =~ /\A__ANON__/msx ) {
       $failures{$module} = 'Skipped: Anonymous Class';
-      return;
+      next;
     }
     if ( $module =~ /\[/msx ) {
       $failures{$module} = 'Skipped: Parameterized Type';
-      return;
+      next;
     }
     my $result = $self->_detect_installed($module);
     if ( defined $result->[0] ) {
@@ -129,23 +128,11 @@ sub _get_all {
     if ( defined $result->[1] ) {
       $failures{$module} = $result->[1];
     }
-  };
-  my $forget_module = sub {
-    my ($badmodule) = @_;
+  }
+
+  for my $badmodule ( $self->exclude ) {
     delete $modtable{$badmodule} if exists $modtable{$badmodule};
     delete $failures{$badmodule} if exists $failures{$badmodule};
-  };
-
-  my (@modules) = $self->_list_modules_in_memory(q{});
-  for my $module (@modules) {
-    $record_module->($module);
-  }
-
-  for my $module ( $self->include ) {
-    $record_module->($module);
-  }
-  for my $badmodule ( $self->exclude ) {
-    $forget_module->($badmodule);
   }
   my $rval = { allmodules => \%modtable };
   $rval->{allfailures} = \%failures if keys %failures and $self->show_failures;

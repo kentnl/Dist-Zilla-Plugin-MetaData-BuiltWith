@@ -8,6 +8,9 @@
  - runtime: (recommends: +1)
  - test: (recommends: +1 ↓2)
 
+ [Internals]
+ - Cleanup some residual cruft from de-autoboxing.
+
 1.004001 2014-12-29T14:33:59Z 8a275b9
  [Bugfix]
  - Fix emitting 'null' for version in external file format.
