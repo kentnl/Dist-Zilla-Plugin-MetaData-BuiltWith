@@ -28,6 +28,8 @@ provides:
   Dist::Zilla::Plugin::MetaData::BuiltWith::All:
     file: lib/Dist/Zilla/Plugin/MetaData/BuiltWith/All.pm
     version: '1.004002'
+recommends:
+  Moose: '2.000'
 requires:
   CPAN::Meta::Converter: '0'
   Carp: '0'
@@ -158,6 +160,10 @@ x_Dist_Zilla:
       class: Dist::Zilla::Plugin::Manifest
       name: '@Author::KENTNL/Manifest'
       version: '5.032'
+    -
+      class: Dist::Zilla::Plugin::Author::KENTNL::TravisCI
+      name: '@Author::KENTNL/Author::KENTNL::TravisCI'
+      version: '0.001002'
     -
       class: Dist::Zilla::Plugin::CopyFilesFromBuild
       name: '@Author::KENTNL/CopyXBuild'
@@ -366,9 +372,9 @@ x_Dist_Zilla:
       name: '@Author::KENTNL/Author::KENTNL::RecommendFixes'
       version: '0.004002'
     -
-      class: Dist::Zilla::Plugin::Pod2Readme
+      class: Dist::Zilla::Plugin::Readme::Brief
       name: '@Author::KENTNL/ShippedReadme'
-      version: '0.001'
+      version: '0.002005'
     -
       class: Dist::Zilla::Plugin::ReadmeAnyFromPod
       name: '@Author::KENTNL/ReadmeAnyFromPod'
@@ -468,7 +474,7 @@ x_Dist_Zilla:
       class: Dist::Zilla::Plugin::Git::CommitBuild
       config:
         Dist::Zilla::Plugin::Git::CommitBuild:
-          branch: build/%b
+          branch: builds
           build_root: ~
           message: 'Build results of %h (on %b)'
           multiple_inheritance: 0
@@ -501,28 +507,21 @@ x_Dist_Zilla:
       name: '@Author::KENTNL/Twitter'
       version: '0.026'
     -
-      class: Dist::Zilla::Plugin::Prereqs::Recommend::MatchInstalled
+      class: Dist::Zilla::Plugin::Prereqs::Upgrade
       config:
-        Dist::Zilla::Plugin::Prereqs::Recommend::MatchInstalled:
-          applyto_map:
-            - 'build.requires = build.recommends'
-            - 'test.requires = test.recommends'
-            - 'runtime.requires = runtime.recommends'
-            - 'configure.requires = configure.recommends'
-            - 'develop.requires = develop.recommends'
-          applyto_phase:
-            - build
-            - test
-            - runtime
-            - configure
-            - develop
+        Dist::Zilla::Plugin::Prereqs::Upgrade:
           modules:
-            - ExtUtils::MakeMaker
-            - Test::More
-          source_relation: requires
-          target_relation: recommends
-      name: '@Author::KENTNL/Prereqs::Recommend::MatchInstalled'
-      version: '0.003001'
+            Dist::Zila::Plugin::MetaProvides::Package: '2.000000'
+            Dist::Zilla: '5'
+            ExtUtils::MakeMaker: '7.00'
+            File::ShareDir::Install: '0.10'
+            Moo: '1.000008'
+            Moose: '2.000'
+            Path::Tiny: '0.058'
+            Test::File::ShareDir: '1.000000'
+            Test::More: '0.99'
+      name: '@Author::KENTNL/Prereqs::Upgrade'
+      version: '0.001000'
     -
       class: Dist::Zilla::Plugin::Prereqs::Recommend::MatchInstalled
       config:
