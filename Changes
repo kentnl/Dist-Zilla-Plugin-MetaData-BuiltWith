@@ -1,6 +1,12 @@
 ﻿Revision history for {{$dist->name}}
 
 {{$NEXT}}
+ [Dependencies::Stats]
+ - Dependencies changed since 1.004001, see misc/*.deps* for details
+ - configure: (recommends: ↓1)
+ - develop: +3 ↑2 -1 (recommends: ↓1, suggests: ↑1)
+ - runtime: (recommends: +1)
+ - test: (recommends: +1 ↓2)
 
 1.004001 2014-12-29T14:33:59Z 8a275b9
  [Bugfix]
