@@ -80,6 +80,15 @@ has 'show_failures' => ( is => 'ro', isa => 'Bool', default => 0 );
 
 around dump_config => config_dumper( __PACKAGE__, qw( show_failures ) );
 
+around '_metadata' => sub {
+  my ( $orig, $self, @args ) = @_;
+  my $stash = $self->$orig(@args);
+  return { %{$stash}, %{ $self->_get_all() } };
+};
+
+__PACKAGE__->meta->make_immutable;
+no Moose;
+
 sub _list_modules_in_memory {
   my ( $self, $package ) = @_;
   my (@out);
@@ -139,14 +148,7 @@ sub _get_all {
   return $rval;
 }
 
-around '_metadata' => sub {
-  my ( $orig, $self, @args ) = @_;
-  my $stash = $self->$orig(@args);
-  return { %{$stash}, %{ $self->_get_all() } };
-};
 
-__PACKAGE__->meta->make_immutable;
-no Moose;
 1;
 
 =head1 SYNOPSIS

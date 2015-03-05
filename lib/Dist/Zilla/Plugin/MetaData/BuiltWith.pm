@@ -190,6 +190,9 @@ around dump_config => config_dumper( __PACKAGE__,
   },
 );
 
+__PACKAGE__->meta->make_immutable;
+no Moose;
+
 sub _config {
   my $self = shift;
   return () unless $self->show_config;
@@ -461,8 +464,6 @@ EOF
   return;
 }
 
-__PACKAGE__->meta->make_immutable;
-no Moose;
 1;
 
 =head1 SYNOPSIS
