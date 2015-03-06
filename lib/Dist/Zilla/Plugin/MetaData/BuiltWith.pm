@@ -492,10 +492,11 @@ version 1.004002
 
 =head1 DESCRIPTION
 
-This module provides extra metadata in your distribution, automatically documenting what versions of dependencies the author was using
-at the time of release.
+This module provides extra metadata in your distribution, automatically documenting what versions of dependencies the author was
+using at the time of release.
 
-This allows consumers of said dists to be able to see a range of versions that are "known good" should they experience problems.
+This allows consumers of said distributions to be able to see a range of versions that are "known good" should they experience
+problems.
 
 =head1 OPTIONS
 
