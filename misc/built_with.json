@@ -69,7 +69,7 @@
       "Module::Runtime" : "0.014",
       "Moose" : "2.1403",
       "MooseX::Types::Moose" : "0.45",
-      "Path::Tiny" : "0.061",
+      "Path::Tiny" : "0.065",
       "Pod::Coverage::TrustPod" : "0.100003",
       "Test::CPAN::Changes" : "0.30",
       "Test::CPAN::Meta" : "0.24",
