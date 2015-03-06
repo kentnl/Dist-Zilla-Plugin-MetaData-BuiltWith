@@ -91,13 +91,9 @@ no Moose;
 
 sub _list_modules_in_memory {
   my ( $self, $package ) = @_;
-  my (@out);
-  if ( 'main' eq $package or $package =~ /\Amain::/msx ) {
-    return $package;
-  }
-  if ($package) {
-    push @out, $package;
-  }
+
+  return $package if 'main' eq $package or $package =~ /\Amain::/msx;
+
   my $ns = do {
     ## no critic (ProhibitNoStrict)
     no strict 'refs';
@@ -110,10 +106,8 @@ sub _list_modules_in_memory {
     $child_pkg = $package . q[::] . $child_pkg if $package;
     push @child_namespaces, $child_pkg;
   }
-  for my $child (@child_namespaces) {
-    push @out, $self->_list_modules_in_memory($child);
-  }
-  return (@out);
+
+  return ( ( $package || () ), map { $self->_list_modules_in_memory($_) } @child_namespaces );
 }
 
 sub _get_all {
@@ -131,12 +125,10 @@ sub _get_all {
       next;
     }
     my $result = $self->_detect_installed($module);
-    if ( defined $result->[0] ) {
-      $modtable{$module} = $result->[0];
-    }
-    if ( defined $result->[1] ) {
-      $failures{$module} = $result->[1];
-    }
+
+    $modtable{$module} = $result->[0] if defined $result->[0];
+    $failures{$module} = $result->[1] if defined $result->[1];
+
   }
 
   for my $badmodule ( $self->exclude ) {
@@ -147,7 +139,6 @@ sub _get_all {
   $rval->{allfailures} = \%failures if keys %failures and $self->show_failures;
   return $rval;
 }
-
 
 1;
 

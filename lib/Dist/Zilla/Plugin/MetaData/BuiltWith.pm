@@ -362,9 +362,9 @@ sub _metadata {
     $self->_uname(),
     $self->_config(),
   };
-  if ( keys %failures ) {
-    $result->{failures} = \%failures;
-  }
+
+  $result->{failures} = \%failures if keys %failures;
+
   return $result;
 }
 
