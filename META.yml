@@ -24,10 +24,10 @@ name: Dist-Zilla-Plugin-MetaData-BuiltWith
 provides:
   Dist::Zilla::Plugin::MetaData::BuiltWith:
     file: lib/Dist/Zilla/Plugin/MetaData/BuiltWith.pm
-    version: '1.004002'
+    version: '1.004003'
   Dist::Zilla::Plugin::MetaData::BuiltWith::All:
     file: lib/Dist/Zilla/Plugin/MetaData/BuiltWith/All.pm
-    version: '1.004002'
+    version: '1.004003'
 recommends:
   Moose: '2.000'
 requires:
@@ -54,7 +54,7 @@ resources:
   bugtracker: https://github.com/kentnl/Dist-Zilla-Plugin-MetaData-BuiltWith/issues
   homepage: https://github.com/kentnl/Dist-Zilla-Plugin-MetaData-BuiltWith
   repository: https://github.com/kentnl/Dist-Zilla-Plugin-MetaData-BuiltWith.git
-version: '1.004002'
+version: '1.004003'
 x_BuiltWith:
   external_file: misc/built_with.json
 x_Dist_Zilla:
@@ -436,7 +436,7 @@ x_Dist_Zilla:
         Dist::Zilla::Plugin::Git::Tag:
           branch: ~
           signed: 0
-          tag: 1.004002-source
+          tag: 1.004003-source
           tag_format: '%v-source'
           tag_message: v%v
           time_zone: local
@@ -490,7 +490,7 @@ x_Dist_Zilla:
         Dist::Zilla::Plugin::Git::Tag:
           branch: releases
           signed: 0
-          tag: '1.004002'
+          tag: '1.004003'
           tag_format: '%v'
           tag_message: v%v
           time_zone: local
