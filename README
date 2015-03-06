@@ -1,15 +1,11 @@
 Dist::Zilla::Plugin::MetaData::BuiltWith
 
-Often, distribution authors get module dependencies wrong. So in such
-cases, its handy to be able to see what version of various packages they
-built with.
+This module provides extra metadata in your distribution, automatically
+documenting what versions of dependencies the author was using at the
+time of release.
 
-Some would prefer to demand everyone install the same version as they
-did, but that's also not always necessary.
-
-Hopefully, the existence of the metadata provided by this module will
-help users on their end machines make intelligent choices about what
-modules to install in the event of a problem.
+This allows consumers of said dists to be able to see a range of
+versions that are "known good" should they experience problems.
 
 INSTALLATION
 
