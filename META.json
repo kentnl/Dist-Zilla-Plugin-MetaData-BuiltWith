@@ -233,7 +233,7 @@
                }
             },
             "name" : "@Author::KENTNL/MetaData::BuiltWith",
-            "version" : "1.004002"
+            "version" : "1.004003"
          },
          {
             "class" : "Dist::Zilla::Plugin::Git::Contributors",
