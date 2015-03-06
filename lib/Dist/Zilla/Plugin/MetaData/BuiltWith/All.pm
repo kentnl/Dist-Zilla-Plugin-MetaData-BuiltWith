@@ -4,7 +4,7 @@ use warnings;
 
 package Dist::Zilla::Plugin::MetaData::BuiltWith::All;
 
-our $VERSION = '1.004001';
+our $VERSION = '1.004002';
 
 # ABSTRACT: Go overkill and report everything in all name-spaces.
 
@@ -80,15 +80,20 @@ has 'show_failures' => ( is => 'ro', isa => 'Bool', default => 0 );
 
 around dump_config => config_dumper( __PACKAGE__, qw( show_failures ) );
 
+around '_metadata' => sub {
+  my ( $orig, $self, @args ) = @_;
+  my $stash = $self->$orig(@args);
+  return { %{$stash}, %{ $self->_get_all() } };
+};
+
+__PACKAGE__->meta->make_immutable;
+no Moose;
+
 sub _list_modules_in_memory {
   my ( $self, $package ) = @_;
-  my (@out);
-  if ( 'main' eq $package or $package =~ /\Amain::/msx ) {
-    return $package;
-  }
-  if ($package) {
-    push @out, $package;
-  }
+
+  return $package if 'main' eq $package or $package =~ /\Amain::/msx;
+
   my $ns = do {
     ## no critic (ProhibitNoStrict)
     no strict 'refs';
@@ -101,10 +106,8 @@ sub _list_modules_in_memory {
     $child_pkg = $package . q[::] . $child_pkg if $package;
     push @child_namespaces, $child_pkg;
   }
-  for my $child (@child_namespaces) {
-    push @out, $self->_list_modules_in_memory($child);
-  }
-  return (@out);
+
+  return ( ( $package || () ), map { $self->_list_modules_in_memory($_) } @child_namespaces );
 }
 
 sub _get_all {
@@ -112,54 +115,31 @@ sub _get_all {
   my %modtable;
   my %failures;
 
-  my $record_module = sub {
-    my ($module) = @_;
+  for my $module ( $self->_list_modules_in_memory(q{}), $self->include ) {
     if ( $module =~ /\A__ANON__/msx ) {
       $failures{$module} = 'Skipped: Anonymous Class';
-      return;
+      next;
     }
     if ( $module =~ /\[/msx ) {
       $failures{$module} = 'Skipped: Parameterized Type';
-      return;
+      next;
     }
     my $result = $self->_detect_installed($module);
-    if ( defined $result->[0] ) {
-      $modtable{$module} = $result->[0];
-    }
-    if ( defined $result->[1] ) {
-      $failures{$module} = $result->[1];
-    }
-  };
-  my $forget_module = sub {
-    my ($badmodule) = @_;
+
+    $modtable{$module} = $result->[0] if defined $result->[0];
+    $failures{$module} = $result->[1] if defined $result->[1];
+
+  }
+
+  for my $badmodule ( $self->exclude ) {
     delete $modtable{$badmodule} if exists $modtable{$badmodule};
     delete $failures{$badmodule} if exists $failures{$badmodule};
-  };
-
-  my (@modules) = $self->_list_modules_in_memory(q{});
-  for my $module (@modules) {
-    $record_module->($module);
-  }
-
-  for my $module ( $self->include ) {
-    $record_module->($module);
-  }
-  for my $badmodule ( $self->exclude ) {
-    $forget_module->($badmodule);
   }
   my $rval = { allmodules => \%modtable };
   $rval->{allfailures} = \%failures if keys %failures and $self->show_failures;
   return $rval;
 }
 
-around '_metadata' => sub {
-  my ( $orig, $self, @args ) = @_;
-  my $stash = $self->$orig(@args);
-  return { %{$stash}, %{ $self->_get_all() } };
-};
-
-__PACKAGE__->meta->make_immutable;
-no Moose;
 1;
 
 __END__
@@ -174,7 +154,7 @@ Dist::Zilla::Plugin::MetaData::BuiltWith::All - Go overkill and report everythin
 
 =head1 VERSION
 
-version 1.004001
+version 1.004002
 
 =head1 SYNOPSIS
 
@@ -265,7 +245,7 @@ Kent Fredric <kentnl@cpan.org>
 
 =head1 COPYRIGHT AND LICENSE
 
-This software is copyright (c) 2014 by Kent Fredric <kentnl@cpan.org>.
+This software is copyright (c) 2015 by Kent Fredric <kentnl@cpan.org>.
 
 This is free software; you can redistribute it and/or modify it under
 the same terms as the Perl 5 programming language system itself.

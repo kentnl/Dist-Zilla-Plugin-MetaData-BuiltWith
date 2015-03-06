@@ -1,5 +1,16 @@
 ﻿Revision history for Dist-Zilla-Plugin-MetaData-BuiltWith
 
+1.004002 2015-03-06T23:08:04Z 81ea208
+ [Dependencies::Stats]
+ - Dependencies changed since 1.004001, see misc/*.deps* for details
+ - configure: (recommends: ↓1)
+ - develop: +3 ↑2 -1 (recommends: ↓1, suggests: ↑1)
+ - runtime: (recommends: +1)
+ - test: (recommends: +1 ↓2)
+
+ [Internals]
+ - Cleanup some residual cruft from de-autoboxing.
+
 1.004001 2014-12-29T14:33:59Z 8a275b9
  [Bugfix]
  - Fix emitting 'null' for version in external file format.

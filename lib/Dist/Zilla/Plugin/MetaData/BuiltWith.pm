@@ -4,7 +4,7 @@ use warnings;
 
 package Dist::Zilla::Plugin::MetaData::BuiltWith;
 
-our $VERSION = '1.004001';
+our $VERSION = '1.004002';
 
 # ABSTRACT: Report what versions of things your distribution was built against
 
@@ -190,6 +190,9 @@ around dump_config => config_dumper( __PACKAGE__,
   },
 );
 
+__PACKAGE__->meta->make_immutable;
+no Moose;
+
 sub _config {
   my $self = shift;
   return () unless $self->show_config;
@@ -359,9 +362,9 @@ sub _metadata {
     $self->_uname(),
     $self->_config(),
   };
-  if ( keys %failures ) {
-    $result->{failures} = \%failures;
-  }
+
+  $result->{failures} = \%failures if keys %failures;
+
   return $result;
 }
 
@@ -461,8 +464,6 @@ EOF
   return;
 }
 
-__PACKAGE__->meta->make_immutable;
-no Moose;
 1;
 
 __END__
@@ -477,7 +478,7 @@ Dist::Zilla::Plugin::MetaData::BuiltWith - Report what versions of things your d
 
 =head1 VERSION
 
-version 1.004001
+version 1.004002
 
 =head1 SYNOPSIS
 
@@ -492,15 +493,11 @@ version 1.004001
 
 =head1 DESCRIPTION
 
-Often, distribution authors get module dependencies wrong. So in such cases,
-its handy to be able to see what version of various packages they built with.
+This module provides extra metadata in your distribution, automatically documenting what versions of dependencies the author was
+using at the time of release.
 
-Some would prefer to demand everyone install the same version as they did,
-but that's also not always necessary.
-
-Hopefully, the existence of the metadata provided by this module will help
-users on their end machines make intelligent choices about what modules to
-install in the event of a problem.
+This allows consumers of said distributions to be able to see a range of versions that are "known good" should they experience
+problems.
 
 =head1 OPTIONS
 
@@ -618,7 +615,7 @@ Kent Fredric <kentnl@cpan.org>
 
 =head1 COPYRIGHT AND LICENSE
 
-This software is copyright (c) 2014 by Kent Fredric <kentnl@cpan.org>.
+This software is copyright (c) 2015 by Kent Fredric <kentnl@cpan.org>.
 
 This is free software; you can redistribute it and/or modify it under
 the same terms as the Perl 5 programming language system itself.
