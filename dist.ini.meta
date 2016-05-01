@@ -18,7 +18,6 @@ normal_form      = numify
 mantissa         = 6
 twitter_extra_hash_tags = #distzilla
 bumpversions      = 1
-copyfiles         = LICENSE
 srcreadme         = mkdn
 
 ;version_major     = 0
