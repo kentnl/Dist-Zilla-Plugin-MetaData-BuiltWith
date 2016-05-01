@@ -3,12 +3,13 @@
 {{$NEXT}}
  - Removed DZTest stuff.
  - Removed use of Util::ConfigDumper
+ - Removed use of Module::Data & Path::ScanINC from the depgraph.
 
  [Dependencies::Stats]
  - Dependencies changed since 1.004002, see misc/*.deps* for details
  - develop: +5 ↑1 -1 (suggests: ↑2)
- - runtime: -1
- - test: -1
+ - runtime: +2 -2 (recommends: +1)
+ - test: -2 (recommends: -1)
 
 1.004002 2015-03-06T23:08:04Z 81ea208
  [Dependencies::Stats]

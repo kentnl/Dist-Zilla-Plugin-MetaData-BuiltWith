@@ -17,6 +17,7 @@ use Moose qw( with has around );
 use MooseX::Types::Moose qw( ArrayRef Bool Str );
 use Module::Runtime qw( is_module_name );
 use Devel::CheckBin qw( can_run );
+use Path::Tiny qw( path );
 use namespace::autoclean;
 with 'Dist::Zilla::Role::FileGatherer';
 with 'Dist::Zilla::Role::FileMunger';
@@ -194,8 +195,10 @@ around dump_config => sub {
     $payload->{include} = [ $self->include ];
   }
 
+  ## no critic (RequireInterpolationOfMetachars)
   # Self report when inherited.
   $payload->{ q[$] . __PACKAGE__ . '::VERSION' } = $VERSION unless __PACKAGE__ eq ref $self;
+  $payload->{q[$Module::Metadata::VERSION]} = $Module::Metadata::VERSION if $INC{'Module/Metadata.pm'};
   return $config;
 };
 
@@ -312,16 +315,27 @@ sub _detect_installed {
 
   return [ undef, 'not a valid module name' ] if not is_module_name($module);
 
-  require Module::Data;
-  my $d = Module::Data->new($module);
+  my @pmname = split qr/::|'/, $module; ## no critic (RegularExpressions)
+  $pmname[-1] .= '.pm';
 
-  return [ undef, 'failed to create a Module::Data wrapper' ] if not defined $d;
+  my $path;
+  for my $incdir (@INC) {
+    next if ref $incdir;
+    my $fullpath = path( $incdir, @pmname );
+    next unless -e $fullpath;
+    next if -d $fullpath;
+    $path = $fullpath;
+    last;
+  }
 
-  return [ undef, 'module was not found in INC' ] if ( not defined $d->path or not -e $d->path or -d $d->path );
+  return [ undef, 'module was not found in INC' ] if not defined $path;
 
-  my $v = $d->_version_emulate;
+  require Module::Metadata;
+  my $mm = Module::Metadata->new_from_file( $path, collect_pod => 0 );
+  return [ undef, 'Module::MetaData could not parse ' . $path ] if not defined $mm;
 
-  return [ undef, 'Module::MetaData could not parse a version from ' . $d->path ] if not $v;
+  my $v = $mm->version($module);
+  return [ undef, 'Module::MetaData could not parse a version from ' . $path ] if not $v;
 
   return [ $v, undef ];
 
