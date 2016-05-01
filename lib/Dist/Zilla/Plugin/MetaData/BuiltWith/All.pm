@@ -4,14 +4,13 @@ use warnings;
 
 package Dist::Zilla::Plugin::MetaData::BuiltWith::All;
 
-our $VERSION = '1.004002';
+our $VERSION = '1.004003';
 
 # ABSTRACT: Go overkill and report everything in all name-spaces.
 
 our $AUTHORITY = 'cpan:KENTNL'; # AUTHORITY
 
 use Moose qw( extends has around );
-use Dist::Zilla::Util::ConfigDumper qw( config_dumper );
 use namespace::autoclean;
 extends 'Dist::Zilla::Plugin::MetaData::BuiltWith';
 
@@ -78,7 +77,14 @@ extends 'Dist::Zilla::Plugin::MetaData::BuiltWith';
 
 has 'show_failures' => ( is => 'ro', isa => 'Bool', default => 0 );
 
-around dump_config => config_dumper( __PACKAGE__, qw( show_failures ) );
+around dump_config => sub {
+  my ( $orig, $self, @args ) = @_;
+  my $config = $self->$orig(@args);
+  my $payload = $config->{ +__PACKAGE__ } = {};
+  $payload->{show_failures} = $self->show_failures;
+  $payload->{ q[$] . __PACKAGE__ . q[::VERSION] } = $VERSION unless __PACKAGE__ eq ref $self;
+  return $config;
+};
 
 around '_metadata' => sub {
   my ( $orig, $self, @args ) = @_;
@@ -154,7 +160,7 @@ Dist::Zilla::Plugin::MetaData::BuiltWith::All - Go overkill and report everythin
 
 =head1 VERSION
 
-version 1.004002
+version 1.004003
 
 =head1 SYNOPSIS
 
@@ -245,7 +251,7 @@ Kent Fredric <kentnl@cpan.org>
 
 =head1 COPYRIGHT AND LICENSE
 
-This software is copyright (c) 2015 by Kent Fredric <kentnl@cpan.org>.
+This software is copyright (c) 2016 by Kent Fredric <kentnl@cpan.org>.
 
 This is free software; you can redistribute it and/or modify it under
 the same terms as the Perl 5 programming language system itself.

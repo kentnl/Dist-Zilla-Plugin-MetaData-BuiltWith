@@ -1,5 +1,16 @@
 ﻿Revision history for Dist-Zilla-Plugin-MetaData-BuiltWith
 
+1.004003 2016-05-01T21:35:06Z e12fda1
+ - Removed DZTest stuff.
+ - Removed use of Util::ConfigDumper
+ - Removed use of Module::Data & Path::ScanINC from the depgraph.
+
+ [Dependencies::Stats]
+ - Dependencies changed since 1.004002, see misc/*.deps* for details
+ - develop: +5 ↑1 -1 (suggests: ↑2)
+ - runtime: +2 -2 (recommends: +1)
+ - test: -2 (recommends: -1)
+
 1.004002 2015-03-06T23:08:04Z 81ea208
  [Dependencies::Stats]
  - Dependencies changed since 1.004001, see misc/*.deps* for details
@@ -361,4 +372,3 @@
 
 0.01000022 2010-06-11T11:48:14Z
  - First version.
-

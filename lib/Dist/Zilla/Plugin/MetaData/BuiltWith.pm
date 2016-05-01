@@ -4,7 +4,7 @@ use warnings;
 
 package Dist::Zilla::Plugin::MetaData::BuiltWith;
 
-our $VERSION = '1.004002';
+our $VERSION = '1.004003';
 
 # ABSTRACT: Report what versions of things your distribution was built against
 
@@ -15,9 +15,9 @@ use Config qw();
 use Moose 2.0;
 use Moose qw( with has around );
 use MooseX::Types::Moose qw( ArrayRef Bool Str );
-use Dist::Zilla::Util::ConfigDumper qw( config_dumper );
 use Module::Runtime qw( is_module_name );
 use Devel::CheckBin qw( can_run );
+use Path::Tiny qw( path );
 use namespace::autoclean;
 with 'Dist::Zilla::Role::FileGatherer';
 with 'Dist::Zilla::Role::FileMunger';
@@ -170,25 +170,37 @@ has 'external_file_name' => (
   lazy_build => 1,
 );
 
-around dump_config => config_dumper( __PACKAGE__,
-  qw( show_uname _stash_key show_config use_external_file external_file_name ),
-  sub {
-    my ( $self, $payload ) = @_;
-    if ( $self->show_uname ) {
-      $payload->{'uname'} = {
-        uname_call => $self->uname_call,
-        uname_args => $self->_uname_args,
-      };
-    }
+around dump_config => sub {
+  my ( $orig, $self, @args ) = @_;
+  my $config = $self->$orig(@args);
+  my $payload = $config->{ +__PACKAGE__ } = {};
 
-    if ( $self->exclude ) {
-      $payload->{exclude} = [ $self->exclude ];
-    }
-    if ( $self->include ) {
-      $payload->{include} = [ $self->include ];
-    }
-  },
-);
+  $payload->{show_uname}         = $self->show_uname;
+  $payload->{_stash_key}         = $self->_stash_key;
+  $payload->{show_config}        = $self->show_config;
+  $payload->{use_external_file}  = $self->use_external_file;
+  $payload->{external_file_name} = $self->external_file_name;
+
+  if ( $self->show_uname ) {
+    $payload->{'uname'} = {
+      uname_call => $self->uname_call,
+      uname_args => $self->_uname_args,
+    };
+  }
+
+  if ( $self->exclude ) {
+    $payload->{exclude} = [ $self->exclude ];
+  }
+  if ( $self->include ) {
+    $payload->{include} = [ $self->include ];
+  }
+
+  ## no critic (RequireInterpolationOfMetachars)
+  # Self report when inherited.
+  $payload->{ q[$] . __PACKAGE__ . '::VERSION' } = $VERSION unless __PACKAGE__ eq ref $self;
+  $payload->{q[$Module::Metadata::VERSION]} = $Module::Metadata::VERSION if $INC{'Module/Metadata.pm'};
+  return $config;
+};
 
 __PACKAGE__->meta->make_immutable;
 no Moose;
@@ -303,16 +315,27 @@ sub _detect_installed {
 
   return [ undef, 'not a valid module name' ] if not is_module_name($module);
 
-  require Module::Data;
-  my $d = Module::Data->new($module);
+  my @pmname = split qr/::|'/, $module; ## no critic (RegularExpressions)
+  $pmname[-1] .= '.pm';
 
-  return [ undef, 'failed to create a Module::Data wrapper' ] if not defined $d;
+  my $path;
+  for my $incdir (@INC) {
+    next if ref $incdir;
+    my $fullpath = path( $incdir, @pmname );
+    next unless -e $fullpath;
+    next if -d $fullpath;
+    $path = $fullpath;
+    last;
+  }
 
-  return [ undef, 'module was not found in INC' ] if ( not defined $d->path or not -e $d->path or -d $d->path );
+  return [ undef, 'module was not found in INC' ] if not defined $path;
 
-  my $v = $d->_version_emulate;
+  require Module::Metadata;
+  my $mm = Module::Metadata->new_from_file( $path, collect_pod => 0 );
+  return [ undef, 'Module::MetaData could not parse ' . $path ] if not defined $mm;
 
-  return [ undef, 'Module::MetaData could not parse a version from ' . $d->path ] if not $v;
+  my $v = $mm->version($module);
+  return [ undef, 'Module::MetaData could not parse a version from ' . $path ] if not $v;
 
   return [ $v, undef ];
 
@@ -478,7 +501,7 @@ Dist::Zilla::Plugin::MetaData::BuiltWith - Report what versions of things your d
 
 =head1 VERSION
 
-version 1.004002
+version 1.004003
 
 =head1 SYNOPSIS
 
@@ -615,7 +638,7 @@ Kent Fredric <kentnl@cpan.org>
 
 =head1 COPYRIGHT AND LICENSE
 
-This software is copyright (c) 2015 by Kent Fredric <kentnl@cpan.org>.
+This software is copyright (c) 2016 by Kent Fredric <kentnl@cpan.org>.
 
 This is free software; you can redistribute it and/or modify it under
 the same terms as the Perl 5 programming language system itself.
