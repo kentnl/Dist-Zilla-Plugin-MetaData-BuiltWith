@@ -215,4 +215,3 @@ This file contains changes in REQUIRED dependencies for standard CPAN phases (co
 0.01000216 2010-06-13T05:07:31Z
  [Added / runtime requires]
  - namespace::autoclean
-
