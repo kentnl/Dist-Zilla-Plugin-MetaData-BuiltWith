@@ -15,7 +15,6 @@ use Config qw();
 use Moose 2.0;
 use Moose qw( with has around );
 use MooseX::Types::Moose qw( ArrayRef Bool Str );
-use Dist::Zilla::Util::ConfigDumper qw( config_dumper );
 use Module::Runtime qw( is_module_name );
 use Devel::CheckBin qw( can_run );
 use namespace::autoclean;
@@ -170,25 +169,35 @@ has 'external_file_name' => (
   lazy_build => 1,
 );
 
-around dump_config => config_dumper( __PACKAGE__,
-  qw( show_uname _stash_key show_config use_external_file external_file_name ),
-  sub {
-    my ( $self, $payload ) = @_;
-    if ( $self->show_uname ) {
-      $payload->{'uname'} = {
-        uname_call => $self->uname_call,
-        uname_args => $self->_uname_args,
-      };
-    }
+around dump_config => sub {
+  my ( $orig, $self, @args ) = @_;
+  my $config = $self->$orig(@args);
+  my $payload = $config->{ +__PACKAGE__ } = {};
 
-    if ( $self->exclude ) {
-      $payload->{exclude} = [ $self->exclude ];
-    }
-    if ( $self->include ) {
-      $payload->{include} = [ $self->include ];
-    }
-  },
-);
+  $payload->{show_uname}         = $self->show_uname;
+  $payload->{_stash_key}         = $self->_stash_key;
+  $payload->{show_config}        = $self->show_config;
+  $payload->{use_external_file}  = $self->use_external_file;
+  $payload->{external_file_name} = $self->external_file_name;
+
+  if ( $self->show_uname ) {
+    $payload->{'uname'} = {
+      uname_call => $self->uname_call,
+      uname_args => $self->_uname_args,
+    };
+  }
+
+  if ( $self->exclude ) {
+    $payload->{exclude} = [ $self->exclude ];
+  }
+  if ( $self->include ) {
+    $payload->{include} = [ $self->include ];
+  }
+
+  # Self report when inherited.
+  $payload->{ q[$] . __PACKAGE__ . '::VERSION' } = $VERSION unless __PACKAGE__ eq ref $self;
+  return $config;
+};
 
 __PACKAGE__->meta->make_immutable;
 no Moose;

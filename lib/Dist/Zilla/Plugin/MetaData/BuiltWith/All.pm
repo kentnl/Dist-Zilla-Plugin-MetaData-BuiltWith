@@ -11,7 +11,6 @@ our $VERSION = '1.004003';
 our $AUTHORITY = 'cpan:KENTNL'; # AUTHORITY
 
 use Moose qw( extends has around );
-use Dist::Zilla::Util::ConfigDumper qw( config_dumper );
 use namespace::autoclean;
 extends 'Dist::Zilla::Plugin::MetaData::BuiltWith';
 
@@ -78,7 +77,14 @@ extends 'Dist::Zilla::Plugin::MetaData::BuiltWith';
 
 has 'show_failures' => ( is => 'ro', isa => 'Bool', default => 0 );
 
-around dump_config => config_dumper( __PACKAGE__, qw( show_failures ) );
+around dump_config => sub {
+  my ( $orig, $self, @args ) = @_;
+  my $config = $self->$orig(@args);
+  my $payload = $config->{ +__PACKAGE__ } = {};
+  $payload->{show_failures} = $self->show_failures;
+  $payload->{ q[$] . __PACKAGE__ . q[::VERSION] } = $VERSION unless __PACKAGE__ eq ref $self;
+  return $config;
+};
 
 around '_metadata' => sub {
   my ( $orig, $self, @args ) = @_;
