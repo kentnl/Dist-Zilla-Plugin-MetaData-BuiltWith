@@ -29,7 +29,7 @@
       "Dist::Zilla::Plugin::Manifest" : "5.047",
       "Dist::Zilla::Plugin::ManifestSkip" : "5.047",
       "Dist::Zilla::Plugin::MetaConfig" : "5.047",
-      "Dist::Zilla::Plugin::MetaData::BuiltWith" : "1.004003",
+      "Dist::Zilla::Plugin::MetaData::BuiltWith" : "1.004004",
       "Dist::Zilla::Plugin::MetaJSON" : "5.047",
       "Dist::Zilla::Plugin::MetaProvides::Package" : "2.004000",
       "Dist::Zilla::Plugin::MetaTests" : "5.047",

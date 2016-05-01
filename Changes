@@ -1,5 +1,7 @@
 ﻿Revision history for Dist-Zilla-Plugin-MetaData-BuiltWith
 
+1.004004 2016-05-01T21:42:11Z 19eb7ef
+
 1.004003 2016-05-01T21:35:06Z e12fda1
  - Removed DZTest stuff.
  - Removed use of Util::ConfigDumper
