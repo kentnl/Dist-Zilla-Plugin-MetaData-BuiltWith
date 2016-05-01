@@ -3,7 +3,6 @@ abstract: 'Report what versions of things your distribution was built against'
 author:
   - 'Kent Fredric <kentnl@cpan.org>'
 build_requires:
-  Dist::Zilla::Util::Test::KENTNL: '1.003001'
   ExtUtils::MakeMaker: '0'
   File::Spec: '0'
   Path::Tiny: '0'

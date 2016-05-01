@@ -18,6 +18,9 @@ This file contains ALL changes in dependencies in both REQUIRED / OPTIONAL depen
  [Removed / develop requires]
  - Dist::Zilla::Plugin::MetaYAML
 
+ [Removed / test requires]
+ - Dist::Zilla::Util::Test::KENTNL 1.003001
+
 1.004002 2015-03-06T23:08:04Z
  [Added / develop requires]
  - Dist::Zilla::Plugin::Author::KENTNL::TravisCI 0.001002
