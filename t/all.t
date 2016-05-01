@@ -2,9 +2,8 @@ use strict;
 use warnings;
 
 use Test::More;
-use Test::DZil qw( simple_ini );
-use Dist::Zilla::Util::Test::KENTNL 1.003001 qw( dztest );
-use Path::Tiny;
+use Test::DZil qw( simple_ini Builder );
+use Path::Tiny qw( path );
 use JSON::MaybeXS;
 
 # ABSTRACT: Basic test
@@ -29,14 +28,22 @@ my $ini = simple_ini(
   ],
   [ 'MetaJSON' => {} ],
 );
-my $test = dztest();
-$test->add_file( 'dist.ini', $ini );
-$test->build_ok;
+my $tzil = Builder->from_config(
+  { dist_root => 'invalid' },
+  {
+    add_files => {
+      path( 'source', 'dist.ini' ) => $ini
+    }
+  }
+);
+$tzil->chrome->logger->set_debug(1);
+$tzil->build;
 
 ## Note: this is required because MD:BW wraps the META.json
 ## file fromCode object to inject during write.
 ## I'm not sure I like that. But either way, it hides from distmeta!
-my $json = $test->test_has_built_file('META.json');
+my $json = path( $tzil->tempdir, 'build', 'META.json' );
+ok( $json->exists, 'META.json exists' );
 
 my $content = JSON::MaybeXS->new->decode( $json->slurp_raw );
 
