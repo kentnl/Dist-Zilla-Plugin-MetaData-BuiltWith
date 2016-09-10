@@ -4,7 +4,7 @@ use warnings;
 
 package Dist::Zilla::Plugin::MetaData::BuiltWith::All;
 
-our $VERSION = '1.004004';
+our $VERSION = '1.004005';
 
 # ABSTRACT: Go overkill and report everything in all name-spaces.
 
