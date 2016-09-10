@@ -1,6 +1,6 @@
 Revision history for Dist-Zilla-Plugin-MetaData-BuiltWith
 
-1.004004 2016-09-10T09:11:39Z cb1340c
+1.004004 2016-09-10T10:08:39Z d8d12b1
  [Bugfix]
  - Don't die when uname call fails.
  - To be honest, I'm still not sure why I was doing this in the first place.

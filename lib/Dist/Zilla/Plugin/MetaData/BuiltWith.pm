@@ -245,12 +245,6 @@ sub _uname {
 
 }
 
-sub _my_log_fatal {
-  my ($self) = @_;
-  ## no critic ( RequireInterpolationOfMetachars )
-  return $self->log_fatal( [ "%s\n   %s:%s\n   %s:%s", shift, q{$@}, shift, q{$!}, shift ] );
-}
-
 sub _build__uname_args {
   my $self = shift;
   ## no critic ( RequireDotMatchAnything RequireExtendedFormatting RequireLineBoundaryMatching )
