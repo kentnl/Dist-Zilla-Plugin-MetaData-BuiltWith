@@ -1,6 +1,11 @@
 ﻿Revision history for {{$dist->name}}
 
 {{$NEXT}}
+ [Bugfix]
+ - Don't die when uname call fails.
+ - To be honest, I'm still not sure why I was doing this in the first place.
+ - Patch Patched (with thanks) by Roy Ivy II ( #1 )
+
  [Dependencies::Stats]
  - Dependencies changed since 1.004003, see misc/*.deps* for details
  - develop: (suggests: ↑1)
