@@ -239,7 +239,7 @@ sub _uname {
   }
   ## no critic ( ProhibitPunctuationVars )
 
-  $self->_my_log_fatal( 'Error calling uname:', $@, $! );
+  $self->log(q{WARNING: `uname` invocation failed, omit from metadata});
 
   return ();
 
