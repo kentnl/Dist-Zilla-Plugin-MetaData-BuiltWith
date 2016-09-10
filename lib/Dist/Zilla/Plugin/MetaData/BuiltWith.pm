@@ -4,7 +4,7 @@ use warnings;
 
 package Dist::Zilla::Plugin::MetaData::BuiltWith;
 
-our $VERSION = '1.004003';
+our $VERSION = '1.004004';
 
 # ABSTRACT: Report what versions of things your distribution was built against
 
@@ -239,16 +239,10 @@ sub _uname {
   }
   ## no critic ( ProhibitPunctuationVars )
 
-  $self->_my_log_fatal( 'Error calling uname:', $@, $! );
+  $self->log(q{WARNING: `uname` invocation failed, omit from metadata});
 
   return ();
 
-}
-
-sub _my_log_fatal {
-  my ($self) = @_;
-  ## no critic ( RequireInterpolationOfMetachars )
-  return $self->log_fatal( [ "%s\n   %s:%s\n   %s:%s", shift, q{$@}, shift, q{$!}, shift ] );
 }
 
 sub _build__uname_args {
@@ -501,7 +495,7 @@ Dist::Zilla::Plugin::MetaData::BuiltWith - Report what versions of things your d
 
 =head1 VERSION
 
-version 1.004003
+version 1.004004
 
 =head1 SYNOPSIS
 
