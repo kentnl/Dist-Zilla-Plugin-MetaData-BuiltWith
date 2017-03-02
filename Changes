@@ -1,5 +1,7 @@
 Revision history for Dist-Zilla-Plugin-MetaData-BuiltWith
 
+1.004006 2017-03-02T03:21:14Z 13ad9b6
+
 1.004005 2017-03-02T03:06:51Z 15987f6
  [BugFix]
  - Avoid test failures on 5.26 w/ -Ddefault_inc_excludes_dot
