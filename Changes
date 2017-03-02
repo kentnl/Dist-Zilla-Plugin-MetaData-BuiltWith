@@ -1,6 +1,14 @@
 Revision history for Dist-Zilla-Plugin-MetaData-BuiltWith
 
-1.004005 2016-09-10T10:34:34Z 39db146
+1.004005 2017-03-02T03:06:51Z 15987f6
+ [BugFix]
+ - Avoid test failures on 5.26 w/ -Ddefault_inc_excludes_dot
+ - Closes https://github.com/kentnl/Dist-Zilla-Plugin-MetaData-BuiltWith/issues/2
+
+ [Dependencies::Stats]
+ - Dependencies changed since 1.004004, see misc/*.deps* for details
+ - develop: +1 ↑1
+ - test: ↓1
 
 1.004004 2016-09-10T10:08:39Z d8d12b1
  [Bugfix]
