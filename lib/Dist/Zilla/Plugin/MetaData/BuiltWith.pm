@@ -4,7 +4,7 @@ use warnings;
 
 package Dist::Zilla::Plugin::MetaData::BuiltWith;
 
-our $VERSION = '1.004005';
+our $VERSION = '1.004006';
 
 # ABSTRACT: Report what versions of things your distribution was built against
 

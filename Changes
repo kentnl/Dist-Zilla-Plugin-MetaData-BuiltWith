@@ -1,6 +1,8 @@
 Revision history for {{$dist->name}}
 
 {{$NEXT}}
+
+1.004005 2017-03-02T03:06:51Z 15987f6
  [BugFix]
  - Avoid test failures on 5.26 w/ -Ddefault_inc_excludes_dot
  - Closes https://github.com/kentnl/Dist-Zilla-Plugin-MetaData-BuiltWith/issues/2
