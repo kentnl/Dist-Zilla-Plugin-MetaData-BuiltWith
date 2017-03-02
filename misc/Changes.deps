@@ -1,6 +1,8 @@
 This file contains changes in REQUIRED dependencies for standard CPAN phases (configure/build/runtime/test)
 
-1.004005
+1.004006
+
+1.004005 2017-03-02T03:06:51Z
  [Changed / test requires]
  - Test::More 0.89 → 0
 
